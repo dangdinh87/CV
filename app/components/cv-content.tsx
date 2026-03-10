@@ -341,15 +341,17 @@ export function CVContent() {
             <table className="project-table">
               <tbody>
                 <tr><td>{t('client')}</td><td>Doraverse</td></tr>
-                <tr><td>{t('descriptions')}</td><td>Developed admin website for an enterprise-grade AI workspace platform based on LibreChat (open-source), enabling multi-model conversations (e.g., GPT, Claude, Gemini), custom AI Agents, AI-powered image/video studio, and LM notebooks. Integrated advanced workspace management with multi-department support, user/model usage analytics, cost tracking, and employee performance insights for each business.</td></tr>
+                <tr><td>{t('descriptions')}</td><td>Enterprise-grade AI workspace platform based on LibreChat (open-source), enabling multi-model conversations (GPT, Claude, Gemini), custom AI Agents, image/video studio, and LM notebooks. Includes workspace admin with multi-department support, analytics dashboards, Stripe billing, credit tracking, and deep research integration.</td></tr>
                 <tr><td>{t('numberOfMembers')}</td><td>10</td></tr>
                 <tr><td>{t('position')}</td><td>Frontend Developer</td></tr>
                 <tr><td>{t('responsibilities')}</td><td>
                   <ul>
-                    <li>Architected and established the frontend codebase</li>
-                    <li>Developed the landing page and marketing assets</li>
-                    <li>Developed admin website for workspace management</li>
-                    <li>Integrated and extended LibreChat with custom features</li>
+                    <li>Architected and established the frontend codebase for workspace admin, auth-web, and meeting-note app as standalone micro-frontends</li>
+                    <li>Developed workspace admin dashboard: analytics (Recharts), AI model management, credit usage tracking by department, member/role management, and Stripe billing integration</li>
+                    <li>Integrated and extended LibreChat with custom features: AI Agents, image/video studio, LM notebooks</li>
+                    <li>Built deep research module with real-time chat integration, WebSocket connect/reconnect handling, and streaming message processing</li>
+                    <li>Developed landing page with Framer and published cookie consent package applied across all company products</li>
+                    <li>Implemented i18n (EN/VI/JP), dark mode, branding/domain settings, and Sentry monitoring</li>
                     <li>Optimized performance, conducted code reviews, and refactored for scalability</li>
                   </ul>
                 </td></tr>
@@ -543,15 +545,18 @@ export function CVContent() {
             <table className="project-table">
               <tbody>
                 <tr><td>{t('client')}</td><td>Selly</td></tr>
-                <tr><td>{t('descriptions')}</td><td>E-commerce website. Selly is a dropshipping platform that allows sellers to run an online business without stocking inventory or managing logistics. Sellers simply select products from Selly, promote them, and confirm orders, while Selly handles packaging and delivery. Integrated and developed additional features tailored to client requirements.</td></tr>
+                <tr><td>{t('descriptions')}</td><td>Multi-platform e-commerce ecosystem with 6 sub-projects: consumer storefront, seller portal, merchant dashboard, admin panel, webview for mobile/banking apps, and Zalo Mini App. Dropshipping platform enabling sellers to manage inventory, orders, and campaigns with real-time chat support.</td></tr>
                 <tr><td>{t('numberOfMembers')}</td><td>10</td></tr>
                 <tr><td>{t('position')}</td><td>Frontend Developer, Backend Developer</td></tr>
                 <tr><td>{t('responsibilities')}</td><td>
                   <ul>
-                    <li>Developed new features and resolved bugs for both client and admin interfaces</li>
-                    <li>Optimized frontend performance and load times</li>
-                    <li>Maintained codebase and refactored legacy components</li>
-                    <li>Conducted code reviews to ensure quality standards</li>
+                    <li>Developed and maintained 6 frontend applications: consumer site, seller portal, merchant dashboard, admin panel, mobile webview, and web-admin</li>
+                    <li>Built complete e-commerce flows: product catalog, checkout, order tracking, inventory management, and campaign/affiliate systems</li>
+                    <li>Implemented real-time chat system with Socket.IO for customer support and merchant communication</li>
+                    <li>Developed webview integration for mobile apps and banking partners (Zalo Mini App, deep-link, Adjust tracking)</li>
+                    <li>Implemented i18n, dark mode, responsive layouts, PDF export, and drag-and-drop interfaces</li>
+                    <li>Integrated third-party services: Firebase analytics, Facebook login, Telegram, Google, TikTok APIs</li>
+                    <li><strong>Backend:</strong> Resolved backend tasks using Go, Node.js, and MongoDB</li>
                   </ul>
                 </td></tr>
                 <tr><td>{t('technologyInUse')}</td><td>
@@ -584,14 +589,16 @@ export function CVContent() {
             <table className="project-table">
               <tbody>
                 <tr><td>{t('client')}</td><td>Cashbag</td></tr>
-                <tr><td>{t('descriptions')}</td><td>Cashbag is a cashback program for shopping, helping users get a portion of the money back from purchases at affiliated stores or platforms. The cashback can be withdrawn to the account or used for other transactions.</td></tr>
+                <tr><td>{t('descriptions')}</td><td>Cashback rewards platform integrated into 15+ banking apps (TPBank, MBBank, BIDV, VPBank, SeaBank, Shinhan, LPBank, NamABank, PVComebank, SHB, VietinBank, TNEX, etc.) and third-party partners (MFast, Galaxy). Features gamification, voucher management, transaction history, and withdrawal systems.</td></tr>
                 <tr><td>{t('numberOfMembers')}</td><td>6</td></tr>
                 <tr><td>{t('position')}</td><td>Frontend Developer</td></tr>
                 <tr><td>{t('responsibilities')}</td><td>
                   <ul>
-                    <li>Developed new features and resolved bugs across the platform</li>
-                    <li>Optimized frontend performance and user experience</li>
-                    <li>Conducted code reviews to ensure quality standards</li>
+                    <li>Developed and maintained Cashbag webview integrated into 15+ banking apps with per-bank branding customization</li>
+                    <li>Built gamification features: spin wheel, leaderboards, and seasonal reward campaigns</li>
+                    <li>Developed admin CRM dashboard for campaign management, financial reporting, and transaction auditing</li>
+                    <li>Implemented voucher management system, withdrawal flows, and transaction history</li>
+                    <li>Integrated Sentry error tracking and Firebase analytics across all bank variants</li>
                   </ul>
                 </td></tr>
                 <tr><td>{t('technologyInUse')}</td><td>
@@ -732,17 +739,29 @@ export function CVContent() {
             </table>
           </div>
 
-          {/* 11. Pomodoro Focus App */}
+
+        </section>
+
+        {/* ── PERSONAL PROJECTS ── */}
+        <section>
+          <div className="sh">
+            <div className="sh-icon" style={{ background: 'var(--cyan-bg)', color: '#0891B2' }}>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M15.59 14.37a6 6 0 0 1-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 0 0 6.16-12.12A14.98 14.98 0 0 0 9.631 8.41m5.96 5.96a14.926 14.926 0 0 1-5.841 2.58m-.119-8.54a6 6 0 0 0-7.381 5.84h4.8m2.58-5.84a14.927 14.927 0 0 1-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 0 1-2.448-2.448 14.9 14.9 0 0 1 .06-.312m-2.24 2.39a4.493 4.493 0 0 0-1.757 4.306 4.493 4.493 0 0 0 4.306-1.758M16.5 9a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z"/>
+              </svg>
+            </div>
+            <h2>{t('personalProjects')}</h2>
+          </div>
+
+          {/* Pomodoro Focus App */}
           <div className="project-block">
             <div className="project-header">
-              <h3>Pomodoro Focus App (Personal)</h3>
+              <h3>Pomodoro Focus App</h3>
               <span className="project-period">2025</span>
             </div>
             <table className="project-table">
               <tbody>
-                <tr><td>{t('client')}</td><td>Personal Project</td></tr>
                 <tr><td>{t('descriptions')}</td><td>Free online Pomodoro timer with AI-powered study coach (Claude), integrated task management, productivity analytics, leaderboard, and mini-games for breaks. Features multi-language support (EN/VI/JP) and dark/light theme.</td></tr>
-                <tr><td>{t('numberOfMembers')}</td><td>1</td></tr>
                 <tr><td>{t('position')}</td><td>Fullstack Developer</td></tr>
                 <tr><td>{t('responsibilities')}</td><td>
                   <ul>
@@ -771,24 +790,24 @@ export function CVContent() {
             </table>
           </div>
 
-          {/* 12. Liverpool FC Fan Hub */}
+          {/* Liverpool FC Fan Hub */}
           <div className="project-block">
             <div className="project-header">
-              <h3>Liverpool FC Fan Hub (Personal)</h3>
-              <span className="project-period">2025</span>
+              <h3>Liverpool FC Fan Hub</h3>
+              <span className="project-period">2026</span>
             </div>
             <table className="project-table">
               <tbody>
-                <tr><td>{t('client')}</td><td>Personal Project</td></tr>
-                <tr><td>{t('descriptions')}</td><td>Comprehensive Liverpool FC fan hub providing live fixtures, squad profiles, Premier League standings, and aggregated news from multiple sources. Features 3D visualizations, match analytics, and AI-powered community chat.</td></tr>
-                <tr><td>{t('numberOfMembers')}</td><td>1</td></tr>
+                <tr><td>{t('descriptions')}</td><td>Comprehensive Liverpool FC fan platform with live fixtures, squad profiles, Premier League standings, multi-source news aggregation (20+ RSS feeds, EN/VI), AI-powered chat assistant, user profiles, and reading history. Features ISR caching, Supabase auth, and multi-language support.</td></tr>
                 <tr><td>{t('position')}</td><td>Fullstack Developer</td></tr>
                 <tr><td>{t('responsibilities')}</td><td>
                   <ul>
-                    <li>Designed and built the full application from scratch</li>
-                    <li>Integrated multiple sports data APIs (FPL, ESPN, RSS feeds) for live data</li>
-                    <li>Built 3D stadium/player visualizations with Three.js</li>
-                    <li>Implemented news aggregation with readability parsing and reading history</li>
+                    <li>Designed and built the full application from scratch with Next.js App Router and ISR caching</li>
+                    <li>Integrated multiple sports data APIs (Football-Data.org, FPL, ESPN) for live fixtures, standings, and player stats</li>
+                    <li>Built automated news pipeline syncing 20+ RSS feeds with AI-powered translation (Groq LLM) and content extraction</li>
+                    <li>Implemented user authentication, profile management, and favorite player system with Supabase</li>
+                    <li>Developed AI chat assistant (LiverBird AI) with multi-turn conversation history and streaming responses</li>
+                    <li>Built news reading features: like/comment system, reading history tracking, and article bookmarking</li>
                   </ul>
                 </td></tr>
                 <tr><td>{t('technologyInUse')}</td><td>
@@ -800,7 +819,6 @@ export function CVContent() {
                     <span className="t g">Radix UI</span>
                     <span className="t p">Zustand</span>
                     <span className="t p">next-intl</span>
-                    <span className="t r">Three.js</span>
                     <span className="t r">Vercel AI SDK</span>
                     <span className="t a">Supabase</span>
                     <span className="t c">Groq AI</span>

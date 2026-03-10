@@ -23,6 +23,7 @@ const translations = {
     education: 'Education',
     skills: 'Skills',
     projects: 'Projects',
+    personalProjects: 'Personal Projects',
     certificates: 'Certificates',
     // Project table labels
     client: 'Client',
@@ -59,6 +60,7 @@ const translations = {
     education: 'Học vấn',
     skills: 'Kỹ năng',
     projects: 'Dự án',
+    personalProjects: 'Dự án cá nhân',
     certificates: 'Chứng chỉ',
     // Project table labels
     client: 'Khách hàng',
