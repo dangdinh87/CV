@@ -58,16 +58,13 @@ export function CVContent() {
             <h2>{t('overview')}</h2>
           </div>
           <ul className="overview-list">
-            <li>Over <strong>3 years of experience</strong> as a Frontend Developer, specializing in building scalable web applications with <strong>React, Next.js, and TypeScript</strong>.</li>
-            <li>Proven track record delivering production products for enterprise clients including <strong>Techcombank, Vingroup, MB Bank</strong>, and multiple fintech/banking partners.</li>
-            <li>Proficient in modern UI frameworks: Tailwind CSS, Ant Design, Shadcn/ui, Bootstrap — with strong focus on responsive design, SSR, and SEO optimization.</li>
-            <li>Experienced in state management ecosystems: Redux, Dva.js, Zustand, TanStack Query, React Hook Form.</li>
-            <li>Capable of backend development with <strong>Go</strong> and <strong>Node.js</strong>, enabling effective full-stack collaboration and independent feature delivery.</li>
-            <li>Hands-on experience with <strong>AI-assisted development</strong>: Claude Code, ClaudeKit, MCP servers, Agent Skills — leveraging AI coding IDEs (Cursor, Trae, Antigravity) to accelerate development velocity.</li>
-            <li>Experience building landing pages with <strong>Framer</strong> and <strong>Subframer</strong> — design-to-code workflow for rapid, high-quality marketing pages.</li>
-            <li>Strong communicator with a quick learning mindset, consistently adapting to new technologies and project requirements.</li>
-            <li>Goal: Become a well-rounded full-stack developer while deepening frontend architecture expertise.</li>
-            <li>Current working location: Da Nang, Viet Nam.</li>
+            <li><strong>3+ years</strong> as a Frontend Developer — React, Next.js, TypeScript.</li>
+            <li>Worked on e-commerce, fintech, AI workspace, and KOL/influencer platforms.</li>
+            <li>UI: Tailwind CSS, Ant Design, Shadcn/ui, Bootstrap. State: Redux, Dva.js, Zustand, TanStack Query.</li>
+            <li>Backend capable: <strong>Go</strong> &amp; <strong>Node.js</strong> — can own full-stack features independently.</li>
+            <li>AI-assisted development: Claude Code, MCP servers, Agent Skills, Cursor, Trae.</li>
+            <li>Landing pages with <strong>Framer</strong> &amp; <strong>Subframer</strong>.</li>
+            <li>Quick learner, good communicator. Based in Da Nang, Vietnam.</li>
           </ul>
         </section>
 
@@ -89,14 +86,7 @@ export function CVContent() {
               <div className="xp-co">Doraverse</div>
               <div className="xp-role">Frontend Developer</div>
               <div className="xp-body">
-                <ul>
-                  <li>Develop admin website for workspace management, user/model usage analytics, cost tracking, and employee performance insights.</li>
-                  <li>Integrate and customize LibreChat (open-source), enhancing capabilities with AI Agents, image/video studio, LM notebooks, and deep research.</li>
-                  <li>Develop landing page, auth-web, and meeting-note app as standalone micro-frontends.</li>
-                  <li>Build and publish cookie consent package, applied across all company products.</li>
-                  <li>Implement i18n (EN/VI/JP), dark mode, and Sentry monitoring; deploy on Vercel with Next.js.</li>
-                  <li>Architect frontend codebase, conduct code reviews, optimize performance, and refactor for maintainability.</li>
-                </ul>
+                AI workspace platform — workspace admin, LibreChat integration, landing page, cookie consent package. Next.js 15, React 19, Tailwind, Shadcn/ui.
               </div>
             </div>
 
@@ -105,15 +95,7 @@ export function CVContent() {
               <div className="xp-co">Selly &amp; Cashbag (CaSe Group)</div>
               <div className="xp-role">Frontend Developer &middot; Backend Developer</div>
               <div className="xp-body">
-                <ul>
-                  <li>Developed and maintained internal websites including Selly, Cashbag, Selly landing page, Selly chat system, Zalo Mini App, Mamori.vn, and admin dashboards.</li>
-                  <li>Integrated third-party APIs such as Telegram, Google, TikTok, and Appscript.</li>
-                  <li>Integrated Cashbag webview into banking apps (TPBank, VPBank, MBBank, BIDV, etc.) and third-party clients (MFast, Galaxy, etc.).</li>
-                  <li>Implemented mobile-compatible solutions using Webview, deep-link, and Adjust.</li>
-                  <li>Implemented multilingual support (i18n), dark mode toggle, and fully responsive layouts.</li>
-                  <li>Structured source code for maintainability, enforced clean code practices, optimized performance, and conducted code reviews.</li>
-                  <li><strong>Backend:</strong> Resolved backend tasks using Go, Node.js, and MongoDB.</li>
-                </ul>
+                E-commerce &amp; fintech — Selly (6 sub-projects), Cashbag (15+ bank integrations), mini games, bio link, chat system. Backend: Go, Node.js.
               </div>
             </div>
 
@@ -122,10 +104,7 @@ export function CVContent() {
               <div className="xp-co">NCCSoft</div>
               <div className="xp-role">Intern Fullstack</div>
               <div className="xp-body">
-                <ul>
-                  <li>Completed training project using ReactJS, ExpressJS, and MongoDB.</li>
-                  <li>Developed features and debugged issues in production projects.</li>
-                </ul>
+                Training project with ReactJS, ExpressJS, MongoDB. Fixed bugs in production.
               </div>
             </div>
 
@@ -150,13 +129,7 @@ export function CVContent() {
               <div className="xp-co">Tfluencer (Techcombank)</div>
               <div className="xp-role">Frontend Developer &middot; Backend Developer</div>
               <div className="xp-body">
-                <ul>
-                  <li>Developed TCB Creator platform (tfluencer.vn) — KOL/influencer management for Techcombank &amp; AccessTrade.</li>
-                  <li>Built service-tos microservice with eKYC, eContract, bank card linking, OTP verification using Next.js &amp; Shadcn/ui.</li>
-                  <li>Integrated FPT eContract API for biometric identity verification and digital contract signing.</li>
-                  <li>Developed 11 brand campaign variants (Yody, VNPay, VNG, Anker, HDBank, MBBank, TPBank, VPBank, etc.) with shared component architecture.</li>
-                  <li><strong>Backend:</strong> Handled several backend features using Go &amp; Echo framework.</li>
-                </ul>
+                KOL monetization platform — TCB Creator, Ambassador (11 brands), TOS eKYC/eContract. Backend: Go &amp; Echo.
               </div>
             </div>
 
@@ -165,10 +138,7 @@ export function CVContent() {
               <div className="xp-co">Vcreator (Vingroup)</div>
               <div className="xp-role">Frontend Developer</div>
               <div className="xp-body">
-                <ul>
-                  <li>Built vcreator.global — video creator platform with UmiJS, Ant Design, Dva.js state management.</li>
-                  <li>Integrated social APIs (YouTube, TikTok, Facebook), Firebase, and partner modules.</li>
-                </ul>
+                KOL content creator platform — social APIs (YouTube, TikTok, Facebook), Firebase. UmiJS, Ant Design.
               </div>
             </div>
 
@@ -177,10 +147,7 @@ export function CVContent() {
               <div className="xp-co">giupvieckimphuc.com</div>
               <div className="xp-role">Frontend Developer</div>
               <div className="xp-body">
-                <ul>
-                  <li>Developed Admin Front-end with ReactJS, Redux, REST API.</li>
-                  <li>Team size: 5. Backend: Java.</li>
-                </ul>
+                Housekeeping service admin — ReactJS, Redux, REST API. Team: 5.
               </div>
             </div>
 
@@ -341,7 +308,7 @@ export function CVContent() {
             <table className="project-table">
               <tbody>
                 <tr><td>{t('client')}</td><td>Doraverse</td></tr>
-                <tr><td>{t('descriptions')}</td><td>Enterprise-grade AI workspace platform based on LibreChat (open-source), enabling multi-model conversations (GPT, Claude, Gemini), custom AI Agents, image/video studio, and LM notebooks. Includes workspace admin with multi-department support, analytics dashboards, Stripe billing, credit tracking, and deep research integration.</td></tr>
+                <tr><td>{t('descriptions')}</td><td>AI workspace platform (based on LibreChat). Multi-model chat, AI Agents, deep research, image/video studio. Workspace admin: analytics, Stripe billing, credit tracking, member management.</td></tr>
                 <tr><td>{t('numberOfMembers')}</td><td>10</td></tr>
                 <tr><td>{t('position')}</td><td>Frontend Developer</td></tr>
                 <tr><td>{t('responsibilities')}</td><td>
@@ -387,7 +354,7 @@ export function CVContent() {
             <table className="project-table">
               <tbody>
                 <tr><td>{t('client')}</td><td>Vingroup</td></tr>
-                <tr><td>{t('descriptions')}</td><td>V-Creator is a platform by Vingroup that encourages content creation about products and services from its member companies like VinFast, Vincom, and Vinpearl. Users share their content on social media platforms such as YouTube, TikTok, Facebook, and Instagram and receive rewards based on the number of views. Integrated and developed additional features tailored to partners such as MB Bank, VPBank, VNPAY, and Yody.</td></tr>
+                <tr><td>{t('descriptions')}</td><td>KOL content creator platform by Vingroup. Creators share content on YouTube, TikTok, Facebook and earn rewards by views. Partners: MB Bank, VPBank, VNPAY, Yody.</td></tr>
                 <tr><td>{t('numberOfMembers')}</td><td>6</td></tr>
                 <tr><td>{t('position')}</td><td>Frontend Developer</td></tr>
                 <tr><td>{t('responsibilities')}</td><td>
@@ -424,7 +391,7 @@ export function CVContent() {
             <table className="project-table">
               <tbody>
                 <tr><td>{t('client')}</td><td>Techcombank, AccessTrade</td></tr>
-                <tr><td>{t('descriptions')}</td><td>Tfluencer is a content creator monetization platform for Techcombank. Includes 3 sub-systems: <strong>TCB Creator</strong> (tfluencer.vn) — creator platform with content management, events/campaigns, KYC verification, reconciliation, partner integration; <strong>Ambassador</strong> — multi-brand campaign system with 11 brand-specific variants (Yody, VNPAY, VNG, Anker, Turborg, Flamingo, Wild Rift, HDBank, MBBank, TPBank, VPBank) each with customized frontend; <strong>TOS (service-tos)</strong> — KYC/eContract microservice handling eKYC verification, electronic contract signing, bank card linking, OTP verification, and partner webhook integration.</td></tr>
+                <tr><td>{t('descriptions')}</td><td>KOL monetization platform for Techcombank. 3 sub-systems: <strong>TCB Creator</strong> — content/campaign/KYC management; <strong>Ambassador</strong> — 11 brand campaign variants; <strong>TOS</strong> — eKYC/eContract microservice.</td></tr>
                 <tr><td>{t('numberOfMembers')}</td><td>6</td></tr>
                 <tr><td>{t('position')}</td><td>Frontend Developer &middot; Backend Developer</td></tr>
                 <tr><td>{t('responsibilities')}</td><td>
@@ -473,7 +440,7 @@ export function CVContent() {
             <table className="project-table">
               <tbody>
                 <tr><td>{t('client')}</td><td>CaSe Group, Banks</td></tr>
-                <tr><td>{t('descriptions')}</td><td>Built multiple reward-based webview games (spin wheel, gift opening) with seasonal themes (Tet, Christmas, etc.), integrated into banking and game purchasing apps.</td></tr>
+                <tr><td>{t('descriptions')}</td><td>Reward-based webview games (spin wheel, gift opening) with seasonal themes, embedded in banking apps.</td></tr>
                 <tr><td>{t('numberOfMembers')}</td><td>6</td></tr>
                 <tr><td>{t('position')}</td><td>Frontend Developer</td></tr>
                 <tr><td>{t('responsibilities')}</td><td>
@@ -509,7 +476,7 @@ export function CVContent() {
             <table className="project-table">
               <tbody>
                 <tr><td>{t('client')}</td><td>CaSe Group</td></tr>
-                <tr><td>{t('descriptions')}</td><td>A platform that allows users to create personal profile pages with social media links, images, articles, and product listings using customizable templates.</td></tr>
+                <tr><td>{t('descriptions')}</td><td>Bio link page builder — users create profile pages with social links, articles, and product listings via customizable templates.</td></tr>
                 <tr><td>{t('numberOfMembers')}</td><td>5</td></tr>
                 <tr><td>{t('position')}</td><td>Frontend Developer, Backend Developer</td></tr>
                 <tr><td>{t('responsibilities')}</td><td>
@@ -545,7 +512,7 @@ export function CVContent() {
             <table className="project-table">
               <tbody>
                 <tr><td>{t('client')}</td><td>Selly</td></tr>
-                <tr><td>{t('descriptions')}</td><td>Multi-platform e-commerce ecosystem with 6 sub-projects: consumer storefront, seller portal, merchant dashboard, admin panel, webview for mobile/banking apps, and Zalo Mini App. Dropshipping platform enabling sellers to manage inventory, orders, and campaigns with real-time chat support.</td></tr>
+                <tr><td>{t('descriptions')}</td><td>Dropshipping e-commerce platform — 6 sub-projects: consumer site, seller portal, merchant dashboard, admin, mobile webview, Zalo Mini App.</td></tr>
                 <tr><td>{t('numberOfMembers')}</td><td>10</td></tr>
                 <tr><td>{t('position')}</td><td>Frontend Developer, Backend Developer</td></tr>
                 <tr><td>{t('responsibilities')}</td><td>
@@ -589,7 +556,7 @@ export function CVContent() {
             <table className="project-table">
               <tbody>
                 <tr><td>{t('client')}</td><td>Cashbag</td></tr>
-                <tr><td>{t('descriptions')}</td><td>Cashback rewards platform integrated into 15+ banking apps (TPBank, MBBank, BIDV, VPBank, SeaBank, Shinhan, LPBank, NamABank, PVComebank, SHB, VietinBank, TNEX, etc.) and third-party partners (MFast, Galaxy). Features gamification, voucher management, transaction history, and withdrawal systems.</td></tr>
+                <tr><td>{t('descriptions')}</td><td>Cashback rewards platform embedded in 15+ banking apps (TPBank, MBBank, BIDV, VPBank, SeaBank, Shinhan, etc.). Gamification, vouchers, transactions, withdrawals.</td></tr>
                 <tr><td>{t('numberOfMembers')}</td><td>6</td></tr>
                 <tr><td>{t('position')}</td><td>Frontend Developer</td></tr>
                 <tr><td>{t('responsibilities')}</td><td>
@@ -628,7 +595,7 @@ export function CVContent() {
             <table className="project-table">
               <tbody>
                 <tr><td>{t('client')}</td><td>Supplier of Selly</td></tr>
-                <tr><td>{t('descriptions')}</td><td>Customer support center enabling real-time assistance for shopping inquiries and purchase-related issues, powered by Socket.IO.</td></tr>
+                <tr><td>{t('descriptions')}</td><td>Real-time customer support chat for Selly e-commerce, powered by Socket.IO.</td></tr>
                 <tr><td>{t('numberOfMembers')}</td><td>5</td></tr>
                 <tr><td>{t('position')}</td><td>Developer</td></tr>
                 <tr><td>{t('responsibilities')}</td><td>
@@ -659,7 +626,7 @@ export function CVContent() {
             <table className="project-table">
               <tbody>
                 <tr><td>{t('client')}</td><td>Cashbag &amp; Selly</td></tr>
-                <tr><td>{t('descriptions')}</td><td>Built Cashbag &amp; Selly e-commerce cashback experience as a Zalo Mini App integration.</td></tr>
+                <tr><td>{t('descriptions')}</td><td>Cashbag &amp; Selly cashback experience as Zalo Mini App.</td></tr>
                 <tr><td>{t('numberOfMembers')}</td><td>3</td></tr>
                 <tr><td>{t('position')}</td><td>Frontend Developer</td></tr>
                 <tr><td>{t('responsibilities')}</td><td>
