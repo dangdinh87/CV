@@ -386,6 +386,7 @@ export function CVContent() {
                     <li>{tr('projVcreatorResp2')}</li>
                     <li>{tr('projVcreatorResp3')}</li>
                     <li>{tr('projVcreatorResp4')}</li>
+                    <li>{tr('projVcreatorResp5')}</li>
                   </ul>
                 </td></tr>
                 <tr><td>{t('technologyInUse')}</td><td>

@@ -71,13 +71,14 @@ export const translations = {
     expTfluencer1: 'Developed TCB Creator platform (tfluencer.vn) — KOL/influencer management for Techcombank & AccessTrade.',
     expTfluencer2: 'Built service-tos microservice with eKYC, eContract, bank card linking, OTP verification using Next.js & Shadcn/ui.',
     expTfluencer3: 'Integrated FPT eContract API for biometric identity verification and digital contract signing.',
-    expTfluencer4: 'Developed 11 brand campaign variants (Yody, VNPay, VNG, Anker, HDBank, MBBank, TPBank, VPBank, etc.) with shared component architecture.',
-    expTfluencer5: 'Developed admin features: user/creator management, campaign approval, KYC review, and analytics dashboards.',
+    expTfluencer4: 'Develop multiple brand campaign variants for banking and enterprise partners with shared component architecture.',
+    expTfluencer5: 'Develop comprehensive admin system: user/creator management, campaign approval, KYC review, content moderation, data export, and analytics dashboards.',
     expTfluencer6: '**Backend:** Handled several backend features using Go & Echo framework.',
 
     // ── Freelance — Vcreator ──
     expVcreator1: 'Built vcreator.global — video creator platform with UmiJS, Ant Design, Dva.js state management.',
     expVcreator2: 'Integrated social APIs (YouTube, TikTok, Facebook), Firebase, and partner modules.',
+    expVcreator3: 'Built admin dashboard for user management and content moderation.',
 
     // ── Freelance — giupvieckimphuc ──
     expGiupviec1: 'Developed Admin Front-end with ReactJS, Redux, REST API.',
@@ -88,19 +89,19 @@ export const translations = {
     eduSub: 'Major: Information Technology · Grade: Very Good',
 
     // ── Skills Summary ──
-    skillsSummary1: '- **Frontend:** JavaScript, TypeScript, ReactJS, Next.js, UmiJS | State: Redux, Zustand | Styling: Tailwind CSS, SCSS, Ant Design, Shadcn/ui.',
+    skillsSummary1: '- **Frontend:** JavaScript, TypeScript, ReactJS, Next.js, UmiJS | State: Redux, Zustand | Styling: Tailwind CSS, SCSS, Ant Design, Shadcn/ui | Animation: Motion, Magic UI.',
     skillsSummary2: '- **Concepts:** Responsive design, SSR, SEO, WebSocket / Socket.IO.',
-    skillsSummary3: '- **Backend:** Node.js, Express.js, Go, Echo, MongoDB, MySQL.',
+    skillsSummary3: '- **Backend:** Node.js, Express.js, Go, Echo, MongoDB, PostgreSQL.',
     skillsSummary4: '- **Tools & AI:** Git, Git Flow, Figma, Docker | AI: Claude Code, ClaudeKit, MCP, Cursor, GitHub Copilot.',
 
     // ── Project: Doraverse ──
     projDoraverseDesc: 'Enterprise AI workspace built on LibreChat with multi-model chat (GPT, Claude, Gemini), custom AI Agents, image/video studio, LM notebooks, AI debate, meeting notes, workspace admin, and analytics dashboards.',
-    projDoraverseResp1: 'Set up frontend architecture for 3 standalone micro-frontends: workspace admin, auth-web, and meeting-note app',
+    projDoraverseResp1: 'Set up frontend architecture for workspace admin, auth-web, and meeting-note app',
     projDoraverseResp2: 'Built admin dashboard with usage analytics (Recharts), AI model management, per-department credit tracking, member/role management, and Stripe billing',
     projDoraverseResp3: 'Extended LibreChat with custom modules: AI Agents, AI debate, image/video studio, LM notebooks, and meeting notes',
     projDoraverseResp4: 'Built deep research feature with WebSocket streaming, multi-model support (GPT, Claude, Gemini), tool-use and function-calling',
     projDoraverseResp5: 'Built landing page with Framer; published internal cookie consent npm package used across all company products',
-    projDoraverseResp6: 'Implemented i18n (EN/VI/JP), dark/light mode, responsive design, and per-workspace branding settings',
+    projDoraverseResp6: 'Implemented multi-language support, dark/light mode, responsive design, and per-workspace branding settings',
     projDoraverseResp7: 'Led code reviews, optimized bundle performance, and refactored legacy code for maintainability',
 
     // ── Project: Vcreator ──
@@ -109,10 +110,11 @@ export const translations = {
     projVcreatorResp2: 'Optimized frontend performance and bundle size',
     projVcreatorResp3: 'Maintained codebase and refactored legacy components',
     projVcreatorResp4: 'Conducted code reviews to ensure quality standards',
+    projVcreatorResp5: 'Built admin dashboard for user management and content moderation',
 
     // ── Project: Tfluencer ──
-    projTfluencerDesc: "Techcombank's content creator monetization platform with 3 sub-systems: **TCB Creator** (creator portal with KYC & campaigns), **Ambassador** (11 brand campaign variants), and **TOS** (KYC/eContract microservice).",
-    projTfluencerResp1: 'Architected frontend codebase for TCB Creator, Ambassador (11 brand variants), and TOS',
+    projTfluencerDesc: "Techcombank's content creator monetization platform with 3 sub-systems: **TCB Creator** (creator portal with KYC & campaigns), **Ambassador** (brand campaign variants for banking and enterprise partners), and **TOS** (KYC/eContract microservice).",
+    projTfluencerResp1: 'Architected frontend codebase for TCB Creator, Ambassador, and TOS',
     projTfluencerResp2: 'Developed frontend & admin for TCB Creator: content, events, campaigns, KYC, reconciliation, and partner management',
     projTfluencerResp3: 'Developed Ambassador frontend with multi-brand customization (Yody, VNPAY, VNG, Anker, etc.)',
     projTfluencerResp4: 'Built TOS (service-tos) KYC/eContract frontend with Next.js, Shadcn/ui, and TanStack Query',
@@ -247,9 +249,9 @@ export const translations = {
     // ── Experience — Doraverse ──
     expDoraverse1: 'Phát triển website quản trị workspace, phân tích sử dụng user/model, theo dõi chi phí và đánh giá hiệu suất nhân viên.',
     expDoraverse2: 'Tích hợp và tùy chỉnh LibreChat (mã nguồn mở), mở rộng với AI Agents, studio hình ảnh/video, LM notebooks và deep research. Xử lý luồng chat streaming đa model (GPT, Claude, Gemini) với hỗ trợ tool-use và function-calling.',
-    expDoraverse3: 'Phát triển landing page, auth-web và ứng dụng meeting-note dưới dạng micro-frontend độc lập.',
+    expDoraverse3: 'Phát triển landing page, auth-web và ứng dụng meeting-note.',
     expDoraverse4: 'Xây dựng và publish package cookie consent, áp dụng cho tất cả sản phẩm công ty.',
-    expDoraverse5: 'Triển khai i18n (EN/VI/JP), dark mode và tích hợp tracking bên thứ ba (GA, GTM, HubSpot, Microsoft Clarity).',
+    expDoraverse5: 'Triển khai đa ngôn ngữ, dark mode và tích hợp tracking bên thứ ba (GA, GTM, HubSpot, Microsoft Clarity).',
     expDoraverse6: 'Thiết kế kiến trúc codebase frontend, review code, tối ưu hiệu suất và refactor để dễ bảo trì.',
 
     // ── Experience — Selly & Cashbag ──
@@ -269,13 +271,14 @@ export const translations = {
     expTfluencer1: 'Phát triển nền tảng TCB Creator (tfluencer.vn) — quản lý KOL/influencer cho Techcombank & AccessTrade.',
     expTfluencer2: 'Xây dựng microservice service-tos với eKYC, eContract, liên kết thẻ ngân hàng, xác thực OTP sử dụng Next.js & Shadcn/ui.',
     expTfluencer3: 'Tích hợp FPT eContract API cho xác minh sinh trắc học và ký hợp đồng điện tử.',
-    expTfluencer4: 'Phát triển 11 biến thể chiến dịch thương hiệu (Yody, VNPay, VNG, Anker, HDBank, MBBank, TPBank, VPBank, v.v.) với kiến trúc component dùng chung.',
-    expTfluencer5: 'Phát triển các tính năng admin: quản lý user/creator, duyệt chiến dịch, review KYC và dashboard phân tích.',
+    expTfluencer4: 'Phát triển nhiều biến thể chiến dịch thương hiệu cho các đối tác ngân hàng và doanh nghiệp với kiến trúc component dùng chung.',
+    expTfluencer5: 'Phát triển hệ thống admin toàn diện: quản lý user/creator, duyệt chiến dịch, review KYC, kiểm duyệt nội dung, xuất dữ liệu và dashboard phân tích.',
     expTfluencer6: '**Backend:** Xử lý nhiều tính năng backend sử dụng Go & Echo framework.',
 
     // ── Freelance — Vcreator ──
     expVcreator1: 'Xây dựng vcreator.global — nền tảng video creator với UmiJS, Ant Design, quản lý state Dva.js.',
     expVcreator2: 'Tích hợp social API (YouTube, TikTok, Facebook), Firebase và các module đối tác.',
+    expVcreator3: 'Xây dựng admin dashboard quản lý user và kiểm duyệt nội dung.',
 
     // ── Freelance — giupvieckimphuc ──
     expGiupviec1: 'Phát triển Admin Front-end với ReactJS, Redux, REST API.',
@@ -286,19 +289,19 @@ export const translations = {
     eduSub: 'Chuyên ngành: Công nghệ Thông tin · Xếp loại: Giỏi',
 
     // ── Skills Summary ──
-    skillsSummary1: '- **Frontend:** JavaScript, TypeScript, ReactJS, Next.js, UmiJS | State: Redux, Zustand | Styling: Tailwind CSS, SCSS, Ant Design, Shadcn/ui.',
+    skillsSummary1: '- **Frontend:** JavaScript, TypeScript, ReactJS, Next.js, UmiJS | State: Redux, Zustand | Styling: Tailwind CSS, SCSS, Ant Design, Shadcn/ui | Animation: Motion, Magic UI.',
     skillsSummary2: '- **Concepts:** Responsive design, SSR, SEO, WebSocket / Socket.IO.',
-    skillsSummary3: '- **Backend:** Node.js, Express.js, Go, Echo, MongoDB, MySQL.',
+    skillsSummary3: '- **Backend:** Node.js, Express.js, Go, Echo, MongoDB, PostgreSQL.',
     skillsSummary4: '- **Tools & AI:** Git, Git Flow, Figma, Docker | AI: Claude Code, ClaudeKit, MCP, Cursor, GitHub Copilot.',
 
     // ── Project: Doraverse ──
     projDoraverseDesc: 'AI workspace doanh nghiệp xây dựng trên LibreChat với chat đa model (GPT, Claude, Gemini), AI Agents, studio hình ảnh/video, LM notebooks, AI debate, ghi chú cuộc họp, quản trị workspace và dashboard phân tích.',
-    projDoraverseResp1: 'Thiết lập kiến trúc frontend cho 3 micro-frontend độc lập: workspace admin, auth-web và meeting-note app',
+    projDoraverseResp1: 'Thiết lập kiến trúc frontend cho workspace admin, auth-web và meeting-note app',
     projDoraverseResp2: 'Xây dựng admin dashboard với analytics (Recharts), quản lý AI model, theo dõi credit theo phòng ban, quản lý thành viên/vai trò và thanh toán Stripe',
     projDoraverseResp3: 'Mở rộng LibreChat với các module tùy chỉnh: AI Agents, AI debate, studio hình ảnh/video, LM notebooks và meeting notes',
     projDoraverseResp4: 'Xây dựng tính năng deep research với WebSocket streaming, hỗ trợ đa model (GPT, Claude, Gemini), tool-use và function-calling',
     projDoraverseResp5: 'Xây dựng landing page với Framer; publish npm package cookie consent dùng chung cho toàn bộ sản phẩm công ty',
-    projDoraverseResp6: 'Triển khai i18n (EN/VI/JP), dark/light mode, responsive design và cài đặt branding theo workspace',
+    projDoraverseResp6: 'Triển khai đa ngôn ngữ, dark/light mode, responsive design và cài đặt branding theo workspace',
     projDoraverseResp7: 'Review code, tối ưu bundle performance và refactor code cũ để dễ bảo trì',
 
     // ── Project: Vcreator ──
@@ -307,10 +310,11 @@ export const translations = {
     projVcreatorResp2: 'Tối ưu hiệu suất frontend và kích thước bundle',
     projVcreatorResp3: 'Bảo trì codebase và refactor các component cũ',
     projVcreatorResp4: 'Review code đảm bảo tiêu chuẩn chất lượng',
+    projVcreatorResp5: 'Xây dựng admin dashboard quản lý user và kiểm duyệt nội dung',
 
     // ── Project: Tfluencer ──
-    projTfluencerDesc: 'Nền tảng kiếm tiền cho content creator của Techcombank với 3 hệ thống: **TCB Creator** (cổng creator với KYC & chiến dịch), **Ambassador** (11 biến thể chiến dịch thương hiệu), và **TOS** (microservice KYC/eContract).',
-    projTfluencerResp1: 'Thiết kế kiến trúc codebase frontend cho TCB Creator, Ambassador (11 biến thể thương hiệu) và TOS',
+    projTfluencerDesc: 'Nền tảng kiếm tiền cho content creator của Techcombank với 3 hệ thống: **TCB Creator** (cổng creator với KYC & chiến dịch), **Ambassador** (biến thể chiến dịch cho đối tác ngân hàng và doanh nghiệp), và **TOS** (microservice KYC/eContract).',
+    projTfluencerResp1: 'Thiết kế kiến trúc codebase frontend cho TCB Creator, Ambassador và TOS',
     projTfluencerResp2: 'Phát triển frontend & admin cho TCB Creator: nội dung, sự kiện, chiến dịch, KYC, đối soát và quản lý đối tác',
     projTfluencerResp3: 'Phát triển frontend Ambassador với tùy chỉnh đa thương hiệu (Yody, VNPAY, VNG, Anker, v.v.)',
     projTfluencerResp4: 'Xây dựng frontend TOS (service-tos) KYC/eContract với Next.js, Shadcn/ui và TanStack Query',
