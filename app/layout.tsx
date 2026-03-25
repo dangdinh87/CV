@@ -3,6 +3,7 @@ import { Space_Grotesk, DM_Sans, JetBrains_Mono } from 'next/font/google'
 import './globals.css'
 import { ThemeProvider } from './context/theme-context'
 import { LanguageProvider } from './context/language-context'
+import { Analytics } from '@vercel/analytics/next'
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
@@ -52,6 +53,7 @@ export default function RootLayout({
             {children}
           </LanguageProvider>
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   )
