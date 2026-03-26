@@ -1,0 +1,160 @@
+/** Category group definitions — maps raw data categories into logical groups */
+
+export interface CategoryGroup {
+  label: string
+  /** Path to SVG icon in /public/icons/ */
+  icon: string
+  /** All raw `category` values from data files that belong to this group */
+  members: string[]
+}
+
+export const CATEGORY_GROUPS: CategoryGroup[] = [
+  {
+    label: 'HTML',
+    icon: '/icons/html.svg',
+    members: [
+      'HTML', 'HTML5', 'Semantic', 'Forms', 'Headers', 'Accessibility',
+    ],
+  },
+  {
+    label: 'CSS',
+    icon: '/icons/css.svg',
+    members: [
+      'CSS', 'Box Model', 'Display & Position', 'Flexbox', 'Grid',
+      'Selectors', 'Responsive', 'Modern CSS', 'CSS Layout', 'Animations',
+    ],
+  },
+  {
+    label: 'JavaScript',
+    icon: '/icons/javascript.svg',
+    members: [
+      'JavaScript', 'Kiểu Dữ Liệu & Biến', 'Hoisting & Closure', 'Functions',
+      'this & Binding', 'Prototype', 'ES6+', 'Promise & Async', 'Async',
+      'DOM & APIs', 'Event Loop', 'JS Tricky', 'Coding Challenge', 'Coding Live',
+    ],
+  },
+  {
+    label: 'TypeScript',
+    icon: '/icons/typescript.svg',
+    members: [
+      'TypeScript', 'Types Cơ Bản', 'Interface', 'Interface & Type',
+      'Generics', 'Utility Types', 'TypeScript Gotchas',
+    ],
+  },
+  {
+    label: 'React',
+    icon: '/icons/react.svg',
+    members: [
+      'React', 'JSX & Cơ Bản', 'Components', 'Props & State',
+      'Hooks & State', 'useState & useEffect', 'Advanced Hooks', 'Custom Hooks',
+      'Lifecycle', 'Context & Router', 'Forms & Error',
+      'Performance & Patterns', 'Patterns', 'React Thực Chiến',
+      'React Query',
+    ],
+  },
+  {
+    label: 'Next.js',
+    icon: '/icons/nextjs.svg',
+    members: [
+      'Next.js', 'App Router', 'Server/Client Components', 'Rendering',
+      'API & Server Actions', 'Next.js SEO',
+    ],
+  },
+  {
+    label: 'State Management',
+    icon: '/icons/state-management.svg',
+    members: [
+      'State Management', 'Redux', 'RTK', 'Zustand', 'Recoil', 'Jotai',
+    ],
+  },
+  {
+    label: 'Node.js',
+    icon: '/icons/nodejs.svg',
+    members: [
+      'Node.js', 'Node.js Deep', 'Node.js Thực Tế', 'Express',
+      'Streams', 'Buffers', 'File System',
+    ],
+  },
+  {
+    label: 'Golang',
+    icon: '/icons/golang.svg',
+    members: [
+      'Golang', 'Concurrency', 'Struct', 'Collections',
+    ],
+  },
+  {
+    label: 'Backend & API',
+    icon: '/icons/backend-api.svg',
+    members: [
+      'HTTP', 'CORS', 'Web & API', 'Environment', 'Error Handling',
+    ],
+  },
+  {
+    label: 'Database',
+    icon: '/icons/database.svg',
+    members: [
+      'Database', 'Database Design', 'SQL Cơ Bản', 'NoSQL', 'ORM', 'Caching',
+    ],
+  },
+  {
+    label: 'DevOps & Tools',
+    icon: '/icons/devops.svg',
+    members: [
+      'Build Tools', 'Webpack', 'Vite', 'Babel', 'SWC',
+      'Package Managers', 'Monorepo', 'Tooling',
+      'Git', 'CI/CD', 'Docker', 'DevOps',
+    ],
+  },
+  {
+    label: 'Testing',
+    icon: '/icons/testing.svg',
+    members: [
+      'Testing', 'Jest', 'Vitest', 'Cypress', 'Playwright',
+      'TDD/BDD', 'Test Pyramid', 'Debug & Scenario', 'Debugging',
+    ],
+  },
+  {
+    label: 'Performance & SEO',
+    icon: '/icons/performance.svg',
+    members: [
+      'Performance', 'Optimization', 'Core Web Vitals', 'Web Perf',
+      'Lazy Loading', 'Code Splitting', 'Performance SEO',
+      'SEO',
+    ],
+  },
+  {
+    label: 'Bảo Mật',
+    icon: '/icons/security.svg',
+    members: [
+      'Security', 'Authentication', 'Auth', 'XSS & CSRF', 'CSP',
+    ],
+  },
+  {
+    label: 'Career & Non-Tech',
+    icon: '/icons/career.svg',
+    members: [
+      'Career & Non-Tech',
+    ],
+  },
+]
+
+/** Build a lookup: raw category → group label */
+const _categoryToGroup = new Map<string, string>()
+for (const group of CATEGORY_GROUPS) {
+  for (const member of group.members) {
+    _categoryToGroup.set(member, group.label)
+  }
+}
+
+/** Resolve raw category to its group label. Unmapped categories fall into "Khác" */
+export function getGroupLabel(rawCategory: string): string {
+  return _categoryToGroup.get(rawCategory) ?? 'Khác'
+}
+
+/** All group labels in display order */
+export const GROUP_LABELS = CATEGORY_GROUPS.map(g => g.label)
+
+/** Group label → icon lookup */
+export const GROUP_ICONS = Object.fromEntries(
+  CATEGORY_GROUPS.map(g => [g.label, g.icon])
+) as Record<string, string>

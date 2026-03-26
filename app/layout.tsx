@@ -26,11 +26,56 @@ const jetbrainsMono = JetBrains_Mono({
   display: 'swap',
 })
 
+const SITE_URL = 'https://luyenphongvan.online'
+
 export const metadata: Metadata = {
-  title: 'Nguyen Dang Dinh — Frontend Developer',
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: 'Luyện Phỏng Vấn — 1100+ Câu Hỏi Phỏng Vấn IT',
+    template: '%s | Luyện Phỏng Vấn',
+  },
   description:
-    'Frontend Developer with 3+ years of experience building scalable web applications with React, Next.js, and TypeScript. Based in Da Nang, Vietnam.',
-  keywords: ['Frontend Developer', 'React', 'Next.js', 'TypeScript', 'Da Nang', 'Vietnam'],
+    'Tổng hợp 1100+ câu hỏi phỏng vấn IT từ cơ bản đến nâng cao. HTML, CSS, JavaScript, TypeScript, React, Next.js, Node.js, Golang, Database, DevOps, Testing, Security, Career & more.',
+  keywords: [
+    'phỏng vấn', 'interview', 'frontend', 'backend', 'fullstack',
+    'React', 'Next.js', 'Node.js', 'TypeScript', 'Golang',
+    'luyện phỏng vấn', 'câu hỏi phỏng vấn IT', 'career',
+    'phỏng vấn lập trình', 'tuyển dụng IT', 'developer interview',
+  ],
+  alternates: {
+    canonical: SITE_URL,
+  },
+  openGraph: {
+    type: 'website',
+    locale: 'vi_VN',
+    url: SITE_URL,
+    siteName: 'Luyện Phỏng Vấn',
+    title: 'Luyện Phỏng Vấn — 1100+ Câu Hỏi Phỏng Vấn IT',
+    description:
+      'Tổng hợp 1100+ câu hỏi phỏng vấn IT từ cơ bản đến nâng cao. Luyện tập ngay với HTML, CSS, JS, React, Node.js, Golang, DevOps & more.',
+    images: [{ url: '/icon.svg', width: 512, height: 512, alt: 'Luyện Phỏng Vấn' }],
+  },
+  twitter: {
+    card: 'summary',
+    title: 'Luyện Phỏng Vấn — 1100+ Câu Hỏi Phỏng Vấn IT',
+    description:
+      'Tổng hợp 1100+ câu hỏi phỏng vấn IT từ cơ bản đến nâng cao.',
+    images: ['/icon.svg'],
+  },
+  verification: {
+    google: 'google583c5c945cf216b2',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
 }
 
 export default function RootLayout({
@@ -39,7 +84,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`${spaceGrotesk.variable} ${dmSans.variable} ${jetbrainsMono.variable}`} suppressHydrationWarning>
+    <html lang="vi" className={`${spaceGrotesk.variable} ${dmSans.variable} ${jetbrainsMono.variable}`} suppressHydrationWarning>
       <head>
         <script
           dangerouslySetInnerHTML={{
@@ -48,6 +93,19 @@ export default function RootLayout({
         />
       </head>
       <body suppressHydrationWarning>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'WebSite',
+              name: 'Luyện Phỏng Vấn',
+              url: SITE_URL,
+              description: 'Tổng hợp 1100+ câu hỏi phỏng vấn IT từ cơ bản đến nâng cao',
+              inLanguage: 'vi',
+            }),
+          }}
+        />
         <ThemeProvider>
           <LanguageProvider>
             {children}

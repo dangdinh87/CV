@@ -81,22 +81,126 @@ function applyInlineFormat(text: string): string {
     .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
 }
 
+// Split text on ". " but NOT inside backticks or after common abbreviations/decimals
+function smartSentenceSplit(text: string): string[] {
+  const results: string[] = []
+  let current = ''
+  let inBacktick = false
+
+  for (let i = 0; i < text.length; i++) {
+    const ch = text[i]
+    if (ch === '`') inBacktick = !inBacktick
+
+    current += ch
+
+    if (inBacktick) continue
+
+    // Split on ". " followed by uppercase or (number) or Pitfall/Ví dụ/Lưu ý
+    if (ch === '.' && i + 1 < text.length && text[i + 1] === ' ') {
+      const after = text.substring(i + 2, i + 12)
+      // Don't split on decimals (0.5), version numbers (v4.16), abbreviations
+      const before2 = text.substring(Math.max(0, i - 2), i)
+      if (/\d$/.test(before2) && /^\d/.test(text[i + 2] || '')) continue
+      // Split if next word starts with uppercase, (, or is a known keyword
+      if (/^[A-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠƯẠ(]/.test(after) || /^(Pitfall|Ví dụ|Lưu ý|Ngoài|Trong|Với|Khi|Nên|Không|Dùng|Có|Đây|Tuy|So|Thêm|Kết|Quan|Cũng|Hiểu|Tránh)/.test(after)) {
+        results.push(current.trim())
+        current = ''
+        i++ // skip the space
+      }
+    }
+  }
+  if (current.trim()) results.push(current.trim())
+  return results
+}
+
 function formatAnswer(text: string): string {
   const escaped = escapeHtml(text)
 
-  // Split sentences that describe list items after a colon or period
-  // Pattern: "Main sentence: item1, item2. Another sentence."
-  // Or: "Sentence. Another sentence. Yet another."
-  const sentences = escaped.split(/(?<=\.)\s+/)
-  if (sentences.length <= 1) return applyInlineFormat(escaped)
+  // Detect numbered pattern: (1) ... (2) ... (3) ...
+  const numberedPattern = /\((\d+)\)\s/g
+  const numberedMatches = [...escaped.matchAll(numberedPattern)]
 
-  // First sentence = summary, rest = detail points
+  if (numberedMatches.length >= 2) {
+    // Extract intro before first (1)
+    const firstIdx = numberedMatches[0].index!
+    const intro = escaped.substring(0, firstIdx).trim()
+
+    // Extract numbered items
+    const items: string[] = []
+    for (let i = 0; i < numberedMatches.length; i++) {
+      const start = numberedMatches[i].index! + numberedMatches[i][0].length
+      const end = i + 1 < numberedMatches.length ? numberedMatches[i + 1].index! : escaped.length
+      let content = escaped.substring(start, end).trim()
+      // Remove trailing period if last item
+      if (i === numberedMatches.length - 1) content = content.replace(/\.$/, '')
+      items.push(content)
+    }
+
+    // Check if there's content after the last numbered item (like Pitfall, Ví dụ)
+    const lastItemEnd = numberedMatches[numberedMatches.length - 1].index! + numberedMatches[numberedMatches.length - 1][0].length
+    const remaining = escaped.substring(lastItemEnd)
+    // Split remaining to get post-list remarks
+    const postSentences = smartSentenceSplit(remaining)
+    const lastItemContent = postSentences[0]?.trim() || ''
+    const postRemarks = postSentences.slice(1).filter(Boolean)
+
+    // Update last item
+    if (lastItemContent) items[items.length - 1] = lastItemContent.replace(/\.$/, '')
+
+    let html = ''
+    if (intro) {
+      // Check if intro itself has sentences
+      const introSentences = smartSentenceSplit(intro)
+      html += `<p class="qa-summary">${applyInlineFormat(introSentences[0])}</p>`
+      if (introSentences.length > 1) {
+        html += introSentences.slice(1).map(s =>
+          `<p class="qa-detail">${applyInlineFormat(s)}</p>`
+        ).join('')
+      }
+    }
+
+    html += '<ol class="qa-points qa-numbered">'
+    items.forEach(item => {
+      html += `<li>${applyInlineFormat(item)}</li>`
+    })
+    html += '</ol>'
+
+    // Add post-list remarks (Pitfall, Ví dụ, etc.)
+    if (postRemarks.length) {
+      postRemarks.forEach(remark => {
+        const r = remark.trim()
+        if (/^Pitfall/i.test(r)) {
+          html += `<p class="qa-pitfall">${applyInlineFormat(r)}</p>`
+        } else if (/^(Ví dụ|Ví dụ thực tế)/i.test(r)) {
+          html += `<p class="qa-example">${applyInlineFormat(r)}</p>`
+        } else {
+          html += `<p class="qa-detail">${applyInlineFormat(r)}</p>`
+        }
+      })
+    }
+
+    return html
+  }
+
+  // Fallback: smart sentence split
+  const sentences = smartSentenceSplit(escaped)
+  if (sentences.length <= 1) return `<p>${applyInlineFormat(escaped)}</p>`
+
   const summary = applyInlineFormat(sentences[0])
   const points = sentences.slice(1)
     .map(s => s.trim())
     .filter(Boolean)
-    .map(s => `<li>${applyInlineFormat(s)}</li>`)
+    .map(s => {
+      if (/^Pitfall/i.test(s)) return `</ul><p class="qa-pitfall">${applyInlineFormat(s)}</p><ul class="qa-points" style="display:none">`
+      if (/^(Ví dụ|Ví dụ thực tế)/i.test(s)) return `</ul><p class="qa-example">${applyInlineFormat(s)}</p><ul class="qa-points" style="display:none">`
+      return `<li>${applyInlineFormat(s)}</li>`
+    })
     .join('')
 
-  return `<p class="qa-summary">${summary}</p><ul class="qa-points">${points}</ul>`
+  // Clean up empty ul tags from pitfall/example extraction
+  let html = `<p class="qa-summary">${summary}</p><ul class="qa-points">${points}</ul>`
+  html = html.replace(/<ul class="qa-points" style="display:none"><\/ul>/g, '')
+  html = html.replace(/<ul class="qa-points"><\/ul>/g, '')
+
+  return html
 }

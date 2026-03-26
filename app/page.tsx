@@ -1,15 +1,5 @@
-import { ThemeToggle } from './components/theme-toggle'
-import { LanguageSwitcher } from './components/language-switcher'
-import { CVContent } from './components/cv-content'
+import { InterviewClient } from './interview/interview-client'
 
 export default function Page() {
-  return (
-    <>
-      <div className="floating-controls">
-        <LanguageSwitcher />
-        <ThemeToggle />
-      </div>
-      <CVContent />
-    </>
-  )
+  return <InterviewClient />
 }
