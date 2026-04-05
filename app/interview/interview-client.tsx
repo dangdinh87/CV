@@ -333,8 +333,9 @@ export function InterviewClient() {
               return (
                 <div key={group.label}>
                   <div
-                    className={`iv-sidebar-item iv-sidebar-group ${isGroupActive || isSubActive ? 'active' : ''}`}
-                    onClick={() => { store.setActiveCategory(group.label); setSidebarOpen(false) }}
+                    className={`iv-sidebar-item iv-sidebar-group ${group.comingSoon ? 'coming-soon' : ''} ${isGroupActive || isSubActive ? 'active' : ''}`}
+                    onClick={() => { if (!group.comingSoon) { store.setActiveCategory(group.label); setSidebarOpen(false) } }}
+                    style={group.comingSoon ? { cursor: 'default', opacity: 0.7 } : undefined}
                   >
                     <span><img className="iv-sidebar-icon" src={group.icon} alt="" width={18} height={18} /> {group.label}</span>
                     {group.comingSoon
