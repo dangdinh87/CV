@@ -6,6 +6,8 @@ export interface CategoryGroup {
   icon: string
   /** All raw `category` values from data files that belong to this group */
   members: string[]
+  /** If true, show "Sắp ra mắt" badge instead of question count */
+  comingSoon?: boolean
 }
 
 export const CATEGORY_GROUPS: CategoryGroup[] = [
@@ -179,6 +181,22 @@ export const CATEGORY_GROUPS: CategoryGroup[] = [
       'AWS & Cloud', 'Compute & Networking', 'Storage & Database',
       'Security & DevOps', 'Architecture',
     ],
+  },
+  {
+    label: 'Java',
+    icon: '/icons/java.svg',
+    members: [
+      'Java', 'Spring Boot', 'JVM', 'Java Collections',
+    ],
+    comingSoon: true,
+  },
+  {
+    label: 'Flutter',
+    icon: '/icons/flutter.svg',
+    members: [
+      'Flutter', 'Dart', 'Flutter Widgets', 'Flutter State',
+    ],
+    comingSoon: true,
   },
   {
     label: 'Career & Non-Tech',

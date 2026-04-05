@@ -322,7 +322,7 @@ export function InterviewClient() {
           <div className="iv-sidebar-list">
             {CATEGORY_GROUPS.map(group => {
               const count = store.groupCounts[group.label] || 0
-              if (count === 0) return null
+              if (count === 0 && !group.comingSoon) return null
               const isGroupActive = store.activeCategory === group.label
               const subs = store.subCategoryCounts[group.label] || {}
               const subEntries = Object.entries(subs).sort((a, b) => b[1] - a[1])
@@ -337,7 +337,10 @@ export function InterviewClient() {
                     onClick={() => { store.setActiveCategory(group.label); setSidebarOpen(false) }}
                   >
                     <span><img className="iv-sidebar-icon" src={group.icon} alt="" width={18} height={18} /> {group.label}</span>
-                    <span className="iv-sidebar-count">{count}</span>
+                    {group.comingSoon
+                      ? <span className="iv-sidebar-badge-soon">{locale === 'en' ? 'Soon' : 'Sắp ra mắt'}</span>
+                      : <span className="iv-sidebar-count">{count}</span>
+                    }
                   </div>
                   {/* Show sub-categories when group or sub is active */}
                   {hasMultipleSubs && (isGroupActive || isSubActive) && (
