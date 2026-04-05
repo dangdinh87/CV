@@ -1,31 +1,13 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
-import { CATEGORIES } from './interview-data'
+import { useEffect, useCallback } from 'react'
 import { useLanguage } from '../context/language-context'
 
-interface FormData {
-  name: string
-  email: string
-  category: string
-  question: string
-  answer: string
-  note: string
-  links: string
-}
-
-const INITIAL: FormData = { name: '', email: '', category: '', question: '', answer: '', note: '', links: '' }
-
-type ContributeTab = 'question' | 'feature'
+const REPO_URL = 'https://github.com/dangdinh87/luyen-phong-van-online'
 
 export function ContributeForm({ onClose }: { onClose: () => void }) {
   const { locale } = useLanguage()
-  const [tab, setTab] = useState<ContributeTab>('question')
-  const [form, setForm] = useState<FormData>(INITIAL)
-  const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle')
-  const [errorMsg, setErrorMsg] = useState('')
 
-  // Close on Escape
   const handleKeyDown = useCallback((e: KeyboardEvent) => {
     if (e.key === 'Escape') onClose()
   }, [onClose])
@@ -35,36 +17,44 @@ export function ContributeForm({ onClose }: { onClose: () => void }) {
     return () => document.removeEventListener('keydown', handleKeyDown)
   }, [handleKeyDown])
 
-  const set = (key: keyof FormData) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
-    setForm(prev => ({ ...prev, [key]: e.target.value }))
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    if (tab === 'question' && !form.question.trim()) { setErrorMsg(locale === 'en' ? 'Please enter a question' : 'Vui lòng nhập câu hỏi'); return }
-    if (tab === 'feature' && !form.question.trim()) { setErrorMsg(locale === 'en' ? 'Please enter a feature description' : 'Vui lòng nhập mô tả tính năng'); return }
-
-    setStatus('sending')
-    setErrorMsg('')
-
-    try {
-      const res = await fetch('/api/contribute', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...form, type: tab }),
-      })
-      const data = await res.json()
-      if (res.ok) {
-        setStatus('success')
-        setForm(INITIAL)
-      } else {
-        setStatus('error')
-        setErrorMsg(data.error || (locale === 'en' ? 'Submission failed' : 'Gửi thất bại'))
-      }
-    } catch {
-      setStatus('error')
-      setErrorMsg(locale === 'en' ? 'Connection error' : 'Lỗi kết nối')
-    }
-  }
+  const items = [
+    {
+      icon: (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <circle cx="12" cy="12" r="3"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+        </svg>
+      ),
+      title: locale === 'en' ? 'Add Questions' : 'Thêm câu hỏi',
+      desc: locale === 'en'
+        ? 'Add new Q&A to data files in app/interview/data/'
+        : 'Thêm câu hỏi & đáp án vào các file data trong app/interview/data/',
+      url: `${REPO_URL}/tree/main/app/interview/data`,
+    },
+    {
+      icon: (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/>
+        </svg>
+      ),
+      title: locale === 'en' ? 'Report Issues' : 'Báo lỗi / Góp ý',
+      desc: locale === 'en'
+        ? 'Report bugs, wrong answers, or suggest improvements'
+        : 'Báo lỗi sai đáp án, đề xuất cải thiện giao diện hoặc tính năng',
+      url: `${REPO_URL}/issues/new`,
+    },
+    {
+      icon: (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M6 3v12"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9a9 9 0 0 1-9 9"/>
+        </svg>
+      ),
+      title: locale === 'en' ? 'Create Pull Request' : 'Tạo Pull Request',
+      desc: locale === 'en'
+        ? 'Fork the repo, make changes, and submit a PR'
+        : 'Fork repo, chỉnh sửa và gửi Pull Request trực tiếp',
+      url: `${REPO_URL}/fork`,
+    },
+  ]
 
   return (
     <>
@@ -77,136 +67,39 @@ export function ContributeForm({ onClose }: { onClose: () => void }) {
           </button>
         </div>
 
-        <div className="iv-contribute-tabs">
-          <button
-            className={`iv-contribute-tab ${tab === 'question' ? 'active' : ''}`}
-            onClick={() => { setTab('question'); setStatus('idle'); setErrorMsg('') }}
-          >
-            {locale === 'en' ? 'Question' : 'Câu hỏi'}
-          </button>
-          <button
-            className={`iv-contribute-tab ${tab === 'feature' ? 'active' : ''}`}
-            onClick={() => { setTab('feature'); setStatus('idle'); setErrorMsg('') }}
-          >
-            {locale === 'en' ? 'Feature' : 'Tính năng'}
-          </button>
+        <p className="iv-contribute-desc">
+          {locale === 'en'
+            ? 'This is an open-source project. Contribute directly on GitHub!'
+            : 'Đây là dự án mã nguồn mở. Đóng góp trực tiếp trên GitHub!'}
+        </p>
+
+        <div className="iv-contribute-links">
+          {items.map((item) => (
+            <a
+              key={item.url}
+              href={item.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="iv-contribute-link-card"
+            >
+              <div className="iv-contribute-link-icon">{item.icon}</div>
+              <div>
+                <div className="iv-contribute-link-title">{item.title}</div>
+                <div className="iv-contribute-link-desc">{item.desc}</div>
+              </div>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="iv-contribute-link-arrow">
+                <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
+              </svg>
+            </a>
+          ))}
         </div>
 
-        {status === 'success' ? (
-          <div className="iv-contribute-success">
-            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--green-ink)" strokeWidth="2"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
-            <p>{locale === 'en' ? 'Thank you for contributing!' : 'Cảm ơn bạn đã đóng góp!'}</p>
-            <p className="iv-contribute-sub">{locale === 'en' ? 'Your submission will be reviewed and added.' : 'Câu hỏi sẽ được review và thêm vào bộ sưu tập.'}</p>
-            <button className="iv-contribute-btn" onClick={onClose}>{locale === 'en' ? 'Close' : 'Đóng'}</button>
-          </div>
-        ) : (
-          <form className="iv-contribute-form" onSubmit={handleSubmit}>
-            {tab === 'question' ? (
-              <>
-                <div className="iv-contribute-row">
-                  <div className="iv-contribute-field">
-                    <label>{locale === 'en' ? 'Name' : 'Tên'} <span className="iv-optional">{locale === 'en' ? '(optional)' : '(tùy chọn)'}</span></label>
-                    <input type="text" value={form.name} onChange={set('name')} placeholder="Ẩn danh" />
-                  </div>
-                  <div className="iv-contribute-field">
-                    <label>Email <span className="iv-optional">{locale === 'en' ? '(optional)' : '(tùy chọn)'}</span></label>
-                    <input type="email" value={form.email} onChange={set('email')} placeholder="email@example.com" />
-                  </div>
-                </div>
-
-                <div className="iv-contribute-field">
-                  <label>{locale === 'en' ? 'Topic' : 'Chủ đề'}</label>
-                  <select value={form.category} onChange={set('category')}>
-                    <option value="">{locale === 'en' ? '-- Select topic --' : '-- Chọn chủ đề --'}</option>
-                    {CATEGORIES.map(cat => (
-                      <option key={cat} value={cat}>{cat}</option>
-                    ))}
-                    <option value="Khác">{locale === 'en' ? 'Other' : 'Khác'}</option>
-                  </select>
-                </div>
-
-                <div className="iv-contribute-field">
-                  <label>{locale === 'en' ? 'Question' : 'Câu hỏi'} <span className="iv-required">*</span></label>
-                  <textarea
-                    value={form.question}
-                    onChange={set('question')}
-                    placeholder={locale === 'en' ? 'Enter a question or knowledge...' : 'Nhập câu hỏi hoặc kiến thức...'}
-                    rows={3}
-                    required
-                  />
-                </div>
-
-                <div className="iv-contribute-field">
-                  <label>{locale === 'en' ? 'Suggested answer' : 'Gợi ý đáp án'} <span className="iv-optional">{locale === 'en' ? '(optional)' : '(tùy chọn)'}</span></label>
-                  <textarea
-                    value={form.answer}
-                    onChange={set('answer')}
-                    placeholder={locale === 'en' ? 'If you have a suggested answer...' : 'Nếu bạn có gợi ý đáp án...'}
-                    rows={4}
-                  />
-                </div>
-
-                <div className="iv-contribute-field">
-                  <label>{locale === 'en' ? 'Note' : 'Ghi chú'} <span className="iv-optional">{locale === 'en' ? '(optional)' : '(tùy chọn)'}</span></label>
-                  <input type="text" value={form.note} onChange={set('note')} placeholder={locale === 'en' ? 'Source, suggested level...' : 'Nguồn, level gợi ý...'} />
-                </div>
-              </>
-            ) : (
-              <>
-                <div className="iv-contribute-row">
-                  <div className="iv-contribute-field">
-                    <label>{locale === 'en' ? 'Name' : 'Tên'} <span className="iv-optional">{locale === 'en' ? '(optional)' : '(tùy chọn)'}</span></label>
-                    <input type="text" value={form.name} onChange={set('name')} placeholder="Ẩn danh" />
-                  </div>
-                  <div className="iv-contribute-field">
-                    <label>Email <span className="iv-optional">{locale === 'en' ? '(optional)' : '(tùy chọn)'}</span></label>
-                    <input type="email" value={form.email} onChange={set('email')} placeholder="email@example.com" />
-                  </div>
-                </div>
-
-                <div className="iv-contribute-field">
-                  <label>{locale === 'en' ? 'Feature description' : 'Mô tả tính năng'} <span className="iv-required">*</span></label>
-                  <textarea
-                    value={form.question}
-                    onChange={set('question')}
-                    placeholder={locale === 'en' ? 'What feature would you like? Describe in detail...' : 'Bạn muốn website có thêm tính năng gì? Mô tả chi tiết...'}
-                    rows={4}
-                    required
-                  />
-                </div>
-
-                <div className="iv-contribute-field">
-                  <label>{locale === 'en' ? 'Reason / Benefits' : 'Lý do / Lợi ích'} <span className="iv-optional">{locale === 'en' ? '(optional)' : '(tùy chọn)'}</span></label>
-                  <textarea
-                    value={form.answer}
-                    onChange={set('answer')}
-                    placeholder={locale === 'en' ? 'How would this feature help learning?' : 'Tính năng này giúp ích gì cho việc học/ôn tập?'}
-                    rows={3}
-                  />
-                </div>
-
-                <div className="iv-contribute-field">
-                  <label>{locale === 'en' ? 'Reference link' : 'Link tham khảo'} <span className="iv-optional">{locale === 'en' ? '(optional)' : '(tùy chọn)'}</span></label>
-                  <textarea
-                    value={form.links}
-                    onChange={set('links')}
-                    placeholder={locale === 'en' ? 'Example links, screenshots...' : 'Link ví dụ từ website khác, ảnh minh họa...'}
-                    rows={2}
-                  />
-                </div>
-              </>
-            )}
-
-            {errorMsg && <div className="iv-contribute-error">{errorMsg}</div>}
-
-            <div className="iv-contribute-actions">
-              <button type="button" className="iv-contribute-btn iv-btn-secondary" onClick={onClose}>{locale === 'en' ? 'Cancel' : 'Hủy'}</button>
-              <button type="submit" className="iv-contribute-btn iv-btn-primary" disabled={status === 'sending'}>
-                {status === 'sending' ? (locale === 'en' ? 'Sending...' : 'Đang gửi...') : (locale === 'en' ? 'Submit' : 'Gửi đóng góp')}
-              </button>
-            </div>
-          </form>
-        )}
+        <div className="iv-contribute-footer">
+          <a href={REPO_URL} target="_blank" rel="noopener noreferrer" className="iv-contribute-repo-link">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            {locale === 'en' ? 'View on GitHub' : 'Xem trên GitHub'}
+          </a>
+        </div>
       </div>
     </>
   )
