@@ -29,8 +29,7 @@ export const QACard = memo(function QACard({
   const answer = locale === 'en' && item.a_en ? item.a_en : item.a
 
   const highlightedQuestion = useMemo(() => {
-    if (!searchQuery) return question
-    return highlightText(question, searchQuery)
+    return formatQuestion(question, searchQuery)
   }, [question, searchQuery])
 
   return (
@@ -98,12 +97,18 @@ export const QACard = memo(function QACard({
   )
 })
 
-function highlightText(text: string, query: string): string {
-  if (!query) return escapeHtml(text)
-  const escaped = escapeHtml(text)
-  const escapedQuery = escapeHtml(query).replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
-  const regex = new RegExp(`(${escapedQuery})`, 'gi')
-  return escaped.replace(regex, '<mark class="iv-highlight">$1</mark>')
+/** Escape HTML, format backtick `code`, then optionally highlight search matches */
+function formatQuestion(text: string, query?: string): string {
+  let html = escapeHtml(text)
+  // Format inline code: `code` → <code>code</code>
+  html = html.replace(/`([^`]+)`/g, '<code>$1</code>')
+  // Highlight search matches
+  if (query) {
+    const escapedQuery = escapeHtml(query).replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+    const regex = new RegExp(`(${escapedQuery})`, 'gi')
+    html = html.replace(regex, '<mark class="iv-highlight">$1</mark>')
+  }
+  return html
 }
 
 function escapeHtml(text: string): string {
