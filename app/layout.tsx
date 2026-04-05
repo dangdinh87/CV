@@ -4,6 +4,7 @@ import './globals.css'
 import { ThemeProvider } from './context/theme-context'
 import { LanguageProvider } from './context/language-context'
 import { Analytics } from '@vercel/analytics/next'
+import Script from 'next/script'
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
@@ -97,6 +98,13 @@ export default function RootLayout({
   return (
     <html lang="vi" className={`${spaceGrotesk.variable} ${dmSans.variable} ${jetbrainsMono.variable}`} suppressHydrationWarning>
       <head>
+        <Script src="https://www.googletagmanager.com/gtag/js?id=G-C1KQC1HB34" strategy="afterInteractive" />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-C1KQC1HB34');`}
+        </Script>
         <script
           dangerouslySetInnerHTML={{
             __html: `(function(){try{var t=localStorage.getItem('theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}catch(e){}})()`,
