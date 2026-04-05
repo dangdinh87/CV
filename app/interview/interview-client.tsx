@@ -1,8 +1,9 @@
 'use client'
 
-import { useState, useEffect, useCallback, useRef } from 'react'
+import { useState, useEffect, useCallback, useRef, useTransition } from 'react'
 import { QA_DATA } from './interview-data'
 import { useInterviewStore } from './use-interview-store'
+import { useDebounce } from './use-debounce'
 import { QACard } from './qa-card'
 import { ContributeForm } from './contribute-form'
 import { useTheme } from '../context/theme-context'
@@ -27,11 +28,17 @@ export function InterviewClient() {
   const { theme, setTheme, toggleTheme } = useTheme()
   const { locale, toggleLocale } = useLanguage()
   const store = useInterviewStore(QA_DATA)
+  const [searchInput, setSearchInput] = useState('')
+  const debouncedSearch = useDebounce(searchInput, 300)
+  const isSearching = searchInput !== debouncedSearch
   const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE)
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [settingsOpen, setSettingsOpen] = useState(false)
   const [contributeOpen, setContributeOpen] = useState(false)
   const [fontSize, setFontSize] = useState(loadFontSize)
+
+  // Sync debounced search to store
+  useEffect(() => { store.setSearch(debouncedSearch) }, [debouncedSearch])
 
   // Persist font size
   useEffect(() => { localStorage.setItem(FONT_KEY, String(fontSize)) }, [fontSize])
@@ -138,14 +145,23 @@ export function InterviewClient() {
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
         </button>
         <div className="iv-search-box">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          {isSearching ? (
+            <div className="iv-search-spinner" />
+          ) : (
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          )}
           <input
             id="searchInput"
             type="text"
             placeholder={locale === 'en' ? 'Search questions... (press / to focus)' : 'Tìm kiếm câu hỏi... (nhấn / để focus)'}
-            value={store.search}
-            onChange={(e) => store.setSearch(e.target.value)}
+            value={searchInput}
+            onChange={(e) => setSearchInput(e.target.value)}
           />
+          {searchInput && (
+            <button className="iv-search-clear" onClick={() => setSearchInput('')} aria-label="Clear search">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+            </button>
+          )}
         </div>
         <div className="iv-filter-group">
           {(['all', 'beginner', 'intermediate', 'advanced'] as const).map(level => (
@@ -360,7 +376,16 @@ export function InterviewClient() {
             </div>
           </div>
 
-          {visibleData.length === 0 ? (
+          {isSearching ? (
+            <div className="iv-search-loading">
+              {[...Array(3)].map((_, i) => (
+                <div key={i} className="iv-skeleton-card">
+                  <div className="iv-skeleton-line iv-skeleton-title" />
+                  <div className="iv-skeleton-line iv-skeleton-meta" />
+                </div>
+              ))}
+            </div>
+          ) : visibleData.length === 0 ? (
             <div className="iv-empty">
               <p>{locale === 'en' ? 'No questions found.' : 'Không tìm thấy câu hỏi nào.'}</p>
             </div>
@@ -371,6 +396,7 @@ export function InterviewClient() {
                   key={item.id}
                   item={item}
                   index={idx + 1}
+                  searchQuery={debouncedSearch}
                   isBookmarked={store.bookmarks.has(item.id)}
                   isLearned={store.learned.has(item.id)}
                   isOpen={store.openAnswers.has(item.id)}

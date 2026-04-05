@@ -1,6 +1,6 @@
 'use client'
 
-import { memo } from 'react'
+import { memo, useMemo } from 'react'
 import confetti from 'canvas-confetti'
 import type { QAItem } from './interview-data'
 import { LEVEL_CONFIG } from './interview-data'
@@ -10,6 +10,7 @@ interface QACardProps {
   item: QAItem
   /** 1-based display index within the current filtered list */
   index: number
+  searchQuery?: string
   isBookmarked: boolean
   isLearned: boolean
   isOpen: boolean
@@ -19,13 +20,18 @@ interface QACardProps {
 }
 
 export const QACard = memo(function QACard({
-  item, index, isBookmarked, isLearned, isOpen,
+  item, index, searchQuery, isBookmarked, isLearned, isOpen,
   onToggleAnswer, onToggleBookmark, onToggleLearned,
 }: QACardProps) {
   const { locale } = useLanguage()
   const levelStyle = LEVEL_CONFIG[item.level]
   const question = locale === 'en' && item.q_en ? item.q_en : item.q
   const answer = locale === 'en' && item.a_en ? item.a_en : item.a
+
+  const highlightedQuestion = useMemo(() => {
+    if (!searchQuery) return question
+    return highlightText(question, searchQuery)
+  }, [question, searchQuery])
 
   return (
     <div
@@ -35,7 +41,7 @@ export const QACard = memo(function QACard({
     >
       <div className="qa-question" onClick={() => onToggleAnswer(item.id)}>
         <span className="qa-num">#{index}</span>
-        <span className="qa-text">{question}</span>
+        <span className="qa-text" dangerouslySetInnerHTML={{ __html: highlightedQuestion }} />
         <div className="qa-meta">
           <span
             className="qa-level"
@@ -91,6 +97,14 @@ export const QACard = memo(function QACard({
     </div>
   )
 })
+
+function highlightText(text: string, query: string): string {
+  if (!query) return escapeHtml(text)
+  const escaped = escapeHtml(text)
+  const escapedQuery = escapeHtml(query).replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+  const regex = new RegExp(`(${escapedQuery})`, 'gi')
+  return escaped.replace(regex, '<mark class="iv-highlight">$1</mark>')
+}
 
 function escapeHtml(text: string): string {
   return text

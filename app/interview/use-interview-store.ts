@@ -162,6 +162,8 @@ export function useInterviewStore(allData: QAItem[]) {
           || item.a?.toLowerCase().includes(q)
           || item.category.toLowerCase().includes(q)
           || item.subcategory.toLowerCase().includes(q)
+          || (item.q_en?.toLowerCase().includes(q) ?? false)
+          || (item.a_en?.toLowerCase().includes(q) ?? false)
       }
       return true
     })
