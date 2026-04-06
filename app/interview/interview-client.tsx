@@ -12,6 +12,7 @@ import { useLanguage } from '../context/language-context'
 import { CATEGORY_GROUPS } from './category-groups'
 import { MorphingText } from './components/morphing-text'
 import { NumberTicker } from './components/number-ticker'
+import { CURRENT_VERSION } from '../changelog/changelog-data'
 import './interview.css'
 
 const ITEMS_PER_PAGE = 100
@@ -35,6 +36,17 @@ export function InterviewClient() {
   const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE)
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [settingsOpen, setSettingsOpen] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false)
+  const [hasNewUpdate, setHasNewUpdate] = useState(false)
+  const [bannerDismissed, setBannerDismissed] = useState(true)
+
+  useEffect(() => {
+    const seen = localStorage.getItem('cl_seen_version')
+    if (seen !== CURRENT_VERSION) {
+      setHasNewUpdate(true)
+      setBannerDismissed(false)
+    }
+  }, [])
   const [contributeOpen, setContributeOpen] = useState(false)
   const [donateOpen, setDonateOpen] = useState(false)
   const [fontSize, setFontSize] = useState(loadFontSize)
@@ -96,13 +108,32 @@ export function InterviewClient() {
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
             </span>
           </button>
-          <button className="iv-lang-toggle" onClick={toggleLocale} title={locale === 'en' ? 'Switch to Vietnamese' : 'Switch to English'}>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-            <span>{locale === 'en' ? 'VI' : 'EN'}</span>
-          </button>
-          <button className="iv-hero-action-btn" onClick={() => setSettingsOpen(!settingsOpen)} title={locale === 'en' ? 'Settings' : 'Cài đặt'}>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
-          </button>
+          <div className="iv-menu-wrap">
+            <button className="iv-hero-action-btn" onClick={() => setMenuOpen(!menuOpen)} title="Menu">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+              {hasNewUpdate && <span className="iv-menu-dot" />}
+            </button>
+            {menuOpen && (
+              <>
+                <div className="iv-menu-backdrop" onClick={() => setMenuOpen(false)} />
+                <div className="iv-menu-dropdown">
+                  <button className="iv-menu-item" onClick={() => { setMenuOpen(false); toggleLocale() }}>
+                    <span style={{ fontSize: '16px', lineHeight: 1 }}>{locale === 'en' ? '🇻🇳' : '🇬🇧'}</span>
+                    {locale === 'en' ? 'Tiếng Việt' : 'English'}
+                  </button>
+                  <button className="iv-menu-item" onClick={() => { setMenuOpen(false); setSettingsOpen(true) }}>
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+                    {locale === 'en' ? 'Settings' : 'Cài đặt'}
+                  </button>
+                  <a href="/changelog" className="iv-menu-item">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 8v4l3 3"/><circle cx="12" cy="12" r="10"/></svg>
+                    {locale === 'en' ? 'Changelog' : 'Nhật ký cập nhật'}
+                    {hasNewUpdate && <span className="iv-menu-new">NEW</span>}
+                  </a>
+                </div>
+              </>
+            )}
+          </div>
         </div>
         <MorphingText
           className="iv-morphing-title"
@@ -139,6 +170,25 @@ export function InterviewClient() {
           </div>
         </div>
       </header>
+
+      {/* Update banner */}
+      {hasNewUpdate && !bannerDismissed && (
+        <div className="iv-update-banner">
+          <div className="iv-update-shimmer" />
+          <a href="/changelog" className="iv-update-content">
+            <span className="iv-update-badge">NEW</span>
+            <span className="iv-update-text">
+              {locale === 'en'
+                ? `v${CURRENT_VERSION} is here — see what's new`
+                : `v${CURRENT_VERSION} vừa cập nhật — xem thay đổi mới`}
+            </span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+          </a>
+          <button className="iv-update-close" onClick={(e) => { e.preventDefault(); setBannerDismissed(true); localStorage.setItem('cl_seen_version', CURRENT_VERSION); setHasNewUpdate(false) }} aria-label="Dismiss">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+          </button>
+        </div>
+      )}
 
       {/* Topbar */}
       <div className="iv-topbar">
@@ -451,6 +501,10 @@ export function InterviewClient() {
           <a href="tel:0977963775" className="iv-footer-link">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
             0977 963 775
+          </a>
+          <a href="/changelog" className="iv-footer-link">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 8v4l3 3"/><circle cx="12" cy="12" r="10"/></svg>
+            Changelog
           </a>
           <button className="iv-footer-donate" onClick={() => setDonateOpen(true)}>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>

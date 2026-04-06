@@ -14,15 +14,18 @@
   top: 16px;
   right: 20px;
   display: flex;
+  align-items: center;
   gap: 8px;
   z-index: 2;
 }
 .iv-hero-action-btn {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 5px;
-  padding: 7px 14px;
+  height: 32px;
+  padding: 0 14px;
   border: 1px solid rgba(255,255,255,0.15);
   border-radius: 6px;
   background: rgba(255,255,255,0.06);
@@ -64,7 +67,8 @@
   display: flex;
   align-items: center;
   gap: 5px;
-  padding: 7px 12px;
+  height: 32px;
+  padding: 0 12px;
   border: 1px solid rgba(255,255,255,0.15);
   border-radius: 6px;
   background: rgba(255,255,255,0.06);
@@ -92,7 +96,8 @@
   overflow: hidden;
   border: 1px solid rgba(255,255,255,0.15);
   border-radius: 6px;
-  padding: 7px 14px;
+  height: 32px;
+  padding: 0 14px;
   font-size: 0.78rem;
   font-weight: 500;
   color: rgba(255,255,255,0.6);
@@ -101,6 +106,152 @@
   transition: all 0.2s;
 }
 .iv-hover-btn:hover { background: rgba(255,255,255,0.12); color: rgba(255,255,255,0.9); border-color: rgba(255,255,255,0.25); }
+
+/* ═══ Update Banner (Magic UI shimmer inspired) ═══ */
+.iv-update-banner {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--accent-soft) 0%, var(--surface) 50%, var(--accent-soft) 100%);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  padding: 0;
+}
+.iv-update-shimmer {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(59,130,246,0.08) 40%,
+    rgba(59,130,246,0.15) 50%,
+    rgba(59,130,246,0.08) 60%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: iv-shimmer 2.5s ease-in-out infinite;
+}
+@keyframes iv-shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+.iv-update-content {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  padding: 10px 16px;
+  text-decoration: none;
+  color: var(--ink);
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: opacity 0.15s;
+}
+.iv-update-content:hover { opacity: 0.8; }
+.iv-update-content svg { color: var(--accent); flex-shrink: 0; }
+.iv-update-badge {
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: #fff;
+  background: var(--accent);
+  padding: 2px 7px;
+  border-radius: 4px;
+  letter-spacing: 0.06em;
+  animation: iv-badge-glow 2s ease-in-out infinite;
+}
+@keyframes iv-badge-glow {
+  0%, 100% { box-shadow: 0 0 4px rgba(59,130,246,0.3); }
+  50% { box-shadow: 0 0 12px rgba(59,130,246,0.5); }
+}
+.iv-update-text {
+  flex: 1;
+}
+.iv-update-close {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  margin-right: 8px;
+  border: none;
+  border-radius: 6px;
+  background: none;
+  color: var(--ink-muted);
+  cursor: pointer;
+  transition: all 0.15s;
+  flex-shrink: 0;
+}
+.iv-update-close:hover { background: var(--surface-raised); color: var(--ink); }
+
+/* Menu dropdown */
+.iv-menu-wrap { position: relative; }
+.iv-menu-backdrop { position: fixed; inset: 0; z-index: 9; }
+.iv-menu-dropdown {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  min-width: 200px;
+  white-space: nowrap;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+  z-index: 10;
+  padding: 4px;
+  animation: iv-menu-in 0.15s ease-out;
+}
+@keyframes iv-menu-in {
+  from { opacity: 0; transform: translateY(-6px) scale(0.95); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.iv-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 9px 12px;
+  border: none;
+  border-radius: 7px;
+  background: none;
+  color: var(--ink);
+  font-size: 0.85rem;
+  font-family: var(--font-body);
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.12s;
+}
+.iv-menu-item:hover { background: var(--surface-raised); }
+.iv-menu-item svg { color: var(--ink-muted); flex-shrink: 0; }
+
+/* Notification dot on menu button */
+.iv-menu-dot {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ef4444;
+  animation: iv-dot-pulse 1.5s ease-in-out infinite;
+}
+@keyframes iv-dot-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(239,68,68,0.5); }
+  50% { box-shadow: 0 0 0 4px rgba(239,68,68,0); }
+}
+
+/* NEW badge in menu */
+.iv-menu-new {
+  margin-left: auto;
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: #fff;
+  background: #ef4444;
+  padding: 1px 6px;
+  border-radius: 3px;
+  letter-spacing: 0.05em;
+}
 .iv-hover-btn-dot {
   width: 7px;
   height: 7px;

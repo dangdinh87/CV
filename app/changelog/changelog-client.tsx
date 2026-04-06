@@ -1,0 +1,117 @@
+'use client'
+
+import { useState } from 'react'
+import { useLanguage } from '../context/language-context'
+import { CHANGELOG, CURRENT_VERSION, TYPE_LABEL } from './changelog-data'
+import './changelog.css'
+
+const SEEN_KEY = 'cl_seen_version'
+
+function formatDate(dateStr: string, locale: string) {
+  const d = new Date(dateStr)
+  return d.toLocaleDateString(locale === 'vi' ? 'vi-VN' : 'en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  })
+}
+
+export function ChangelogClient() {
+  const { locale } = useLanguage()
+  const lang = locale as 'vi' | 'en'
+
+  /* First entry always expanded, rest collapsed */
+  const [expanded, setExpanded] = useState<Set<string>>(() => {
+    const set = new Set<string>()
+    if (CHANGELOG.length > 0) set.add(CHANGELOG[0].version)
+    return set
+  })
+
+  /* Mark current version as seen when user visits this page */
+  if (typeof window !== 'undefined') {
+    localStorage.setItem(SEEN_KEY, CURRENT_VERSION)
+  }
+
+  const toggle = (version: string) => {
+    setExpanded(prev => {
+      const next = new Set(prev)
+      if (next.has(version)) next.delete(version)
+      else next.add(version)
+      return next
+    })
+  }
+
+  return (
+    <div className="cl-page">
+      {/* Header */}
+      <header className="cl-header">
+        <div className="cl-header-actions">
+          <a href="/" className="cl-back-btn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+            {lang === 'en' ? 'Back' : 'Quay lại'}
+          </a>
+        </div>
+        <div className="cl-current-version">v{CURRENT_VERSION}</div>
+        <h1 className="cl-title">{lang === 'en' ? 'Changelog' : 'Nhật ký cập nhật'}</h1>
+        <p className="cl-subtitle">{lang === 'en' ? 'Follow the latest updates and improvements' : 'Theo dõi các cập nhật và cải tiến mới nhất'}</p>
+      </header>
+
+      {/* Timeline */}
+      <div className="cl-container">
+        <div className="cl-timeline">
+          {CHANGELOG.map((entry, i) => {
+            const isOpen = expanded.has(entry.version)
+            return (
+              <article key={entry.version} className="cl-entry">
+                <button className="cl-entry-header" onClick={() => toggle(entry.version)} aria-expanded={isOpen}>
+                  <span className="cl-version">v{entry.version}</span>
+                  <span className="cl-date">{formatDate(entry.date, lang)}</span>
+                  {i === 0 && <span className="cl-latest">{lang === 'en' ? 'Latest' : 'Mới nhất'}</span>}
+                  <span className="cl-entry-count">{entry.changes.length}</span>
+                  <svg className={`cl-chevron ${isOpen ? 'cl-chevron--open' : ''}`} width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                </button>
+                {isOpen && (
+                  <ul className="cl-changes">
+                    {entry.changes.map((change, j) => (
+                      <li key={j} className="cl-change">
+                        <span className={`cl-badge cl-badge--${change.type}`}>{TYPE_LABEL[change.type][lang]}</span>
+                        <span>{change.text[lang]}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </article>
+            )
+          })}
+        </div>
+      </div>
+
+      {/* Footer */}
+      <footer className="iv-footer-wrap">
+        <div className="iv-footer">
+          <div className="iv-footer-left">
+            <div className="iv-footer-brand">
+              <img src="/icon.svg" alt="" width={24} height={24} className="iv-footer-icon" />
+              <span className="iv-footer-logo">{lang === 'en' ? 'IT Knowledge Hub' : 'Luyện Phỏng Vấn IT'}</span>
+            </div>
+            <p className="iv-footer-slogan">{lang === 'en'
+              ? 'A comprehensive, open-source knowledge base with 1280+ carefully curated IT interview questions and in-depth answers.'
+              : 'Kho kiến thức mã nguồn mở với hơn 1280+ câu hỏi phỏng vấn IT được biên soạn kỹ lưỡng kèm đáp án chi tiết.'}</p>
+          </div>
+          <div className="iv-footer-right">
+            <span className="iv-footer-label">{lang === 'en' ? 'Contact' : 'Liên hệ'}</span>
+            <a href="mailto:nguyendangdinh47@gmail.com" className="iv-footer-link">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+              nguyendangdinh47@gmail.com
+            </a>
+            <a href="tel:0977963775" className="iv-footer-link">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              0977 963 775
+            </a>
+          </div>
+        </div>
+        <div className="iv-footer-copy">&copy; {new Date().getFullYear()} {lang === 'en' ? 'IT Knowledge Hub' : 'Luyện Phỏng Vấn IT'}</div>
+      </footer>
+    </div>
+  )
+}

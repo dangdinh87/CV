@@ -33,7 +33,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   // Hydrate from localStorage
   useEffect(() => {
     const stored = localStorage.getItem('theme') as ThemeMode | null
-    const mode = stored === 'light' || stored === 'dark' || stored === 'system' ? stored : 'system'
+    const mode = stored === 'light' || stored === 'dark' || stored === 'system' ? stored : 'dark'
     setThemeState(mode)
     applyTheme(mode)
   }, [])

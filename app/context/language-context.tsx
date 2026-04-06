@@ -27,14 +27,14 @@ interface LanguageContextValue {
 }
 
 const LanguageContext = createContext<LanguageContextValue>({
-  locale: 'en',
+  locale: 'vi',
   toggleLocale: () => {},
-  t: (key) => translations.en[key],
-  tr: (key) => translations.en[key],
+  t: (key) => translations.vi[key],
+  tr: (key) => translations.vi[key],
 })
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [locale, setLocale] = useState<Locale>('en')
+  const [locale, setLocale] = useState<Locale>('vi')
 
   useEffect(() => {
     const saved = localStorage.getItem('locale') as Locale | null
