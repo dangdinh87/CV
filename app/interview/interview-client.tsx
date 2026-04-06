@@ -489,27 +489,27 @@ export function InterviewClient() {
             <span className="iv-footer-logo">{locale === 'en' ? 'IT Knowledge Hub' : 'Luyện Phỏng Vấn IT'}</span>
           </div>
           <p className="iv-footer-slogan">{locale === 'en'
-                ? 'A comprehensive, open-source knowledge base with 1280+ carefully curated IT interview questions and in-depth answers — covering Frontend, Backend, System Design, DevOps and beyond. Built by the community, for the community.'
-                : 'Kho kiến thức mã nguồn mở với hơn 1280+ câu hỏi phỏng vấn IT được biên soạn kỹ lưỡng kèm đáp án chi tiết — bao quát Frontend, Backend, System Design, DevOps và nhiều lĩnh vực khác. Được xây dựng bởi cộng đồng, dành cho cộng đồng.'}</p>
+                ? '1580+ IT interview questions with detailed answers — Frontend, Backend, Java, PHP, C#, Flutter, System Design, DevOps. Built by the community, for the community.'
+                : '1580+ câu hỏi phỏng vấn IT kèm đáp án chi tiết — Frontend, Backend, Java, PHP, C#, Flutter, System Design, DevOps. Được xây dựng bởi cộng đồng, dành cho cộng đồng.'}</p>
+          <div className="iv-footer-links">
+            <a href="mailto:nguyendangdinh47@gmail.com" className="iv-footer-link">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+              nguyendangdinh47@gmail.com
+            </a>
+            <a href="/changelog" className="iv-footer-link">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 8v4l3 3"/><circle cx="12" cy="12" r="10"/></svg>
+              Changelog
+            </a>
+            <button className="iv-footer-donate" onClick={() => setDonateOpen(true)}>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+              {locale === 'en' ? 'Support' : 'Ủng hộ'}
+            </button>
+          </div>
         </div>
         <div className="iv-footer-right">
-          <span className="iv-footer-label">{locale === 'en' ? 'Contact' : 'Liên hệ'}</span>
-          <a href="mailto:nguyendangdinh47@gmail.com" className="iv-footer-link">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-            nguyendangdinh47@gmail.com
+          <a href="https://launch.j2team.dev/products/luyen-phong-van?utm_source=badge-launched&utm_medium=badge&utm_campaign=badge-luyen-phong-van" target="_blank" rel="noopener noreferrer" className="iv-footer-badge">
+            <img src="https://launch.j2team.dev/badge/luyen-phong-van/light" alt="Luyện Phỏng Vấn - Launched on J2TEAM Launch" width="250" height="54" loading="lazy" />
           </a>
-          <a href="tel:0977963775" className="iv-footer-link">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-            0977 963 775
-          </a>
-          <a href="/changelog" className="iv-footer-link">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 8v4l3 3"/><circle cx="12" cy="12" r="10"/></svg>
-            Changelog
-          </a>
-          <button className="iv-footer-donate" onClick={() => setDonateOpen(true)}>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-            {locale === 'en' ? 'Support the project' : 'Ủng hộ dự án'}
-          </button>
         </div>
         </div>
         <div className="iv-footer-copy">&copy; {new Date().getFullYear()} {locale === 'en' ? 'IT Knowledge Hub' : 'Luyện Phỏng Vấn IT'}</div>

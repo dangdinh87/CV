@@ -64,13 +64,15 @@ export function DonateModal({ onClose }: { onClose: () => void }) {
                 </svg>
                 Buy Me a Coffee
               </a>
-              <button
-                onClick={() => setShowMomoQR(true)}
+              <a
+                href="https://me.momo.vn/ReI4uqFoFMujsGUVFmFl"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="iv-donate-btn iv-donate-btn-momo"
               >
                 <MomoIcon size={20} />
                 MoMo
-              </button>
+              </a>
             </div>
           </>
         )}
