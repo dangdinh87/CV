@@ -11,7 +11,7 @@ export interface ChangelogEntry {
   changes: Change[]
 }
 
-export const CURRENT_VERSION = '1.8.0'
+export const CURRENT_VERSION = '1.9.0'
 
 /* Badge labels shown to end-users */
 export const TYPE_LABEL: Record<ChangeType, { vi: string; en: string }> = {
@@ -23,6 +23,15 @@ export const TYPE_LABEL: Record<ChangeType, { vi: string; en: string }> = {
 }
 
 export const CHANGELOG: ChangelogEntry[] = [
+  {
+    version: '1.9.0',
+    date: '2026-04-07',
+    changes: [
+      { type: 'category', text: { vi: 'Thêm danh mục RabbitMQ — 58 câu hỏi về Exchange, Queue, Dead Letter, Clustering, và Spring AMQP', en: 'Added RabbitMQ category — 58 questions on Exchange, Queue, Dead Letter, Clustering, and Spring AMQP' } },
+      { type: 'category', text: { vi: 'Thêm danh mục Android — 67 câu hỏi về Kotlin, Jetpack Compose, Architecture, Coroutines, và KMP', en: 'Added Android category — 67 questions on Kotlin, Jetpack Compose, Architecture, Coroutines, and KMP' } },
+      { type: 'fix', text: { vi: 'Sửa lỗi format hiển thị câu trả lời', en: 'Fixed answer display formatting issues' } },
+    ],
+  },
   {
     version: '1.8.0',
     date: '2026-04-06',

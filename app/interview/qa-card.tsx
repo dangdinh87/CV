@@ -229,8 +229,34 @@ function formatAnswer(text: string): string {
   const sentences = smartSentenceSplit(escaped)
   if (sentences.length <= 1) return `<p>${applyInlineFormat(escaped)}</p>`
 
-  const summary = applyInlineFormat(sentences[0])
-  const points = sentences.slice(1)
+  // Only 2 sentences → render as 2 paragraphs (1 summary + 1 bullet looks odd)
+  if (sentences.length === 2) {
+    return sentences.map((s, i) =>
+      `<p class="${i === 0 ? 'qa-summary' : 'qa-detail'}">${applyInlineFormat(s)}</p>`
+    ).join('')
+  }
+
+  // Detect if first sentence is a peer item (not a real summary).
+  // Short first sentence (< 40 chars) much shorter than the rest → likely a peer.
+  const first = sentences[0]
+  const rest = sentences.slice(1)
+  const firstIsShort = first.length < 40
+  const restAvgLen = rest.reduce((sum, s) => sum + s.length, 0) / rest.length
+  // Only treat as peer when there are few items (3-4); with 5+ items, keep first as summary
+  const firstIsPeer = firstIsShort && restAvgLen > first.length * 1.2 && sentences.length <= 4
+
+  let summary: string | null = null
+  let bulletSentences: string[]
+
+  if (firstIsPeer) {
+    summary = null
+    bulletSentences = sentences
+  } else {
+    summary = applyInlineFormat(sentences[0])
+    bulletSentences = rest
+  }
+
+  const points = bulletSentences
     .map(s => s.trim())
     .filter(Boolean)
     .map(s => {
@@ -241,7 +267,7 @@ function formatAnswer(text: string): string {
     .join('')
 
   // Clean up empty ul tags from pitfall/example extraction
-  let html = `<p class="qa-summary">${summary}</p><ul class="qa-points">${points}</ul>`
+  let html = (summary ? `<p class="qa-summary">${summary}</p>` : '') + `<ul class="qa-points">${points}</ul>`
   html = html.replace(/<ul class="qa-points" style="display:none"><\/ul>/g, '')
   html = html.replace(/<ul class="qa-points"><\/ul>/g, '')
 

@@ -1,10 +1,8 @@
 # Luyện Phỏng Vấn Online
 
-> 1280+ câu hỏi phỏng vấn IT có đáp án chi tiết, song ngữ Việt-Anh.
+> 1700+ câu hỏi phỏng vấn IT có đáp án chi tiết, song ngữ Việt-Anh.
 
 **🔗 Sản phẩm: [luyenphongvan.online](https://luyenphongvan.online)**
-
-**📅 Cập nhật lần cuối: 29/03/2026**
 
 ---
 
@@ -16,9 +14,14 @@ Tổng hợp câu hỏi phỏng vấn IT từ cơ bản đến nâng cao, phân 
 - JavaScript / TypeScript
 - React / Next.js
 - Golang
+- Java / Spring Boot
+- PHP / Laravel
+- C# / ASP.NET
+- Flutter / Dart
+- Android / Kotlin
 - System Design
 - Design Patterns
-- Kafka / Redis
+- Kafka / Redis / RabbitMQ
 - AWS / Cloud
 - Networking / OS
 - SEO
@@ -43,6 +46,8 @@ Tổng hợp câu hỏi phỏng vấn IT từ cơ bản đến nâng cao, phân 
 ## Phát triển
 
 ```bash
+git clone https://github.com/dangdinh87/luyen-phong-van-online.git
+cd cv-app
 pnpm install
 pnpm dev
 ```
@@ -51,11 +56,15 @@ Mở [http://localhost:3000](http://localhost:3000).
 
 ## Đóng góp
 
-Bạn có thể đóng góp câu hỏi mới trực tiếp trên trang web hoặc tạo PR trên repo này.
+Xem [CONTRIBUTING.md](CONTRIBUTING.md) để biết cách đóng góp câu hỏi mới hoặc cải thiện nội dung.
+
+## License
+
+MIT
 
 ## Tác giả
 
-**Nguyễn Đăng Đỉnh** — Frontend Developer
+**Nguyễn Đăng Định** — Frontend Developer
 
 - GitHub: [dangdinh87](https://github.com/dangdinh87)
 - Email: nguyendangdinh47@gmail.com
