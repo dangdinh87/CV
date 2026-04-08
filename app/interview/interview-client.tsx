@@ -16,6 +16,7 @@ import { CURRENT_VERSION } from '../changelog/changelog-data'
 import './interview.css'
 
 const ITEMS_PER_PAGE = 100
+const INTERVIEW_LEVELS = ['all', 'beginner', 'intermediate', 'advanced'] as const
 const FONT_KEY = 'iv_font_size'
 
 const FONT_DEFAULT = 16
@@ -215,7 +216,7 @@ export function InterviewClient() {
           )}
         </div>
         <div className="iv-filter-group">
-          {(['all', 'beginner', 'intermediate', 'advanced'] as const).map(level => (
+          {INTERVIEW_LEVELS.map(level => (
             <button
               key={level}
               className={`iv-filter-btn ${store.activeLevel === level ? 'active' : ''}`}
