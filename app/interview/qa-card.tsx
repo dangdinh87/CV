@@ -122,6 +122,8 @@ function applyInlineFormat(text: string): string {
   return text
     .replace(/`([^`]+)`/g, '<code>$1</code>')
     .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*([^*]+)\*/g, '<em>$1</em>')
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
 }
 
 // Split text on ". " but NOT inside backticks or after common abbreviations/decimals
@@ -158,6 +160,35 @@ function smartSentenceSplit(text: string): string[] {
 
 function formatAnswer(text: string): string {
   const escaped = escapeHtml(text)
+
+  // Explicit newline support `\n` overrides the smart sentence split heuristic
+  if (escaped.includes('\n')) {
+    const blocks = escaped.split(/\n\s*\n/).filter(Boolean)
+    let html = ''
+    blocks.forEach(block => {
+      // If block is a list (starts with '- ')
+      if (block.trim().startsWith('- ')) {
+        const listItems = []
+        let currentItem = ''
+        block.split('\n').forEach(line => {
+          if (line.trim().startsWith('- ')) {
+            if (currentItem) listItems.push(currentItem)
+            currentItem = line.trim().substring(2).trim()
+          } else {
+            currentItem += (currentItem ? '<br/>' : '') + line.trim()
+          }
+        })
+        if (currentItem) listItems.push(currentItem)
+
+        html += `<ul class="qa-points">${listItems.map(item => `<li>${applyInlineFormat(item)}</li>`).join('')}</ul>`
+      } else {
+        html += `<p class="qa-detail">${applyInlineFormat(block.replace(/\n/g, '<br/>'))}</p>`
+      }
+    })
+    // Give the first paragraph the summary class if it's the only one or if it makes sense
+    html = html.replace(/<p class="qa-detail">/, '<p class="qa-summary">')
+    return html
+  }
 
   // Detect numbered pattern: (1) ... (2) ... (3) ...
   const numberedPattern = /\((\d+)\)\s/g
