@@ -9,7 +9,7 @@ import { ContributeForm } from './contribute-form'
 import { DonateModal } from './donate-modal'
 import { useTheme } from '../context/theme-context'
 import { useLanguage } from '../context/language-context'
-import { CATEGORY_GROUPS } from './category-groups'
+import { CATEGORY_GROUPS, getGroupLabel, GROUP_MAP } from './category-groups'
 import { MorphingText } from './components/morphing-text'
 import { NumberTicker } from './components/number-ticker'
 import { CURRENT_VERSION } from '../changelog/changelog-data'
@@ -420,7 +420,8 @@ export function InterviewClient() {
           <div className="iv-content-header">
             <div className="iv-content-title">
               {store.activeCategory !== 'all' && (() => {
-                const group = CATEGORY_GROUPS.find(g => g.label === store.activeCategory || g.members.includes(store.activeCategory))
+                const groupLabel = getGroupLabel(store.activeCategory)
+                const group = GROUP_MAP.get(groupLabel)
                 return group ? <img src={group.icon} alt="" width={24} height={24} className="iv-content-title-icon" /> : null
               })()}
               {store.activeCategory === 'all' ? (locale === 'en' ? 'All Questions' : 'Tất Cả Câu Hỏi') : store.activeCategory}

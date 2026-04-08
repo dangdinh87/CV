@@ -235,9 +235,18 @@ export const CATEGORY_GROUPS: CategoryGroup[] = [
   },
 ]
 
-/** Build a lookup: raw category → group label */
+/** Build a lookup: raw category or group label → group label */
 const _categoryToGroup = new Map<string, string>()
+/** Map: group label → CategoryGroup */
+export const GROUP_MAP = new Map<string, CategoryGroup>()
+/** Map: group label → Set of member categories */
+export const GROUP_MEMBER_SETS = new Map<string, Set<string>>()
+
 for (const group of CATEGORY_GROUPS) {
+  GROUP_MAP.set(group.label, group)
+  GROUP_MEMBER_SETS.set(group.label, new Set(group.members))
+  // Group label itself should map to its label
+  _categoryToGroup.set(group.label, group.label)
   for (const member of group.members) {
     _categoryToGroup.set(member, group.label)
   }

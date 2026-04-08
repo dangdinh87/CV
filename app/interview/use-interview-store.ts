@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback, useMemo } from 'react'
 import type { QAItem } from './interview-data'
-import { CATEGORY_GROUPS, getGroupLabel } from './category-groups'
+import { CATEGORY_GROUPS, getGroupLabel, GROUP_MEMBER_SETS } from './category-groups'
 
 const STORAGE_KEYS = {
   bookmarks: 'iv_bookmarks',
@@ -142,8 +142,8 @@ export function useInterviewStore(allData: QAItem[]) {
   const activeCategorySet = useMemo(() => {
     if (activeCategory === 'all') return null
     // Check if it's a group label
-    const group = CATEGORY_GROUPS.find(g => g.label === activeCategory)
-    if (group) return new Set(group.members)
+    const memberSet = GROUP_MEMBER_SETS.get(activeCategory)
+    if (memberSet) return memberSet
     // Otherwise it's a raw sub-category
     return new Set([activeCategory])
   }, [activeCategory])
