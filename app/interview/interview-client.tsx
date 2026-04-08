@@ -61,10 +61,14 @@ export function InterviewClient() {
   // Reset visible count on filter change
   useEffect(() => { setVisibleCount(ITEMS_PER_PAGE) }, [store.activeCategory, store.activeLevel, store.search, store.showFilter])
 
-  // Keyboard shortcut: / to focus search
+  // Keyboard shortcut: / or Ctrl+K/Cmd+K to focus search
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
-      if (e.key === '/' && !e.ctrlKey && !e.metaKey && document.activeElement?.tagName !== 'INPUT') {
+      // Allow Ctrl+K or Cmd+K or /
+      const isCmdK = (e.ctrlKey || e.metaKey) && e.key === 'k';
+      const isSlash = e.key === '/' && !e.ctrlKey && !e.metaKey;
+
+      if ((isCmdK || isSlash) && document.activeElement?.tagName !== 'INPUT' && document.activeElement?.tagName !== 'TEXTAREA') {
         e.preventDefault()
         document.getElementById('searchInput')?.focus()
       }
@@ -205,7 +209,9 @@ export function InterviewClient() {
           <input
             id="searchInput"
             type="text"
-            placeholder={locale === 'en' ? 'Search questions... (press / to focus)' : 'Tìm kiếm câu hỏi... (nhấn / để focus)'}
+            placeholder={locale === 'en' ? 'Search questions... (press / or Ctrl+K)' : 'Tìm kiếm câu hỏi... (nhấn / hoặc Ctrl+K)'}
+            aria-label={locale === 'en' ? 'Search questions' : 'Tìm kiếm câu hỏi'}
+            autoComplete="off"
             value={searchInput}
             onChange={(e) => setSearchInput(e.target.value)}
           />
