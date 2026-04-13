@@ -268,6 +268,7 @@ export const CATEGORY_GROUPS: CategoryGroup[] = [
     members: [
       'Career & Non-Tech',
     ],
+    sectionLabel: { vi: 'Sự nghiệp', en: 'Career' },
   },
 ]
 
