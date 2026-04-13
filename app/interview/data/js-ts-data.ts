@@ -17,12 +17,70 @@ export const JS_TS_DATA: QAItem[] = [
   { id: 211, category: "JavaScript", subcategory: "Hoisting & Closure", level: "beginner", q: "Hoisting trong JavaScript là gì?", a: "Hoisting là cơ chế JavaScript đưa khai báo biến và hàm lên đầu phạm vi (scope) trước khi thực thi. var được hoisted và khởi tạo với undefined, function declaration được hoisted hoàn toàn. let và const được hoisted nhưng không khởi tạo, tạo ra Temporal Dead Zone." , q_en: "What is hoisting in JavaScript?", a_en: "Hoisting is JavaScript's mechanism of moving variable and function declarations to the top of their scope before execution. var is hoisted and initialized with undefined; function declarations are fully hoisted. let and const are hoisted but not initialized, creating a Temporal Dead Zone." },
   { id: 212, category: "JavaScript", subcategory: "Hoisting & Closure", level: "intermediate", q: "Temporal Dead Zone (TDZ) là gì?", a: "TDZ là khoảng thời gian từ khi block bắt đầu đến khi biến let/const được khai báo. Trong TDZ, việc truy cập biến sẽ ném ReferenceError dù biến đã được hoisted. Ví dụ: `console.log(x); let x = 5;` sẽ throw ReferenceError, trong khi var chỉ trả về undefined. TDZ giúp phát hiện lỗi dùng biến trước khi khai báo — điều var cho phép nhưng gây bug khó tìm. Khi phỏng vấn hỏi về TDZ, nhớ nêu rằng biến vẫn được hoisted nhưng chưa được khởi tạo." , q_en: "What is the Temporal Dead Zone (TDZ)?", a_en: "The TDZ is the period from when a block begins until a let/const variable is declared. Accessing the variable in the TDZ throws a ReferenceError even though it has been hoisted. Example: `console.log(x); let x = 5;` throws ReferenceError, while var only returns undefined. TDZ helps catch bugs where a variable is used before being declared — something var allows but which causes hard-to-find bugs. When asked about TDZ in interviews, remember to note the variable is still hoisted but not yet initialized." },
   { id: 213, category: "JavaScript", subcategory: "Hoisting & Closure", level: "intermediate", q: "Scope chain trong JavaScript hoạt động như thế nào?", a: "Scope chain là cơ chế JavaScript tìm kiếm biến từ scope hiện tại ra ngoài đến global scope. Khi không tìm thấy biến trong scope hiện tại, JS tìm trong scope cha, rồi tiếp tục lên cho đến global. Nếu không tìm thấy ở global, ném ReferenceError." , q_en: "How does the scope chain work in JavaScript?", a_en: "The scope chain is JavaScript's mechanism for looking up variables from the current scope outward to the global scope. When a variable is not found in the current scope, JS looks in the parent scope, continuing upward to global. If not found at global, a ReferenceError is thrown." },
-  { id: 214, category: "JavaScript", subcategory: "Hoisting & Closure", level: "intermediate", q: "Closure là gì? Cho ví dụ thực tế.", a: "Closure là hàm 'nhớ' được biến từ lexical scope bên ngoài, ngay cả sau khi hàm ngoài đã return. Ví dụ: `function makeCounter() { let count = 0; return () => ++count; } const c = makeCounter(); c(); // 1, c(); // 2` — hàm trả về vẫn truy cập `count`. Ứng dụng thực tế: private variables (encapsulation), factory functions, event handlers giữ state, debounce/throttle, React hooks (useState bên trong dùng closure)." , q_en: "What is a closure? Give a practical example.", a_en: "A closure is a function that 'remembers' variables from its outer lexical scope, even after the outer function has returned. Example: `function makeCounter() { let count = 0; return () => ++count; } const c = makeCounter(); c(); // 1, c(); // 2` — the returned function still accesses `count`. Practical uses: private variables (encapsulation), factory functions, event handlers holding state, debounce/throttle, React hooks (useState internally uses closures)." },
+  { id: 214, category: "JavaScript", subcategory: "Hoisting & Closure", level: "intermediate", q: "Closure là gì? Cho ví dụ thực tế.", a: `Closure là hàm 'nhớ' được biến từ lexical scope bên ngoài, ngay cả sau khi hàm ngoài đã return.
+\`\`\`javascript
+function makeCounter() {
+  let count = 0;
+  return () => ++count;
+}
+const c = makeCounter();
+c(); // 1
+c(); // 2
+\`\`\`
+Hàm trả về vẫn truy cập \`count\`. Ứng dụng thực tế: private variables (encapsulation), factory functions, event handlers giữ state, debounce/throttle, React hooks (useState bên trong dùng closure).`, q_en: "What is a closure? Give a practical example.", a_en: `A closure is a function that 'remembers' variables from its outer lexical scope, even after the outer function has returned.
+\`\`\`javascript
+function makeCounter() {
+  let count = 0;
+  return () => ++count;
+}
+const c = makeCounter();
+c(); // 1
+c(); // 2
+\`\`\`
+The returned function still accesses \`count\`. Practical uses: private variables (encapsulation), factory functions, event handlers holding state, debounce/throttle, React hooks (useState internally uses closures).` },
   { id: 215, category: "JavaScript", subcategory: "Hoisting & Closure", level: "intermediate", q: "Lexical scope là gì?", a: "Lexical scope (static scope) nghĩa là phạm vi của biến được xác định tại thời điểm viết code, không phải lúc chạy. Hàm con có thể truy cập biến của hàm cha nơi nó được định nghĩa, không phải nơi nó được gọi. Đây là nền tảng của closure trong JavaScript." , q_en: "What is lexical scope?", a_en: "Lexical scope (static scope) means that the scope of a variable is determined at write time, not at runtime. An inner function can access variables from the outer function where it was defined, not where it is called. This is the foundation of closures in JavaScript." },
   { id: 216, category: "JavaScript", subcategory: "Hoisting & Closure", level: "advanced", q: "Closure có thể gây memory leak như thế nào?", a: "Closure giữ tham chiếu đến scope ngoài, ngăn garbage collector giải phóng bộ nhớ. Vấn đề xảy ra khi closure không cần thiết giữ tham chiếu đến đối tượng lớn hoặc DOM node đã bị xóa. Cách phòng tránh: xóa event listeners không dùng, null hóa tham chiếu, tránh closures trong vòng lặp không cần thiết." , q_en: "How can closures cause memory leaks?", a_en: "Closures hold references to the outer scope, preventing garbage collection from freeing memory. Problems arise when unnecessary closures hold references to large objects or already-removed DOM nodes. Prevention: remove unused event listeners, null out references, avoid closures inside loops when not needed." },
   { id: 217, category: "JavaScript", subcategory: "Hoisting & Closure", level: "advanced", q: "Module pattern sử dụng closure như thế nào?", a: "Module pattern dùng IIFE và closure để tạo private state. Hàm bên trong có thể truy cập biến private của IIFE nhưng code bên ngoài không thể. Pattern này cho phép encapsulation trước khi ES modules được giới thiệu, tạo API public qua returned object." , q_en: "How does the module pattern use closures?", a_en: "The module pattern uses IIFEs and closures to create private state. Inner functions can access the IIFE's private variables, but outside code cannot. This pattern enables encapsulation before ES modules were introduced, exposing a public API via the returned object." },
   { id: 218, category: "JavaScript", subcategory: "Hoisting & Closure", level: "beginner", q: "Sự khác biệt giữa function scope và block scope là gì?", a: "Function scope: biến khai báo bằng `var` chỉ tồn tại trong hàm chứa nó, mọi block `{}` bên trong đều dùng chung. Block scope: biến `let`/`const` chỉ tồn tại trong khối `{}` gần nhất — if, for, while, hay bất kỳ `{}` nào. Ví dụ rò rỉ var: `for (var i = 0; i < 3; i++) {}; console.log(i)` in ra 3 vì i thoát ra ngoài for. Với `let`, biến i không tồn tại ngoài vòng lặp. Đây là lý do chính để tránh dùng var trong code hiện đại." , q_en: "What is the difference between function scope and block scope?", a_en: "Function scope: variables declared with `var` only exist within the enclosing function; all inner `{}` blocks share the same scope. Block scope: `let`/`const` variables only exist within the nearest `{}` block — if, for, while, or any `{}`. Example of var leaking: `for (var i = 0; i < 3; i++) {}; console.log(i)` prints 3 because i escapes the for loop. With `let`, i does not exist outside the loop. This is the main reason to avoid var in modern code." },
-  { id: 219, category: "JavaScript", subcategory: "Hoisting & Closure", level: "intermediate", q: "Vấn đề classic về closure trong vòng lặp with var là gì?", a: "Khi dùng `var` trong vòng lặp for, tất cả callback chia sẻ cùng tham chiếu đến biến i — vì var là function scope, chỉ có một biến i duy nhất. Ví dụ: `for (var i = 0; i < 3; i++) { setTimeout(() => console.log(i), 0); }` in ra `3 3 3` thay vì `0 1 2`. Giải pháp đơn giản nhất: thay `var` bằng `let` — block scope tạo ra một biến i riêng cho mỗi iteration. Giải pháp cũ hơn: dùng IIFE `(function(j) { setTimeout(() => console.log(j), 0); })(i)` để capture giá trị. Đây là câu hỏi phỏng vấn cổ điển về closure." , q_en: "What is the classic closure-in-loop problem with var?", a_en: "When using `var` in a for loop, all callbacks share the same reference to variable i — because var is function-scoped, there is only one i. Example: `for (var i = 0; i < 3; i++) { setTimeout(() => console.log(i), 0); }` prints `3 3 3` instead of `0 1 2`. The simplest fix: replace `var` with `let` — block scope creates a separate i for each iteration. Older solution: use IIFE `(function(j) { setTimeout(() => console.log(j), 0); })(i)` to capture the value. This is a classic interview question about closures." },
+  { id: 219, category: "JavaScript", subcategory: "Hoisting & Closure", level: "intermediate", q: "Vấn đề classic về closure trong vòng lặp with var là gì?", a: `Khi dùng \`var\` trong vòng lặp for, tất cả callback chia sẻ cùng tham chiếu đến biến i — vì var là function scope, chỉ có một biến i duy nhất.
+\`\`\`javascript
+// Bug: in ra 3 3 3
+for (var i = 0; i < 3; i++) {
+  setTimeout(() => console.log(i), 0);
+}
+
+// Fix 1: dùng let (block scope)
+for (let i = 0; i < 3; i++) {
+  setTimeout(() => console.log(i), 0); // 0 1 2
+}
+
+// Fix 2: IIFE capture giá trị
+for (var i = 0; i < 3; i++) {
+  (function(j) {
+    setTimeout(() => console.log(j), 0);
+  })(i);
+}
+\`\`\`
+Đây là câu hỏi phỏng vấn cổ điển về closure.`, q_en: "What is the classic closure-in-loop problem with var?", a_en: `When using \`var\` in a for loop, all callbacks share the same reference to variable i — because var is function-scoped, there is only one i.
+\`\`\`javascript
+// Bug: prints 3 3 3
+for (var i = 0; i < 3; i++) {
+  setTimeout(() => console.log(i), 0);
+}
+
+// Fix 1: use let (block scope)
+for (let i = 0; i < 3; i++) {
+  setTimeout(() => console.log(i), 0); // 0 1 2
+}
+
+// Fix 2: IIFE to capture the value
+for (var i = 0; i < 3; i++) {
+  (function(j) {
+    setTimeout(() => console.log(j), 0);
+  })(i);
+}
+\`\`\`
+This is a classic interview question about closures.` },
   { id: 220, category: "JavaScript", subcategory: "Hoisting & Closure", level: "intermediate", q: "Sự khác biệt giữa function declaration và function expression trong hoisting là gì?", a: "Function declaration được hoisted hoàn toàn (cả tên và thân hàm), có thể gọi trước khi khai báo. Function expression chỉ hoisted phần khai báo biến (với var là undefined), không thể gọi trước khi gán. Điều này ảnh hưởng đến thứ tự khai báo trong code." , q_en: "What is the difference between function declarations and function expressions in terms of hoisting?", a_en: "Function declarations are fully hoisted (both name and body), so they can be called before they are declared. Function expressions only hoist the variable declaration (undefined with var), and cannot be called before assignment. This affects the ordering of declarations in your code." },
   { id: 221, category: "JavaScript", subcategory: "Hoisting & Closure", level: "advanced", q: "Garbage collection trong JavaScript hoạt động như thế nào liên quan đến closure?", a: "JavaScript dùng mark-and-sweep algorithm: đánh dấu tất cả đối tượng có thể truy cập từ root (global), sau đó dọn dẹp những gì không được đánh dấu. Closure ngăn GC vì giữ reference đến outer scope. V8 engine tối ưu bằng cách chỉ giữ những biến thực sự được dùng trong closure." , q_en: "How does garbage collection in JavaScript relate to closures?", a_en: "JavaScript uses a mark-and-sweep algorithm: it marks all objects reachable from roots (global), then cleans up unmarked ones. Closures prevent GC by holding references to the outer scope. The V8 engine optimizes this by only keeping variables that are actually used within the closure." },
   { id: 222, category: "JavaScript", subcategory: "Hoisting & Closure", level: "intermediate", q: "Partial application và closure liên quan với nhau như thế nào?", a: "Partial application tạo hàm mới bằng cách cố định một số argument của hàm gốc, nhờ closure để nhớ các argument đó. Ví dụ: `const multiply = (a, b) => a * b; const double = (b) => multiply(2, b);` — double dùng closure để nhớ a=2. Khác currying ở chỗ partial application cố định nhiều argument cùng lúc. Hữu ích khi cần tạo hàm chuyên biệt từ hàm chung, ví dụ tạo logger với prefix cố định hay validator với rules cố định." , q_en: "How do partial application and closures relate?", a_en: "Partial application creates a new function by fixing some arguments of the original function, using closures to remember those arguments. Example: `const multiply = (a, b) => a * b; const double = (b) => multiply(2, b);` — double uses a closure to remember a=2. It differs from currying in that partial application fixes multiple arguments at once. Useful for creating specialized functions from general ones, such as a logger with a fixed prefix or a validator with fixed rules." },
@@ -42,7 +100,31 @@ export const JS_TS_DATA: QAItem[] = [
   { id: 234, category: "JavaScript", subcategory: "Functions", level: "intermediate", q: "Rest parameters (...args) là gì? Khác gì arguments object?", a: "Rest parameters `(...args)` thu thập tất cả tham số còn lại thành Array thực sự: `function sum(...nums) { return nums.reduce((a, b) => a + b, 0); }`. Khác `arguments` object ở 3 điểm: rest là Array thật (có `map`, `filter`...) trong khi arguments chỉ là array-like; rest chỉ chứa các params chưa được đặt tên, còn arguments chứa tất cả; arrow functions không có `arguments` nhưng có rest params. Bẫy: rest param phải là tham số cuối cùng — `(a, ...rest, b)` là syntax error." , q_en: "What are rest parameters (...args)? How do they differ from the arguments object?", a_en: "Rest parameters `(...args)` collect all remaining parameters into a real Array: `function sum(...nums) { return nums.reduce((a, b) => a + b, 0); }`. They differ from the `arguments` object in 3 ways: rest is a true Array (has `map`, `filter`, etc.) while arguments is only array-like; rest only contains unnamed parameters while arguments contains all; arrow functions do not have `arguments` but do have rest params. Trap: the rest parameter must be the last parameter — `(a, ...rest, b)` is a syntax error." },
   { id: 235, category: "JavaScript", subcategory: "Functions", level: "intermediate", q: "Function composition là gì?", a: "Function composition là tạo hàm mới bằng cách kết hợp nhiều hàm, output của hàm này là input của hàm kia: `compose(f, g)(x) = f(g(x))`. Ví dụ: `const process = compose(trim, toLowerCase, removeSpaces)` tạo pipeline xử lý string. Implement bằng reduce: `const compose = (...fns) => x => fns.reduceRight((v, f) => f(v), x)`. `pipe` là ngược chiều (trái sang phải, dễ đọc hơn). Hữu ích để tạo data transformation pipelines không cần biến trung gian, code theo functional style." , q_en: "What is function composition?", a_en: "Function composition creates a new function by combining multiple functions where the output of one becomes the input of another: `compose(f, g)(x) = f(g(x))`. Example: `const process = compose(trim, toLowerCase, removeSpaces)` creates a string processing pipeline. Implemented with reduce: `const compose = (...fns) => x => fns.reduceRight((v, f) => f(v), x)`. `pipe` is the reverse direction (left to right, easier to read). Useful for creating data transformation pipelines without intermediate variables in a functional style." },
   { id: 236, category: "JavaScript", subcategory: "Functions", level: "beginner", q: "Sự khác biệt giữa return và không có return trong arrow function là gì?", a: "Arrow function một dòng không có `{}` tự động return (implicit return): `x => x * 2`. Nếu có `{}` phải dùng return tường minh: `x => { return x * 2; }`. Bẫy phổ biến nhất: return object literal phải bọc trong ngoặc đơn `x => ({ value: x })` — nếu không có `()`, JS hiểu `{}` là function body chứ không phải object, hàm sẽ trả về undefined. Hay gặp khi dùng `.map()` để transform array thành array of objects." , q_en: "What is the difference between return and no return in arrow functions?", a_en: "Single-line arrow functions without `{}` automatically return (implicit return): `x => x * 2`. With `{}`, you must use an explicit return: `x => { return x * 2; }`. The most common trap: returning an object literal requires wrapping in parentheses `x => ({ value: x })` — without `()`, JS interprets `{}` as a function body, not an object, and the function returns undefined. Frequently encountered when using `.map()` to transform an array into an array of objects." },
-  { id: 237, category: "JavaScript", subcategory: "Functions", level: "advanced", q: "Generator function là gì? Dùng khi nào?", a: "Generator function dùng function* và yield, trả về iterator có thể pause và resume. Mỗi lần gọi next() thực thi đến yield tiếp theo và trả về {value, done}. Dùng để tạo infinite sequences, lazy evaluation, hoặc kiểm soát luồng bất đồng bộ (trước khi có async/await)." , q_en: "What is a generator function? When should you use one?", a_en: "Generator functions use function* and yield, returning an iterator that can be paused and resumed. Each call to next() executes to the next yield and returns {value, done}. Used to create infinite sequences, lazy evaluation, or control asynchronous flow (before async/await existed)." },
+  { id: 237, category: "JavaScript", subcategory: "Functions", level: "advanced", q: "Generator function là gì? Dùng khi nào?", a: `Generator function dùng \`function*\` và \`yield\`, trả về iterator có thể pause và resume. Mỗi lần gọi \`next()\` thực thi đến yield tiếp theo và trả về \`{value, done}\`.
+\`\`\`javascript
+function* counter() {
+  let n = 0;
+  while (true) {
+    yield n++;
+  }
+}
+const gen = counter();
+gen.next(); // { value: 0, done: false }
+gen.next(); // { value: 1, done: false }
+\`\`\`
+Dùng để tạo infinite sequences, lazy evaluation, hoặc kiểm soát luồng bất đồng bộ (trước khi có async/await).`, q_en: "What is a generator function? When should you use one?", a_en: `Generator functions use \`function*\` and \`yield\`, returning an iterator that can be paused and resumed. Each call to \`next()\` executes to the next yield and returns \`{value, done}\`.
+\`\`\`javascript
+function* counter() {
+  let n = 0;
+  while (true) {
+    yield n++;
+  }
+}
+const gen = counter();
+gen.next(); // { value: 0, done: false }
+gen.next(); // { value: 1, done: false }
+\`\`\`
+Used to create infinite sequences, lazy evaluation, or control asynchronous flow (before async/await existed).` },
   { id: 238, category: "JavaScript", subcategory: "Functions", level: "intermediate", q: "Callback hell là gì? Các giải pháp để tránh?", a: "Callback hell là khi nhiều callbacks lồng nhau tạo code hình kim tự tháp, khó đọc và maintain — ví dụ: `getUser(id, (user) => getPosts(user, (posts) => getComments(posts[0], (comments) => ...)))`. Dễ xảy ra khi xử lý nhiều tác vụ async phụ thuộc nhau theo kiểu cũ. Giải pháp theo thứ tự ưu tiên: dùng async/await (rõ nhất), Promise chaining, hoặc named functions thay anonymous callbacks. Trong dự án thực tế, async/await là tiêu chuẩn hiện đại và nên dùng mặc định." , q_en: "What is callback hell? What are solutions to avoid it?", a_en: "Callback hell is when multiple nested callbacks create pyramid-shaped code that is hard to read and maintain — for example: `getUser(id, (user) => getPosts(user, (posts) => getComments(posts[0], (comments) => ...)))`. It occurs when handling many sequential async tasks in the old style. Solutions in order of preference: use async/await (clearest), Promise chaining, or named functions instead of anonymous callbacks. In real projects, async/await is the modern standard and should be the default." },
   { id: 239, category: "JavaScript", subcategory: "Functions", level: "advanced", q: "Tail call optimization là gì?", a: "Tail call là khi hàm return kết quả của một lần gọi hàm khác trực tiếp. Tail call optimization (TCO) cho phép engine tái sử dụng stack frame thay vì tạo mới, tránh stack overflow trong đệ quy. ES6 quy định TCO nhưng chỉ Safari thực sự implement đầy đủ." , q_en: "What is tail call optimization?", a_en: "A tail call is when a function directly returns the result of calling another function. Tail call optimization (TCO) allows the engine to reuse the stack frame instead of creating a new one, preventing stack overflow in recursion. ES6 specifies TCO but only Safari actually implements it fully." },
   { id: 240, category: "JavaScript", subcategory: "Functions", level: "intermediate", q: "Function arity là gì?", a: "Arity là số lượng tham số mà hàm khai báo — truy cập qua `fn.length`. Lưu ý: `.length` chỉ đếm params trước default value hoặc rest param, ví dụ `(a, b = 1, ...c) => {}` có length là 1. Tên gọi: unary (1 arg), binary (2 args), ternary (3), variadic (không cố định). Arity quan trọng trong currying (cần biết bao nhiêu arg để auto-curry) và function composition. Bẫy phỏng vấn: `[1,2,3].map(parseInt)` trả về `[1, NaN, NaN]` vì parseInt nhận 2 args và map truyền vào (value, index)." , q_en: "What is function arity?", a_en: "Arity is the number of parameters a function declares — accessible via `fn.length`. Note: `.length` only counts params before default values or rest params, e.g., `(a, b = 1, ...c) => {}` has length 1. Names: unary (1 arg), binary (2 args), ternary (3), variadic (variable). Arity matters in currying (need to know how many args to auto-curry) and function composition. Interview trap: `[1,2,3].map(parseInt)` returns `[1, NaN, NaN]` because parseInt takes 2 args and map passes (value, index)." },
@@ -75,7 +157,41 @@ export const JS_TS_DATA: QAItem[] = [
   { id: 261, category: "JavaScript", subcategory: "ES6+", level: "beginner", q: "Destructuring assignment là gì? Cho ví dụ với array và object.", a: "Destructuring cho phép giải nén giá trị từ array/object vào biến riêng lẻ. Array: const [a, b] = [1, 2]. Object: const {name, age} = person. Hỗ trợ default values, alias, và nested destructuring. Rất hữu ích với function parameters và khi làm việc với API responses." , q_en: "What is destructuring assignment? Give examples with arrays and objects.", a_en: "Destructuring allows unpacking values from arrays/objects into separate variables. Array: const [a, b] = [1, 2]. Object: const {name, age} = person. Supports default values, aliases, and nested destructuring. Very useful with function parameters and when working with API responses." },
   { id: 262, category: "JavaScript", subcategory: "ES6+", level: "beginner", q: "Spread operator (...) và rest parameters (...) khác nhau như thế nào?", a: "Spread mở rộng iterable thành từng phần tử riêng lẻ (dùng trong function calls, array literals, object literals). Rest thu thập nhiều phần tử thành một array (dùng trong function parameters). Cú pháp giống nhau nhưng ngữ cảnh ngược nhau: spread 'mở ra', rest 'thu lại'." , q_en: "How do the spread operator (...) and rest parameters (...) differ?", a_en: "Spread expands an iterable into individual elements (used in function calls, array literals, object literals). Rest collects multiple elements into an array (used in function parameters). Same syntax but opposite purpose: spread 'spreads out', rest 'gathers together'." },
   { id: 263, category: "JavaScript", subcategory: "ES6+", level: "beginner", q: "Template literals là gì? Có những tính năng gì?", a: "Template literals dùng backtick thay dấu nháy, hỗ trợ: interpolation ${expression}, multi-line strings không cần \\n, tagged templates (cho styled-components, SQL query builders). Tagged templates là function nhận template strings và expressions làm arguments." , q_en: "What are template literals? What features do they have?", a_en: "Template literals use backticks instead of quotes, supporting: interpolation ${expression}, multi-line strings without \\\\n, and tagged templates (used by styled-components, SQL query builders). Tagged templates are functions that receive template strings and expressions as arguments." },
-  { id: 264, category: "JavaScript", subcategory: "ES6+", level: "beginner", q: "Class trong ES6 là gì? Có điểm gì khác với function constructor?", a: "Class là cú pháp OOP rõ ràng hơn để tạo objects: `class Animal { constructor(name) { this.name = name; } speak() { return this.name + ' speaks'; } }`. Khác function constructor ở chỗ: class không thể gọi không có `new` (throw TypeError), methods trong class không enumerable (không xuất hiện trong for...in), và phải khai báo trước khi dùng (không hoisted). Bên dưới vẫn dùng prototype chain — class chỉ là syntactic sugar. Nên dùng class thay function constructor trong code hiện đại vì rõ ràng và có thêm private fields (#), static methods." , q_en: "What are ES6 classes? How do they differ from function constructors?", a_en: "Classes are a clearer OOP syntax for creating objects: `class Animal { constructor(name) { this.name = name; } speak() { return this.name + ' speaks'; } }`. Differences from function constructors: classes cannot be called without `new` (throws TypeError), methods in a class are non-enumerable (do not appear in for...in), and they must be declared before use (not hoisted). Under the hood they still use prototype chains — classes are just syntactic sugar. Prefer classes over function constructors in modern code for clarity and additional features like private fields (#) and static methods." },
+  { id: 264, category: "JavaScript", subcategory: "ES6+", level: "beginner", q: "Class trong ES6 là gì? Có điểm gì khác với function constructor?", a: `Class là cú pháp OOP rõ ràng hơn để tạo objects.
+\`\`\`javascript
+class Animal {
+  #name; // private field
+  constructor(name) {
+    this.#name = name;
+  }
+  speak() {
+    return this.#name + ' speaks';
+  }
+  static create(name) {
+    return new Animal(name);
+  }
+}
+const a = Animal.create('Cat');
+a.speak(); // 'Cat speaks'
+\`\`\`
+Khác function constructor: class không thể gọi không có \`new\` (throw TypeError), methods không enumerable (không xuất hiện trong for...in), và phải khai báo trước khi dùng (không hoisted). Bên dưới vẫn dùng prototype chain — class chỉ là syntactic sugar.`, q_en: "What are ES6 classes? How do they differ from function constructors?", a_en: `Classes are a clearer OOP syntax for creating objects.
+\`\`\`javascript
+class Animal {
+  #name; // private field
+  constructor(name) {
+    this.#name = name;
+  }
+  speak() {
+    return this.#name + ' speaks';
+  }
+  static create(name) {
+    return new Animal(name);
+  }
+}
+const a = Animal.create('Cat');
+a.speak(); // 'Cat speaks'
+\`\`\`
+Differences from function constructors: classes cannot be called without \`new\` (throws TypeError), methods are non-enumerable (do not appear in for...in), and they must be declared before use (not hoisted). Under the hood they still use prototype chains — classes are just syntactic sugar.` },
   { id: 265, category: "JavaScript", subcategory: "ES6+", level: "intermediate", q: "Private class fields (#) là gì?", a: "Private fields khai báo với # prefix chỉ có thể truy cập trong class: #name. Không thể truy cập từ bên ngoài kể cả subclass, ném SyntaxError. Đây là private thực sự (khác convention _ prefix), được implement ở engine level. Cũng có private methods (#method()) và static private." , q_en: "What are private class fields (#)?", a_en: "Private fields declared with the # prefix can only be accessed within the class: #name. They cannot be accessed from outside, including from subclasses, throwing a SyntaxError. This is true privacy (unlike the convention of _ prefix), implemented at the engine level. Private methods (#method()) and static private fields are also supported." },
   { id: 266, category: "JavaScript", subcategory: "ES6+", level: "beginner", q: "for...of và for...in khác nhau như thế nào?", a: "for...in lặp qua enumerable property names của object (và prototype chain). for...of lặp qua values của iterable objects (Array, String, Map, Set, Generator). for...of thường dùng cho arrays, for...in cho objects. Tránh for...in với arrays do có thể lặp qua inherited properties." , q_en: "What is the difference between for...of and for...in?", a_en: "for...in iterates over enumerable property names of an object (including the prototype chain). for...of iterates over the values of iterable objects (Array, String, Map, Set, Generator). for...of is typically used with arrays, for...in with objects. Avoid for...in with arrays as it may iterate over inherited properties." },
   { id: 267, category: "JavaScript", subcategory: "ES6+", level: "intermediate", q: "Map và WeakMap khác nhau như thế nào?", a: "Map lưu key-value với key là bất kỳ type nào, iterable, có size. WeakMap chỉ nhận objects làm key, không iterable, không có size. Key trong WeakMap là weak reference: nếu object bị garbage collect, entry tự động bị xóa. WeakMap dùng để associate data với object mà không ngăn GC." , q_en: "What is the difference between Map and WeakMap?", a_en: "Map stores key-value pairs where keys can be any type, is iterable, and has a size. WeakMap only accepts objects as keys, is not iterable, and has no size property. Keys in WeakMap are weak references: if the object is garbage collected, the entry is automatically removed. WeakMap is used to associate data with an object without preventing garbage collection." },
@@ -96,11 +212,159 @@ export const JS_TS_DATA: QAItem[] = [
   // === JavaScript: Promise & Async (281-300) ===
   { id: 281, category: "JavaScript", subcategory: "Promise & Async", level: "beginner", q: "Promise là gì? Có những trạng thái nào?", a: "Promise đại diện cho kết quả của một tác vụ bất đồng bộ sẽ có trong tương lai. Ba trạng thái: pending (đang chờ), fulfilled (thành công với giá trị), rejected (thất bại với lý do). Một khi fulfilled/rejected, trạng thái không thay đổi (immutable). Dùng .then()/.catch()/.finally() để handle." , q_en: "What is a Promise? What states does it have?", a_en: "A Promise represents the eventual result of an asynchronous operation. Three states: pending (waiting), fulfilled (succeeded with a value), rejected (failed with a reason). Once fulfilled or rejected, the state is immutable. Use .then()/.catch()/.finally() to handle it." },
   { id: 282, category: "JavaScript", subcategory: "Promise & Async", level: "beginner", q: ".then(), .catch() và .finally() hoạt động như thế nào?", a: "`.then(onFulfilled, onRejected)` nhận callback khi promise fulfilled hoặc rejected. `.catch(onRejected)` là shorthand cho `.then(null, onRejected)` — chỉ xử lý lỗi. `.finally(callback)` chạy dù fulfilled hay rejected, không nhận value, dùng để cleanup (ẩn loading spinner, đóng connection). Tất cả đều trả về Promise mới nên có thể chain tiếp. Bẫy phổ biến: không thêm `.catch()` ở cuối chain dẫn đến unhandled rejection — luôn kết thúc chain bằng `.catch()` trong production code." , q_en: "How do .then(), .catch(), and .finally() work?", a_en: "`.then(onFulfilled, onRejected)` accepts callbacks for when a promise is fulfilled or rejected. `.catch(onRejected)` is shorthand for `.then(null, onRejected)` — only handles errors. `.finally(callback)` runs regardless of fulfilled or rejected, receives no value, and is used for cleanup (hiding a loading spinner, closing a connection). All return a new Promise and can be chained. Common trap: not adding `.catch()` at the end of a chain leads to unhandled rejections — always end chains with `.catch()` in production code." },
-  { id: 283, category: "JavaScript", subcategory: "Promise & Async", level: "intermediate", q: "Promise.all(), Promise.race(), Promise.allSettled() và Promise.any() khác nhau như thế nào?", a: "all(): chờ tất cả fulfilled, reject ngay khi có một reject (fail-fast). race(): resolve hoặc reject ngay khi có promise đầu tiên settle (fulfilled hoặc rejected). allSettled(): chờ tất cả settle (fulfilled hoặc rejected), không reject. any(): resolve với promise đầu tiên fulfilled, reject khi tất cả reject (AggregateError)." , q_en: "What is the difference between Promise.all(), Promise.race(), Promise.allSettled(), and Promise.any()?", a_en: "all(): waits for all to be fulfilled, rejects immediately when any one rejects (fail-fast). race(): resolves or rejects as soon as the first promise settles (either fulfilled or rejected). allSettled(): waits for all to settle (fulfilled or rejected), never rejects itself. any(): resolves with the first fulfilled promise, rejects only when all reject (AggregateError)." },
-  { id: 284, category: "JavaScript", subcategory: "Promise & Async", level: "advanced", q: "Event loop trong JavaScript hoạt động như thế nào?", a: "JS single-threaded nhưng xử lý async nhờ event loop. Quy trình: (1) Chạy hết sync code trên Call Stack. (2) Xử lý hết Microtask queue (Promise.then, queueMicrotask, MutationObserver). (3) Browser có thể render (paint). (4) Lấy 1 Macrotask (setTimeout, setInterval, I/O events). (5) Quay lại bước 2. Lưu ý: microtasks luôn ưu tiên hơn macrotasks — `Promise.resolve().then()` chạy trước `setTimeout(fn, 0)`." , q_en: "How does the JavaScript event loop work?", a_en: "JS is single-threaded but handles async via the event loop. The process: (1) Run all sync code on the Call Stack. (2) Process all Microtask queue entries (Promise.then, queueMicrotask, MutationObserver). (3) Browser may render (paint). (4) Take 1 Macrotask (setTimeout, setInterval, I/O events). (5) Go back to step 2. Note: microtasks always have priority over macrotasks — `Promise.resolve().then()` runs before `setTimeout(fn, 0)`." },
+  { id: 283, category: "JavaScript", subcategory: "Promise & Async", level: "intermediate", q: "Promise.all(), Promise.race(), Promise.allSettled() và Promise.any() khác nhau như thế nào?", a: `So sánh 4 combinators của Promise:
+\`\`\`javascript
+const p1 = fetch('/api/a');
+const p2 = fetch('/api/b');
+
+// all(): fail-fast nếu có 1 reject
+const [a, b] = await Promise.all([p1, p2]);
+
+// race(): lấy kết quả đầu tiên (fulfilled hoặc rejected)
+const first = await Promise.race([p1, p2]);
+
+// allSettled(): chờ tất cả, không reject
+const results = await Promise.allSettled([p1, p2]);
+// results[0] = { status: 'fulfilled', value: ... }
+// results[1] = { status: 'rejected', reason: ... }
+
+// any(): fulfilled đầu tiên, reject chỉ khi tất cả reject
+const fastest = await Promise.any([p1, p2]);
+\`\`\``, q_en: "What is the difference between Promise.all(), Promise.race(), Promise.allSettled(), and Promise.any()?", a_en: `Comparing the 4 Promise combinators:
+\`\`\`javascript
+const p1 = fetch('/api/a');
+const p2 = fetch('/api/b');
+
+// all(): fail-fast if any rejects
+const [a, b] = await Promise.all([p1, p2]);
+
+// race(): takes the first result (fulfilled or rejected)
+const first = await Promise.race([p1, p2]);
+
+// allSettled(): waits for all, never rejects
+const results = await Promise.allSettled([p1, p2]);
+// results[0] = { status: 'fulfilled', value: ... }
+// results[1] = { status: 'rejected', reason: ... }
+
+// any(): first to fulfill, rejects only if all reject
+const fastest = await Promise.any([p1, p2]);
+\`\`\`` },
+  { id: 284, category: "JavaScript", subcategory: "Promise & Async", level: "advanced", q: "Event loop trong JavaScript hoạt động như thế nào?", a: `JS single-threaded nhưng xử lý async nhờ event loop. Quy trình: (1) Chạy hết sync code trên Call Stack. (2) Xử lý hết Microtask queue. (3) Browser có thể render. (4) Lấy 1 Macrotask. (5) Quay lại bước 2.
+\`\`\`javascript
+console.log('1 sync');
+
+setTimeout(() => console.log('4 macrotask'), 0);
+
+Promise.resolve()
+  .then(() => console.log('2 microtask'))
+  .then(() => console.log('3 microtask 2'));
+
+console.log('1b sync');
+// Output: 1 sync → 1b sync → 2 microtask → 3 microtask 2 → 4 macrotask
+\`\`\`
+Microtasks luôn ưu tiên hơn macrotasks — \`Promise.resolve().then()\` chạy trước \`setTimeout(fn, 0)\`.`, q_en: "How does the JavaScript event loop work?", a_en: `JS is single-threaded but handles async via the event loop. The process: (1) Run all sync code on the Call Stack. (2) Process all Microtask queue entries. (3) Browser may render. (4) Take 1 Macrotask. (5) Go back to step 2.
+\`\`\`javascript
+console.log('1 sync');
+
+setTimeout(() => console.log('4 macrotask'), 0);
+
+Promise.resolve()
+  .then(() => console.log('2 microtask'))
+  .then(() => console.log('3 microtask 2'));
+
+console.log('1b sync');
+// Output: 1 sync → 1b sync → 2 microtask → 3 microtask 2 → 4 macrotask
+\`\`\`
+Microtasks always have priority over macrotasks — \`Promise.resolve().then()\` runs before \`setTimeout(fn, 0)\`.` },
   { id: 285, category: "JavaScript", subcategory: "Promise & Async", level: "intermediate", q: "Microtask và macrotask khác nhau như thế nào?", a: "Microtasks: Promise callbacks (.then, .catch), queueMicrotask(), MutationObserver. Macrotasks (tasks): setTimeout, setInterval, setImmediate (Node.js), I/O callbacks, UI rendering. Sau mỗi macrotask, tất cả microtasks trong queue được xử lý hết. Thứ tự: sync code → microtasks → render → macrotask → ..." , q_en: "What is the difference between microtasks and macrotasks?", a_en: "Microtasks: Promise callbacks (.then, .catch), queueMicrotask(), MutationObserver. Macrotasks (tasks): setTimeout, setInterval, setImmediate (Node.js), I/O callbacks, UI rendering. After each macrotask, all microtasks in the queue are processed. Order: sync code → microtasks → render → macrotask → ..." },
-  { id: 286, category: "JavaScript", subcategory: "Promise & Async", level: "beginner", q: "async/await là gì? Tại sao nó dễ hơn Promise chains?", a: "async/await là syntactic sugar trên Promises. async function luôn trả về Promise. await dừng thực thi trong async function cho đến khi Promise resolve, trả về resolved value. Code trông như synchronous nhưng vẫn non-blocking. Dễ đọc hơn, dễ debug hơn, xử lý lỗi với try/catch tự nhiên hơn." , q_en: "What is async/await? Why is it easier than Promise chains?", a_en: "async/await is syntactic sugar on top of Promises. An async function always returns a Promise. await pauses execution inside the async function until the Promise resolves, returning the resolved value. Code looks synchronous but is still non-blocking. It is easier to read, easier to debug, and error handling with try/catch is more natural." },
-  { id: 287, category: "JavaScript", subcategory: "Promise & Async", level: "intermediate", q: "Xử lý lỗi trong async/await như thế nào?", a: "Dùng try/catch bọc await expressions. Lỗi từ rejected Promise được catch như exception. Có thể chain .catch() trên async function call bên ngoài. Cần cẩn thận với parallel awaits trong try/catch: await Promise.all([a, b]) để handle lỗi từ cả hai đồng thời." , q_en: "How do you handle errors in async/await?", a_en: "Use try/catch to wrap await expressions. Errors from rejected Promises are caught like exceptions. You can also chain .catch() on the async function call from the outside. Be careful with parallel awaits in try/catch: use await Promise.all([a, b]) to handle errors from both simultaneously." },
+  { id: 286, category: "JavaScript", subcategory: "Promise & Async", level: "beginner", q: "async/await là gì? Tại sao nó dễ hơn Promise chains?", a: `async/await là syntactic sugar trên Promises. \`async function\` luôn trả về Promise. \`await\` dừng thực thi cho đến khi Promise resolve.
+\`\`\`javascript
+// Promise chain
+function fetchUser(id) {
+  return fetch(\`/api/users/\${id}\`)
+    .then(res => res.json())
+    .then(user => fetch(\`/api/posts/\${user.id}\`))
+    .then(res => res.json())
+    .catch(err => console.error(err));
+}
+
+// async/await — dễ đọc hơn
+async function fetchUser(id) {
+  try {
+    const res = await fetch(\`/api/users/\${id}\`);
+    const user = await res.json();
+    const posts = await fetch(\`/api/posts/\${user.id}\`);
+    return posts.json();
+  } catch (err) {
+    console.error(err);
+  }
+}
+\`\`\`
+Code trông như synchronous nhưng vẫn non-blocking. Dễ đọc hơn, dễ debug hơn, xử lý lỗi với try/catch tự nhiên hơn.`, q_en: "What is async/await? Why is it easier than Promise chains?", a_en: `async/await is syntactic sugar on top of Promises. An \`async function\` always returns a Promise. \`await\` pauses execution until the Promise resolves.
+\`\`\`javascript
+// Promise chain
+function fetchUser(id) {
+  return fetch(\`/api/users/\${id}\`)
+    .then(res => res.json())
+    .then(user => fetch(\`/api/posts/\${user.id}\`))
+    .then(res => res.json())
+    .catch(err => console.error(err));
+}
+
+// async/await — easier to read
+async function fetchUser(id) {
+  try {
+    const res = await fetch(\`/api/users/\${id}\`);
+    const user = await res.json();
+    const posts = await fetch(\`/api/posts/\${user.id}\`);
+    return posts.json();
+  } catch (err) {
+    console.error(err);
+  }
+}
+\`\`\`
+Code looks synchronous but is still non-blocking. Easier to read, easier to debug, and error handling with try/catch is more natural.` },
+  { id: 287, category: "JavaScript", subcategory: "Promise & Async", level: "intermediate", q: "Xử lý lỗi trong async/await như thế nào?", a: `Dùng try/catch bọc await expressions. Lỗi từ rejected Promise được catch như exception.
+\`\`\`javascript
+async function loadData() {
+  try {
+    const res = await fetch('/api/data');
+    if (!res.ok) throw new Error(\`HTTP \${res.status}\`);
+    return await res.json();
+  } catch (err) {
+    console.error('Failed:', err.message);
+    return null;
+  } finally {
+    hideLoading(); // luôn chạy
+  }
+}
+
+// Hoặc chain .catch() bên ngoài
+loadData().catch(err => console.error(err));
+
+// Parallel: cần Promise.all để catch cả hai
+const [a, b] = await Promise.all([fetchA(), fetchB()]);
+\`\`\``, q_en: "How do you handle errors in async/await?", a_en: `Use try/catch to wrap await expressions. Errors from rejected Promises are caught like exceptions.
+\`\`\`javascript
+async function loadData() {
+  try {
+    const res = await fetch('/api/data');
+    if (!res.ok) throw new Error(\`HTTP \${res.status}\`);
+    return await res.json();
+  } catch (err) {
+    console.error('Failed:', err.message);
+    return null;
+  } finally {
+    hideLoading(); // always runs
+  }
+}
+
+// Or chain .catch() from the outside
+loadData().catch(err => console.error(err));
+
+// Parallel: use Promise.all to catch both errors
+const [a, b] = await Promise.all([fetchA(), fetchB()]);
+\`\`\`` },
   { id: 288, category: "JavaScript", subcategory: "Promise & Async", level: "advanced", q: "Debounce và throttle là gì? Khi nào dùng cái nào?", a: "Debounce: chỉ gọi hàm sau khi ngừng trigger một khoảng thời gian (dùng cho search input, resize). Throttle: gọi hàm tối đa một lần trong khoảng thời gian nhất định (dùng cho scroll, mousemove). Debounce = 'đợi nghỉ', throttle = 'giới hạn tần suất'." , q_en: "What are debounce and throttle? When do you use each?", a_en: "Debounce: only calls the function after triggering has stopped for a given time period (use for search input, resize). Throttle: calls the function at most once per given time interval (use for scroll, mousemove). Debounce = 'wait for a pause', throttle = 'limit frequency'." },
   { id: 289, category: "JavaScript", subcategory: "Promise & Async", level: "advanced", q: "Promise executor chạy synchronously hay asynchronously?", a: "Promise executor (function truyền vào new Promise()) chạy synchronously ngay lập tức. Nhưng callbacks .then()/.catch() luôn chạy asynchronously (microtask queue), kể cả khi Promise đã resolve. Điều này đảm bảo behavior nhất quán dù Promise resolve sync hay async." , q_en: "Does the Promise executor run synchronously or asynchronously?", a_en: "The Promise executor (the function passed to new Promise()) runs synchronously, immediately. However, .then()/.catch() callbacks always run asynchronously (in the microtask queue), even when the Promise is already resolved. This ensures consistent behavior whether the Promise resolves synchronously or asynchronously." },
   { id: 290, category: "JavaScript", subcategory: "Promise & Async", level: "intermediate", q: "Promise chaining và error propagation hoạt động như thế nào?", a: "Trong chain, error propagate đến .catch() gần nhất tiếp theo. Sau .catch(), chain tiếp tục bình thường. Trả về rejected promise hoặc throw trong .then() cũng tiếp tục propagate. Nếu không có .catch(), unhandledRejection event được fired (crash trong Node.js)." , q_en: "How do Promise chaining and error propagation work?", a_en: "In a chain, errors propagate to the nearest subsequent .catch(). After .catch(), the chain continues normally. Returning a rejected promise or throwing inside .then() continues the propagation. Without a .catch(), an unhandledRejection event is fired (crashes Node.js)." },
@@ -110,7 +374,45 @@ export const JS_TS_DATA: QAItem[] = [
   { id: 294, category: "JavaScript", subcategory: "Promise & Async", level: "intermediate", q: "Promise.resolve() và Promise.reject() dùng để làm gì?", a: "Promise.resolve(value) trả về Promise đã fulfilled với value (nếu value là Promise/thenable, unwrap nó). Promise.reject(reason) trả về Promise đã rejected. Hữu ích để tạo Promise ngay lập tức, normalize value (có thể là Promise hoặc plain value), và trong testing." , q_en: "What are Promise.resolve() and Promise.reject() used for?", a_en: "Promise.resolve(value) returns a Promise already fulfilled with the value (if value is a Promise/thenable, it unwraps it). Promise.reject(reason) returns an already-rejected Promise. Useful for creating Promises immediately, normalizing values (which may be a Promise or plain value), and in testing." },
   { id: 295, category: "JavaScript", subcategory: "Promise & Async", level: "advanced", q: "Thenable là gì?", a: "Thenable là object có method .then(). Promise resolution procedure unwrap thenables: khi resolve với thenable, gọi .then() của nó. Cho phép interop giữa các Promise implementations khác nhau. Nếu thenable throw trong .then(), Promise bị rejected. Đây là cách jQuery Deferred hoạt động với native Promises." , q_en: "What is a thenable?", a_en: "A thenable is an object with a .then() method. The Promise resolution procedure unwraps thenables: when resolving with a thenable, it calls its .then(). This enables interoperability between different Promise implementations. If a thenable throws inside .then(), the Promise is rejected. This is how jQuery Deferred objects work with native Promises." },
   { id: 296, category: "JavaScript", subcategory: "Promise & Async", level: "intermediate", q: "Race condition trong async JavaScript là gì và cách xử lý?", a: "Race condition xảy ra khi nhiều async operations chạy đồng thời và kết quả phụ thuộc vào thứ tự hoàn thành. Cách xử lý: dùng AbortController hủy requests cũ, track request ID và bỏ qua responses không mới nhất, dùng debounce, hoặc mutex/semaphore pattern." , q_en: "What is a race condition in async JavaScript and how do you handle it?", a_en: "A race condition occurs when multiple async operations run concurrently and the result depends on which one finishes first. Solutions: use AbortController to cancel stale requests, track a request ID and discard outdated responses, use debounce, or implement a mutex/semaphore pattern." },
-  { id: 297, category: "JavaScript", subcategory: "Promise & Async", level: "advanced", q: "async/await với parallel execution như thế nào?", a: "await tuần tự từng operation sẽ chậm hơn. Chạy song song: tạo tất cả Promises trước rồi await: const [a, b] = await Promise.all([fetchA(), fetchB()]). Tránh await trong loop (for...of với await là serial), dùng Promise.all(items.map(fn)) cho parallel." , q_en: "How do you use async/await with parallel execution?", a_en: "Sequentially awaiting each operation is slower. Run in parallel: create all Promises first then await them: const [a, b] = await Promise.all([fetchA(), fetchB()]). Avoid await inside loops (for...of with await is serial); use Promise.all(items.map(fn)) for parallel execution." },
+  { id: 297, category: "JavaScript", subcategory: "Promise & Async", level: "advanced", q: "async/await với parallel execution như thế nào?", a: `await tuần tự từng operation sẽ chậm hơn. Chạy song song bằng cách tạo tất cả Promises trước rồi mới await.
+\`\`\`javascript
+// Sequential — chậm (mỗi request phải chờ cái trước)
+const user = await fetchUser(id);
+const posts = await fetchPosts(id); // chờ user xong mới gọi
+
+// Parallel — nhanh hơn
+const [user, posts] = await Promise.all([
+  fetchUser(id),
+  fetchPosts(id),
+]);
+
+// Tránh await trong loop (serial)
+for (const id of ids) {
+  await fetchItem(id); // BAD: 1 by 1
+}
+
+// Dùng Promise.all cho parallel
+const items = await Promise.all(ids.map(id => fetchItem(id)));
+\`\`\``, q_en: "How do you use async/await with parallel execution?", a_en: `Sequentially awaiting each operation is slower. Run in parallel by creating all Promises first, then awaiting them.
+\`\`\`javascript
+// Sequential — slow (each request waits for the previous)
+const user = await fetchUser(id);
+const posts = await fetchPosts(id); // waits for user first
+
+// Parallel — much faster
+const [user, posts] = await Promise.all([
+  fetchUser(id),
+  fetchPosts(id),
+]);
+
+// Avoid await inside loops (serial)
+for (const id of ids) {
+  await fetchItem(id); // BAD: 1 by 1
+}
+
+// Use Promise.all for parallel
+const items = await Promise.all(ids.map(id => fetchItem(id)));
+\`\`\`` },
   { id: 298, category: "JavaScript", subcategory: "Promise & Async", level: "intermediate", q: "Unhandled promise rejection là gì? Cách xử lý?", a: "Unhandled rejection xảy ra khi Promise bị rejected mà không có .catch() handler. Trong Node.js v15+ sẽ terminate process theo mặc định (cấu hình qua --unhandled-rejections flag), trong browser hiện warning. Xử lý: luôn thêm .catch(), dùng process.on('unhandledRejection'), window.addEventListener('unhandledrejection'). Tốt nhất: luôn handle errors tại source." , q_en: "What is an unhandled promise rejection? How do you handle it?", a_en: "An unhandled rejection occurs when a Promise is rejected without a .catch() handler. In Node.js v15+ this terminates the process by default (configurable via --unhandled-rejections flag); in browsers it shows a warning. Handle by: always adding .catch(), using process.on('unhandledRejection'), or window.addEventListener('unhandledrejection'). Best practice: always handle errors at the source." },
   { id: 299, category: "JavaScript", subcategory: "Promise & Async", level: "advanced", q: "Task scheduling trong JavaScript: requestAnimationFrame và requestIdleCallback là gì?", a: "requestAnimationFrame(cb) chạy callback trước lần repaint tiếp theo (~16ms), dùng cho animations để sync với display refresh. requestIdleCallback(cb) chạy khi browser idle giữa frames, dùng cho non-urgent tasks như analytics, prefetch. Cả hai quan trọng cho performance." , q_en: "What are requestAnimationFrame and requestIdleCallback in JavaScript task scheduling?", a_en: "requestAnimationFrame(cb) schedules a callback before the next repaint (~16ms), used for animations to sync with the display refresh rate. requestIdleCallback(cb) runs when the browser is idle between frames, used for non-urgent tasks like analytics and prefetching. Both are important for performance." },
   { id: 300, category: "JavaScript", subcategory: "Promise & Async", level: "advanced", q: "Long tasks và JavaScript performance liên quan đến event loop như thế nào?", a: "Tasks chiếm hơn 50ms là long tasks, block main thread, gây jank (giật). Giải pháp: chia nhỏ tasks với setTimeout(0) hoặc scheduler.yield() (mới), sử dụng Web Workers cho heavy computation, dùng requestIdleCallback cho background tasks. Chrome DevTools performance tab hiển thị long tasks." , q_en: "How do long tasks relate to JavaScript performance and the event loop?", a_en: "Tasks taking more than 50ms are long tasks that block the main thread and cause jank (stuttering). Solutions: break tasks into chunks with setTimeout(0) or scheduler.yield() (newer), use Web Workers for heavy computation, and use requestIdleCallback for background tasks. Chrome DevTools performance tab displays long tasks." },
@@ -159,7 +461,43 @@ export const JS_TS_DATA: QAItem[] = [
   { id: 337, category: "TypeScript", subcategory: "Interface & Type", level: "beginner", q: "Cách extend interface và type trong TypeScript?", a: "Interface: interface Child extends Parent { ... } và extends nhiều: extends A, B. Type: type Combined = A & B (intersection). Interface có thể extend type và ngược lại. Extends kiểm tra compatibility (không thể re-declare incompatible property), còn & intersection merge tất cả." , q_en: "How do you extend interfaces and types in TypeScript?", a_en: "Interface: `interface Child extends Parent { ... }` and multiple extends: `extends A, B`. Type: `type Combined = A & B` (intersection). An interface can extend a type and vice versa. extends checks compatibility (you cannot re-declare an incompatible property), while & intersection merges everything." },
   { id: 338, category: "TypeScript", subcategory: "Interface & Type", level: "intermediate", q: "Index signature trong TypeScript là gì?", a: "Index signature cho phép object có keys không biết trước: { [key: string]: value }. Tất cả explicit properties phải compatible với index signature type. string index signature làm tất cả properties phải match kiểu. Dùng Record<string, ValueType> thay thế khi cần, rõ ràng hơn." , q_en: "What is an index signature in TypeScript?", a_en: "An index signature allows objects to have unknown keys in advance: `{ [key: string]: value }`. All explicit properties must be compatible with the index signature type. A string index signature requires all properties to match its type. Use `Record<string, ValueType>` as a clearer alternative when needed." },
   { id: 339, category: "TypeScript", subcategory: "Interface & Type", level: "beginner", q: "Optional properties (?) và readonly properties là gì?", a: "Optional property (prop?: Type) có thể có hoặc không, type là Type | undefined khi access. readonly property không thể reassign sau khởi tạo (chỉ compile time, không phải runtime deep freeze). Readonly<T> làm tất cả properties readonly. readonly arrays: ReadonlyArray<T> hoặc readonly T[]." , q_en: "What are optional properties (?) and readonly properties?", a_en: "Optional property (prop?: Type) may or may not be present; the type is `Type | undefined` when accessed. readonly property cannot be reassigned after initialization (compile time only, not a runtime deep freeze). `Readonly<T>` makes all properties readonly. Readonly arrays: `ReadonlyArray<T>` or `readonly T[]`." },
-  { id: 340, category: "TypeScript", subcategory: "Interface & Type", level: "intermediate", q: "Discriminated unions là gì? Tại sao hữu ích?", a: "Discriminated union là union trong đó mỗi member có common literal property (discriminant): type Shape = {kind: 'circle', radius: number} | {kind: 'square', side: number}. TypeScript narrow type tự động khi check discriminant trong if/switch. Giúp type-safe handling cases khác nhau, thay cho if-else kiểm tra kiểu thủ công." , q_en: "What are discriminated unions? Why are they useful?", a_en: "A discriminated union is a union where each member has a common literal property (the discriminant): `type Shape = {kind: 'circle', radius: number} | {kind: 'square', side: number}`. TypeScript automatically narrows the type when checking the discriminant in an if/switch. Provides type-safe handling of different cases, replacing manual if-else type checks." },
+  { id: 340, category: "TypeScript", subcategory: "Interface & Type", level: "intermediate", q: "Discriminated unions là gì? Tại sao hữu ích?", a: `Discriminated union là union trong đó mỗi member có common literal property (discriminant). TypeScript narrow type tự động khi check discriminant.
+\`\`\`typescript
+type Shape =
+  | { kind: 'circle'; radius: number }
+  | { kind: 'square'; side: number }
+  | { kind: 'triangle'; base: number; height: number };
+
+function area(shape: Shape): number {
+  switch (shape.kind) {
+    case 'circle':
+      return Math.PI * shape.radius ** 2;
+    case 'square':
+      return shape.side ** 2;
+    case 'triangle':
+      return (shape.base * shape.height) / 2;
+  }
+}
+\`\`\`
+Giúp type-safe handling cases khác nhau, TypeScript sẽ báo lỗi nếu thiếu case.`, q_en: "What are discriminated unions? Why are they useful?", a_en: `A discriminated union is a union where each member has a common literal property (the discriminant). TypeScript automatically narrows the type when checking the discriminant.
+\`\`\`typescript
+type Shape =
+  | { kind: 'circle'; radius: number }
+  | { kind: 'square'; side: number }
+  | { kind: 'triangle'; base: number; height: number };
+
+function area(shape: Shape): number {
+  switch (shape.kind) {
+    case 'circle':
+      return Math.PI * shape.radius ** 2;
+    case 'square':
+      return shape.side ** 2;
+    case 'triangle':
+      return (shape.base * shape.height) / 2;
+  }
+}
+\`\`\`
+Provides type-safe handling of different cases — TypeScript reports an error if a case is missing.` },
   { id: 341, category: "TypeScript", subcategory: "Interface & Type", level: "intermediate", q: "Function type trong interface và type alias như thế nào?", a: "Interface: call signature {(arg: Type): ReturnType} hoặc method signature {method(arg: Type): ReturnType}. Type alias: type Fn = (arg: Type) => ReturnType. Overloads trong interface: khai báo nhiều call signatures. Function interfaces cũng có thể có properties (như jQuery $ function)." , q_en: "What do function types look like in interfaces and type aliases?", a_en: "Interface: call signature `{(arg: Type): ReturnType}` or method signature `{method(arg: Type): ReturnType}`. Type alias: `type Fn = (arg: Type) => ReturnType`. Overloads in interface: declare multiple call signatures. Function interfaces can also have properties (like the jQuery $ function)." },
   { id: 342, category: "TypeScript", subcategory: "Interface & Type", level: "advanced", q: "Module augmentation là gì?", a: "Module augmentation cho phép thêm types vào module đã có: declare module 'express' { interface Request { user?: User } }. Dùng để extend third-party types mà không fork. Cần import module đó (ambient augmentation vs global augmentation). Rất hữu ích cho middleware patterns." , q_en: "What is module augmentation?", a_en: "Module augmentation allows adding types to an existing module: `declare module 'express' { interface Request { user?: User } }`. Used to extend third-party types without forking. Requires importing the module (ambient augmentation vs global augmentation). Very useful for middleware patterns." },
   { id: 343, category: "TypeScript", subcategory: "Interface & Type", level: "intermediate", q: "Recursive types trong TypeScript là gì?", a: "TypeScript hỗ trợ recursive type aliases: type TreeNode = { value: number; children: TreeNode[] }. Hữu ích cho tree structures, nested JSON, linked lists. Type alias có thể tự tham chiếu. Interface luôn hỗ trợ recursive (vì là named type), type alias cũng hỗ trợ từ TS 3.7." , q_en: "What are recursive types in TypeScript?", a_en: "TypeScript supports recursive type aliases: `type TreeNode = { value: number; children: TreeNode[] }`. Useful for tree structures, nested JSON, and linked lists. Type aliases can reference themselves. Interfaces have always supported recursion (as named types); type aliases also support it since TS 3.7." },
@@ -167,12 +505,218 @@ export const JS_TS_DATA: QAItem[] = [
   { id: 345, category: "TypeScript", subcategory: "Interface & Type", level: "intermediate", q: "Excess property checking trong TypeScript là gì?", a: "TypeScript kiểm tra extra properties khi assign object literal trực tiếp vào typed variable. Nếu type không có property đó, báo lỗi. Nhưng assign qua biến trung gian không bị check. Behavior này giúp phát hiện typos trong config objects. Workaround: index signature hoặc type assertion." , q_en: "What is excess property checking in TypeScript?", a_en: "TypeScript checks for extra properties when assigning an object literal directly to a typed variable. If the type does not have that property, an error is reported. However, assigning via an intermediate variable bypasses this check. This behavior helps catch typos in config objects. Workarounds: use an index signature or a type assertion." },
 
   // === TypeScript: Generics (346-360) ===
-  { id: 346, category: "TypeScript", subcategory: "Generics", level: "intermediate", q: "Generics trong TypeScript là gì? Tại sao cần thiết?", a: "Generics cho phép tạo components (functions, classes, interfaces) có thể hoạt động với nhiều kiểu dữ liệu mà vẫn type-safe. Thay dùng any, dùng type parameter <T>. Ví dụ: function identity<T>(arg: T): T trả về cùng kiểu nhận vào. Tái sử dụng code mà không mất type information." , q_en: "What are generics in TypeScript? Why are they necessary?", a_en: "Generics allow creating components (functions, classes, interfaces) that work with multiple types while remaining type-safe. Instead of using any, use a type parameter <T>. Example: `function identity<T>(arg: T): T` returns the same type it receives. Reuse code without losing type information." },
-  { id: 347, category: "TypeScript", subcategory: "Generics", level: "intermediate", q: "Generic constraints (extends) trong TypeScript là gì?", a: "Constraints giới hạn type parameter phải extend một type cụ thể: function getProperty<T, K extends keyof T>(obj: T, key: K). Ngăn dùng với types không compatible. Có thể constrain multiple: T extends A & B. Constraints cho phép access properties trên type parameter." , q_en: "What are generic constraints (extends) in TypeScript?", a_en: "Constraints limit a type parameter to extend a specific type: `function getProperty<T, K extends keyof T>(obj: T, key: K)`. Prevents use with incompatible types. Multiple constraints: `T extends A & B`. Constraints allow accessing properties on the type parameter." },
+  { id: 346, category: "TypeScript", subcategory: "Generics", level: "intermediate", q: "Generics trong TypeScript là gì? Tại sao cần thiết?", a: `Generics cho phép tạo components (functions, classes, interfaces) hoạt động với nhiều kiểu dữ liệu mà vẫn type-safe. Thay dùng \`any\`, dùng type parameter \`<T>\`.
+\`\`\`typescript
+// Không generic — mất type info
+function identity(arg: any): any { return arg; }
+
+// Generic — type-safe
+function identity<T>(arg: T): T { return arg; }
+
+const n = identity(42);    // n: number
+const s = identity('hi');  // s: string
+
+// Generic interface
+interface ApiResponse<T> {
+  data: T;
+  status: number;
+  message: string;
+}
+
+const res: ApiResponse<User[]> = await fetchUsers();
+\`\`\`
+Tái sử dụng code mà không mất type information.`, q_en: "What are generics in TypeScript? Why are they necessary?", a_en: `Generics allow creating components (functions, classes, interfaces) that work with multiple types while remaining type-safe. Instead of using \`any\`, use a type parameter \`<T>\`.
+\`\`\`typescript
+// Non-generic — loses type info
+function identity(arg: any): any { return arg; }
+
+// Generic — type-safe
+function identity<T>(arg: T): T { return arg; }
+
+const n = identity(42);    // n: number
+const s = identity('hi');  // s: string
+
+// Generic interface
+interface ApiResponse<T> {
+  data: T;
+  status: number;
+  message: string;
+}
+
+const res: ApiResponse<User[]> = await fetchUsers();
+\`\`\`
+Reuse code without losing type information.` },
+  { id: 347, category: "TypeScript", subcategory: "Generics", level: "intermediate", q: "Generic constraints (extends) trong TypeScript là gì?", a: `Constraints giới hạn type parameter phải extend một type cụ thể, ngăn dùng với types không compatible.
+\`\`\`typescript
+// Không có constraint — không access được .length
+function getLength<T>(arg: T): number {
+  return arg.length; // Error!
+}
+
+// Có constraint
+function getLength<T extends { length: number }>(arg: T): number {
+  return arg.length; // OK
+}
+
+// keyof constraint — type-safe property access
+function getProperty<T, K extends keyof T>(obj: T, key: K): T[K] {
+  return obj[key];
+}
+const name = getProperty({ name: 'An', age: 25 }, 'name'); // string
+
+// Multiple constraints
+function merge<T extends object, U extends object>(a: T, b: U): T & U {
+  return { ...a, ...b };
+}
+\`\`\``, q_en: "What are generic constraints (extends) in TypeScript?", a_en: `Constraints limit a type parameter to extend a specific type, preventing use with incompatible types.
+\`\`\`typescript
+// Without constraint — cannot access .length
+function getLength<T>(arg: T): number {
+  return arg.length; // Error!
+}
+
+// With constraint
+function getLength<T extends { length: number }>(arg: T): number {
+  return arg.length; // OK
+}
+
+// keyof constraint — type-safe property access
+function getProperty<T, K extends keyof T>(obj: T, key: K): T[K] {
+  return obj[key];
+}
+const name = getProperty({ name: 'An', age: 25 }, 'name'); // string
+
+// Multiple constraints
+function merge<T extends object, U extends object>(a: T, b: U): T & U {
+  return { ...a, ...b };
+}
+\`\`\`` },
   { id: 348, category: "TypeScript", subcategory: "Generics", level: "intermediate", q: "keyof operator là gì?", a: "`keyof T` trả về union type của tất cả keys của T: `keyof {a: number, b: string}` cho ra `'a' | 'b'`. Dùng với generics để type-safe property access: `function get<T, K extends keyof T>(obj: T, key: K): T[K]` đảm bảo key tồn tại và return đúng kiểu. `keyof typeof obj` lấy keys của object value (không phải type). Hay gặp trong utility types như `Pick`, `Record`, và khi build form hay table components cần truy cập dynamic property một cách an toàn." , q_en: "What is the keyof operator?", a_en: "`keyof T` returns a union type of all keys of T: `keyof {a: number, b: string}` gives `'a' | 'b'`. Used with generics for type-safe property access: `function get<T, K extends keyof T>(obj: T, key: K): T[K]` ensures the key exists and returns the correct type. `keyof typeof obj` gets the keys of an object value (not a type). Commonly seen in utility types like `Pick`, `Record`, and when building form or table components that need dynamic property access safely." },
-  { id: 349, category: "TypeScript", subcategory: "Generics", level: "advanced", q: "Mapped types trong TypeScript là gì?", a: "Mapped types tạo type mới bằng cách biến đổi properties của type khác: { [K in keyof T]: ... }. Có thể thêm/xóa modifiers: +readonly, -readonly, +?, -?. Ví dụ: Readonly<T> = { readonly [K in keyof T]: T[K] }. Là nền tảng của nhiều built-in utility types." , q_en: "What are mapped types in TypeScript?", a_en: "Mapped types create new types by transforming properties of another type: `{ [K in keyof T]: ... }`. Modifiers can be added or removed: +readonly, -readonly, +?, -?. Example: `Readonly<T> = { readonly [K in keyof T]: T[K] }`. They are the foundation of many built-in utility types." },
-  { id: 350, category: "TypeScript", subcategory: "Generics", level: "advanced", q: "Conditional types trong TypeScript là gì?", a: "Conditional types: T extends U ? X : Y. Evaluate tại compile time dựa vào type relationship. Distributive với union types: khi T là union, distribute trên từng member. Dùng với infer để extract parts of types. Nền tảng của Exclude, Extract, NonNullable, ReturnType, và nhiều utility types." , q_en: "What are conditional types in TypeScript?", a_en: "Conditional types: `T extends U ? X : Y`. Evaluated at compile time based on the type relationship. Distributive with union types: when T is a union, it distributes over each member. Used with infer to extract parts of types. The foundation of Exclude, Extract, NonNullable, ReturnType, and many other utility types." },
-  { id: 351, category: "TypeScript", subcategory: "Generics", level: "advanced", q: "infer keyword trong conditional types là gì?", a: "infer khai báo type variable trong conditional type để 'capture' type được infer: type ReturnType<T> = T extends (...args: any) => infer R ? R : never. Chỉ dùng trong extends clause của conditional type. Cho phép extract nested types từ complex types." , q_en: "What is the infer keyword in conditional types?", a_en: "infer declares a type variable inside a conditional type to capture an inferred type: `type ReturnType<T> = T extends (...args: any) => infer R ? R : never`. It can only be used in the extends clause of a conditional type. Allows extracting nested types from complex types." },
+  { id: 349, category: "TypeScript", subcategory: "Generics", level: "advanced", q: "Mapped types trong TypeScript là gì?", a: `Mapped types tạo type mới bằng cách biến đổi properties của type khác: \`{ [K in keyof T]: ... }\`.
+\`\`\`typescript
+// Giải thích cách hoạt động qua ví dụ
+type User = { id: number; name: string; email: string };
+
+// Tương đương Partial<T>
+type MyPartial<T> = { [K in keyof T]?: T[K] };
+
+// Tương đương Readonly<T>
+type MyReadonly<T> = { readonly [K in keyof T]: T[K] };
+
+// Biến đổi value type
+type Nullable<T> = { [K in keyof T]: T[K] | null };
+
+// Xóa modifier: -readonly, -?
+type Mutable<T> = { -readonly [K in keyof T]: T[K] };
+type Required<T> = { [K in keyof T]-?: T[K] };
+
+// Remap key với as
+type Getters<T> = {
+  [K in keyof T as \`get\${Capitalize<string & K>}\`]: () => T[K]
+};
+\`\`\`
+Là nền tảng của nhiều built-in utility types (Partial, Readonly, Record, Pick, Omit).`, q_en: "What are mapped types in TypeScript?", a_en: `Mapped types create new types by transforming properties of another type: \`{ [K in keyof T]: ... }\`.
+\`\`\`typescript
+// Understanding through examples
+type User = { id: number; name: string; email: string };
+
+// Equivalent to Partial<T>
+type MyPartial<T> = { [K in keyof T]?: T[K] };
+
+// Equivalent to Readonly<T>
+type MyReadonly<T> = { readonly [K in keyof T]: T[K] };
+
+// Transform value types
+type Nullable<T> = { [K in keyof T]: T[K] | null };
+
+// Remove modifiers: -readonly, -?
+type Mutable<T> = { -readonly [K in keyof T]: T[K] };
+type Required<T> = { [K in keyof T]-?: T[K] };
+
+// Remap key with as
+type Getters<T> = {
+  [K in keyof T as \`get\${Capitalize<string & K>}\`]: () => T[K]
+};
+\`\`\`
+They are the foundation of many built-in utility types (Partial, Readonly, Record, Pick, Omit).` },
+  { id: 350, category: "TypeScript", subcategory: "Generics", level: "advanced", q: "Conditional types trong TypeScript là gì?", a: `Conditional types: \`T extends U ? X : Y\`. Evaluate tại compile time dựa vào type relationship.
+\`\`\`typescript
+// Cơ bản
+type IsString<T> = T extends string ? true : false;
+type A = IsString<string>; // true
+type B = IsString<number>; // false
+
+// Distributive: tự động phân phối trên union
+type NonNullable<T> = T extends null | undefined ? never : T;
+type C = NonNullable<string | null | undefined>; // string
+
+// Infer: extract type từ bên trong
+type ReturnType<T> = T extends (...args: any[]) => infer R ? R : never;
+type D = ReturnType<() => number>; // number
+
+// Thực tế: flatten array type
+type Flatten<T> = T extends Array<infer Item> ? Item : T;
+type E = Flatten<string[]>; // string
+type F = Flatten<number>;   // number
+\`\`\`
+Nền tảng của Exclude, Extract, NonNullable, ReturnType, và nhiều utility types.`, q_en: "What are conditional types in TypeScript?", a_en: `Conditional types: \`T extends U ? X : Y\`. Evaluated at compile time based on the type relationship.
+\`\`\`typescript
+// Basic
+type IsString<T> = T extends string ? true : false;
+type A = IsString<string>; // true
+type B = IsString<number>; // false
+
+// Distributive: automatically distributes over unions
+type NonNullable<T> = T extends null | undefined ? never : T;
+type C = NonNullable<string | null | undefined>; // string
+
+// Infer: extract a type from inside another
+type ReturnType<T> = T extends (...args: any[]) => infer R ? R : never;
+type D = ReturnType<() => number>; // number
+
+// Practical: flatten an array type
+type Flatten<T> = T extends Array<infer Item> ? Item : T;
+type E = Flatten<string[]>; // string
+type F = Flatten<number>;   // number
+\`\`\`
+The foundation of Exclude, Extract, NonNullable, ReturnType, and many other utility types.` },
+  { id: 351, category: "TypeScript", subcategory: "Generics", level: "advanced", q: "infer keyword trong conditional types là gì?", a: `\`infer\` khai báo type variable trong conditional type để 'capture' type được infer. Chỉ dùng trong \`extends\` clause.
+\`\`\`typescript
+// Extract return type của function
+type ReturnType<T> = T extends (...args: any[]) => infer R ? R : never;
+type R = ReturnType<() => Promise<string>>; // Promise<string>
+
+// Extract params
+type Parameters<T> = T extends (...args: infer P) => any ? P : never;
+type P = Parameters<(a: string, b: number) => void>; // [string, number]
+
+// Extract element type từ array
+type UnwrapArray<T> = T extends (infer U)[] ? U : T;
+type U = UnwrapArray<string[]>; // string
+
+// Extract từ Promise
+type Awaited<T> = T extends Promise<infer V> ? Awaited<V> : T;
+type V = Awaited<Promise<Promise<number>>>; // number
+\`\`\`
+Cho phép extract nested types từ complex types một cách type-safe.`, q_en: "What is the infer keyword in conditional types?", a_en: `\`infer\` declares a type variable inside a conditional type to capture an inferred type. It can only be used in the \`extends\` clause.
+\`\`\`typescript
+// Extract the return type of a function
+type ReturnType<T> = T extends (...args: any[]) => infer R ? R : never;
+type R = ReturnType<() => Promise<string>>; // Promise<string>
+
+// Extract params
+type Parameters<T> = T extends (...args: infer P) => any ? P : never;
+type P = Parameters<(a: string, b: number) => void>; // [string, number]
+
+// Extract element type from array
+type UnwrapArray<T> = T extends (infer U)[] ? U : T;
+type U = UnwrapArray<string[]>; // string
+
+// Extract from Promise
+type Awaited<T> = T extends Promise<infer V> ? Awaited<V> : T;
+type V = Awaited<Promise<Promise<number>>>; // number
+\`\`\`
+Allows extracting nested types from complex types in a type-safe way.` },
   { id: 352, category: "TypeScript", subcategory: "Generics", level: "intermediate", q: "Default type parameters là gì?", a: "Generic type parameters có thể có default: function create<T = string>(). Nếu không cung cấp type argument, dùng default. Hữu ích cho optional configuration, React components (T = {}), backward-compatible API changes. Default phải compatible với constraint nếu có." , q_en: "What are default type parameters?", a_en: "Generic type parameters can have defaults: `function create<T = string>()`. If no type argument is provided, the default is used. Useful for optional configuration, React components (T = {}), and backward-compatible API changes. The default must be compatible with the constraint, if one exists." },
   { id: 353, category: "TypeScript", subcategory: "Generics", level: "advanced", q: "Variance trong TypeScript generics là gì?", a: "Variance mô tả how subtype relationships propagate qua generic types. Covariant (read-only): Array<Dog> compatible với Array<Animal>. Contravariant (write-only): function input types. Invariant: mutable containers. TypeScript dùng structural subtyping và có variance checking cho function types (in/out keywords từ TS 4.7)." , q_en: "What is variance in TypeScript generics?", a_en: "Variance describes how subtype relationships propagate through generic types. Covariant (read-only): Array<Dog> is compatible with Array<Animal>. Contravariant (write-only): function input types. Invariant: mutable containers. TypeScript uses structural subtyping and has variance checking for function types (in/out keywords from TS 4.7)." },
   { id: 354, category: "TypeScript", subcategory: "Generics", level: "intermediate", q: "Generic classes trong TypeScript là gì?", a: "Class có thể generic: class Stack<T> { items: T[] = []; push(item: T) {...} pop(): T {...} }. Type parameter available trong toàn bộ class. Static members không thể dùng class type parameter. Khi instantiate: new Stack<number>() hoặc để TS infer từ constructor args." , q_en: "What are generic classes in TypeScript?", a_en: "Classes can be generic: `class Stack<T> { items: T[] = []; push(item: T) {...} pop(): T {...} }`. The type parameter is available throughout the class. Static members cannot use the class type parameter. When instantiating: `new Stack<number>()` or let TS infer from constructor args." },
@@ -192,7 +736,71 @@ export const JS_TS_DATA: QAItem[] = [
   { id: 366, category: "TypeScript", subcategory: "Utility Types", level: "intermediate", q: "NonNullable<T> là gì?", a: "`NonNullable<T>` loại bỏ `null` và `undefined` khỏi type T: `NonNullable<string | null | undefined>` cho ra `string`. Tương đương với `Exclude<T, null | undefined>`. Hay dùng sau khi đã kiểm tra null ở runtime nhưng TypeScript vẫn chưa tự narrow được — ví dụ kết quả từ `Array.find()` có type `T | undefined`, sau khi guard check có thể cast về `NonNullable`. Với strictNullChecks bật, đây là utility cần thiết để làm việc với optional values an toàn." , q_en: "What is NonNullable<T>?", a_en: "`NonNullable<T>` removes `null` and `undefined` from type T: `NonNullable<string | null | undefined>` gives `string`. Equivalent to `Exclude<T, null | undefined>`. Often used after null checking at runtime when TypeScript has not automatically narrowed the type — for example, `Array.find()` returns `T | undefined`, and after a guard check you can cast it to `NonNullable`. With strictNullChecks enabled, this utility is essential for safely working with optional values." },
   { id: 367, category: "TypeScript", subcategory: "Utility Types", level: "intermediate", q: "Readonly<T> và ReadonlyArray<T> là gì?", a: "Readonly<T> làm tất cả properties của T thành readonly (shallow). ReadonlyArray<T> là array không thể modify (push, pop, sort không available). Dùng với as const, Redux state, functional programming. Deep readonly cần custom type: DeepReadonly<T> với recursive mapped type." , q_en: "What are Readonly<T> and ReadonlyArray<T>?", a_en: "Readonly<T> makes all properties of T readonly (shallow). ReadonlyArray<T> is an array that cannot be modified (push, pop, sort are unavailable). Used with as const, Redux state, and functional programming. Deep readonly requires a custom type: DeepReadonly<T> using a recursive mapped type." },
   { id: 368, category: "TypeScript", subcategory: "Utility Types", level: "advanced", q: "InstanceType<T> và ThisParameterType<T> là gì?", a: "InstanceType<T> lấy type của instance khi dùng new T(): InstanceType<typeof MyClass> = MyClass. Hữu ích với factory patterns và generic class handling. ThisParameterType<T> lấy type của this parameter trong function, OmitThisParameter<T> loại bỏ nó." , q_en: "What are InstanceType<T> and ThisParameterType<T>?", a_en: "InstanceType<T> extracts the type of an instance when using `new T()`: `InstanceType<typeof MyClass>` = MyClass. Useful with factory patterns and generic class handling. ThisParameterType<T> extracts the type of the this parameter in a function; OmitThisParameter<T> removes it." },
-  { id: 369, category: "TypeScript", subcategory: "Utility Types", level: "intermediate", q: "Hãy implement Partial<T> từ đầu để hiểu cách hoạt động.", a: "type MyPartial<T> = { [K in keyof T]?: T[K] }. Dùng mapped type iterate qua tất cả keys của T, thêm ? để optional. Tương tự: type MyRequired<T> = { [K in keyof T]-?: T[K] } (dấu - xóa optional modifier). Hiểu cách này giúp tạo custom utility types." , q_en: "Implement Partial<T> from scratch to understand how it works.", a_en: "type MyPartial<T> = { [K in keyof T]?: T[K] }. Uses a mapped type to iterate over all keys of T and adds ? to make them optional. Similarly: `type MyRequired<T> = { [K in keyof T]-?: T[K] }` (the minus sign removes the optional modifier). Understanding this helps you create custom utility types." },
+  { id: 369, category: "TypeScript", subcategory: "Utility Types", level: "intermediate", q: "Hãy implement Partial<T> từ đầu để hiểu cách hoạt động.", a: `Dùng mapped type iterate qua tất cả keys của T, thêm \`?\` để optional.
+\`\`\`typescript
+// Partial<T>: tất cả optional
+type MyPartial<T> = {
+  [K in keyof T]?: T[K];
+};
+
+// Required<T>: dấu - xóa optional modifier
+type MyRequired<T> = {
+  [K in keyof T]-?: T[K];
+};
+
+// Readonly<T>
+type MyReadonly<T> = {
+  readonly [K in keyof T]: T[K];
+};
+
+// Pick<T, K>
+type MyPick<T, K extends keyof T> = {
+  [P in K]: T[P];
+};
+
+// Record<K, V>
+type MyRecord<K extends keyof any, V> = {
+  [P in K]: V;
+};
+
+// Kiểm tra
+type User = { id: number; name: string; email?: string };
+type PartialUser = MyPartial<User>;
+// { id?: number; name?: string; email?: string }
+\`\`\`
+Hiểu cách này giúp tạo custom utility types bất kỳ.`, q_en: "Implement Partial<T> from scratch to understand how it works.", a_en: `Uses a mapped type to iterate over all keys of T and adds \`?\` to make them optional.
+\`\`\`typescript
+// Partial<T>: all optional
+type MyPartial<T> = {
+  [K in keyof T]?: T[K];
+};
+
+// Required<T>: minus removes the optional modifier
+type MyRequired<T> = {
+  [K in keyof T]-?: T[K];
+};
+
+// Readonly<T>
+type MyReadonly<T> = {
+  readonly [K in keyof T]: T[K];
+};
+
+// Pick<T, K>
+type MyPick<T, K extends keyof T> = {
+  [P in K]: T[P];
+};
+
+// Record<K, V>
+type MyRecord<K extends keyof any, V> = {
+  [P in K]: V;
+};
+
+// Verify
+type User = { id: number; name: string; email?: string };
+type PartialUser = MyPartial<User>;
+// { id?: number; name?: string; email?: string }
+\`\`\`
+Understanding this helps you create any custom utility type.` },
   { id: 370, category: "TypeScript", subcategory: "Utility Types", level: "advanced", q: "Mutable<T> (ngược của Readonly) tạo như thế nào?", a: "TypeScript không có built-in Mutable nhưng có thể tạo: type Mutable<T> = { -readonly [K in keyof T]: T[K] }. Dấu - trước readonly xóa readonly modifier. Hữu ích khi cần temporarily mutate readonly objects (trong test setup chẳng hạn). Cũng có thể combine: type WritablePick<T, K extends keyof T>." , q_en: "How do you create Mutable<T> (the opposite of Readonly)?", a_en: "TypeScript has no built-in Mutable but you can create one: `type Mutable<T> = { -readonly [K in keyof T]: T[K] }`. The minus before readonly removes the readonly modifier. Useful when you need to temporarily mutate readonly objects (e.g., in test setup). Can also be combined: `type WritablePick<T, K extends keyof T>`." },
   { id: 371, category: "TypeScript", subcategory: "Utility Types", level: "intermediate", q: "const enum và regular enum khác nhau về runtime như thế nào?", a: "Regular enum compile thành JS object (có runtime overhead, hỗ trợ reverse lookup). Const enum inline tất cả values tại compile time (không sinh runtime code, không có reverse lookup). Const enum không dùng được với declaration files và isolatedModules. Prefer string literal unions thay enum trong nhiều trường hợp." , q_en: "How do const enum and regular enum differ at runtime?", a_en: "Regular enums compile to JS objects (runtime overhead, supports reverse lookup). Const enums inline all values at compile time (no runtime code generated, no reverse lookup). Const enums cannot be used with declaration files and isolatedModules. In many cases, prefer string literal unions over enums." },
   { id: 372, category: "TypeScript", subcategory: "Utility Types", level: "advanced", q: "Deep partial và deep readonly type tạo như thế nào?", a: "DeepPartial được tạo bằng recursive conditional type: nếu T là object thì áp dụng optional modifier cho mỗi key và đệ quy vào giá trị con, ngược lại trả về T nguyên bản (type DeepPartial<T> = T extends object ? { [K in keyof T]?: DeepPartial<T[K]> } : T). DeepReadonly cần xử lý riêng trường hợp array bằng cách kiểm tra T extends (infer U)[] trước để chuyển thành ReadonlyArray<DeepReadonly<U>>, sau đó mới xử lý object bằng cách thêm readonly modifier cho tất cả keys và đệ quy tiếp. Việc tách riêng logic cho array là bắt buộc vì array có semantics khác với object thông thường, nếu không sẽ mất đi các array methods và tính đúng đắn của kiểu dữ liệu." , q_en: "How do you create deep partial and deep readonly types?", a_en: "DeepPartial is created using a recursive conditional type: if T is an object, apply the optional modifier to each key and recurse into child values, otherwise return T as-is (`type DeepPartial<T> = T extends object ? { [K in keyof T]?: DeepPartial<T[K]> } : T`). DeepReadonly needs to handle arrays separately by checking `T extends (infer U)[]` first to convert them to `ReadonlyArray<DeepReadonly<U>>`, then handle objects by adding readonly to all keys and recursing. Separating array logic is mandatory because arrays have different semantics from plain objects, otherwise array methods and type correctness would be lost." },
@@ -202,7 +810,65 @@ export const JS_TS_DATA: QAItem[] = [
 
   // === TypeScript: Advanced (376-400) ===
   { id: 376, category: "TypeScript", subcategory: "Advanced", level: "intermediate", q: "Type guards là gì? Các loại type guards trong TypeScript?", a: "Type guards thu hẹp type trong code branch. Loại: 1) typeof ('string', 'number'...), 2) instanceof (class instances), 3) in operator (property check), 4) equality (==, ===), 5) user-defined (function với return type is Type), 6) assertion functions (asserts condition). User-defined guards rất mạnh để custom narrowing." , q_en: "What are type guards? What types of type guards exist in TypeScript?", a_en: "Type guards narrow a type within a code branch. Types: 1) typeof ('string', 'number'...), 2) instanceof (class instances), 3) in operator (property check), 4) equality (==, ===), 5) user-defined (function with return type `is Type`), 6) assertion functions (asserts condition). User-defined guards are very powerful for custom narrowing." },
-  { id: 377, category: "TypeScript", subcategory: "Advanced", level: "intermediate", q: "User-defined type guards (type predicates) là gì?", a: "Function type với return type 'param is Type': function isString(val: unknown): val is string { return typeof val === 'string' }. Khi function return true, TS narrow type của param. Nguy hiểm: TS tin type predicate hoàn toàn, implementation sai sẽ gây runtime bug mà không có compile error." , q_en: "What are user-defined type guards (type predicates)?", a_en: "A function with a return type of 'param is Type': `function isString(val: unknown): val is string { return typeof val === 'string' }`. When the function returns true, TS narrows the type of the param. Dangerous: TS fully trusts the type predicate; a wrong implementation causes runtime bugs without compile errors." },
+  { id: 377, category: "TypeScript", subcategory: "Advanced", level: "intermediate", q: "User-defined type guards (type predicates) là gì?", a: `Function type với return type \`param is Type\`. Khi function return true, TS narrow type của param.
+\`\`\`typescript
+// Type predicate
+function isString(val: unknown): val is string {
+  return typeof val === 'string';
+}
+
+// Sử dụng
+function process(val: string | number) {
+  if (isString(val)) {
+    val.toUpperCase(); // val: string
+  } else {
+    val.toFixed(2);   // val: number
+  }
+}
+
+// Thực tế: kiểm tra object shape
+interface Cat { meow(): void }
+interface Dog { bark(): void }
+
+function isCat(animal: Cat | Dog): animal is Cat {
+  return 'meow' in animal;
+}
+
+// Array filter với type guard
+const items: (string | null)[] = ['a', null, 'b'];
+const strings = items.filter((x): x is string => x !== null);
+// strings: string[]
+\`\`\`
+Nguy hiểm: TS tin type predicate hoàn toàn, implementation sai sẽ gây runtime bug mà không có compile error.`, q_en: "What are user-defined type guards (type predicates)?", a_en: `A function with a return type of \`param is Type\`. When the function returns true, TS narrows the type of the param.
+\`\`\`typescript
+// Type predicate
+function isString(val: unknown): val is string {
+  return typeof val === 'string';
+}
+
+// Usage
+function process(val: string | number) {
+  if (isString(val)) {
+    val.toUpperCase(); // val: string
+  } else {
+    val.toFixed(2);   // val: number
+  }
+}
+
+// Practical: check object shape
+interface Cat { meow(): void }
+interface Dog { bark(): void }
+
+function isCat(animal: Cat | Dog): animal is Cat {
+  return 'meow' in animal;
+}
+
+// Array filter with type guard
+const items: (string | null)[] = ['a', null, 'b'];
+const strings = items.filter((x): x is string => x !== null);
+// strings: string[]
+\`\`\`
+Dangerous: TS fully trusts the type predicate; a wrong implementation causes runtime bugs without compile errors.` },
   { id: 378, category: "TypeScript", subcategory: "Advanced", level: "advanced", q: "Decorators trong TypeScript là gì?", a: "Decorators là function đặc biệt apply lên class/method/property/accessor/parameter để modify behavior. Dùng @decorator syntax. TS 5.0+ hỗ trợ TC39 Stage 3 decorators natively (không cần flag). Legacy decorators (Angular, NestJS) vẫn dùng experimentalDecorators: true — hai loại không tương thích. Decorator factories: @Log() trả về decorator function." , q_en: "What are decorators in TypeScript?", a_en: "Decorators are special functions applied to classes/methods/properties/accessors/parameters to modify behavior. Use @decorator syntax. TS 5.0+ supports TC39 Stage 3 decorators natively (no flag needed). Legacy decorators (Angular, NestJS) still use experimentalDecorators: true — the two types are incompatible. Decorator factories: @Log() returns a decorator function." },
   { id: 379, category: "TypeScript", subcategory: "Advanced", level: "advanced", q: "Decorator metadata và reflect-metadata là gì?", a: "Reflect Metadata API cho phép đọc/ghi metadata trên class/method tại runtime. TypeScript emit metadata khi emitDecoratorMetadata: true (design:type, design:paramtypes, design:returntype). Dùng bởi dependency injection frameworks (Angular, NestJS) để resolve constructor params tự động." , q_en: "What are decorator metadata and reflect-metadata?", a_en: "The Reflect Metadata API allows reading/writing metadata on classes/methods at runtime. TypeScript emits metadata when emitDecoratorMetadata: true (design:type, design:paramtypes, design:returntype). Used by dependency injection frameworks (Angular, NestJS) to automatically resolve constructor parameters." },
   { id: 380, category: "TypeScript", subcategory: "Advanced", level: "advanced", q: "Function overloads trong TypeScript là gì?", a: "Function overloads khai báo nhiều function signatures trước implementation: ít nhất 2 overload signatures + 1 implementation signature. Implementation phải compatible với tất cả overloads. Dùng khi function return type hoặc parameters khác nhau tùy input types. Giúp caller có type info chính xác cho mỗi usage." , q_en: "What are function overloads in TypeScript?", a_en: "Function overloads declare multiple function signatures before the implementation: at least 2 overload signatures + 1 implementation signature. The implementation must be compatible with all overloads. Used when a function's return type or parameters differ depending on the input types. Gives callers accurate type information for each usage." },
@@ -218,7 +884,55 @@ export const JS_TS_DATA: QAItem[] = [
   { id: 390, category: "TypeScript", subcategory: "Advanced", level: "advanced", q: "Type compatibility và assignability trong TypeScript hoạt động như thế nào?", a: "A assignable cho B nếu A có tất cả (và có thể nhiều hơn) properties của B. Subtype có thể assign cho supertype. Function parameters: contravariant (param type của subtype phải rộng hơn hoặc bằng). Return type: covariant (return type của subtype phải hẹp hơn hoặc bằng). strictFunctionTypes enforce contravariance." , q_en: "How do type compatibility and assignability work in TypeScript?", a_en: "A is assignable to B if A has all (and possibly more) properties of B. A subtype can be assigned to a supertype. Function parameters: contravariant (the param type of a subtype must be the same or wider). Return type: covariant (the return type of a subtype must be the same or narrower). strictFunctionTypes enforces contravariance." },
   { id: 391, category: "TypeScript", subcategory: "Advanced", level: "advanced", q: "const type parameters (TS 5.0) là gì?", a: "const type parameters: function identity<const T>(val: T): T. Giúp infer literal types mà không cần as const. Trước đây cần as const để get literal types, giờ generics tự infer. Hữu ích cho config objects, routing definitions, và bất kỳ nơi nào muốn preserve literal types." , q_en: "What are const type parameters (TS 5.0)?", a_en: "Const type parameters: `function identity<const T>(val: T): T`. Infers literal types without needing as const. Previously, as const was required to get literal types; now generics can infer them automatically. Useful for config objects, routing definitions, and anywhere you want to preserve literal types." },
   { id: 392, category: "TypeScript", subcategory: "Advanced", level: "advanced", q: "Discriminated unions vs class hierarchy khi nào dùng cái nào?", a: "Discriminated unions: prefer khi data-centric, cần exhaustive matching, serializable (Redux actions, API responses). Class hierarchy: khi cần behavior với data, encapsulation, OOP patterns. Functional code thường prefer discriminated unions vì pattern matching dễ hơn. TypeScript exhausiveness checking qua never type." , q_en: "When should you use discriminated unions vs class hierarchies?", a_en: "Discriminated unions: prefer when data-centric, need exhaustive matching, or the data must be serializable (Redux actions, API responses). Class hierarchy: when you need behavior bundled with data, encapsulation, or OOP patterns. Functional code typically prefers discriminated unions because pattern matching is easier. TypeScript exhaustiveness checking uses the never type." },
-  { id: 393, category: "TypeScript", subcategory: "Advanced", level: "advanced", q: "Exhaustiveness checking trong TypeScript là gì?", a: "Sau khi handle tất cả cases trong discriminated union, assign default case sang variable type never: const exhaustive: never = value. Nếu có case chưa handle, TS báo lỗi vì giá trị đó không assign được cho never. Pattern này đảm bảo thêm case mới vào union sẽ bị catch ngay tại compile time." , q_en: "What is exhaustiveness checking in TypeScript?", a_en: "After handling all cases of a discriminated union, assign the default case to a variable of type never: `const exhaustive: never = value`. If any case is unhandled, TS throws an error because the value cannot be assigned to never. This pattern ensures that adding a new case to the union is caught immediately at compile time." },
+  { id: 393, category: "TypeScript", subcategory: "Advanced", level: "advanced", q: "Exhaustiveness checking trong TypeScript là gì?", a: `Sau khi handle tất cả cases trong discriminated union, assign default case sang variable type \`never\`. Nếu có case chưa handle, TS báo lỗi.
+\`\`\`typescript
+type Action =
+  | { type: 'INCREMENT' }
+  | { type: 'DECREMENT' }
+  | { type: 'RESET' };
+
+function reducer(state: number, action: Action): number {
+  switch (action.type) {
+    case 'INCREMENT': return state + 1;
+    case 'DECREMENT': return state - 1;
+    case 'RESET':     return 0;
+    default:
+      // Nếu thêm 'SET' vào Action mà không handle, dòng này báo lỗi
+      const exhaustive: never = action;
+      throw new Error(\`Unhandled action: \${exhaustive}\`);
+  }
+}
+
+// Hoặc dùng helper function
+function assertNever(x: never): never {
+  throw new Error('Unexpected value: ' + x);
+}
+\`\`\`
+Pattern này đảm bảo thêm case mới vào union sẽ bị catch ngay tại compile time.`, q_en: "What is exhaustiveness checking in TypeScript?", a_en: `After handling all cases of a discriminated union, assign the default case to a variable of type \`never\`. If any case is unhandled, TS reports an error.
+\`\`\`typescript
+type Action =
+  | { type: 'INCREMENT' }
+  | { type: 'DECREMENT' }
+  | { type: 'RESET' };
+
+function reducer(state: number, action: Action): number {
+  switch (action.type) {
+    case 'INCREMENT': return state + 1;
+    case 'DECREMENT': return state - 1;
+    case 'RESET':     return 0;
+    default:
+      // If 'SET' is added to Action without handling it, this line errors
+      const exhaustive: never = action;
+      throw new Error(\`Unhandled action: \${exhaustive}\`);
+  }
+}
+
+// Or use a helper function
+function assertNever(x: never): never {
+  throw new Error('Unexpected value: ' + x);
+}
+\`\`\`
+This pattern ensures that adding a new case to the union is caught immediately at compile time.` },
   { id: 394, category: "TypeScript", subcategory: "Advanced", level: "advanced", q: "using declarations và Symbol.dispose (TS 5.2) là gì?", a: "using declaration là tính năng từ đề xuất TC39 Explicit Resource Management, được TypeScript 5.2 hỗ trợ, cho phép tự động giải phóng tài nguyên khi biến ra khỏi scope mà không cần viết try/finally thủ công, ví dụ: using file = openFile() sẽ tự gọi cleanup khi kết thúc block. Object được gán cho using phải implement method [Symbol.dispose]() để TypeScript biết cách giải phóng, còn với tài nguyên bất đồng bộ thì dùng await using kết hợp với [Symbol.asyncDispose](). Tính năng này đặc biệt hữu ích cho việc quản lý file handles, database connections, và event listeners vì đảm bảo tài nguyên luôn được dọn dẹp đúng cách ngay cả khi có exception xảy ra." , q_en: "What are using declarations and Symbol.dispose (TS 5.2)?", a_en: "The using declaration is a feature from the TC39 Explicit Resource Management proposal, supported in TypeScript 5.2, that automatically disposes of resources when a variable goes out of scope without needing manual try/finally, for example: `using file = openFile()` automatically calls cleanup when the block ends. The object assigned to using must implement a `[Symbol.dispose]()` method so TypeScript knows how to release it; for async resources, use `await using` combined with `[Symbol.asyncDispose]()`. This feature is especially useful for managing file handles, database connections, and event listeners because it guarantees resources are always cleaned up correctly even when exceptions occur." },
   { id: 395, category: "TypeScript", subcategory: "Advanced", level: "intermediate", q: "Path aliases trong TypeScript (paths config) là gì?", a: "paths trong tsconfig.json map import paths: '@components/*': ['src/components/*']. Giúp import ngắn hơn thay relative paths dài. Cần configure cả bundler (Vite, Webpack) vì TS compiler chỉ handle types, không transform imports. Dùng @ prefix là convention phổ biến." , q_en: "What are path aliases in TypeScript (paths config)?", a_en: "paths in tsconfig.json maps import paths: `'@components/*': ['src/components/*']`. Gives shorter imports instead of long relative paths. Requires configuring both TS and the bundler (Vite, Webpack) because the TS compiler only handles types and does not transform imports. The @ prefix is a common convention." },
   { id: 396, category: "TypeScript", subcategory: "Advanced", level: "advanced", q: "Isolated modules và tại sao Vite/esbuild yêu cầu nó?", a: "isolatedModules: true yêu cầu mỗi file có thể compile standalone (không cần cross-file type information). Vite/esbuild strip types từng file riêng (nhanh hơn) thay full type checking. Hạn chế: không dùng const enum, namespace, và phải export type tường minh (import type). TS vẫn type check đầy đủ khi build." , q_en: "What is isolatedModules and why do Vite/esbuild require it?", a_en: "isolatedModules: true requires each file to be compilable standalone (without cross-file type information). Vite/esbuild strip types from each file individually (faster) rather than doing a full type check. Limitations: const enums, namespaces, and implicit type re-exports cannot be used — explicit `import type` is required. TS still performs a full type check during build." },

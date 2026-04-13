@@ -15,7 +15,7 @@ export const CATEGORIES = [
   'HTML', 'CSS', 'JavaScript', 'TypeScript', 'React',
   'Next.js', 'State Management', 'Node.js', 'Database',
   'Build Tools', 'Testing', 'Performance', 'Security',
-  'SEO', 'Golang',
+  'SEO', 'Golang', 'Python', 'Vue.js',
   'System Design', 'Design Patterns', 'Kafka', 'Redis',
   'Network', 'Operating System', 'AWS & Cloud',
 ] as const
@@ -49,6 +49,8 @@ import { CSHARP_DATA } from './data/csharp-data'
 import { FLUTTER_DATA } from './data/flutter-data'
 import { ANDROID_DATA } from './data/android-data'
 import { RABBITMQ_DATA } from './data/rabbitmq-data'
+import { PYTHON_DATA } from './data/python-data'
+import { VUEJS_DATA } from './data/vuejs-data'
 
 export const QA_DATA: QAItem[] = [
   ...HTML_CSS_DATA,
@@ -71,4 +73,6 @@ export const QA_DATA: QAItem[] = [
   ...FLUTTER_DATA,
   ...ANDROID_DATA,
   ...RABBITMQ_DATA,
+  ...PYTHON_DATA,
+  ...VUEJS_DATA,
 ].sort((a, b) => a.id - b.id)

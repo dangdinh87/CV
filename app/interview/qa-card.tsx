@@ -2,9 +2,50 @@
 
 import { memo, useMemo } from 'react'
 import confetti from 'canvas-confetti'
+import hljs from 'highlight.js/lib/core'
+import python from 'highlight.js/lib/languages/python'
+import javascript from 'highlight.js/lib/languages/javascript'
+import typescript from 'highlight.js/lib/languages/typescript'
+import go from 'highlight.js/lib/languages/go'
+import java from 'highlight.js/lib/languages/java'
+import php from 'highlight.js/lib/languages/php'
+import csharp from 'highlight.js/lib/languages/csharp'
+import dart from 'highlight.js/lib/languages/dart'
+import kotlin from 'highlight.js/lib/languages/kotlin'
+import sql from 'highlight.js/lib/languages/sql'
+import bash from 'highlight.js/lib/languages/bash'
+import json from 'highlight.js/lib/languages/json'
+import xml from 'highlight.js/lib/languages/xml'
+import css from 'highlight.js/lib/languages/css'
+import yaml from 'highlight.js/lib/languages/yaml'
 import type { QAItem } from './interview-data'
 import { LEVEL_CONFIG } from './interview-data'
 import { useLanguage } from '../context/language-context'
+
+// Register languages once at module level
+hljs.registerLanguage('python', python)
+hljs.registerLanguage('javascript', javascript)
+hljs.registerLanguage('js', javascript)
+hljs.registerLanguage('typescript', typescript)
+hljs.registerLanguage('ts', typescript)
+hljs.registerLanguage('go', go)
+hljs.registerLanguage('java', java)
+hljs.registerLanguage('php', php)
+hljs.registerLanguage('csharp', csharp)
+hljs.registerLanguage('cs', csharp)
+hljs.registerLanguage('dart', dart)
+hljs.registerLanguage('kotlin', kotlin)
+hljs.registerLanguage('sql', sql)
+hljs.registerLanguage('bash', bash)
+hljs.registerLanguage('sh', bash)
+hljs.registerLanguage('shell', bash)
+hljs.registerLanguage('json', json)
+hljs.registerLanguage('html', xml)
+hljs.registerLanguage('xml', xml)
+hljs.registerLanguage('vue', xml)
+hljs.registerLanguage('css', css)
+hljs.registerLanguage('yaml', yaml)
+hljs.registerLanguage('yml', yaml)
 
 interface QACardProps {
   item: QAItem
@@ -156,7 +197,54 @@ function smartSentenceSplit(text: string): string[] {
   return results
 }
 
-function formatAnswer(text: string): string {
+// ── Code block rendering ──────────────────────────────────────────────────────
+
+function renderCodeBlock(lang: string, code: string): string {
+  const trimmed = code.trim()
+  let highlighted: string
+  try {
+    const language = lang && hljs.getLanguage(lang) ? lang : 'plaintext'
+    highlighted = hljs.highlight(trimmed, { language, ignoreIllegals: true }).value
+  } catch {
+    highlighted = trimmed
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+  }
+  const langBadge = lang
+    ? `<span class="qa-code-lang">${lang}</span>`
+    : ''
+  return `<div class="qa-code-wrap">${langBadge}<pre class="qa-code-pre"><code class="qa-code-block hljs">${highlighted}</code></pre></div>`
+}
+
+function formatAnswer(rawText: string): string {
+  // Split by code blocks first so they bypass HTML escaping + sentence parsing
+  const codeRe = /```(\w*)\n([\s\S]*?)```/g
+  const parts: Array<{ type: 'text' | 'code'; content: string; lang: string }> = []
+  let last = 0
+  let m: RegExpExecArray | null
+  while ((m = codeRe.exec(rawText)) !== null) {
+    if (m.index > last) parts.push({ type: 'text', content: rawText.slice(last, m.index), lang: '' })
+    parts.push({ type: 'code', lang: m[1] ?? '', content: m[2] ?? '' })
+    last = m.index + m[0].length
+  }
+  if (last < rawText.length) parts.push({ type: 'text', content: rawText.slice(last), lang: '' })
+
+  // No code blocks → use original text-only formatter unchanged
+  if (parts.length === 1 && parts[0].type === 'text') return formatTextOnly(rawText)
+
+  return parts
+    .map(p =>
+      p.type === 'code'
+        ? renderCodeBlock(p.lang, p.content)
+        : p.content.trim()
+          ? formatTextOnly(p.content.trim())
+          : ''
+    )
+    .join('')
+}
+
+function formatTextOnly(text: string): string {
   const escaped = escapeHtml(text)
 
   // Detect numbered pattern: (1) ... (2) ... (3) ...

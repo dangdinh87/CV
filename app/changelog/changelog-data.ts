@@ -11,7 +11,7 @@ export interface ChangelogEntry {
   changes: Change[]
 }
 
-export const CURRENT_VERSION = '1.9.0'
+export const CURRENT_VERSION = '1.10.0'
 
 /* Badge labels shown to end-users */
 export const TYPE_LABEL: Record<ChangeType, { vi: string; en: string }> = {
@@ -23,6 +23,17 @@ export const TYPE_LABEL: Record<ChangeType, { vi: string; en: string }> = {
 }
 
 export const CHANGELOG: ChangelogEntry[] = [
+  {
+    version: '1.10.0',
+    date: '2026-04-13',
+    changes: [
+      { type: 'category', text: { vi: 'Thêm danh mục Python — 49 câu hỏi về Core Language, OOP, Async/Await, FastAPI, và hệ sinh thái Python hiện đại', en: 'Added Python category — 49 questions on Core Language, OOP, Async, FastAPI, and the modern Python ecosystem' } },
+      { type: 'category', text: { vi: 'Thêm danh mục Vue.js — 50 câu hỏi về Vue 3, Composition API, Pinia, Vue Router, và performance optimization', en: 'Added Vue.js category — 50 questions on Vue 3, Composition API, Pinia, Vue Router, and performance optimization' } },
+      { type: 'feature', text: { vi: 'Syntax highlighting cho code block — tích hợp highlight.js với theme Catppuccin Mocha, hỗ trợ 15+ ngôn ngữ (Python, Go, TypeScript, JSX, SQL, ...)', en: 'Syntax highlighting for code blocks — integrated highlight.js with Catppuccin Mocha theme, supporting 15+ languages (Python, Go, TypeScript, JSX, SQL, ...)' } },
+      { type: 'improve', text: { vi: 'Cải thiện format 73 câu hỏi với code block đa dòng có syntax highlighting — JS/TS, React/Next.js, Golang, Design Patterns', en: 'Improved format for 73 questions with multi-line syntax-highlighted code blocks — JS/TS, React/Next.js, Golang, Design Patterns' } },
+      { type: 'fix', text: { vi: 'Sửa lỗi code block hiển thị gộp trên một dòng — CSS white-space bị override bởi rule `.qa-answer code`', en: 'Fixed code blocks collapsing to a single line — CSS white-space was being overridden by the .qa-answer code rule' } },
+    ],
+  },
   {
     version: '1.9.0',
     date: '2026-04-07',

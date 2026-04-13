@@ -123,6 +123,18 @@ export const CATEGORY_GROUPS: CategoryGroup[] = [
     addedDate: '2026-04-07',
   },
   {
+    label: 'Python',
+    icon: '/icons/python.svg',
+    members: ['Python'],
+    addedDate: '2026-04-13',
+  },
+  {
+    label: 'Vue.js',
+    icon: '/icons/vuejs.svg',
+    members: ['Vue.js'],
+    addedDate: '2026-04-13',
+  },
+  {
     label: 'Backend & API',
     icon: '/icons/backend-api.svg',
     members: [
