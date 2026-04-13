@@ -1,0 +1,3 @@
+## 2024-04-09 - Added form label association in contribute form
+**Learning:** The contribute form (`app/interview/contribute-form.tsx`) had `<label>` elements and input controls inside container `<div>`s without proper HTML association (missing `htmlFor` on the label and `id` on the control). This is a common accessibility issue where clicking the label text doesn't focus the input and screen readers struggle to associate them.
+**Action:** Always verify that every `<label>` has an `htmlFor` attribute that explicitly maps to the `id` of its corresponding form control (`<input>`, `<textarea>`, `<select>`), ensuring to use unique prefixes if a component renders conditionally to avoid duplicate IDs.

@@ -156,18 +156,18 @@ export function ContributeForm({ onClose }: { onClose: () => void }) {
               <>
                 <div className="iv-contribute-row">
                   <div className="iv-contribute-field">
-                    <label>{locale === 'en' ? 'Name' : 'Tên'} <span className="iv-optional">{locale === 'en' ? '(optional)' : '(tùy chọn)'}</span></label>
-                    <input type="text" value={form.name} onChange={set('name')} placeholder="Ẩn danh" />
+                    <label htmlFor="q_name">{locale === 'en' ? 'Name' : 'Tên'} <span className="iv-optional">{locale === 'en' ? '(optional)' : '(tùy chọn)'}</span></label>
+                    <input id="q_name" type="text" value={form.name} onChange={set('name')} placeholder="Ẩn danh" />
                   </div>
                   <div className="iv-contribute-field">
-                    <label>Email <span className="iv-optional">{locale === 'en' ? '(optional)' : '(tùy chọn)'}</span></label>
-                    <input type="email" value={form.email} onChange={set('email')} placeholder="email@example.com" />
+                    <label htmlFor="q_email">Email <span className="iv-optional">{locale === 'en' ? '(optional)' : '(tùy chọn)'}</span></label>
+                    <input id="q_email" type="email" value={form.email} onChange={set('email')} placeholder="email@example.com" />
                   </div>
                 </div>
 
                 <div className="iv-contribute-field">
-                  <label>{locale === 'en' ? 'Topic' : 'Chủ đề'}</label>
-                  <select value={form.category} onChange={set('category')}>
+                  <label htmlFor="q_category">{locale === 'en' ? 'Topic' : 'Chủ đề'}</label>
+                  <select id="q_category" value={form.category} onChange={set('category')}>
                     <option value="">{locale === 'en' ? '-- Select topic --' : '-- Chọn chủ đề --'}</option>
                     {CATEGORIES.map(cat => (
                       <option key={cat} value={cat}>{cat}</option>
@@ -177,8 +177,9 @@ export function ContributeForm({ onClose }: { onClose: () => void }) {
                 </div>
 
                 <div className="iv-contribute-field">
-                  <label>{locale === 'en' ? 'Question' : 'Câu hỏi'} <span className="iv-required">*</span></label>
+                  <label htmlFor="q_question">{locale === 'en' ? 'Question' : 'Câu hỏi'} <span className="iv-required">*</span></label>
                   <textarea
+                    id="q_question"
                     value={form.question}
                     onChange={set('question')}
                     placeholder={locale === 'en' ? 'Enter a question or knowledge...' : 'Nhập câu hỏi hoặc kiến thức...'}
@@ -188,8 +189,9 @@ export function ContributeForm({ onClose }: { onClose: () => void }) {
                 </div>
 
                 <div className="iv-contribute-field">
-                  <label>{locale === 'en' ? 'Suggested answer' : 'Gợi ý đáp án'} <span className="iv-optional">{locale === 'en' ? '(optional)' : '(tùy chọn)'}</span></label>
+                  <label htmlFor="q_answer">{locale === 'en' ? 'Suggested answer' : 'Gợi ý đáp án'} <span className="iv-optional">{locale === 'en' ? '(optional)' : '(tùy chọn)'}</span></label>
                   <textarea
+                    id="q_answer"
                     value={form.answer}
                     onChange={set('answer')}
                     placeholder={locale === 'en' ? 'If you have a suggested answer...' : 'Nếu bạn có gợi ý đáp án...'}
@@ -198,26 +200,27 @@ export function ContributeForm({ onClose }: { onClose: () => void }) {
                 </div>
 
                 <div className="iv-contribute-field">
-                  <label>{locale === 'en' ? 'Note' : 'Ghi chú'} <span className="iv-optional">{locale === 'en' ? '(optional)' : '(tùy chọn)'}</span></label>
-                  <input type="text" value={form.note} onChange={set('note')} placeholder={locale === 'en' ? 'Source, suggested level...' : 'Nguồn, level gợi ý...'} />
+                  <label htmlFor="q_note">{locale === 'en' ? 'Note' : 'Ghi chú'} <span className="iv-optional">{locale === 'en' ? '(optional)' : '(tùy chọn)'}</span></label>
+                  <input id="q_note" type="text" value={form.note} onChange={set('note')} placeholder={locale === 'en' ? 'Source, suggested level...' : 'Nguồn, level gợi ý...'} />
                 </div>
               </>
             ) : (
               <>
                 <div className="iv-contribute-row">
                   <div className="iv-contribute-field">
-                    <label>{locale === 'en' ? 'Name' : 'Tên'} <span className="iv-optional">{locale === 'en' ? '(optional)' : '(tùy chọn)'}</span></label>
-                    <input type="text" value={form.name} onChange={set('name')} placeholder="Ẩn danh" />
+                    <label htmlFor="f_name">{locale === 'en' ? 'Name' : 'Tên'} <span className="iv-optional">{locale === 'en' ? '(optional)' : '(tùy chọn)'}</span></label>
+                    <input id="f_name" type="text" value={form.name} onChange={set('name')} placeholder="Ẩn danh" />
                   </div>
                   <div className="iv-contribute-field">
-                    <label>Email <span className="iv-optional">{locale === 'en' ? '(optional)' : '(tùy chọn)'}</span></label>
-                    <input type="email" value={form.email} onChange={set('email')} placeholder="email@example.com" />
+                    <label htmlFor="f_email">Email <span className="iv-optional">{locale === 'en' ? '(optional)' : '(tùy chọn)'}</span></label>
+                    <input id="f_email" type="email" value={form.email} onChange={set('email')} placeholder="email@example.com" />
                   </div>
                 </div>
 
                 <div className="iv-contribute-field">
-                  <label>{locale === 'en' ? 'Feature description' : 'Mô tả tính năng'} <span className="iv-required">*</span></label>
+                  <label htmlFor="f_question">{locale === 'en' ? 'Feature description' : 'Mô tả tính năng'} <span className="iv-required">*</span></label>
                   <textarea
+                    id="f_question"
                     value={form.question}
                     onChange={set('question')}
                     placeholder={locale === 'en' ? 'What feature would you like? Describe in detail...' : 'Bạn muốn website có thêm tính năng gì? Mô tả chi tiết...'}
@@ -227,8 +230,9 @@ export function ContributeForm({ onClose }: { onClose: () => void }) {
                 </div>
 
                 <div className="iv-contribute-field">
-                  <label>{locale === 'en' ? 'Reason / Benefits' : 'Lý do / Lợi ích'} <span className="iv-optional">{locale === 'en' ? '(optional)' : '(tùy chọn)'}</span></label>
+                  <label htmlFor="f_answer">{locale === 'en' ? 'Reason / Benefits' : 'Lý do / Lợi ích'} <span className="iv-optional">{locale === 'en' ? '(optional)' : '(tùy chọn)'}</span></label>
                   <textarea
+                    id="f_answer"
                     value={form.answer}
                     onChange={set('answer')}
                     placeholder={locale === 'en' ? 'How would this feature help learning?' : 'Tính năng này giúp ích gì cho việc học/ôn tập?'}
@@ -237,8 +241,9 @@ export function ContributeForm({ onClose }: { onClose: () => void }) {
                 </div>
 
                 <div className="iv-contribute-field">
-                  <label>{locale === 'en' ? 'Reference link' : 'Link tham khảo'} <span className="iv-optional">{locale === 'en' ? '(optional)' : '(tùy chọn)'}</span></label>
+                  <label htmlFor="f_links">{locale === 'en' ? 'Reference link' : 'Link tham khảo'} <span className="iv-optional">{locale === 'en' ? '(optional)' : '(tùy chọn)'}</span></label>
                   <textarea
+                    id="f_links"
                     value={form.links}
                     onChange={set('links')}
                     placeholder={locale === 'en' ? 'Example links, screenshots...' : 'Link ví dụ từ website khác, ảnh minh họa...'}
