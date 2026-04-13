@@ -51,6 +51,7 @@ import { ANDROID_DATA } from './data/android-data'
 import { RABBITMQ_DATA } from './data/rabbitmq-data'
 import { PYTHON_DATA } from './data/python-data'
 import { VUEJS_DATA } from './data/vuejs-data'
+import { NESTJS_DATA } from './data/nestjs-data'
 
 export const QA_DATA: QAItem[] = [
   ...HTML_CSS_DATA,
@@ -75,4 +76,5 @@ export const QA_DATA: QAItem[] = [
   ...RABBITMQ_DATA,
   ...PYTHON_DATA,
   ...VUEJS_DATA,
+  ...NESTJS_DATA,
 ].sort((a, b) => a.id - b.id)

@@ -135,6 +135,12 @@ export const CATEGORY_GROUPS: CategoryGroup[] = [
     addedDate: '2026-04-13',
   },
   {
+    label: 'NestJS',
+    icon: '/icons/nestjs.svg',
+    members: ['NestJS'],
+    addedDate: '2026-04-13',
+  },
+  {
     label: 'Backend & API',
     icon: '/icons/backend-api.svg',
     members: [

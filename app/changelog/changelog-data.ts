@@ -29,6 +29,7 @@ export const CHANGELOG: ChangelogEntry[] = [
     version: '1.10.0',
     date: '2026-04-13',
     changes: [
+      { type: 'category', icons: ['/icons/nestjs.svg'], text: { vi: 'Thêm danh mục NestJS — 21 câu hỏi về Modules, Controllers, DI, Guards, Pipes, Interceptors, Filters, JWT Auth, TypeORM, Microservices, WebSockets, CQRS', en: 'Added NestJS category — 21 questions on Modules, Controllers, DI, Guards, Pipes, Interceptors, Filters, JWT Auth, TypeORM, Microservices, WebSockets, CQRS' } },
       { type: 'category', icons: ['/icons/python.svg'], text: { vi: 'Thêm danh mục Python — 49 câu hỏi về Core Language, OOP, Async/Await, FastAPI, và hệ sinh thái Python hiện đại', en: 'Added Python category — 49 questions on Core Language, OOP, Async, FastAPI, and the modern Python ecosystem' } },
       { type: 'category', icons: ['/icons/vuejs.svg'], text: { vi: 'Thêm danh mục Vue.js — 50 câu hỏi về Vue 3, Composition API, Pinia, Vue Router, và performance optimization', en: 'Added Vue.js category — 50 questions on Vue 3, Composition API, Pinia, Vue Router, and performance optimization' } },
       { type: 'feature', text: { vi: 'Syntax highlighting cho code block — tích hợp highlight.js với theme Catppuccin Mocha, hỗ trợ 15+ ngôn ngữ (Python, Go, TypeScript, JSX, SQL, ...)', en: 'Syntax highlighting for code blocks — integrated highlight.js with Catppuccin Mocha theme, supporting 15+ languages (Python, Go, TypeScript, JSX, SQL, ...)' } },
