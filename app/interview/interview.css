@@ -1772,6 +1772,11 @@
   color: #fff;
   border: none;
 }
+.iv-donate-btn-telegram {
+  background: #26A5E4;
+  color: #fff;
+  border: none;
+}
 .iv-donate-qr-wrap {
   display: flex;
   flex-direction: column;
