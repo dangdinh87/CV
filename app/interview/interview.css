@@ -852,10 +852,6 @@
   cursor: pointer;
   user-select: none;
 }
-.qa-question:focus-visible {
-  outline: none;
-  background-color: color-mix(in srgb, var(--accent) 5%, transparent);
-}
 .qa-num {
   font-family: var(--font-mono);
   font-size: 0.7rem;
