@@ -1,3 +1,3 @@
-## 2024-04-09 - Added form label association in contribute form
-**Learning:** The contribute form (`app/interview/contribute-form.tsx`) had `<label>` elements and input controls inside container `<div>`s without proper HTML association (missing `htmlFor` on the label and `id` on the control). This is a common accessibility issue where clicking the label text doesn't focus the input and screen readers struggle to associate them.
-**Action:** Always verify that every `<label>` has an `htmlFor` attribute that explicitly maps to the `id` of its corresponding form control (`<input>`, `<textarea>`, `<select>`), ensuring to use unique prefixes if a component renders conditionally to avoid duplicate IDs.
+## 2024-05-20 - Missing ARIA labels on Icon-Only Buttons
+**Learning:** Found an accessibility pattern where icon-only buttons (like the hamburger menu button in the hero section) rely purely on `title` attributes instead of proper `aria-label`s. In addition, interactive toggle elements missed `aria-expanded` attributes which are crucial for screen reader users to understand the component's state.
+**Action:** When adding or auditing icon-only buttons in the application, ensure `aria-label` is always set (using appropriate localization) and any stateful toggles implement the relevant ARIA attributes (e.g. `aria-expanded`).

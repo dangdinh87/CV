@@ -114,7 +114,7 @@ export function InterviewClient() {
             </span>
           </button>
           <div className="iv-menu-wrap">
-            <button className="iv-hero-action-btn" onClick={() => setMenuOpen(!menuOpen)} title="Menu">
+            <button className="iv-hero-action-btn" onClick={() => setMenuOpen(!menuOpen)} title="Menu" aria-label={locale === 'en' ? 'Menu' : 'Danh mục'} aria-expanded={menuOpen}>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
               {hasNewUpdate && <span className="iv-menu-dot" />}
             </button>
