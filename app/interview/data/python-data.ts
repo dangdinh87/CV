@@ -279,9 +279,9 @@ Use for: pure functions with expensive computation, recursive algorithms.`,
     subcategory: 'Core Language',
     level: 'beginner',
     q: 'f-string, `.format()`, `%` formatting — nên dùng cái nào?',
-    a: 'Dùng f-string (Python 3.6+) — nhanh nhất, dễ đọc nhất, hỗ trợ expression trực tiếp. `f"Name: {name!r}, Score: {score:.2f}"`. `.format()` khi cần template string tái sử dụng. `%` formatting là cũ, không nên dùng trong code mới. Ví dụ: `f"2+2={2+2}"` in ra `"2+2=4"` — expression được evaluate ngay trong string.',
+    a: 'Dùng f-string (Python 3.6+) — nhanh nhất, dễ đọc nhất, hỗ trợ expression trực tiếp. `f"Name: {name!r}, Score: {score:.2f}"`. `.format()` khi cần template string tái sử dụng. `%` formatting là cũ, không nên dùng trong code mới. \n\n**Ví dụ:** `f"2+2={2+2}"` in ra `"2+2=4"` — expression được evaluate ngay trong string.',
     q_en: 'f-string, `.format()`, `%` formatting — which to use?',
-    a_en: 'Use f-strings (Python 3.6+) — fastest, most readable, supports inline expressions. `f"Name: {name!r}, Score: {score:.2f}"`. Use `.format()` for reusable templates. Avoid `%` formatting in new code. Example: `f"2+2={2+2}"` prints `"2+2=4"` — expressions evaluated inline.',
+    a_en: 'Use f-strings (Python 3.6+) — fastest, most readable, supports inline expressions. `f"Name: {name!r}, Score: {score:.2f}"`. Use `.format()` for reusable templates. Avoid `%` formatting in new code. \n\n**Example:** `f"2+2={2+2}"` prints `"2+2=4"` — expressions evaluated inline.',
   },
 
   // ── OOP ──────────────────────────────────────────────────────────────────────
@@ -679,9 +679,9 @@ async def rate_limited_fetch(url):
     subcategory: 'FastAPI',
     level: 'beginner',
     q: 'FastAPI là gì? Ưu điểm so với Flask và Django?',
-    a: 'FastAPI là modern Python web framework dựa trên Starlette (ASGI) + Pydantic. Ưu điểm: (1) Async native — ~20K RPS, Flask/Django ~4-5K RPS (2) Auto OpenAPI docs — Swagger UI + ReDoc tự động từ type hints (3) Type-based validation — Pydantic validate request/response (4) Dependency Injection built-in (5) ASGI hỗ trợ WebSocket, HTTP/2. Dùng FastAPI cho: microservices, AI/ML serving, real-time APIs. Django vẫn tốt cho enterprise apps với admin panel và nhiều features built-in.',
+    a: 'FastAPI là modern Python web framework dựa trên Starlette (ASGI) + Pydantic. \n\n**Ưu điểm:** (1) Async native — ~20K RPS, Flask/Django ~4-5K RPS (2) Auto OpenAPI docs — Swagger UI + ReDoc tự động từ type hints (3) Type-based validation — Pydantic validate request/response (4) Dependency Injection built-in (5) ASGI hỗ trợ WebSocket, HTTP/2. Dùng FastAPI cho: microservices, AI/ML serving, real-time APIs. Django vẫn tốt cho enterprise apps với admin panel và nhiều features built-in.',
     q_en: 'What is FastAPI? How does it compare to Flask and Django?',
-    a_en: 'FastAPI is a modern Python framework built on Starlette (ASGI) + Pydantic. Advantages: (1) Async native — ~20K RPS vs Flask/Django ~4-5K RPS (2) Auto OpenAPI docs from type hints (3) Pydantic type-based validation (4) Built-in Dependency Injection (5) WebSocket, HTTP/2 support. Use for: microservices, AI/ML serving, real-time APIs.',
+    a_en: 'FastAPI is a modern Python framework built on Starlette (ASGI) + Pydantic. \n\n**Advantages:** (1) Async native — ~20K RPS vs Flask/Django ~4-5K RPS (2) Auto OpenAPI docs from type hints (3) Pydantic type-based validation (4) Built-in Dependency Injection (5) WebSocket, HTTP/2 support. Use for: microservices, AI/ML serving, real-time APIs.',
   },
   {
     id: 3129,
@@ -710,7 +710,7 @@ async def list_users(
 ):
     ...
 \`\`\`
-Lợi ích: testable (override dependency trong test), reusable, separation of concerns.`,
+\n\n**Lợi ích:** testable (override dependency trong test), reusable, separation of concerns.`,
     q_en: 'How does Dependency Injection work in FastAPI?',
     a_en: `Depends() injects dependencies into path operations — auto-resolved, supports chaining and cleanup.
 \`\`\`python

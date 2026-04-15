@@ -232,9 +232,9 @@ export const CSHARP_DATA: QAItem[] = [
     subcategory: 'LINQ',
     level: 'intermediate',
     q: 'LINQ là gì và có những ưu điểm gì?',
-    a: 'LINQ (Language Integrated Query) thống nhất cách truy vấn các nguồn dữ liệu khác nhau (collections, database, XML) bằng cú pháp nhất quán. Ưu điểm: type safety tại compile-time, IntelliSense hỗ trợ, query dễ đọc như SQL, giảm boilerplate. Hỗ trợ cả method syntax và query syntax — compiler chuyển đổi cả hai thành biểu diễn nội tại giống nhau.',
+    a: 'LINQ (Language Integrated Query) thống nhất cách truy vấn các nguồn dữ liệu khác nhau (collections, database, XML) bằng cú pháp nhất quán. \n\n**Ưu điểm:** type safety tại compile-time, IntelliSense hỗ trợ, query dễ đọc như SQL, giảm boilerplate. Hỗ trợ cả method syntax và query syntax — compiler chuyển đổi cả hai thành biểu diễn nội tại giống nhau.',
     q_en: 'What is LINQ and what are its main advantages?',
-    a_en: 'LINQ (Language Integrated Query) unifies querying diverse data sources (collections, databases, XML) with identical syntax. Advantages: compile-time type safety, IntelliSense support, readable SQL-like queries, reduced boilerplate loops. Supports both method and query syntax — compilers transform both to the same underlying representation.',
+    a_en: 'LINQ (Language Integrated Query) unifies querying diverse data sources (collections, databases, XML) with identical syntax. \n\n**Advantages:** compile-time type safety, IntelliSense support, readable SQL-like queries, reduced boilerplate loops. Supports both method and query syntax — compilers transform both to the same underlying representation.',
   },
   {
     id: 2724,
@@ -404,9 +404,9 @@ export const CSHARP_DATA: QAItem[] = [
     subcategory: 'Async & Threading',
     level: 'advanced',
     q: '`lock` và `ReaderWriterLockSlim` khác nhau như thế nào?',
-    a: '`lock` đối xử bình đẳng với cả reader và writer, serialize toàn bộ access. `ReaderWriterLockSlim` cho phép nhiều reader đồng thời trong khi vẫn đảm bảo exclusive write access. Dùng `lock` khi read và write cân bằng; dùng `ReaderWriterLockSlim` cho workload nặng về đọc. Lưu ý: contention vẫn quan trọng — đo lường trước khi tối ưu.',
+    a: '`lock` đối xử bình đẳng với cả reader và writer, serialize toàn bộ access. `ReaderWriterLockSlim` cho phép nhiều reader đồng thời trong khi vẫn đảm bảo exclusive write access. Dùng `lock` khi read và write cân bằng; dùng `ReaderWriterLockSlim` cho workload nặng về đọc. \n\n**Lưu ý:** contention vẫn quan trọng — đo lường trước khi tối ưu.',
     q_en: 'What is the difference between lock and ReaderWriterLockSlim?',
-    a_en: '`lock` serializes all access equally for readers and writers. `ReaderWriterLockSlim` allows multiple concurrent readers while enforcing exclusive write access. Use `lock` for balanced read/write workloads; use `ReaderWriterLockSlim` for read-heavy scenarios. Note: contention still matters — measure before optimizing.',
+    a_en: '`lock` serializes all access equally for readers and writers. `ReaderWriterLockSlim` allows multiple concurrent readers while enforcing exclusive write access. Use `lock` for balanced read/write workloads; use `ReaderWriterLockSlim` for read-heavy scenarios. \n\n**Note:** contention still matters — measure before optimizing.',
   },
 
   // === ENTITY FRAMEWORK ===
@@ -610,8 +610,8 @@ export const CSHARP_DATA: QAItem[] = [
     subcategory: 'Cơ Bản',
     level: 'intermediate',
     q: 'Primary constructor trong C# 12 là gì và nó giải quyết vấn đề gì?',
-    a: 'Primary constructor cho phép khai báo tham số constructor trực tiếp trên class/struct: `public class Person(string name, int age) {}`. Các tham số này có phạm vi dùng được trong toàn bộ class body. Giúp loại bỏ boilerplate khởi tạo field lặp đi lặp lại, code gọn hơn cho data class. Không chỉ dành cho record — từ C# 12 áp dụng cho mọi class/struct. Lưu ý: compiler không tự tạo backing field trong non-record class, cần tự gán tham số vào field khi cần lưu trữ.',
-    a_en: 'Primary constructors allow declaring constructor parameters directly on class/struct declarations: `public class Person(string name, int age) {}`. Parameters are in scope throughout the class body, eliminating repetitive field initialization boilerplate and improving readability for data classes. Not limited to records — available on all classes/structs since C# 12. Note: compiler does not auto-generate backing fields in non-record classes; assign parameters to fields manually when storage is needed.',
+    a: 'Primary constructor cho phép khai báo tham số constructor trực tiếp trên class/struct: `public class Person(string name, int age) {}`. Các tham số này có phạm vi dùng được trong toàn bộ class body. Giúp loại bỏ boilerplate khởi tạo field lặp đi lặp lại, code gọn hơn cho data class. Không chỉ dành cho record — từ C# 12 áp dụng cho mọi class/struct. \n\n**Lưu ý:** compiler không tự tạo backing field trong non-record class, cần tự gán tham số vào field khi cần lưu trữ.',
+    a_en: 'Primary constructors allow declaring constructor parameters directly on class/struct declarations: `public class Person(string name, int age) {}`. Parameters are in scope throughout the class body, eliminating repetitive field initialization boilerplate and improving readability for data classes. Not limited to records — available on all classes/structs since C# 12. \n\n**Note:** compiler does not auto-generate backing fields in non-record classes; assign parameters to fields manually when storage is needed.',
     q_en: 'What are primary constructors in C# 12 and what problems do they solve?',
   },
   {
@@ -652,8 +652,8 @@ export const CSHARP_DATA: QAItem[] = [
     subcategory: 'ASP.NET',
     level: 'advanced',
     q: 'Native AOT compilation là gì và tại sao quan trọng cho cloud deployment?',
-    a: 'Native AOT biên dịch C# IL thành native machine code tại build time thay vì JIT lúc runtime. Lợi ích: khởi động cực nhanh (<50–100ms (AOT) so với 200–500ms (JIT)), bộ nhớ thấp hơn, không có JIT pause. Publish: `dotnet publish -r linux-x64 -p:PublishAot=true`. Đánh đổi: binary lớn hơn, không dùng reflection tùy tiện (cần trim metadata). Quan trọng với Kubernetes, serverless (Azure Function Apps) và workload nhạy cảm về chi phí. Tính năng production sẵn sàng từ .NET 8+.',
-    a_en: 'Native AOT compiles C# IL to native machine code at build time instead of JIT at runtime. Benefits: fast startup (<50–100ms (AOT) vs 200–500ms (JIT)), lower memory footprint, no JIT pauses. Publish command: `dotnet publish -r linux-x64 -p:PublishAot=true`. Trade-offs: larger binary size, no arbitrary runtime reflection without trimming metadata. Critical for Kubernetes, serverless (Function Apps), and cost-sensitive cloud workloads. Production-ready from .NET 8+.',
+    a: 'Native AOT biên dịch C# IL thành native machine code tại build time thay vì JIT lúc runtime. \n\n**Lợi ích:** khởi động cực nhanh (<50–100ms (AOT) so với 200–500ms (JIT)), bộ nhớ thấp hơn, không có JIT pause. Publish: `dotnet publish -r linux-x64 -p:PublishAot=true`. Đánh đổi: binary lớn hơn, không dùng reflection tùy tiện (cần trim metadata). Quan trọng với Kubernetes, serverless (Azure Function Apps) và workload nhạy cảm về chi phí. Tính năng production sẵn sàng từ .NET 8+.',
+    a_en: 'Native AOT compiles C# IL to native machine code at build time instead of JIT at runtime. \n\n**Benefits:** fast startup (<50–100ms (AOT) vs 200–500ms (JIT)), lower memory footprint, no JIT pauses. Publish command: `dotnet publish -r linux-x64 -p:PublishAot=true`. Trade-offs: larger binary size, no arbitrary runtime reflection without trimming metadata. Critical for Kubernetes, serverless (Function Apps), and cost-sensitive cloud workloads. Production-ready from .NET 8+.',
     q_en: 'What is Native AOT compilation and why is it important for cloud deployments?',
   },
   {
@@ -694,8 +694,8 @@ export const CSHARP_DATA: QAItem[] = [
     subcategory: 'ASP.NET',
     level: 'advanced',
     q: 'CQRS là gì và khi nào nên kết hợp với MediatR?',
-    a: 'CQRS (Command Query Responsibility Segregation) tách biệt thao tác ghi (command) và đọc (query) thành các handler riêng. MediatR implement pattern Mediator — in-process messaging bus. Command thay đổi state; query chỉ trả về dữ liệu. Lợi ích: scale độc lập, DTO khác nhau cho read/write, pipeline middleware cho cross-cutting concerns. Sai lầm phổ biến: dùng CQRS cho CRUD đơn giản — chỉ nên áp dụng khi độ phức tạp thực sự yêu cầu model read/write khác nhau.',
-    a_en: 'CQRS (Command Query Responsibility Segregation) separates write operations (commands) from read operations (queries) into distinct handlers. MediatR implements the Mediator pattern as an in-process messaging bus. Commands modify state; queries return data. Benefits: independent scaling, different DTOs for reads/writes, pipeline middleware for cross-cutting concerns. Common mistake: applying CQRS to simple CRUD — only implement when complexity genuinely requires separate read/write models.',
+    a: 'CQRS (Command Query Responsibility Segregation) tách biệt thao tác ghi (command) và đọc (query) thành các handler riêng. MediatR implement pattern Mediator — in-process messaging bus. Command thay đổi state; query chỉ trả về dữ liệu. \n\n**Lợi ích:** scale độc lập, DTO khác nhau cho read/write, pipeline middleware cho cross-cutting concerns. Sai lầm phổ biến: dùng CQRS cho CRUD đơn giản — chỉ nên áp dụng khi độ phức tạp thực sự yêu cầu model read/write khác nhau.',
+    a_en: 'CQRS (Command Query Responsibility Segregation) separates write operations (commands) from read operations (queries) into distinct handlers. MediatR implements the Mediator pattern as an in-process messaging bus. Commands modify state; queries return data. \n\n**Benefits:** independent scaling, different DTOs for reads/writes, pipeline middleware for cross-cutting concerns. Common mistake: applying CQRS to simple CRUD — only implement when complexity genuinely requires separate read/write models.',
     q_en: 'What is CQRS and when should you implement it with MediatR?',
   },
   {
@@ -724,8 +724,8 @@ export const CSHARP_DATA: QAItem[] = [
     subcategory: 'ASP.NET',
     level: 'advanced',
     q: 'Captive dependency problem trong DI là gì và làm thế nào để tránh?',
-    a: 'Captive dependency xảy ra khi scoped service bị inject vào singleton — service scoped sống mãi cùng singleton, không bao giờ được dispose đúng chu kỳ. Ví dụ: `IUnitOfWork` (scoped) inject vào `AppService` (singleton), UnitOfWork bị "giam" mãi, scope không bao giờ kết thúc. Hậu quả: memory leak, dữ liệu stale, connection pool cạn kiệt. Phòng tránh: không bao giờ inject scoped vào singleton; dùng factory pattern hoặc `IServiceScopeFactory` để tạo scope tạm thời khi cần. Singleton nên stateless.',
-    a_en: 'Captive dependency occurs when a scoped service is injected into a singleton — the scoped service lives as long as the singleton, never disposed at the correct scope boundary. Example: `IUnitOfWork` (scoped) injected into `AppService` (singleton); UnitOfWork is captured and its scope never ends. Consequences: memory leaks, stale data, and connection pool exhaustion. Prevention: never inject scoped services into singletons; use `IServiceScopeFactory` to create temporary scopes when needed. Singletons should be stateless.',
+    a: 'Captive dependency xảy ra khi scoped service bị inject vào singleton — service scoped sống mãi cùng singleton, không bao giờ được dispose đúng chu kỳ. \n\n**Ví dụ:** `IUnitOfWork` (scoped) inject vào `AppService` (singleton), UnitOfWork bị "giam" mãi, scope không bao giờ kết thúc. Hậu quả: memory leak, dữ liệu stale, connection pool cạn kiệt. Phòng tránh: không bao giờ inject scoped vào singleton; dùng factory pattern hoặc `IServiceScopeFactory` để tạo scope tạm thời khi cần. Singleton nên stateless.',
+    a_en: 'Captive dependency occurs when a scoped service is injected into a singleton — the scoped service lives as long as the singleton, never disposed at the correct scope boundary. \n\n**Example:** `IUnitOfWork` (scoped) injected into `AppService` (singleton); UnitOfWork is captured and its scope never ends. Consequences: memory leaks, stale data, and connection pool exhaustion. Prevention: never inject scoped services into singletons; use `IServiceScopeFactory` to create temporary scopes when needed. Singletons should be stateless.',
     q_en: 'What is the captive dependency problem in DI and how do you avoid it?',
   },
 ]

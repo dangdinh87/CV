@@ -38,9 +38,9 @@ export const VUEJS_DATA: QAItem[] = [
     subcategory: 'Core Concepts',
     level: 'beginner',
     q: 'Virtual DOM trong Vue hoạt động thế nào?',
-    a: 'Vue dùng Virtual DOM — một JavaScript object tree đại diện cho DOM thực. Khi state thay đổi: (1) Vue tạo VDOM tree mới (2) Diff algorithm so sánh old và new VDOM (3) Chỉ patch những thay đổi thực sự lên DOM thật. Vue 3 cải thiện với compiler-informed optimizations: biết trước node nào static, dynamic để skip diff. Lợi ích: batch updates, tránh layout thrashing, dễ test.',
+    a: 'Vue dùng Virtual DOM — một JavaScript object tree đại diện cho DOM thực. Khi state thay đổi: (1) Vue tạo VDOM tree mới (2) Diff algorithm so sánh old và new VDOM (3) Chỉ patch những thay đổi thực sự lên DOM thật. Vue 3 cải thiện với compiler-informed optimizations: biết trước node nào static, dynamic để skip diff. \n\n**Lợi ích:** batch updates, tránh layout thrashing, dễ test.',
     q_en: 'How does the Virtual DOM work in Vue?',
-    a_en: 'Vue uses a Virtual DOM — a JavaScript object tree representing the real DOM. When state changes: (1) Vue creates a new VDOM tree (2) Diff algorithm compares old and new VDOM (3) Only patches real differences to the actual DOM. Vue 3 improves with compiler-informed optimizations: it knows which nodes are static vs dynamic and skips unnecessary diffs. Benefits: batched updates, avoids layout thrashing, easier to test.',
+    a_en: 'Vue uses a Virtual DOM — a JavaScript object tree representing the real DOM. When state changes: (1) Vue creates a new VDOM tree (2) Diff algorithm compares old and new VDOM (3) Only patches real differences to the actual DOM. Vue 3 improves with compiler-informed optimizations: it knows which nodes are static vs dynamic and skips unnecessary diffs. \n\n**Benefits:** batched updates, avoids layout thrashing, easier to test.',
   },
   {
     id: 3204,
@@ -173,7 +173,7 @@ const { count, name } = toRefs(state) // preserves reactivity
     subcategory: 'Composition API',
     level: 'intermediate',
     q: 'Composable là gì? So sánh với Mixins?',
-    a: `Composable là function dùng Composition API để đóng gói và tái sử dụng stateful logic. Ví dụ:
+    a: `Composable là function dùng Composition API để đóng gói và tái sử dụng stateful logic. \n\n**Ví dụ:**
 \`\`\`javascript
 // useFetch.js
 export function useFetch(url) {
@@ -185,7 +185,7 @@ export function useFetch(url) {
 \`\`\`
 So với Mixins: (1) Không có naming collision — return value rõ ràng (2) Source rõ ràng — biết data từ đâu (3) Có thể nhận arguments (dynamic) (4) Không có implicit state sharing. Mixins bị deprecated trong Vue 3.`,
     q_en: 'What is a Composable? Compare with Mixins.',
-    a_en: `A composable is a function using Composition API to encapsulate and reuse stateful logic. Example:
+    a_en: `A composable is a function using Composition API to encapsulate and reuse stateful logic. \n\n**Example:**
 \`\`\`javascript
 // useFetch.js
 export function useFetch(url) {
@@ -345,9 +345,9 @@ Use scoped slots when child knows how to get data but parent decides how to rend
     subcategory: 'Component Communication',
     level: 'intermediate',
     q: '`defineExpose` trong `<script setup>` là gì?',
-    a: 'Trong `<script setup>`, component instance mặc định không expose properties ra ngoài (không access được qua template ref). `defineExpose` cho phép explicitly expose các methods/properties để parent gọi qua `ref`. Ví dụ: `defineExpose({ focus, reset })` — parent gọi `childRef.value.focus()`. Dùng khi cần imperative control (focus, scroll, reset form). Pitfall: không expose quá nhiều — tránh biến component thành "god object", ưu tiên event-based communication.',
+    a: 'Trong `<script setup>`, component instance mặc định không expose properties ra ngoài (không access được qua template ref). `defineExpose` cho phép explicitly expose các methods/properties để parent gọi qua `ref`. \n\n**Ví dụ:** `defineExpose({ focus, reset })` — parent gọi `childRef.value.focus()`. Dùng khi cần imperative control (focus, scroll, reset form). Pitfall: không expose quá nhiều — tránh biến component thành "god object", ưu tiên event-based communication.',
     q_en: 'What is `defineExpose` in `<script setup>`?',
-    a_en: 'In `<script setup>`, component instances do not expose properties by default (not accessible via template ref). `defineExpose` explicitly exposes methods/properties for parent access via `ref`. Example: `defineExpose({ focus, reset })` — parent calls `childRef.value.focus()`. Use for imperative control (focus, scroll, form reset). Pitfall: do not over-expose — avoid turning components into "god objects"; prefer event-based communication.',
+    a_en: 'In `<script setup>`, component instances do not expose properties by default (not accessible via template ref). `defineExpose` explicitly exposes methods/properties for parent access via `ref`. \n\n**Example:** `defineExpose({ focus, reset })` — parent calls `childRef.value.focus()`. Use for imperative control (focus, scroll, form reset). Pitfall: do not over-expose — avoid turning components into "god objects"; prefer event-based communication.',
   },
 
   // ── Vue Router ───────────────────────────────────────────────────────────────
@@ -468,9 +468,9 @@ Lazy loading: component is only downloaded when navigating to that route — red
     subcategory: 'Pinia',
     level: 'beginner',
     q: 'Pinia là gì? Tại sao thay thế Vuex?',
-    a: 'Pinia là official state management library cho Vue 3 — thay thế Vuex. Ưu điểm: (1) Composition API-friendly, không cần mutations (2) TypeScript support tốt hơn nhiều (3) Không có nested modules, mỗi store là một module độc lập (4) Bundle nhỏ hơn (~1KB) (5) Devtools support, hot-reload (6) Server-side rendering support. Vuex 5 đã bị dừng phát triển — Pinia là future.',
+    a: 'Pinia là official state management library cho Vue 3 — thay thế Vuex. \n\n**Ưu điểm:** (1) Composition API-friendly, không cần mutations (2) TypeScript support tốt hơn nhiều (3) Không có nested modules, mỗi store là một module độc lập (4) Bundle nhỏ hơn (~1KB) (5) Devtools support, hot-reload (6) Server-side rendering support. Vuex 5 đã bị dừng phát triển — Pinia là future.',
     q_en: 'What is Pinia? Why replace Vuex?',
-    a_en: 'Pinia is the official state management library for Vue 3 — replacing Vuex. Advantages: (1) Composition API-friendly, no mutations needed (2) Significantly better TypeScript support (3) No nested modules — each store is an independent module (4) Smaller bundle (~1KB) (5) Devtools support, hot-reload (6) SSR support. Vuex 5 development was halted — Pinia is the future.',
+    a_en: 'Pinia is the official state management library for Vue 3 — replacing Vuex. \n\n**Advantages:** (1) Composition API-friendly, no mutations needed (2) Significantly better TypeScript support (3) No nested modules — each store is an independent module (4) Smaller bundle (~1KB) (5) Devtools support, hot-reload (6) SSR support. Vuex 5 development was halted — Pinia is the future.',
   },
   {
     id: 3224,
@@ -740,9 +740,9 @@ Combine with \`<Suspense>\` to handle loading state elegantly.`,
     subcategory: 'Performance',
     level: 'intermediate',
     q: 'Fragments trong Vue 3?',
-    a: 'Vue 3 hỗ trợ multiple root nodes trong template (fragments) — Vue 2 yêu cầu single root. Điều này giúp: (1) Không cần wrapper `<div>` không cần thiết (2) Cấu trúc DOM sạch hơn (3) Tránh CSS side effects từ wrapper. Ví dụ: `<template><header/><main/><footer/></template>` hoạt động trong Vue 3. Pitfall: attributes inheritance (fallthrough) với multiple root nodes cần `v-bind="$attrs"` explicit để control nơi attrs được apply.',
+    a: 'Vue 3 hỗ trợ multiple root nodes trong template (fragments) — Vue 2 yêu cầu single root. Điều này giúp: (1) Không cần wrapper `<div>` không cần thiết (2) Cấu trúc DOM sạch hơn (3) Tránh CSS side effects từ wrapper. \n\n**Ví dụ:** `<template><header/><main/><footer/></template>` hoạt động trong Vue 3. Pitfall: attributes inheritance (fallthrough) với multiple root nodes cần `v-bind="$attrs"` explicit để control nơi attrs được apply.',
     q_en: 'Fragments in Vue 3?',
-    a_en: 'Vue 3 supports multiple root nodes in templates (fragments) — Vue 2 required a single root. Benefits: (1) No unnecessary wrapper `<div>` elements (2) Cleaner DOM structure (3) Avoids CSS side effects from wrappers. Example: `<template><header/><main/><footer/></template>` works in Vue 3. Pitfall: attribute inheritance (fallthrough) with multiple root nodes requires explicit `v-bind="$attrs"` to control where attrs are applied.',
+    a_en: 'Vue 3 supports multiple root nodes in templates (fragments) — Vue 2 required a single root. \n\n**Benefits:** (1) No unnecessary wrapper `<div>` elements (2) Cleaner DOM structure (3) Avoids CSS side effects from wrappers. \n\n**Example:** `<template><header/><main/><footer/></template>` works in Vue 3. Pitfall: attribute inheritance (fallthrough) with multiple root nodes requires explicit `v-bind="$attrs"` to control where attrs are applied.',
   },
 
   // ── Advanced Topics ───────────────────────────────────────────────────────────
@@ -816,9 +816,9 @@ Directive hooks: \`created\`, \`beforeMount\`, \`mounted\`, \`beforeUpdate\`, \`
     subcategory: 'Advanced',
     level: 'advanced',
     q: 'SSR với Nuxt.js — Vue SSR hoạt động thế nào?',
-    a: 'Nuxt.js là meta-framework cho Vue với SSR/SSG built-in. SSR flow: (1) Request đến server (2) Nuxt render Vue app thành HTML string (3) HTML được gửi cho client (4) Client hydration — Vue attach event listeners lên server-rendered HTML. Lợi ích: SEO tốt hơn, faster First Contentful Paint. Pitfall: (1) `window`/`document` không có ở server — wrap trong `onMounted` hoặc check `process.client` (2) State mismatch giữa server và client gây hydration error (3) `onMounted` không chạy server-side.',
+    a: 'Nuxt.js là meta-framework cho Vue với SSR/SSG built-in. SSR flow: (1) Request đến server (2) Nuxt render Vue app thành HTML string (3) HTML được gửi cho client (4) Client hydration — Vue attach event listeners lên server-rendered HTML. \n\n**Lợi ích:** SEO tốt hơn, faster First Contentful Paint. Pitfall: (1) `window`/`document` không có ở server — wrap trong `onMounted` hoặc check `process.client` (2) State mismatch giữa server và client gây hydration error (3) `onMounted` không chạy server-side.',
     q_en: 'SSR with Nuxt.js — how does Vue SSR work?',
-    a_en: 'Nuxt.js is the meta-framework for Vue with built-in SSR/SSG. SSR flow: (1) Request hits server (2) Nuxt renders Vue app to HTML string (3) HTML sent to client (4) Client hydration — Vue attaches event listeners to server-rendered HTML. Benefits: better SEO, faster First Contentful Paint. Pitfall: (1) `window`/`document` unavailable on server — wrap in `onMounted` or check `process.client` (2) Server/client state mismatch causes hydration errors (3) `onMounted` does not run server-side.',
+    a_en: 'Nuxt.js is the meta-framework for Vue with built-in SSR/SSG. SSR flow: (1) Request hits server (2) Nuxt renders Vue app to HTML string (3) HTML sent to client (4) Client hydration — Vue attaches event listeners to server-rendered HTML. \n\n**Benefits:** better SEO, faster First Contentful Paint. Pitfall: (1) `window`/`document` unavailable on server — wrap in `onMounted` or check `process.client` (2) Server/client state mismatch causes hydration errors (3) `onMounted` does not run server-side.',
   },
   {
     id: 3236,
@@ -1056,9 +1056,9 @@ Use when: (1) Need to read DOM after state update (2) Focus an element after v-i
     subcategory: 'Advanced',
     level: 'intermediate',
     q: 'VueUse là gì? Các composables phổ biến?',
-    a: 'VueUse là collection composables utility dùng Vue Composition API — hơn 200 composables sẵn có. Phổ biến: `useMouse()` (track mouse position), `useLocalStorage()` (reactive localStorage), `useEventListener()` (auto cleanup listener), `useFetch()` (fetch với loading/error state), `useIntersectionObserver()` (lazy load), `useDark()` (dark mode toggle), `useDebounce()` / `useThrottle()`, `useBreakpoints()` (responsive), `onClickOutside()`. Lợi ích: tránh viết boilerplate, tự cleanup trong `onUnmounted`, TypeScript support đầy đủ.',
+    a: 'VueUse là collection composables utility dùng Vue Composition API — hơn 200 composables sẵn có. Phổ biến: `useMouse()` (track mouse position), `useLocalStorage()` (reactive localStorage), `useEventListener()` (auto cleanup listener), `useFetch()` (fetch với loading/error state), `useIntersectionObserver()` (lazy load), `useDark()` (dark mode toggle), `useDebounce()` / `useThrottle()`, `useBreakpoints()` (responsive), `onClickOutside()`. \n\n**Lợi ích:** tránh viết boilerplate, tự cleanup trong `onUnmounted`, TypeScript support đầy đủ.',
     q_en: 'What is VueUse? Popular composables?',
-    a_en: 'VueUse is a collection of utility composables built with Vue Composition API — 200+ composables available. Popular: `useMouse()` (track mouse position), `useLocalStorage()` (reactive localStorage), `useEventListener()` (auto-cleanup listener), `useFetch()` (fetch with loading/error state), `useIntersectionObserver()` (lazy loading), `useDark()` (dark mode toggle), `useDebounce()` / `useThrottle()`, `useBreakpoints()` (responsive), `onClickOutside()`. Benefits: avoids boilerplate, auto-cleanup in `onUnmounted`, full TypeScript support.',
+    a_en: 'VueUse is a collection of utility composables built with Vue Composition API — 200+ composables available. Popular: `useMouse()` (track mouse position), `useLocalStorage()` (reactive localStorage), `useEventListener()` (auto-cleanup listener), `useFetch()` (fetch with loading/error state), `useIntersectionObserver()` (lazy loading), `useDark()` (dark mode toggle), `useDebounce()` / `useThrottle()`, `useBreakpoints()` (responsive), `onClickOutside()`. \n\n**Benefits:** avoids boilerplate, auto-cleanup in `onUnmounted`, full TypeScript support.',
   },
   {
     id: 3243,
