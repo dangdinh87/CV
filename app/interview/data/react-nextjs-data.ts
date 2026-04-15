@@ -3,24 +3,24 @@ import type { QAItem } from '../interview-data'
 export const REACT_NEXTJS_DATA: QAItem[] = [
   // === React - JSX & Cơ Bản (401-415) ===
   { id: 401, category: "React", subcategory: "JSX & Cơ Bản", level: "beginner", q: "JSX là gì và tại sao React sử dụng nó?", a: "JSX (JavaScript XML) là cú pháp mở rộng của JavaScript cho phép viết HTML bên trong JavaScript. React sử dụng JSX vì nó giúp mô tả UI trực quan hơn, kết hợp logic và markup trong cùng một file component. Babel transpile JSX thành các lời gọi React.createElement() trước khi chạy trên trình duyệt.", q_en: "What is JSX and why does React use it?", a_en: "JSX (JavaScript XML) is a syntax extension for JavaScript that lets you write HTML-like markup inside JavaScript. React uses JSX because it makes describing UI more intuitive by combining logic and markup in the same component file. Babel transpiles JSX into React.createElement() calls before the code runs in the browser." },
-  { id: 402, category: "React", subcategory: "JSX & Cơ Bản", level: "beginner", q: "JSX được transpile thành gì? Hãy cho ví dụ minh họa.", a: "JSX được Babel transpile thành React.createElement(type, props, ...children). Ví dụ: `<h1 className='title'>Hello</h1>` trở thành `React.createElement('h1', { className: 'title' }, 'Hello')`. Kể từ React 17, có thể sử dụng JSX mà không cần import React nhờ transform tự động.", q_en: "What does JSX compile to? Give an example.", a_en: "Babel transpiles JSX into React.createElement(type, props, ...children) calls. For example, `<h1 className='title'>Hello</h1>` becomes `React.createElement('h1', { className: 'title' }, 'Hello')`. Since React 17, you can use JSX without importing React thanks to the automatic JSX transform." },
+  { id: 402, category: "React", subcategory: "JSX & Cơ Bản", level: "beginner", q: "JSX được transpile thành gì? Hãy cho ví dụ minh họa.", a: "JSX được Babel transpile thành React.createElement(type, props, ...children). \n\n**Ví dụ:** `<h1 className='title'>Hello</h1>` trở thành `React.createElement('h1', { className: 'title' }, 'Hello')`. Kể từ React 17, có thể sử dụng JSX mà không cần import React nhờ transform tự động.", q_en: "What does JSX compile to? Give an example.", a_en: "Babel transpiles JSX into React.createElement(type, props, ...children) calls. For example, `<h1 className='title'>Hello</h1>` becomes `React.createElement('h1', { className: 'title' }, 'Hello')`. Since React 17, you can use JSX without importing React thanks to the automatic JSX transform." },
   { id: 403, category: "React", subcategory: "JSX & Cơ Bản", level: "beginner", q: "Conditional rendering trong React được thực hiện như thế nào?", a: "Có nhiều cách: toán tử ba ngôi `isLoggedIn ? <Dashboard /> : <Login />`, toán tử && `isLoading && <Spinner />`, hoặc if/else bên ngoài return. Trong thực tế, ternary dùng cho toggle giữa 2 component, && dùng để hiển thị/ẩn một component. Cần tránh `count && <List />` vì nếu count=0, React render số 0 thay vì không render gì.", q_en: "How is conditional rendering handled in React?", a_en: "There are several approaches: the ternary operator `isLoggedIn ? <Dashboard /> : <Login />`, the logical AND `isLoading && <Spinner />`, or an if/else block outside the return statement. In practice, ternary is used to toggle between two components, and && is used to show or hide a single component. Avoid `count && <List />` because if count is 0, React renders the number 0 instead of nothing." },
   { id: 404, category: "React", subcategory: "JSX & Cơ Bản", level: "beginner", q: "React Fragment là gì và khi nào nên sử dụng?", a: "React Fragment (`<React.Fragment>` hoặc `<>`) cho phép nhóm nhiều phần tử mà không thêm node DOM thừa. Sử dụng khi component cần trả về nhiều phần tử cùng cấp, ví dụ trong table rows hay danh sách. Cú pháp rút gọn `<>...</>` không hỗ trợ thuộc tính key, cần dùng `<React.Fragment key={id}>` khi render danh sách.", q_en: "What is a React Fragment and when should you use it?", a_en: "React Fragment (`<React.Fragment>` or `<>`) lets you group multiple elements without adding an extra DOM node. Use it when a component needs to return several sibling elements, such as table rows or list items. The shorthand `<>...</>` does not support the key attribute, so use `<React.Fragment key={id}>` when rendering lists." },
   { id: 405, category: "React", subcategory: "JSX & Cơ Bản", level: "beginner", q: "Key prop trong React là gì và tại sao nó quan trọng?", a: "Key là prop đặc biệt giúp React xác định phần tử nào trong danh sách đã thay đổi, được thêm hoặc bị xóa. React sử dụng key để tối ưu hóa quá trình reconciliation, tránh re-render không cần thiết. Key phải là chuỗi hoặc số duy nhất trong cùng cấp độ, không nên dùng index khi danh sách có thể thay đổi thứ tự.", q_en: "What is the key prop in React and why does it matter?", a_en: "The key prop is a special attribute that helps React identify which items in a list have changed, been added, or been removed. React uses keys to optimize the reconciliation process and avoid unnecessary re-renders. Keys must be unique strings or numbers among siblings; avoid using the array index as a key when the list order can change." },
   { id: 406, category: "React", subcategory: "JSX & Cơ Bản", level: "beginner", q: "Tại sao phải dùng className thay vì class trong JSX?", a: "JSX được biên dịch thành JavaScript, và `class` là từ khóa dành riêng trong JS để khai báo lớp ES6. Do đó React dùng `className` để ánh xạ đến thuộc tính `class` của DOM, tránh xung đột cú pháp. Tương tự, thuộc tính `for` của label được thay bằng `htmlFor`. Lỗi thường gặp khi copy HTML sang JSX là quên đổi các thuộc tính này.", q_en: "Why must you use className instead of class in JSX?", a_en: "JSX compiles to JavaScript, and `class` is a reserved keyword in JS for ES6 class declarations. React therefore uses `className` to map to the DOM `class` attribute and avoid a syntax conflict. Similarly, the label `for` attribute becomes `htmlFor`. A common mistake when copying HTML into JSX is forgetting to rename these attributes." },
-  { id: 407, category: "React", subcategory: "JSX & Cơ Bản", level: "beginner", q: "Làm thế nào để render danh sách trong JSX?", a: "Dùng Array.map() để chuyển đổi mảng dữ liệu thành mảng JSX elements. Mỗi phần tử cần có thuộc tính key duy nhất để React theo dõi. Ví dụ: `{items.map(item => <li key={item.id}>{item.name}</li>)}`. Tránh dùng index làm key nếu thứ tự danh sách có thể thay đổi.", q_en: "How do you render a list in JSX?", a_en: "Use Array.map() to transform a data array into an array of JSX elements. Each element needs a unique key attribute for React to track it. Example: `{items.map(item => <li key={item.id}>{item.name}</li>)}`. Avoid using the array index as a key if the list order can change." },
-  { id: 408, category: "React", subcategory: "JSX & Cơ Bản", level: "beginner", q: "Sự khác nhau giữa biểu thức và câu lệnh trong JSX là gì?", a: "JSX chỉ chấp nhận biểu thức (expressions) trong `{}`, không nhận câu lệnh (statements) như if, for, while vì JSX được transpile thành lời gọi hàm. Ví dụ: `{items.map(i => <li key={i.id}>{i.name}</li>)}` hợp lệ, nhưng `{for(...)}` thì không. Dùng ternary cho điều kiện, map/filter để lặp. Nếu logic phức tạp, tính toán bên ngoài return rồi dùng biến trong JSX.", q_en: "What is the difference between expressions and statements in JSX?", a_en: "JSX only accepts expressions inside `{}`, not statements like if, for, or while — because JSX compiles to function calls that must return a value. For example, `{items.map(i => <li key={i.id}>{i.name}</li>)}` is valid, but `{for(...)}` is not. Use the ternary operator for conditions and map/filter for iteration. For complex logic, compute values before the return and use variables in JSX." },
-  { id: 409, category: "React", subcategory: "JSX & Cơ Bản", level: "intermediate", q: "Inline styles trong JSX hoạt động như thế nào?", a: "Trong JSX, inline style nhận vào một object JavaScript với camelCase property thay vì kebab-case CSS. Ví dụ: `style={{ backgroundColor: 'red', fontSize: '16px' }}`. Giá trị số tự động được thêm đơn vị px, nhưng một số thuộc tính như zIndex, opacity nhận số thuần. Double braces là do brace ngoài là JSX expression, brace trong là object.", q_en: "How do inline styles work in JSX?", a_en: "In JSX, the style attribute takes a JavaScript object with camelCase property names instead of CSS kebab-case. Example: `style={{ backgroundColor: 'red', fontSize: '16px' }}`. Numeric values automatically get a px unit appended, though some properties like zIndex and opacity accept plain numbers. The double braces occur because the outer brace is the JSX expression container and the inner brace is the object literal." },
+  { id: 407, category: "React", subcategory: "JSX & Cơ Bản", level: "beginner", q: "Làm thế nào để render danh sách trong JSX?", a: "Dùng Array.map() để chuyển đổi mảng dữ liệu thành mảng JSX elements. Mỗi phần tử cần có thuộc tính key duy nhất để React theo dõi. \n\n**Ví dụ:** `{items.map(item => <li key={item.id}>{item.name}</li>)}`. Tránh dùng index làm key nếu thứ tự danh sách có thể thay đổi.", q_en: "How do you render a list in JSX?", a_en: "Use Array.map() to transform a data array into an array of JSX elements. Each element needs a unique key attribute for React to track it. \n\n**Example:** `{items.map(item => <li key={item.id}>{item.name}</li>)}`. Avoid using the array index as a key if the list order can change." },
+  { id: 408, category: "React", subcategory: "JSX & Cơ Bản", level: "beginner", q: "Sự khác nhau giữa biểu thức và câu lệnh trong JSX là gì?", a: "JSX chỉ chấp nhận biểu thức (expressions) trong `{}`, không nhận câu lệnh (statements) như if, for, while vì JSX được transpile thành lời gọi hàm. \n\n**Ví dụ:** `{items.map(i => <li key={i.id}>{i.name}</li>)}` hợp lệ, nhưng `{for(...)}` thì không. Dùng ternary cho điều kiện, map/filter để lặp. Nếu logic phức tạp, tính toán bên ngoài return rồi dùng biến trong JSX.", q_en: "What is the difference between expressions and statements in JSX?", a_en: "JSX only accepts expressions inside `{}`, not statements like if, for, or while — because JSX compiles to function calls that must return a value. For example, `{items.map(i => <li key={i.id}>{i.name}</li>)}` is valid, but `{for(...)}` is not. Use the ternary operator for conditions and map/filter for iteration. For complex logic, compute values before the return and use variables in JSX." },
+  { id: 409, category: "React", subcategory: "JSX & Cơ Bản", level: "intermediate", q: "Inline styles trong JSX hoạt động như thế nào?", a: "Trong JSX, inline style nhận vào một object JavaScript với camelCase property thay vì kebab-case CSS. \n\n**Ví dụ:** `style={{ backgroundColor: 'red', fontSize: '16px' }}`. Giá trị số tự động được thêm đơn vị px, nhưng một số thuộc tính như zIndex, opacity nhận số thuần. Double braces là do brace ngoài là JSX expression, brace trong là object.", q_en: "How do inline styles work in JSX?", a_en: "In JSX, the style attribute takes a JavaScript object with camelCase property names instead of CSS kebab-case. \n\n**Example:** `style={{ backgroundColor: 'red', fontSize: '16px' }}`. Numeric values automatically get a px unit appended, though some properties like zIndex and opacity accept plain numbers. The double braces occur because the outer brace is the JSX expression container and the inner brace is the object literal." },
   { id: 410, category: "React", subcategory: "JSX & Cơ Bản", level: "beginner", q: "Event handling trong JSX khác gì so với HTML thông thường?", a: "Trong JSX, tên event dùng camelCase (onClick, onChange, onSubmit) thay vì lowercase. Handler là function reference, không phải string. Để ngăn hành vi mặc định, gọi e.preventDefault() trong handler thay vì return false. React sử dụng synthetic events để đảm bảo tính nhất quán giữa các trình duyệt.", q_en: "How does event handling in JSX differ from standard HTML?", a_en: "In JSX, event names use camelCase (onClick, onChange, onSubmit) instead of lowercase. The handler is a function reference, not a string. To prevent default browser behavior, call e.preventDefault() inside the handler rather than returning false. React wraps native events in SyntheticEvents to ensure cross-browser consistency." },
   { id: 411, category: "React", subcategory: "JSX & Cơ Bản", level: "intermediate", q: "Self-closing tags trong JSX được dùng như thế nào?", a: "Mọi JSX element đều phải được đóng — kể cả các thẻ HTML vốn tự đóng trong HTML5. Các thẻ không có nội dung con dùng self-closing syntax: `<br />`, `<img src='...' />`, `<MyComponent />`. Đây là yêu cầu bắt buộc, khác HTML5 nơi `<br>` không cần dấu đóng. Lỗi phổ biến khi chuyển template HTML sang JSX là quên thêm dấu `/` trước `>`.", q_en: "How are self-closing tags used in JSX?", a_en: "Every JSX element must be explicitly closed, including tags that are self-closing in HTML5. Elements with no children use the self-closing syntax: `<br />`, `<img src='...' />`, `<MyComponent />`. This is a strict requirement in JSX, unlike HTML5 where `<br>` needs no closing slash. A common mistake when converting HTML templates to JSX is forgetting to add the `/` before `>`." },
-  { id: 412, category: "React", subcategory: "JSX & Cơ Bản", level: "beginner", q: "Spread operator trong JSX props được dùng như thế nào?", a: "Dùng `{...props}` để truyền tất cả thuộc tính của một object xuống component con. Ví dụ: `<Button {...buttonProps} />` tương đương với liệt kê từng prop riêng lẻ. Hữu ích khi cần forward props nhưng cần cẩn thận vì có thể truyền props không mong muốn.", q_en: "How is the spread operator used with JSX props?", a_en: "Use `{...props}` to pass all properties of an object down to a child component. For example, `<Button {...buttonProps} />` is equivalent to listing each prop individually. This is useful for forwarding props, but be careful since it can pass unintended props to the component." },
-  { id: 413, category: "React", subcategory: "JSX & Cơ Bản", level: "intermediate", q: "JSX có hỗ trợ comment không? Cú pháp như thế nào?", a: "JSX hỗ trợ comment dùng cú pháp `{/* nội dung comment */}` bên trong markup. Comment JS thông thường `//` hay `/* */` không dùng được trực tiếp giữa các JSX tags vì chúng không phải expressions. Ví dụ: `<div>{/* TODO: thêm loading */}<Button /></div>`. Lỗi hay gặp là dùng `// comment` ngay bên trong JSX khiến Babel báo lỗi parse.", q_en: "Does JSX support comments? What is the syntax?", a_en: "JSX supports comments using the `{/* comment content */}` syntax inside markup. Regular JS comments (`//` or `/* */`) cannot be used directly between JSX tags because they are not expressions. Example: `<div>{/* TODO: add loading */}<Button /></div>`. A frequent mistake is using `// comment` directly inside JSX, which causes a Babel parse error." },
+  { id: 412, category: "React", subcategory: "JSX & Cơ Bản", level: "beginner", q: "Spread operator trong JSX props được dùng như thế nào?", a: "Dùng `{...props}` để truyền tất cả thuộc tính của một object xuống component con. \n\n**Ví dụ:** `<Button {...buttonProps} />` tương đương với liệt kê từng prop riêng lẻ. Hữu ích khi cần forward props nhưng cần cẩn thận vì có thể truyền props không mong muốn.", q_en: "How is the spread operator used with JSX props?", a_en: "Use `{...props}` to pass all properties of an object down to a child component. For example, `<Button {...buttonProps} />` is equivalent to listing each prop individually. This is useful for forwarding props, but be careful since it can pass unintended props to the component." },
+  { id: 413, category: "React", subcategory: "JSX & Cơ Bản", level: "intermediate", q: "JSX có hỗ trợ comment không? Cú pháp như thế nào?", a: "JSX hỗ trợ comment dùng cú pháp `{/* nội dung comment */}` bên trong markup. Comment JS thông thường `//` hay `/* */` không dùng được trực tiếp giữa các JSX tags vì chúng không phải expressions. \n\n**Ví dụ:** `<div>{/* TODO: thêm loading */}<Button /></div>`. Lỗi hay gặp là dùng `// comment` ngay bên trong JSX khiến Babel báo lỗi parse.", q_en: "Does JSX support comments? What is the syntax?", a_en: "JSX supports comments using the `{/* comment content */}` syntax inside markup. Regular JS comments (`//` or `/* */`) cannot be used directly between JSX tags because they are not expressions. \n\n**Example:** `<div>{/* TODO: add loading */}<Button /></div>`. A frequent mistake is using `// comment` directly inside JSX, which causes a Babel parse error." },
   { id: 414, category: "React", subcategory: "JSX & Cơ Bản", level: "beginner", q: "Sự khác biệt giữa null, undefined, false và chuỗi rỗng khi render trong JSX là gì?", a: "React bỏ qua và không render null, undefined, false — đây là cơ chế cho conditional rendering. Chuỗi rỗng `''` cũng không hiển thị gì. Tuy nhiên số `0` sẽ được render thành chữ số 0 trên màn hình — đây là lỗi hay gặp khi viết `{count && <List />}` và count bằng 0. Cách fix: dùng ternary `{count > 0 ? <List /> : null}` để luôn trả về boolean hoặc null.", q_en: "What is the difference between null, undefined, false, and an empty string when rendering in JSX?", a_en: "React ignores and does not render null, undefined, or false — this is what enables conditional rendering. An empty string `''` also renders nothing visible. However, the number `0` will actually render as the character 0 on screen — a common bug when writing `{count && <List />}` and count equals 0. The fix is to use a ternary: `{count > 0 ? <List /> : null}` so the expression always resolves to a boolean or null." },
   { id: 415, category: "React", subcategory: "JSX & Cơ Bản", level: "intermediate", q: "Tại sao mỗi component React chỉ có thể return một element duy nhất ở cấp cao nhất?", a: "Vì JSX được transpile thành một lời gọi hàm React.createElement() đơn, và hàm chỉ có thể return một giá trị. Để return nhiều element, dùng Fragment (`<>...</>`) hoặc bọc trong một wrapper element như `<div>`. Fragment là lựa chọn tốt hơn vì không thêm node DOM không cần thiết.", q_en: "Why can a React component only return a single root element?", a_en: "Because JSX compiles to a single React.createElement() call, and a function can only return one value. To return multiple elements, wrap them in a Fragment (`<>...</>`) or a container element like `<div>`. Fragments are the better choice because they do not add unnecessary DOM nodes." },
 
   // === React - Components (416-430) ===
   { id: 416, category: "React", subcategory: "Components", level: "beginner", q: "Sự khác nhau giữa Function Component và Class Component là gì?", a: "Function Component là hàm JavaScript trả về JSX, đơn giản và ngắn gọn hơn. Class Component kế thừa từ React.Component, có lifecycle methods và this context. Kể từ React 16.8 với Hooks, Function Component có thể làm mọi thứ Class Component làm được và được khuyến khích sử dụng. Class Component vẫn tồn tại nhưng không còn được khuyến nghị cho code mới.", q_en: "What is the difference between a Function Component and a Class Component?", a_en: "A Function Component is a plain JavaScript function that returns JSX — simpler and more concise. A Class Component extends React.Component and has lifecycle methods and a this context. Since React 16.8 introduced Hooks, Function Components can do everything Class Components can, and are the recommended approach. Class Components still work but are no longer recommended for new code." },
-  { id: 417, category: "React", subcategory: "Components", level: "beginner", q: "props.children là gì và cách sử dụng như thế nào?", a: "props.children là nội dung được truyền giữa thẻ mở và đóng của component. Ví dụ: `<Card><p>Nội dung</p></Card>` thì Card nhận `<p>Nội dung</p>` qua props.children và render bằng `{props.children}`. Dùng để tạo wrapper component linh hoạt như Card, Modal, Layout mà không cần biết trước nội dung bên trong. Nếu không truyền gì, children là undefined — nên khai báo defaultProps hoặc kiểm tra trước khi render.", q_en: "What is props.children and how do you use it?", a_en: "props.children is the content passed between a component's opening and closing tags. For example, in `<Card><p>Content</p></Card>`, the Card component receives `<p>Content</p>` via props.children and renders it with `{props.children}`. Use it to build flexible wrapper components like Card, Modal, or Layout without needing to know the inner content in advance. If nothing is passed, children is undefined — check for it or provide a default before rendering." },
+  { id: 417, category: "React", subcategory: "Components", level: "beginner", q: "props.children là gì và cách sử dụng như thế nào?", a: "props.children là nội dung được truyền giữa thẻ mở và đóng của component. \n\n**Ví dụ:** `<Card><p>Nội dung</p></Card>` thì Card nhận `<p>Nội dung</p>` qua props.children và render bằng `{props.children}`. Dùng để tạo wrapper component linh hoạt như Card, Modal, Layout mà không cần biết trước nội dung bên trong. Nếu không truyền gì, children là undefined — nên khai báo defaultProps hoặc kiểm tra trước khi render.", q_en: "What is props.children and how do you use it?", a_en: "props.children is the content passed between a component's opening and closing tags. For example, in `<Card><p>Content</p></Card>`, the Card component receives `<p>Content</p>` via props.children and renders it with `{props.children}`. Use it to build flexible wrapper components like Card, Modal, or Layout without needing to know the inner content in advance. If nothing is passed, children is undefined — check for it or provide a default before rendering." },
   { id: 418, category: "React", subcategory: "Components", level: "beginner", q: "Default props trong React được khai báo như thế nào?", a: "Trong Function Component, khai báo default values trực tiếp trong destructuring: `function Button({ color = 'blue', size = 'md' }) {}` — cách ngắn gọn và được khuyến nghị. Trong Class Component dùng `Button.defaultProps = { color: 'blue' }` sau khai báo class. Với TypeScript, định nghĩa interface cho props rồi đặt default trong destructuring giúp vừa type-safe vừa có default. defaultProps trong function component đã bị deprecate từ React 18.3.", q_en: "How do you declare default props in React?", a_en: "In a Function Component, declare default values directly in the destructuring parameters: `function Button({ color = 'blue', size = 'md' }) {}` — this is the concise, recommended approach. In a Class Component, use `Button.defaultProps = { color: 'blue' }` after the class declaration. With TypeScript, define an interface for props and set defaults in destructuring for both type safety and default values. Note that defaultProps on function components was deprecated in React 18.3." },
   { id: 419, category: "React", subcategory: "Components", level: "intermediate", q: "Pure Component là gì và nó khác gì Component thông thường?", a: "Pure Component trong Class Component là React.PureComponent, tự động implement shouldComponentUpdate với shallow comparison của props và state. Trong Function Component, tương đương là React.memo() wrap component. Hữu ích để tránh re-render không cần thiết khi props không thay đổi. Shallow comparison có thể bỏ qua thay đổi của nested objects.", q_en: "What is a Pure Component and how does it differ from a regular Component?", a_en: "In class-based React, a Pure Component is React.PureComponent, which automatically implements shouldComponentUpdate with a shallow comparison of props and state. The Function Component equivalent is wrapping with React.memo(). Both are useful for preventing unnecessary re-renders when props have not actually changed. Be aware that shallow comparison can miss changes inside nested objects." },
   { id: 420, category: "React", subcategory: "Components", level: "beginner", q: "Controlled Component là gì trong React?", a: "Controlled Component là component mà giá trị của form element (input, textarea, select) được kiểm soát bởi React state. Mỗi thay đổi của input gọi onChange handler để cập nhật state, và value của input được bind với state. Đây là cách được khuyến nghị vì cho phép validate và xử lý dữ liệu trước khi submit.", q_en: "What is a Controlled Component in React?", a_en: "A Controlled Component is one where the value of a form element (input, textarea, select) is fully controlled by React state. Every change in the input triggers an onChange handler that updates state, and the input's value is bound back to that state. This is the recommended approach because it lets you validate and transform data before submission." },
@@ -28,16 +28,68 @@ export const REACT_NEXTJS_DATA: QAItem[] = [
   { id: 422, category: "React", subcategory: "Components", level: "beginner", q: "Tên component React phải bắt đầu bằng chữ hoa. Tại sao vậy?", a: "React dùng quy ước này để phân biệt DOM elements (lowercase) với React components (uppercase). `<div>` được render như HTML element, `<Button>` được render như custom React component. Nếu component bắt đầu bằng chữ thường, React sẽ coi đó là DOM element và tìm kiếm trong HTML spec.", q_en: "React component names must start with a capital letter. Why?", a_en: "React uses this convention to distinguish native DOM elements (lowercase) from custom React components (uppercase). `<div>` is rendered as an HTML element, while `<Button>` is rendered as a custom React component. If a component name starts with a lowercase letter, React treats it as a DOM element and looks it up in the HTML spec." },
   { id: 423, category: "React", subcategory: "Components", level: "intermediate", q: "Displayname trong React component dùng để làm gì?", a: "displayName là thuộc tính string dùng để đặt tên hiển thị cho component trong React DevTools. Mặc định React dùng tên hàm, nhưng với HOC hay arrow function ẩn danh, tên sẽ hiện là 'Anonymous' gây khó debug. Gán tường minh: `withAuth.displayName = 'withAuth(Button)'` để DevTools hiển thị đúng tên. Rất hữu ích khi trace re-render trong Profiler tab.", q_en: "What is displayName used for in a React component?", a_en: "displayName is a string property used to set a component's label in React DevTools. By default React uses the function name, but with HOCs or anonymous arrow functions the name shows as 'Anonymous', making debugging hard. Assign it explicitly: `withAuth.displayName = 'withAuth(Button)'` so DevTools shows the correct name. This is especially helpful when tracing re-renders in the Profiler tab." },
   { id: 424, category: "React", subcategory: "Components", level: "intermediate", q: "Sự khác nhau giữa React.Component và React.PureComponent là gì?", a: "React.Component không có bất kỳ tối ưu hóa re-render nào mặc định. React.PureComponent tự động implement shouldComponentUpdate với shallow comparison props và state, ngăn re-render khi props/state không thay đổi. Tuy nhiên, PureComponent có thể bỏ sót update nếu dùng mutate thay vì immutable update.", q_en: "What is the difference between React.Component and React.PureComponent?", a_en: "React.Component has no re-render optimization by default — it re-renders on every setState or parent render. React.PureComponent automatically implements shouldComponentUpdate with a shallow comparison of props and state, preventing re-renders when nothing has changed. However, PureComponent can miss updates if you mutate objects directly instead of using immutable updates." },
-  { id: 425, category: "React", subcategory: "Components", level: "advanced", q: "Forwardref trong React là gì và khi nào cần dùng?", a: "React.forwardRef cho phép component nhận ref từ parent và forward xuống DOM element hoặc component con bên trong. Cần thiết khi muốn parent có thể trực tiếp access DOM node của child, ví dụ để focus input hay measure element. Cú pháp: `const Input = React.forwardRef((props, ref) => <input ref={ref} {...props} />)`.", q_en: "What is forwardRef in React and when do you need it?", a_en: "React.forwardRef lets a component receive a ref from its parent and pass it down to a DOM element or inner component. It is needed when the parent must directly access a child's DOM node — for example, to focus an input or measure an element. Syntax: `const Input = React.forwardRef((props, ref) => <input ref={ref} {...props} />)`." },
-  { id: 426, category: "React", subcategory: "Components", level: "beginner", q: "Stateless và stateful component khác nhau như thế nào?", a: "Stateless (presentational) component chỉ nhận props và render UI thuần túy, không giữ state nội bộ — dễ test vì output chỉ phụ thuộc vào input. Ví dụ: `<Button label='Save' onClick={fn} />`. Stateful (container) component quản lý state và business logic, thường fetch data và pass xuống. Phân biệt này mờ dần từ khi Hooks ra đời — function component giờ có thể có state qua useState và vẫn được coi là một loại component duy nhất.", q_en: "How do stateless and stateful components differ?", a_en: "A stateless (presentational) component only receives props and renders pure UI with no internal state — easy to test because output depends solely on input. Example: `<Button label='Save' onClick={fn} />`. A stateful (container) component manages state and business logic, typically fetching data and passing it down. This distinction has blurred since Hooks — function components can now hold state via useState while still being considered a single unified component type." },
-  { id: 427, category: "React", subcategory: "Components", level: "intermediate", q: "Compound Components pattern là gì?", a: "Compound Components là pattern cho phép các component liên quan chia sẻ state ngầm qua Context. Ví dụ: `<Select>`, `<Select.Option>` chia sẻ state selected value mà không cần props drilling. Pattern này tạo API linh hoạt, cho phép user sắp xếp sub-components theo ý muốn trong khi vẫn duy trì shared state.", q_en: "What is the Compound Components pattern?", a_en: "Compound Components is a pattern where related components implicitly share state through Context. For example, `<Select>` and `<Select.Option>` share the selected value state without prop drilling. The pattern creates a flexible API that lets consumers arrange sub-components however they like while the shared state is maintained behind the scenes." },
+  { id: 425, category: "React", subcategory: "Components", level: "advanced", q: "Forwardref trong React là gì và khi nào cần dùng?", a: `React.forwardRef cho phép component nhận ref từ parent và forward xuống DOM element hoặc component con bên trong. Cần thiết khi muốn parent có thể trực tiếp access DOM node của child, ví dụ để focus input hay measure element.
+\`\`\`tsx
+interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  label: string
+}
+
+const Input = React.forwardRef<HTMLInputElement, InputProps>(
+  ({ label, ...props }, ref) => (
+    <label>
+      {label}
+      <input ref={ref} {...props} />
+    </label>
+  )
+)
+Input.displayName = 'Input'
+
+// Parent sử dụng ref để focus programmatically
+const LoginForm = () => {
+  const emailRef = useRef<HTMLInputElement>(null)
+
+  useEffect(() => {
+    emailRef.current?.focus()
+  }, [])
+
+  return <Input ref={emailRef} label="Email" type="email" />
+}
+\`\`\``, q_en: "What is forwardRef in React and when do you need it?", a_en: `React.forwardRef lets a component receive a ref from its parent and pass it down to a DOM element or inner component. It is needed when the parent must directly access a child's DOM node — for example, to focus an input or measure an element.
+\`\`\`tsx
+interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  label: string
+}
+
+const Input = React.forwardRef<HTMLInputElement, InputProps>(
+  ({ label, ...props }, ref) => (
+    <label>
+      {label}
+      <input ref={ref} {...props} />
+    </label>
+  )
+)
+Input.displayName = 'Input'
+
+// Parent uses the ref to programmatically focus the input
+const LoginForm = () => {
+  const emailRef = useRef<HTMLInputElement>(null)
+
+  useEffect(() => {
+    emailRef.current?.focus()
+  }, [])
+
+  return <Input ref={emailRef} label="Email" type="email" />
+}
+\`\`\`` },
+  { id: 426, category: "React", subcategory: "Components", level: "beginner", q: "Stateless và stateful component khác nhau như thế nào?", a: "Stateless (presentational) component chỉ nhận props và render UI thuần túy, không giữ state nội bộ — dễ test vì output chỉ phụ thuộc vào input. \n\n**Ví dụ:** `<Button label='Save' onClick={fn} />`. Stateful (container) component quản lý state và business logic, thường fetch data và pass xuống. Phân biệt này mờ dần từ khi Hooks ra đời — function component giờ có thể có state qua useState và vẫn được coi là một loại component duy nhất.", q_en: "How do stateless and stateful components differ?", a_en: "A stateless (presentational) component only receives props and renders pure UI with no internal state — easy to test because output depends solely on input. \n\n**Example:** `<Button label='Save' onClick={fn} />`. A stateful (container) component manages state and business logic, typically fetching data and passing it down. This distinction has blurred since Hooks — function components can now hold state via useState while still being considered a single unified component type." },
+  { id: 427, category: "React", subcategory: "Components", level: "intermediate", q: "Compound Components pattern là gì?", a: "Compound Components là pattern cho phép các component liên quan chia sẻ state ngầm qua Context. \n\n**Ví dụ:** `<Select>`, `<Select.Option>` chia sẻ state selected value mà không cần props drilling. Pattern này tạo API linh hoạt, cho phép user sắp xếp sub-components theo ý muốn trong khi vẫn duy trì shared state.", q_en: "What is the Compound Components pattern?", a_en: "Compound Components is a pattern where related components implicitly share state through Context. For example, `<Select>` and `<Select.Option>` share the selected value state without prop drilling. The pattern creates a flexible API that lets consumers arrange sub-components however they like while the shared state is maintained behind the scenes." },
   { id: 428, category: "React", subcategory: "Components", level: "intermediate", q: "Sự khác biệt giữa mount, update và unmount trong vòng đời component là gì?", a: "Mount là khi component được thêm vào DOM lần đầu tiên. Update xảy ra khi props hoặc state thay đổi, khiến component re-render. Unmount là khi component bị xóa khỏi DOM. Các lifecycle methods (componentDidMount, componentDidUpdate, componentWillUnmount) hoặc useEffect hook xử lý các giai đoạn này.", q_en: "What is the difference between mount, update, and unmount in a component's lifecycle?", a_en: "Mount is when a component is added to the DOM for the first time. Update occurs when props or state change, causing the component to re-render. Unmount is when the component is removed from the DOM. Lifecycle methods (componentDidMount, componentDidUpdate, componentWillUnmount) or the useEffect hook handle each of these phases." },
-  { id: 429, category: "React", subcategory: "Components", level: "advanced", q: "Component colocation là gì và tại sao nó được khuyến nghị?", a: "Colocation là nguyên tắc đặt code gần nơi nó được sử dụng nhất - state, event handlers, styles của component nên nằm trong cùng file hoặc thư mục. Giúp code dễ hiểu và maintain hơn, giảm cognitive load khi chỉnh sửa một feature. Ví dụ: đặt query data fetching trong component cần dữ liệu thay vì ở global store.", q_en: "What is component colocation and why is it recommended?", a_en: "Colocation is the principle of keeping code close to where it is used — a component's state, event handlers, and styles should live in the same file or folder. This makes code easier to understand and maintain, reducing cognitive load when editing a feature. For example, placing data-fetching logic inside the component that needs it rather than in a global store." },
+  { id: 429, category: "React", subcategory: "Components", level: "advanced", q: "Component colocation là gì và tại sao nó được khuyến nghị?", a: "Colocation là nguyên tắc đặt code gần nơi nó được sử dụng nhất - state, event handlers, styles của component nên nằm trong cùng file hoặc thư mục. Giúp code dễ hiểu và maintain hơn, giảm cognitive load khi chỉnh sửa một feature. \n\n**Ví dụ:** đặt query data fetching trong component cần dữ liệu thay vì ở global store.", q_en: "What is component colocation and why is it recommended?", a_en: "Colocation is the principle of keeping code close to where it is used — a component's state, event handlers, and styles should live in the same file or folder. This makes code easier to understand and maintain, reducing cognitive load when editing a feature. For example, placing data-fetching logic inside the component that needs it rather than in a global store." },
   { id: 430, category: "React", subcategory: "Components", level: "beginner", q: "React component có thể return gì ngoài JSX?", a: "Component có thể return: JSX element, null (không render gì), array of elements, string, number, Portal, Fragment. Return null hữu ích để ẩn component mà không thay đổi cấu trúc. Array cần có key cho mỗi element. String và number được render trực tiếp như text node.", q_en: "What can a React component return besides JSX?", a_en: "A component can return: a JSX element, null (renders nothing), an array of elements, a string, a number, a Portal, or a Fragment. Returning null is useful for hiding a component without altering the tree structure. Arrays require a key on each element. Strings and numbers are rendered directly as text nodes." },
 
   // === React - Props & State (431-445) ===
   { id: 431, category: "React", subcategory: "Props & State", level: "beginner", q: "Sự khác nhau cơ bản giữa props và state trong React là gì?", a: "Props là dữ liệu được truyền từ component cha xuống con, read-only và không thể thay đổi bởi component nhận. State là dữ liệu nội bộ của component, có thể thay đổi theo thời gian và kích hoạt re-render. Props giống như tham số hàm, state giống như biến cục bộ của component.", q_en: "What is the fundamental difference between props and state in React?", a_en: "Props are data passed from a parent component to a child, read-only and immutable by the receiving component. State is a component's internal data that can change over time and triggers a re-render when updated. Props are like function parameters; state is like a component's local variables." },
-  { id: 432, category: "React", subcategory: "Props & State", level: "intermediate", q: "Lifting state up là gì và khi nào cần thực hiện?", a: "Lifting state up là kỹ thuật di chuyển state lên component cha chung gần nhất khi nhiều component cần chia sẻ cùng dữ liệu. Ví dụ: `TemperatureInput` Celsius và Fahrenheit đều cần cùng nhiệt độ — state được đặt ở component cha, truyền xuống qua props và cập nhật qua callback `onTemperatureChange`. Cần làm khi hai sibling component mất đồng bộ. Nếu phải lift quá nhiều tầng, hãy xem xét Context hoặc state manager.", q_en: "What is lifting state up and when should you do it?", a_en: "Lifting state up means moving state to the nearest common parent when multiple components need to share the same data. For example, Celsius and Fahrenheit TemperatureInput components both need the same temperature value — the state lives in the parent, flows down via props, and is updated via an `onTemperatureChange` callback. Do it when two sibling components fall out of sync. If you need to lift through too many layers, consider Context or a state management library." },
+  { id: 432, category: "React", subcategory: "Props & State", level: "intermediate", q: "Lifting state up là gì và khi nào cần thực hiện?", a: "Lifting state up là kỹ thuật di chuyển state lên component cha chung gần nhất khi nhiều component cần chia sẻ cùng dữ liệu. \n\n**Ví dụ:** `TemperatureInput` Celsius và Fahrenheit đều cần cùng nhiệt độ — state được đặt ở component cha, truyền xuống qua props và cập nhật qua callback `onTemperatureChange`. Cần làm khi hai sibling component mất đồng bộ. Nếu phải lift quá nhiều tầng, hãy xem xét Context hoặc state manager.", q_en: "What is lifting state up and when should you do it?", a_en: "Lifting state up means moving state to the nearest common parent when multiple components need to share the same data. For example, Celsius and Fahrenheit TemperatureInput components both need the same temperature value — the state lives in the parent, flows down via props, and is updated via an `onTemperatureChange` callback. Do it when two sibling components fall out of sync. If you need to lift through too many layers, consider Context or a state management library." },
   { id: 433, category: "React", subcategory: "Props & State", level: "beginner", q: "setState trong Class Component hoạt động như thế nào?", a: "setState() không cập nhật state ngay lập tức mà queue update và React có thể batch nhiều setState lại. Tham số có thể là object mới hoặc updater function `(prevState) => newState`. Dùng updater function khi cần dựa vào giá trị state hiện tại để tránh race condition.", q_en: "How does setState work in a Class Component?", a_en: "setState() does not update state immediately — it queues the update and React may batch multiple setState calls together. The argument can be a new state object or an updater function `(prevState) => newState`. Use the updater function form when the new state depends on the current state value to avoid race conditions." },
   { id: 434, category: "React", subcategory: "Props & State", level: "intermediate", q: "Immutability trong React state là gì và tại sao quan trọng?", a: "Immutability nghĩa là không trực tiếp mutate state mà tạo object/array mới. React dùng shallow comparison để detect thay đổi, nếu mutate trực tiếp React sẽ không nhận ra sự thay đổi và không re-render. Dùng spread operator `{...state, field: value}` hoặc Array.map/filter để tạo bản sao mới.", q_en: "What is immutability in React state and why does it matter?", a_en: "Immutability means never mutating state directly, but always creating a new object or array. React uses shallow comparison to detect changes — if you mutate in place, React won't recognize the change and won't re-render. Use the spread operator `{...state, field: value}` or Array.map/filter to produce new copies." },
   { id: 435, category: "React", subcategory: "Props & State", level: "intermediate", q: "Làm thế nào để cập nhật nested state objects một cách đúng đắn?", a: "Dùng spread operator để tạo bản sao ở mỗi cấp: `setState(prev => ({ ...prev, user: { ...prev.user, name: 'new' } }))`. Với nested sâu, xem xét dùng Immer library cho phép viết code mutate nhưng tạo immutable update dưới hood. Cấu trúc state phẳng (flat) cũng giúp tránh vấn đề này.", q_en: "How do you correctly update nested state objects?", a_en: "Use the spread operator to create a shallow copy at each level: `setState(prev => ({ ...prev, user: { ...prev.user, name: 'new' } }))`. For deeply nested structures, consider the Immer library, which lets you write mutating-style code while producing immutable updates under the hood. Keeping state as flat as possible also avoids this problem entirely." },
@@ -53,9 +105,9 @@ export const REACT_NEXTJS_DATA: QAItem[] = [
   { id: 445, category: "React", subcategory: "Props & State", level: "advanced", q: "Tại sao không nên khởi tạo state từ props trực tiếp?", a: "Khởi tạo state từ props (`useState(props.value)`) chỉ chạy một lần khi mount, khi props thay đổi state sẽ không cập nhật theo. Đây là anti-pattern gây ra bugs khó phát hiện. Nếu cần derived state từ props, hoặc tính toán trong render, hoặc dùng useEffect để sync, hoặc làm component fully controlled.", q_en: "Why should you avoid initializing state directly from props?", a_en: "Initializing state from props (`useState(props.value)`) only runs once on mount — when props change later, the state does not update. This is an anti-pattern that causes subtle, hard-to-find bugs. If you need derived state from props, either compute it during render, sync it with useEffect, or make the component fully controlled." },
 
   // === React - Lifecycle (446-455) ===
-  { id: 446, category: "React", subcategory: "Lifecycle", level: "beginner", q: "componentDidMount được gọi khi nào và dùng để làm gì?", a: "componentDidMount được gọi một lần duy nhất ngay sau khi component được gắn vào DOM lần đầu. Đây là nơi thích hợp để: fetch dữ liệu từ API, đăng ký event listeners, khởi tạo thư viện cần DOM như D3 hay Google Maps. Tương đương `useEffect(() => { fetchData(); }, [])` trong function component. Lưu ý: gọi setState bên trong sẽ trigger thêm một lần render nhưng user không thấy trạng thái trung gian.", q_en: "When is componentDidMount called and what is it used for?", a_en: "componentDidMount is called exactly once, right after the component is inserted into the DOM for the first time. It is the right place to fetch data from an API, register event listeners, or initialize DOM-dependent libraries like D3 or Google Maps. The equivalent in function components is `useEffect(() => { fetchData(); }, [])`. Note: calling setState inside it triggers an extra render, but the user does not see the intermediate state." },
+  { id: 446, category: "React", subcategory: "Lifecycle", level: "beginner", q: "componentDidMount được gọi khi nào và dùng để làm gì?", a: "componentDidMount được gọi một lần duy nhất ngay sau khi component được gắn vào DOM lần đầu. Đây là nơi thích hợp để: fetch dữ liệu từ API, đăng ký event listeners, khởi tạo thư viện cần DOM như D3 hay Google Maps. Tương đương `useEffect(() => { fetchData(); }, [])` trong function component. \n\n**Lưu ý:** gọi setState bên trong sẽ trigger thêm một lần render nhưng user không thấy trạng thái trung gian.", q_en: "When is componentDidMount called and what is it used for?", a_en: "componentDidMount is called exactly once, right after the component is inserted into the DOM for the first time. It is the right place to fetch data from an API, register event listeners, or initialize DOM-dependent libraries like D3 or Google Maps. The equivalent in function components is `useEffect(() => { fetchData(); }, [])`. \n\n**Note:** calling setState inside it triggers an extra render, but the user does not see the intermediate state." },
   { id: 447, category: "React", subcategory: "Lifecycle", level: "intermediate", q: "componentDidUpdate hoạt động như thế nào và khi nào nên dùng?", a: "componentDidUpdate(prevProps, prevState) được gọi sau mỗi lần re-render (trừ lần đầu mount). So sánh prevProps/prevState với giá trị hiện tại để quyết định có nên thực hiện side effects không. Luôn wrap code trong điều kiện `if (prevProps.id !== this.props.id)` để tránh infinite loop.", q_en: "How does componentDidUpdate work and when should you use it?", a_en: "componentDidUpdate(prevProps, prevState) is called after every re-render except the initial mount. Compare prevProps or prevState against current values to decide whether to perform a side effect. Always wrap your code in a condition like `if (prevProps.id !== this.props.id)` to avoid creating an infinite loop." },
-  { id: 448, category: "React", subcategory: "Lifecycle", level: "beginner", q: "componentWillUnmount dùng để làm gì?", a: "componentWillUnmount được gọi ngay trước khi component bị xóa khỏi DOM — đây là nơi bắt buộc phải cleanup để tránh memory leak. Ví dụ: `clearInterval(this.timerId)`, hủy WebSocket subscription, gọi `controller.abort()` để cancel fetch đang chạy. Không được gọi setState ở đây vì component không còn tồn tại. Tương đương hàm cleanup `return () => clearInterval(id)` trả về trong useEffect.", q_en: "What is componentWillUnmount used for?", a_en: "componentWillUnmount is called just before the component is removed from the DOM — this is where you must clean up to avoid memory leaks. Examples: `clearInterval(this.timerId)`, unsubscribing from a WebSocket, or calling `controller.abort()` to cancel an in-flight fetch. Do not call setState here since the component no longer exists. The equivalent in function components is the cleanup function returned from useEffect: `return () => clearInterval(id)`." },
+  { id: 448, category: "React", subcategory: "Lifecycle", level: "beginner", q: "componentWillUnmount dùng để làm gì?", a: "componentWillUnmount được gọi ngay trước khi component bị xóa khỏi DOM — đây là nơi bắt buộc phải cleanup để tránh memory leak. \n\n**Ví dụ:** `clearInterval(this.timerId)`, hủy WebSocket subscription, gọi `controller.abort()` để cancel fetch đang chạy. Không được gọi setState ở đây vì component không còn tồn tại. Tương đương hàm cleanup `return () => clearInterval(id)` trả về trong useEffect.", q_en: "What is componentWillUnmount used for?", a_en: "componentWillUnmount is called just before the component is removed from the DOM — this is where you must clean up to avoid memory leaks. Examples: `clearInterval(this.timerId)`, unsubscribing from a WebSocket, or calling `controller.abort()` to cancel an in-flight fetch. Do not call setState here since the component no longer exists. The equivalent in function components is the cleanup function returned from useEffect: `return () => clearInterval(id)`." },
   { id: 449, category: "React", subcategory: "Lifecycle", level: "intermediate", q: "getDerivedStateFromProps là gì và khi nào nên tránh dùng?", a: "getDerivedStateFromProps là static method được gọi trước mỗi lần render để sync state với props. Nên tránh dùng vì dẫn đến code phức tạp và dễ gây bugs. Thay thế tốt hơn: tính giá trị derived trong render, dùng fully controlled component, hoặc dùng key prop để reset component khi cần. React team cũng khuyến cáo hạn chế dùng.", q_en: "What is getDerivedStateFromProps and when should you avoid it?", a_en: "getDerivedStateFromProps is a static method called before every render to sync state with props. It should generally be avoided because it leads to complex code and subtle bugs. Better alternatives: compute derived values during render, use a fully controlled component, or use the key prop to reset the component when needed. The React team itself recommends using it sparingly." },
   { id: 450, category: "React", subcategory: "Lifecycle", level: "advanced", q: "shouldComponentUpdate hoạt động như thế nào và khi nào nên dùng?", a: "shouldComponentUpdate(nextProps, nextState) trả về boolean, quyết định component có re-render hay không. Mặc định return true. Dùng để tối ưu performance bằng cách skip render khi props/state không thực sự thay đổi. React.PureComponent tự động implement với shallow comparison. Với function components, dùng React.memo thay thế.", q_en: "How does shouldComponentUpdate work and when should you use it?", a_en: "shouldComponentUpdate(nextProps, nextState) returns a boolean that tells React whether to re-render the component. It defaults to true. Use it to optimize performance by skipping renders when props or state have not meaningfully changed. React.PureComponent implements this automatically with a shallow comparison. For function components, use React.memo instead." },
   { id: 451, category: "React", subcategory: "Lifecycle", level: "advanced", q: "getSnapshotBeforeUpdate dùng để làm gì?", a: "getSnapshotBeforeUpdate(prevProps, prevState) được gọi ngay trước khi DOM được cập nhật, cho phép capture thông tin từ DOM trước khi thay đổi. Giá trị trả về được pass vào componentDidUpdate như tham số thứ ba. Hay dùng để giữ scroll position trong chat app khi có message mới.", q_en: "What is getSnapshotBeforeUpdate used for?", a_en: "getSnapshotBeforeUpdate(prevProps, prevState) is called right before the DOM is updated, allowing you to capture information from the DOM before the change takes effect. Its return value is passed as the third argument to componentDidUpdate. A classic use case is preserving scroll position in a chat app when new messages are added." },
@@ -65,11 +117,105 @@ export const REACT_NEXTJS_DATA: QAItem[] = [
   { id: 455, category: "React", subcategory: "Lifecycle", level: "beginner", q: "Constructor trong Class Component dùng để làm gì?", a: "Constructor trong Class Component dùng để khởi tạo state (`this.state = { count: 0 }`) và bind event handlers (`this.handleClick = this.handleClick.bind(this)`). Phải gọi `super(props)` trước tiên để React gán this.props đúng cách — bỏ qua bước này gây lỗi khó debug. Không được gọi fetch hay side effects ở đây, để vào componentDidMount. Trong Function Component, constructor không cần vì useState và arrow functions thay thế hoàn toàn.", q_en: "What is the constructor used for in a Class Component?", a_en: "The constructor in a Class Component is used to initialize state (`this.state = { count: 0 }`) and bind event handlers (`this.handleClick = this.handleClick.bind(this)`). You must call `super(props)` first so React assigns this.props correctly — skipping it causes hard-to-debug errors. Do not perform fetches or side effects here; put those in componentDidMount. In Function Components, the constructor is unnecessary because useState and arrow functions replace it entirely." },
 
   // === React - useState & useEffect (456-475) ===
-  { id: 456, category: "React", subcategory: "useState & useEffect", level: "beginner", q: "useState hook hoạt động như thế nào?", a: "useState nhận giá trị khởi tạo và trả về mảng gồm state hiện tại và setter function: `const [count, setCount] = useState(0)`. Khi gọi setter, React schedule re-render với giá trị mới. Setter có thể nhận giá trị mới trực tiếp hoặc updater function `prev => prev + 1` để tránh stale closure.", q_en: "How does the useState hook work?", a_en: "useState accepts an initial value and returns an array containing the current state and a setter function: `const [count, setCount] = useState(0)`. Calling the setter schedules a re-render with the new value. The setter can receive the new value directly or an updater function `prev => prev + 1` to avoid stale closure issues." },
+  { id: 456, category: "React", subcategory: "useState & useEffect", level: "beginner", q: "useState hook hoạt động như thế nào?", a: `useState nhận giá trị khởi tạo và trả về mảng gồm state hiện tại và setter function. Khi gọi setter, React schedule re-render với giá trị mới. Setter có thể nhận giá trị mới trực tiếp hoặc updater function để tránh stale closure.
+\`\`\`tsx
+const Counter = () => {
+  const [count, setCount] = useState(0)
+
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={() => setCount(count + 1)}>+1 trực tiếp</button>
+      <button onClick={() => setCount(prev => prev + 1)}>+1 updater</button>
+    </div>
+  )
+}
+\`\`\``, q_en: "How does the useState hook work?", a_en: `useState accepts an initial value and returns an array containing the current state and a setter function. Calling the setter schedules a re-render with the new value. The setter can receive the new value directly or an updater function to avoid stale closure issues.
+\`\`\`tsx
+const Counter = () => {
+  const [count, setCount] = useState(0)
+
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={() => setCount(count + 1)}>direct</button>
+      <button onClick={() => setCount(prev => prev + 1)}>updater fn</button>
+    </div>
+  )
+}
+\`\`\`` },
   { id: 457, category: "React", subcategory: "useState & useEffect", level: "beginner", q: "useEffect hook dùng để làm gì?", a: "useEffect thực hiện side effects trong function components: fetch data, subscriptions, DOM manipulation, timers. Nhận callback function và dependency array. Chạy sau mỗi render (mặc định), sau render khi dependencies thay đổi (có deps array), hoặc chỉ một lần sau mount (deps array rỗng `[]`).", q_en: "What is the useEffect hook used for?", a_en: "useEffect performs side effects in function components: fetching data, setting up subscriptions, manipulating the DOM, and managing timers. It accepts a callback and a dependency array. It runs after every render by default, after renders where specific dependencies changed (when a deps array is provided), or only once after mount (with an empty `[]` array)." },
   { id: 458, category: "React", subcategory: "useState & useEffect", level: "beginner", q: "Dependency array trong useEffect có ý nghĩa gì?", a: "Dependency array kiểm soát khi nào effect chạy lại. Không có array: chạy sau mỗi render. Array rỗng `[]`: chỉ chạy sau mount, tương đương componentDidMount. Array có giá trị `[a, b]`: chạy khi a hoặc b thay đổi. React ESLint plugin exhaustive-deps giúp phát hiện missing dependencies.", q_en: "What is the purpose of the dependency array in useEffect?", a_en: "The dependency array controls when the effect re-runs. No array: runs after every render. Empty array `[]`: runs only after the initial mount, equivalent to componentDidMount. Array with values `[a, b]`: runs whenever a or b changes. The React ESLint plugin's exhaustive-deps rule helps catch missing dependencies." },
-  { id: 459, category: "React", subcategory: "useState & useEffect", level: "intermediate", q: "Cleanup function trong useEffect là gì và khi nào cần dùng?", a: "Cleanup function là function được return từ useEffect, chạy trước khi effect chạy lại hoặc component unmount. Dùng để hủy subscriptions, clearTimeout, cancel fetch requests tránh memory leaks và stale updates. Ví dụ: `return () => { clearInterval(timer); subscription.unsubscribe(); }`.", q_en: "What is the cleanup function in useEffect and when do you need it?", a_en: "The cleanup function is the function returned from useEffect. It runs before the effect re-runs or before the component unmounts. Use it to cancel subscriptions, clear timeouts, or abort fetch requests to prevent memory leaks and stale updates. Example: `return () => { clearInterval(timer); subscription.unsubscribe(); }`." },
-  { id: 460, category: "React", subcategory: "useState & useEffect", level: "intermediate", q: "Làm thế nào để thực hiện async operations trong useEffect?", a: "Không thể trực tiếp dùng async function làm effect callback vì nó trả về Promise, nhưng cleanup phải return void. Giải pháp: khai báo async function bên trong effect rồi gọi nó, hoặc dùng IIFE: `useEffect(() => { (async () => { const data = await fetch(url); })(); }, [])`. Luôn xử lý cleanup để cancel request nếu component unmount.", q_en: "How do you perform async operations inside useEffect?", a_en: "You cannot use an async function directly as the effect callback because it returns a Promise, but the cleanup must return void or nothing. The solution is to declare an async function inside the effect and call it immediately, or use an IIFE: `useEffect(() => { (async () => { const data = await fetch(url); })(); }, [])`. Always handle cleanup to cancel the request if the component unmounts." },
+  { id: 459, category: "React", subcategory: "useState & useEffect", level: "intermediate", q: "Cleanup function trong useEffect là gì và khi nào cần dùng?", a: `Cleanup function là function được return từ useEffect, chạy trước khi effect chạy lại hoặc component unmount. Dùng để hủy subscriptions, clearTimeout, cancel fetch requests tránh memory leaks và stale updates.
+\`\`\`tsx
+useEffect(() => {
+  const timer = setInterval(() => {
+    setCount(c => c + 1)
+  }, 1000)
+
+  const subscription = eventSource.subscribe(handler)
+
+  // cleanup: chạy khi unmount hoặc trước khi effect chạy lại
+  return () => {
+    clearInterval(timer)
+    subscription.unsubscribe()
+  }
+}, [])
+\`\`\``, q_en: "What is the cleanup function in useEffect and when do you need it?", a_en: `The cleanup function is the function returned from useEffect. It runs before the effect re-runs or before the component unmounts. Use it to cancel subscriptions, clear timeouts, or abort fetch requests to prevent memory leaks and stale updates.
+\`\`\`tsx
+useEffect(() => {
+  const timer = setInterval(() => {
+    setCount(c => c + 1)
+  }, 1000)
+
+  const subscription = eventSource.subscribe(handler)
+
+  // cleanup: runs on unmount or before re-running the effect
+  return () => {
+    clearInterval(timer)
+    subscription.unsubscribe()
+  }
+}, [])
+\`\`\`` },
+  { id: 460, category: "React", subcategory: "useState & useEffect", level: "intermediate", q: "Làm thế nào để thực hiện async operations trong useEffect?", a: `Không thể trực tiếp dùng async function làm effect callback vì nó trả về Promise, nhưng cleanup phải return void. Giải pháp: khai báo async function bên trong effect rồi gọi nó. Luôn xử lý cleanup để cancel request nếu component unmount.
+\`\`\`tsx
+useEffect(() => {
+  const controller = new AbortController()
+
+  const fetchData = async () => {
+    try {
+      const res = await fetch('/api/data', { signal: controller.signal })
+      const json = await res.json()
+      setData(json)
+    } catch (err) {
+      if (err.name !== 'AbortError') setError(err)
+    }
+  }
+
+  fetchData()
+
+  return () => controller.abort()
+}, [url])
+\`\`\``, q_en: "How do you perform async operations inside useEffect?", a_en: `You cannot use an async function directly as the effect callback because it returns a Promise, but the cleanup must return void or nothing. Declare an async function inside the effect and call it immediately. Always handle cleanup to cancel the request if the component unmounts.
+\`\`\`tsx
+useEffect(() => {
+  const controller = new AbortController()
+
+  const fetchData = async () => {
+    try {
+      const res = await fetch('/api/data', { signal: controller.signal })
+      const json = await res.json()
+      setData(json)
+    } catch (err) {
+      if (err.name !== 'AbortError') setError(err)
+    }
+  }
+
+  fetchData()
+
+  return () => controller.abort()
+}, [url])
+\`\`\`` },
   { id: 461, category: "React", subcategory: "useState & useEffect", level: "intermediate", q: "Làm sao tránh infinite loop trong useEffect?", a: "Infinite loop xảy ra khi effect cập nhật state mà state đó lại là dependency của effect. Giải pháp: kiểm tra dependency array có chính xác không, dùng functional updater `setCount(c => c + 1)` thay vì reference state trong effect, tách effect thành nhiều effect với dependencies khác nhau, hoặc dùng useRef để lưu giá trị mà không trigger re-render.", q_en: "How do you avoid infinite loops in useEffect?", a_en: "An infinite loop occurs when the effect updates state that is also listed as a dependency, causing it to re-run forever. Solutions: verify the dependency array is correct, use the functional updater `setCount(c => c + 1)` instead of referencing state directly inside the effect, split a large effect into multiple focused ones, or use useRef to store a value without triggering a re-render." },
   { id: 462, category: "React", subcategory: "useState & useEffect", level: "beginner", q: "Làm thế nào để fetch data với useEffect?", a: "Tạo async function bên trong effect, gọi fetch, set state với kết quả, và xử lý loading/error states. Dùng cleanup function để cancel request nếu component unmount (AbortController). Với React 18 và StrictMode, effect chạy hai lần trong dev nên cần idempotent cleanup. Hoặc dùng React Query/SWR để data fetching tốt hơn.", q_en: "How do you fetch data with useEffect?", a_en: "Declare an async function inside the effect, call fetch, set state with the result, and handle loading/error states. Use a cleanup function with AbortController to cancel the request if the component unmounts. With React 18 Strict Mode, effects run twice in development, so cleanup must be idempotent. For production apps, React Query or SWR handle data fetching more robustly." },
   { id: 463, category: "React", subcategory: "useState & useEffect", level: "intermediate", q: "Stale closure trong useEffect là gì và cách tránh?", a: "Stale closure xảy ra khi effect capture giá trị cũ của state hoặc props vì closure bị tạo lúc render trước. Giải pháp: thêm dependencies bị thiếu vào array, dùng useRef để lưu giá trị mới nhất không cần re-run effect, hoặc dùng functional updater `setState(prev => ...)` để không cần reference state trong closure.", q_en: "What is a stale closure in useEffect and how do you avoid it?", a_en: "A stale closure occurs when an effect captures an outdated value of state or props because the closure was created during a previous render. Solutions: add the missing values to the dependency array, use useRef to always access the latest value without re-running the effect, or use the functional updater form `setState(prev => ...)` so you do not need to reference state inside the closure." },
@@ -80,23 +226,247 @@ export const REACT_NEXTJS_DATA: QAItem[] = [
   { id: 468, category: "React", subcategory: "useState & useEffect", level: "beginner", q: "useState có thể lưu trữ kiểu dữ liệu nào?", a: "useState có thể lưu bất kỳ giá trị JavaScript nào: primitives (string, number, boolean), objects, arrays, functions, null, undefined. Với objects và arrays, phải cập nhật immutably (tạo bản sao mới) để trigger re-render. Tránh lưu dữ liệu có thể tính toán từ state khác (derived state) để tránh state sync bugs.", q_en: "What types of data can useState store?", a_en: "useState can store any JavaScript value: primitives (string, number, boolean), objects, arrays, functions, null, and undefined. For objects and arrays, you must update immutably (create a new copy) to trigger a re-render. Avoid storing data that can be computed from other state (derived state) to prevent state synchronization bugs." },
   { id: 469, category: "React", subcategory: "useState & useEffect", level: "intermediate", q: "Batching updates trong function component với hooks?", a: "React 18 tự động batch tất cả state updates kể cả trong async code (setTimeout, Promise, fetch callbacks). Nhiều useState calls trong event handler hay useEffect chỉ gây một lần re-render. Dùng `flushSync` từ react-dom để force immediate re-render khi cần. Đây là improvement lớn so với React 17 chỉ batch trong event handlers.", q_en: "How does update batching work in function components with hooks?", a_en: "React 18 automatically batches all state updates, including those inside async code (setTimeout, Promises, fetch callbacks). Multiple useState calls in an event handler or useEffect produce only one re-render. Use `flushSync` from react-dom to force an immediate re-render when necessary. This is a significant improvement over React 17, which only batched updates inside event handlers." },
   { id: 470, category: "React", subcategory: "useState & useEffect", level: "advanced", q: "useInsertionEffect là gì và khi nào dùng?", a: "useInsertionEffect chạy trước bất kỳ DOM mutations nào, trước cả useLayoutEffect. Được tạo ra dành cho CSS-in-JS libraries để inject styles trước khi component render, tránh flash of unstyled content. Không nên dùng trong application code thông thường, chỉ dành cho library authors.", q_en: "What is useInsertionEffect and when should it be used?", a_en: "useInsertionEffect fires before any DOM mutations, even before useLayoutEffect. It was designed specifically for CSS-in-JS libraries to inject styles before components render, preventing a flash of unstyled content. It should not be used in application code — it is intended only for library authors." },
-  { id: 471, category: "React", subcategory: "useState & useEffect", level: "intermediate", q: "Làm thế nào để share stateful logic giữa nhiều components với useEffect?", a: "Trích xuất logic vào custom hook - function bắt đầu bằng 'use'. Custom hook có thể gọi useState, useEffect và các hooks khác. Component sử dụng custom hook sẽ có state riêng biệt, không chia sẻ instance. Ví dụ: useWindowSize(), useDebounce(), useFetch() đều là custom hooks phổ biến.", q_en: "How do you share stateful logic across multiple components using useEffect?", a_en: "Extract the logic into a custom hook — a function whose name starts with 'use'. The custom hook can call useState, useEffect, and other hooks. Each component that uses the hook gets its own isolated state instance; state is not shared. Common examples include useWindowSize(), useDebounce(), and useFetch()." },
+  { id: 471, category: "React", subcategory: "useState & useEffect", level: "intermediate", q: "Làm thế nào để share stateful logic giữa nhiều components với useEffect?", a: "Trích xuất logic vào custom hook - function bắt đầu bằng 'use'. Custom hook có thể gọi useState, useEffect và các hooks khác. Component sử dụng custom hook sẽ có state riêng biệt, không chia sẻ instance. \n\n**Ví dụ:** useWindowSize(), useDebounce(), useFetch() đều là custom hooks phổ biến.", q_en: "How do you share stateful logic across multiple components using useEffect?", a_en: "Extract the logic into a custom hook — a function whose name starts with 'use'. The custom hook can call useState, useEffect, and other hooks. Each component that uses the hook gets its own isolated state instance; state is not shared. Common examples include useWindowSize(), useDebounce(), and useFetch()." },
   { id: 472, category: "React", subcategory: "useState & useEffect", level: "beginner", q: "useState setter function có bao giờ thay đổi reference không?", a: "Không — setter function từ useState luôn có cùng reference (identity) giữa các lần render, React đảm bảo điều này. Vì vậy không cần và không nên thêm setter vào dependency array của useEffect, tránh chạy effect thừa. Khác với hàm thông thường tự khai báo trong component body — những hàm đó được tạo mới mỗi render. Đây là lý do useCallback cần cho hàm callback tự viết nhưng không cần cho state setter.", q_en: "Does the useState setter function ever change its reference between renders?", a_en: "No — React guarantees that the setter function from useState always has the same reference (identity) across renders. Therefore you do not need to include setters in a useEffect dependency array, which would cause unnecessary effect runs. This is unlike regular functions declared in the component body, which are recreated on every render. That is why useCallback is needed for custom callbacks but not for state setters." },
-  { id: 473, category: "React", subcategory: "useState & useEffect", level: "intermediate", q: "Khi nào React bail out (bỏ qua) re-render khi gọi setState?", a: "React bail out nếu giá trị mới giống hệt giá trị hiện tại (sử dụng Object.is comparison). Ví dụ: `setCount(count)` với cùng value sẽ không trigger re-render. Tuy nhiên React vẫn có thể render component một lần để verify trước khi bail out hoàn toàn. Hữu ích để tối ưu performance.", q_en: "When does React bail out of a re-render after a setState call?", a_en: "React bails out when the new value is identical to the current value, using Object.is comparison. For example, `setCount(count)` with the same value will not trigger a re-render. However, React may still render the component once to verify before bailing out completely. This built-in optimization helps avoid unnecessary work." },
+  { id: 473, category: "React", subcategory: "useState & useEffect", level: "intermediate", q: "Khi nào React bail out (bỏ qua) re-render khi gọi setState?", a: "React bail out nếu giá trị mới giống hệt giá trị hiện tại (sử dụng Object.is comparison). \n\n**Ví dụ:** `setCount(count)` với cùng value sẽ không trigger re-render. Tuy nhiên React vẫn có thể render component một lần để verify trước khi bail out hoàn toàn. Hữu ích để tối ưu performance.", q_en: "When does React bail out of a re-render after a setState call?", a_en: "React bails out when the new value is identical to the current value, using Object.is comparison. For example, `setCount(count)` with the same value will not trigger a re-render. However, React may still render the component once to verify before bailing out completely. This built-in optimization helps avoid unnecessary work." },
   { id: 474, category: "React", subcategory: "useState & useEffect", level: "advanced", q: "useEffect với object dependencies có vấn đề gì?", a: "Object dependencies tạo infinite loop vì mỗi render tạo object literal mới có reference khác, React compare by reference không phải by value. Giải pháp: destructure primitive values từ object làm deps `[obj.id, obj.name]`, dùng useMemo để memoize object, hoặc dùng useRef để lưu object. Tương tự với array và function dependencies.", q_en: "What problem arises when using object values as useEffect dependencies?", a_en: "Object dependencies cause infinite loops because every render creates a new object literal with a different reference, and React compares by reference not by value. Solutions: destructure primitive values from the object and use those as deps `[obj.id, obj.name]`, memoize the object with useMemo, or store it in a useRef. The same issue applies to array and function dependencies." },
   { id: 475, category: "React", subcategory: "useState & useEffect", level: "intermediate", q: "Cách đúng để fetch data và xử lý race conditions trong useEffect?", a: "Dùng AbortController để cancel fetch request cũ khi effect re-run: `const controller = new AbortController(); fetch(url, { signal: controller.signal }); return () => controller.abort()`. Hoặc dùng boolean flag `let cancelled = false` trong cleanup. React Query và SWR tự động handle race conditions.", q_en: "What is the correct way to fetch data and handle race conditions in useEffect?", a_en: "Use AbortController to cancel the previous request when the effect re-runs: `const controller = new AbortController(); fetch(url, { signal: controller.signal }); return () => controller.abort()`. Alternatively, use a boolean cancelled flag and check it in the cleanup. React Query and SWR handle race conditions automatically and are the recommended choice for production apps." },
 
   // === React - Advanced Hooks (476-495) ===
-  { id: 476, category: "React", subcategory: "Advanced Hooks", level: "intermediate", q: "useContext hook là gì và cách sử dụng?", a: "useContext nhận Context object và trả về value hiện tại từ Provider gần nhất bên trên. Ví dụ: `const theme = useContext(ThemeContext)` lấy theme từ `<ThemeContext.Provider value='dark'>`. Khi value của Provider thay đổi, mọi component gọi useContext đó đều re-render. Pitfall: nếu không có Provider bên trên, trả về giá trị default từ createContext. Để tránh re-render thừa, tách context thành nhiều phần nhỏ theo concern.", q_en: "What is the useContext hook and how do you use it?", a_en: "useContext accepts a Context object and returns the current value from the nearest Provider above in the tree. Example: `const theme = useContext(ThemeContext)` reads the theme from `<ThemeContext.Provider value='dark'>`. When the Provider's value changes, every component calling that useContext will re-render. Pitfall: if there is no Provider above, it returns the default value from createContext. To avoid unnecessary re-renders, split context into smaller pieces by concern." },
-  { id: 477, category: "React", subcategory: "Advanced Hooks", level: "intermediate", q: "useReducer khác gì useState và khi nào nên dùng?", a: "useReducer(`reducer, initialState`) phù hợp khi: state logic phức tạp với nhiều sub-values, state transition phụ thuộc vào state trước, hay nhiều actions khác nhau cập nhật state theo cách khác nhau. Giống Redux pattern với dispatch/action/reducer. Khi state là object với nhiều fields liên quan, useReducer thường sạch hơn nhiều useState.", q_en: "How does useReducer differ from useState and when should you use it?", a_en: "useReducer(reducer, initialState) is a better fit when: state logic is complex with multiple sub-values, state transitions depend on previous state, or many different actions update state in distinct ways. It mirrors the Redux pattern with dispatch/action/reducer. When state is an object with several related fields, useReducer is typically cleaner than multiple useState calls." },
-  { id: 478, category: "React", subcategory: "Advanced Hooks", level: "intermediate", q: "useMemo hook dùng để làm gì? Khi nào nên dùng?", a: "useMemo memoize kết quả tính toán tốn kém, chỉ tính lại khi dependencies thay đổi: `useMemo(() => expensiveCalc(a, b), [a, b])`. Dùng khi: có tính toán expensive mà không muốn chạy lại mỗi render, cần stable object reference cho dependency array của effect hay prop của React.memo component. Không nên dùng quá mức vì có overhead riêng.", q_en: "What is the useMemo hook for and when should you use it?", a_en: "useMemo memoizes the result of an expensive computation, recalculating only when dependencies change: `useMemo(() => expensiveCalc(a, b), [a, b])`. Use it when: a calculation is costly and you want to skip it on every render, or you need a stable object reference as a dependency for an effect or as a prop for a React.memo component. Do not overuse it — memoization has its own overhead." },
-  { id: 479, category: "React", subcategory: "Advanced Hooks", level: "intermediate", q: "useCallback hook dùng để làm gì? Khác gì useMemo?", a: "useCallback memoize function để giữ stable reference giữa renders: `useCallback(() => fn, deps)`. Tương đương `useMemo(() => fn, deps)` nhưng rõ ràng hơn. Dùng khi truyền callback xuống child component được wrap bởi React.memo, hoặc khi function là dependency của useEffect. Không cần cho hầu hết event handlers thông thường.", q_en: "What is the useCallback hook for? How does it differ from useMemo?", a_en: "useCallback memoizes a function to maintain a stable reference between renders: `useCallback(() => fn, deps)`. It is equivalent to `useMemo(() => fn, deps)` but more explicit about intent. Use it when passing a callback to a child component wrapped with React.memo, or when a function is a dependency of useEffect. It is not needed for most ordinary event handlers." },
-  { id: 480, category: "React", subcategory: "Advanced Hooks", level: "intermediate", q: "useRef hook có những công dụng gì?", a: "useRef trả về mutable ref object với `.current` property không trigger re-render khi thay đổi. Hai công dụng chính: (1) truy cập DOM element trực tiếp `const inputRef = useRef(null); <input ref={inputRef} />` để focus/measure; (2) lưu giá trị mutable giữa renders mà không cần re-render như timerId, previous value, hay event handler reference.", q_en: "What are the main uses of the useRef hook?", a_en: "useRef returns a mutable ref object whose `.current` property does not trigger a re-render when changed. Two primary uses: (1) directly accessing a DOM element — `const inputRef = useRef(null); <input ref={inputRef} />` — to focus or measure it; (2) storing a mutable value that persists across renders without causing a re-render, such as a timer ID, previous value, or event handler reference." },
+  { id: 476, category: "React", subcategory: "Advanced Hooks", level: "intermediate", q: "useContext hook là gì và cách sử dụng?", a: `useContext nhận Context object và trả về value hiện tại từ Provider gần nhất bên trên. Khi value của Provider thay đổi, mọi component gọi useContext đó đều re-render. Pitfall: nếu không có Provider bên trên, trả về giá trị default từ createContext.
+\`\`\`tsx
+// 1. Tạo context
+const ThemeContext = createContext<'light' | 'dark'>('light')
+
+// 2. Provider bọc cây component
+const App = () => (
+  <ThemeContext.Provider value="dark">
+    <Toolbar />
+  </ThemeContext.Provider>
+)
+
+// 3. Consume ở bất kỳ component con nào
+const Toolbar = () => {
+  const theme = useContext(ThemeContext)
+  return <div className={theme}>Current theme: {theme}</div>
+}
+\`\`\``, q_en: "What is the useContext hook and how do you use it?", a_en: `useContext accepts a Context object and returns the current value from the nearest Provider above in the tree. When the Provider's value changes, every component calling that useContext will re-render. Pitfall: if there is no Provider above, it returns the default value from createContext.
+\`\`\`tsx
+// 1. Create context
+const ThemeContext = createContext<'light' | 'dark'>('light')
+
+// 2. Provider wraps the component tree
+const App = () => (
+  <ThemeContext.Provider value="dark">
+    <Toolbar />
+  </ThemeContext.Provider>
+)
+
+// 3. Consume in any descendant component
+const Toolbar = () => {
+  const theme = useContext(ThemeContext)
+  return <div className={theme}>Current theme: {theme}</div>
+}
+\`\`\`` },
+  { id: 477, category: "React", subcategory: "Advanced Hooks", level: "intermediate", q: "useReducer khác gì useState và khi nào nên dùng?", a: `useReducer phù hợp khi state logic phức tạp với nhiều sub-values, hoặc nhiều actions khác nhau cập nhật state theo cách khác nhau. Giống Redux pattern với dispatch/action/reducer.
+\`\`\`tsx
+type State = { count: number; step: number }
+type Action = { type: 'increment' } | { type: 'setStep'; payload: number }
+
+const reducer = (state: State, action: Action): State => {
+  switch (action.type) {
+    case 'increment': return { ...state, count: state.count + state.step }
+    case 'setStep':   return { ...state, step: action.payload }
+    default:          return state
+  }
+}
+
+const Counter = () => {
+  const [state, dispatch] = useReducer(reducer, { count: 0, step: 1 })
+  return (
+    <>
+      <p>Count: {state.count}, Step: {state.step}</p>
+      <button onClick={() => dispatch({ type: 'increment' })}>+</button>
+    </>
+  )
+}
+\`\`\``, q_en: "How does useReducer differ from useState and when should you use it?", a_en: `useReducer is a better fit when state logic is complex with multiple sub-values, or many different actions update state in distinct ways. It mirrors the Redux pattern with dispatch/action/reducer.
+\`\`\`tsx
+type State = { count: number; step: number }
+type Action = { type: 'increment' } | { type: 'setStep'; payload: number }
+
+const reducer = (state: State, action: Action): State => {
+  switch (action.type) {
+    case 'increment': return { ...state, count: state.count + state.step }
+    case 'setStep':   return { ...state, step: action.payload }
+    default:          return state
+  }
+}
+
+const Counter = () => {
+  const [state, dispatch] = useReducer(reducer, { count: 0, step: 1 })
+  return (
+    <>
+      <p>Count: {state.count}, Step: {state.step}</p>
+      <button onClick={() => dispatch({ type: 'increment' })}>+</button>
+    </>
+  )
+}
+\`\`\`` },
+  { id: 478, category: "React", subcategory: "Advanced Hooks", level: "intermediate", q: "useMemo hook dùng để làm gì? Khi nào nên dùng?", a: `useMemo memoize kết quả tính toán tốn kém, chỉ tính lại khi dependencies thay đổi. Dùng khi có tính toán expensive mà không muốn chạy lại mỗi render, hoặc cần stable object reference. Không nên dùng quá mức vì có overhead riêng.
+\`\`\`tsx
+const ProductList = ({ products, filter }: Props) => {
+  // tính toán chỉ chạy lại khi products hoặc filter thay đổi
+  const filtered = useMemo(
+    () => products.filter(p => p.category === filter),
+    [products, filter]
+  )
+
+  return <ul>{filtered.map(p => <li key={p.id}>{p.name}</li>)}</ul>
+}
+\`\`\``, q_en: "What is the useMemo hook for and when should you use it?", a_en: `useMemo memoizes the result of an expensive computation, recalculating only when dependencies change. Use it when a calculation is costly and you want to skip it on every render, or you need a stable object reference for an effect or React.memo prop. Do not overuse it — memoization has its own overhead.
+\`\`\`tsx
+const ProductList = ({ products, filter }: Props) => {
+  // recalculates only when products or filter changes
+  const filtered = useMemo(
+    () => products.filter(p => p.category === filter),
+    [products, filter]
+  )
+
+  return <ul>{filtered.map(p => <li key={p.id}>{p.name}</li>)}</ul>
+}
+\`\`\`` },
+  { id: 479, category: "React", subcategory: "Advanced Hooks", level: "intermediate", q: "useCallback hook dùng để làm gì? Khác gì useMemo?", a: `useCallback memoize function để giữ stable reference giữa renders. Dùng khi truyền callback xuống child component được wrap bởi React.memo, hoặc khi function là dependency của useEffect.
+\`\`\`tsx
+const Parent = () => {
+  const [count, setCount] = useState(0)
+
+  // không dùng useCallback: handleClick mới mỗi render → Child luôn re-render
+  // dùng useCallback: reference ổn định → Child skip re-render nếu props khác không đổi
+  const handleClick = useCallback(() => {
+    console.log('clicked')
+  }, []) // deps rỗng vì không dùng state/props trong fn
+
+  return (
+    <>
+      <button onClick={() => setCount(c => c + 1)}>Parent count: {count}</button>
+      <MemoChild onClick={handleClick} />
+    </>
+  )
+}
+
+const MemoChild = React.memo(({ onClick }: { onClick: () => void }) => {
+  console.log('Child render')
+  return <button onClick={onClick}>Child</button>
+})
+\`\`\``, q_en: "What is the useCallback hook for? How does it differ from useMemo?", a_en: `useCallback memoizes a function to maintain a stable reference between renders. Use it when passing a callback to a child component wrapped with React.memo, or when a function is a dependency of useEffect.
+\`\`\`tsx
+const Parent = () => {
+  const [count, setCount] = useState(0)
+
+  // without useCallback: handleClick is new every render → Child always re-renders
+  // with useCallback: stable reference → Child skips re-render if other props unchanged
+  const handleClick = useCallback(() => {
+    console.log('clicked')
+  }, []) // empty deps because fn doesn't use any state/props
+
+  return (
+    <>
+      <button onClick={() => setCount(c => c + 1)}>Parent count: {count}</button>
+      <MemoChild onClick={handleClick} />
+    </>
+  )
+}
+
+const MemoChild = React.memo(({ onClick }: { onClick: () => void }) => {
+  console.log('Child render')
+  return <button onClick={onClick}>Child</button>
+})
+\`\`\`` },
+  { id: 480, category: "React", subcategory: "Advanced Hooks", level: "intermediate", q: "useRef hook có những công dụng gì?", a: `useRef trả về mutable ref object với \`.current\` property không trigger re-render khi thay đổi. Hai công dụng chính: (1) truy cập DOM element trực tiếp để focus/measure; (2) lưu giá trị mutable giữa renders mà không cần re-render.
+\`\`\`tsx
+const FormExample = () => {
+  // (1) DOM ref: focus input khi mount
+  const inputRef = useRef<HTMLInputElement>(null)
+  useEffect(() => { inputRef.current?.focus() }, [])
+
+  // (2) mutable value: lưu timerId mà không trigger re-render
+  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null)
+  const start = () => { timerRef.current = setInterval(tick, 1000) }
+  const stop  = () => { if (timerRef.current) clearInterval(timerRef.current) }
+
+  return <input ref={inputRef} placeholder="auto-focused" />
+}
+\`\`\``, q_en: "What are the main uses of the useRef hook?", a_en: `useRef returns a mutable ref object whose \`.current\` property does not trigger a re-render when changed. Two primary uses: (1) directly accessing a DOM element to focus or measure it; (2) storing a mutable value that persists across renders without causing a re-render.
+\`\`\`tsx
+const FormExample = () => {
+  // (1) DOM ref: focus input on mount
+  const inputRef = useRef<HTMLInputElement>(null)
+  useEffect(() => { inputRef.current?.focus() }, [])
+
+  // (2) mutable value: store timerId without triggering re-render
+  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null)
+  const start = () => { timerRef.current = setInterval(tick, 1000) }
+  const stop  = () => { if (timerRef.current) clearInterval(timerRef.current) }
+
+  return <input ref={inputRef} placeholder="auto-focused" />
+}
+\`\`\`` },
   { id: 481, category: "React", subcategory: "Advanced Hooks", level: "advanced", q: "useId hook là gì và khi nào dùng?", a: "useId (React 18) tạo unique ID ổn định giữa server và client, giải quyết hydration mismatch khi dùng Math.random() hay counter. Dùng cho: nối input với label qua id/htmlFor, ARIA attributes cần unique IDs. Không dùng làm key trong danh sách. Prefix với CSS prefix nếu cần: `id={id + '-input'}`.", q_en: "What is the useId hook and when should you use it?", a_en: "useId (React 18) generates a stable unique ID that is consistent between server and client, solving hydration mismatches caused by Math.random() or counters. Use it for: linking inputs to labels via id/htmlFor, and ARIA attributes that require unique IDs. Do not use it as a list key. You can suffix it for multiple related elements: `id={id + '-input'}`." },
-  { id: 482, category: "React", subcategory: "Advanced Hooks", level: "intermediate", q: "useLayoutEffect khác useEffect như thế nào và khi nào dùng?", a: "useLayoutEffect chạy synchronously sau DOM update nhưng trước browser paint, blocking. useEffect chạy asynchronously sau paint, non-blocking. Dùng useLayoutEffect khi: cần đọc layout và synchronously set style/position để tránh visual flicker, ví dụ tooltip positioning. Server rendering: useLayoutEffect không chạy trên server, cần fallback.", q_en: "How does useLayoutEffect differ from useEffect and when should you use it?", a_en: "useLayoutEffect runs synchronously after DOM updates but before the browser paints — it is blocking. useEffect runs asynchronously after the paint — non-blocking. Use useLayoutEffect when you need to read DOM layout and synchronously apply styles or positions to prevent visual flicker, such as for tooltip positioning. Note: useLayoutEffect does not run on the server during SSR, so you may need a fallback." },
-  { id: 483, category: "React", subcategory: "Advanced Hooks", level: "advanced", q: "useTransition hook dùng để làm gì?", a: "useTransition (React 18) cho phép đánh dấu state update là non-urgent, React có thể interrupt và ưu tiên urgent updates trước. Trả về `[isPending, startTransition]`. Dùng khi: filtering danh sách lớn, heavy re-renders mà không muốn block UI cho urgent input. Ví dụ: typing vào search box (urgent) + updating results (transition).", q_en: "What is the useTransition hook used for?", a_en: "useTransition (React 18) lets you mark a state update as non-urgent, allowing React to interrupt it and prioritize more urgent updates first. It returns `[isPending, startTransition]`. Use it for: filtering large lists or heavy re-renders where you do not want to block UI updates for urgent input. Classic example: typing in a search box (urgent) while updating search results (transition)." },
+  { id: 482, category: "React", subcategory: "Advanced Hooks", level: "intermediate", q: "useLayoutEffect khác useEffect như thế nào và khi nào dùng?", a: "useLayoutEffect chạy synchronously sau DOM update nhưng trước browser paint, blocking. useEffect chạy asynchronously sau paint, non-blocking. Dùng useLayoutEffect khi: cần đọc layout và synchronously set style/position để tránh visual flicker, ví dụ tooltip positioning. Server rendering: useLayoutEffect không chạy trên server, cần fallback.", q_en: "How does useLayoutEffect differ from useEffect and when should you use it?", a_en: "useLayoutEffect runs synchronously after DOM updates but before the browser paints — it is blocking. useEffect runs asynchronously after the paint — non-blocking. Use useLayoutEffect when you need to read DOM layout and synchronously apply styles or positions to prevent visual flicker, such as for tooltip positioning. \n\n**Note:** useLayoutEffect does not run on the server during SSR, so you may need a fallback." },
+  { id: 483, category: "React", subcategory: "Advanced Hooks", level: "advanced", q: "useTransition hook dùng để làm gì?", a: `useTransition (React 18) cho phép đánh dấu state update là non-urgent, React có thể interrupt và ưu tiên urgent updates trước. Trả về \`[isPending, startTransition]\`. Dùng khi filtering danh sách lớn, heavy re-renders mà không muốn block UI.
+\`\`\`tsx
+const SearchPage = () => {
+  const [query, setQuery] = useState('')
+  const [results, setResults] = useState<string[]>([])
+  const [isPending, startTransition] = useTransition()
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // urgent: cập nhật input ngay lập tức
+    setQuery(e.target.value)
+
+    // non-urgent: React có thể defer để giữ UI responsive
+    startTransition(() => {
+      setResults(heavyFilter(e.target.value))
+    })
+  }
+
+  return (
+    <>
+      <input value={query} onChange={handleChange} placeholder="Search..." />
+      {isPending && <span>Filtering...</span>}
+      <ul>{results.map(r => <li key={r}>{r}</li>)}</ul>
+    </>
+  )
+}
+\`\`\``, q_en: "What is the useTransition hook used for?", a_en: `useTransition (React 18) lets you mark a state update as non-urgent, allowing React to interrupt it and prioritize more urgent updates first. It returns \`[isPending, startTransition]\`. Use it for filtering large lists or heavy re-renders where you do not want to block UI.
+\`\`\`tsx
+const SearchPage = () => {
+  const [query, setQuery] = useState('')
+  const [results, setResults] = useState<string[]>([])
+  const [isPending, startTransition] = useTransition()
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // urgent: update input immediately
+    setQuery(e.target.value)
+
+    // non-urgent: React can defer this to keep UI responsive
+    startTransition(() => {
+      setResults(heavyFilter(e.target.value))
+    })
+  }
+
+  return (
+    <>
+      <input value={query} onChange={handleChange} placeholder="Search..." />
+      {isPending && <span>Filtering...</span>}
+      <ul>{results.map(r => <li key={r}>{r}</li>)}</ul>
+    </>
+  )
+}
+\`\`\`` },
   { id: 484, category: "React", subcategory: "Advanced Hooks", level: "advanced", q: "useDeferredValue hook là gì?", a: "useDeferredValue (React 18) trả về phiên bản deferred của giá trị, React có thể giữ giá trị cũ khi render expensive component trong khi urgent update hoàn thành. Khác useTransition: không wrap update code, wrap giá trị result. Tốt khi không control code cập nhật state (nhận từ props). Kết hợp với React.memo để maximize benefit.", q_en: "What is the useDeferredValue hook?", a_en: "useDeferredValue (React 18) returns a deferred version of a value — React can keep showing the old value while an expensive component re-renders and urgent updates complete first. Unlike useTransition, you wrap the resulting value rather than the update code. It is ideal when you do not control the code that updates state (e.g., the value comes from props). Combine with React.memo to maximize the benefit." },
-  { id: 485, category: "React", subcategory: "Advanced Hooks", level: "advanced", q: "useImperativeHandle hook dùng để làm gì?", a: "useImperativeHandle kết hợp với forwardRef để tùy chỉnh những gì parent nhìn thấy qua ref, thay vì expose toàn bộ DOM node. Ví dụ: expose chỉ `focus()` và `scrollIntoView()` thay vì toàn bộ input element. Giúp đóng gói internal implementation, chỉ expose API cần thiết. Dùng khi cần imperative API từ component.", q_en: "What is useImperativeHandle used for?", a_en: "useImperativeHandle is used with forwardRef to customize what the parent sees through a ref, rather than exposing the full DOM node. For example, you can expose only `focus()` and `scrollIntoView()` instead of the entire input element. This encapsulates the internal implementation and surfaces only the necessary API. Use it when a component needs to provide an imperative interface to its parent." },
+  { id: 485, category: "React", subcategory: "Advanced Hooks", level: "advanced", q: "useImperativeHandle hook dùng để làm gì?", a: "useImperativeHandle kết hợp với forwardRef để tùy chỉnh những gì parent nhìn thấy qua ref, thay vì expose toàn bộ DOM node. \n\n**Ví dụ:** expose chỉ `focus()` và `scrollIntoView()` thay vì toàn bộ input element. Giúp đóng gói internal implementation, chỉ expose API cần thiết. Dùng khi cần imperative API từ component.", q_en: "What is useImperativeHandle used for?", a_en: "useImperativeHandle is used with forwardRef to customize what the parent sees through a ref, rather than exposing the full DOM node. For example, you can expose only `focus()` and `scrollIntoView()` instead of the entire input element. This encapsulates the internal implementation and surfaces only the necessary API. Use it when a component needs to provide an imperative interface to its parent." },
   { id: 486, category: "React", subcategory: "Advanced Hooks", level: "intermediate", q: "useDebugValue hook dùng để làm gì?", a: "useDebugValue hiển thị label tùy chỉnh cho custom hook trong React DevTools. Hữu ích khi debug complex custom hooks để thấy state hiện tại. Nhận giá trị hoặc format function (để lazy format chỉ khi DevTools mở). Chỉ cần dùng trong custom hooks được chia sẻ, không cần cho internal hooks.", q_en: "What is useDebugValue used for?", a_en: "useDebugValue displays a custom label for a custom hook in React DevTools. It is useful for debugging complex custom hooks so you can see their current state at a glance. It accepts a value or a format function (for lazy formatting that only runs when DevTools is open). Only add it to shared custom hooks — it is unnecessary for internal implementation hooks." },
   { id: 487, category: "React", subcategory: "Advanced Hooks", level: "advanced", q: "useSyncExternalStore hook là gì?", a: "useSyncExternalStore (React 18) là hook chính thức để subscribe external stores (Redux, Zustand, browser APIs) đảm bảo consistent reads trong concurrent mode. Thay thế manual subscription trong useEffect. Nhận subscribe function và getSnapshot function. Libraries như Redux đã migrate sang hook này thay vì useEffect-based subscription.", q_en: "What is the useSyncExternalStore hook?", a_en: "useSyncExternalStore (React 18) is the official hook for subscribing to external stores (Redux, Zustand, browser APIs) while guaranteeing consistent reads in Concurrent Mode. It replaces manual subscription patterns inside useEffect. It takes a subscribe function and a getSnapshot function. Libraries like Redux have migrated to this hook instead of useEffect-based subscriptions." },
   { id: 488, category: "React", subcategory: "Advanced Hooks", level: "intermediate", q: "Quy tắc của Hooks (Rules of Hooks) là gì?", a: "Hai quy tắc bắt buộc: (1) Chỉ gọi hooks ở top level — không trong vòng lặp, điều kiện hay hàm lồng, vì React theo dõi hooks theo thứ tự gọi mỗi render. (2) Chỉ gọi hooks trong function component hoặc custom hook, không trong class hay hàm JS thông thường. Vi phạm gây lỗi runtime khó debug. Cài `eslint-plugin-react-hooks` để bắt lỗi ngay lúc viết code thay vì lúc chạy.", q_en: "What are the Rules of Hooks?", a_en: "There are two mandatory rules: (1) Only call hooks at the top level — never inside loops, conditions, or nested functions — because React tracks hooks by their call order on each render. (2) Only call hooks inside function components or custom hooks, not in classes or regular JS functions. Violations cause hard-to-debug runtime errors. Install `eslint-plugin-react-hooks` to catch violations at write time rather than at runtime." },
@@ -109,19 +479,127 @@ export const REACT_NEXTJS_DATA: QAItem[] = [
   { id: 495, category: "React", subcategory: "Advanced Hooks", level: "intermediate", q: "Sự khác biệt giữa useMemo và React.memo là gì?", a: "useMemo là hook memoize giá trị/kết quả tính toán bên trong component. React.memo là HOC memoize toàn bộ component, skip re-render khi props không thay đổi (shallow comparison). Kết hợp cả hai: dùng React.memo cho component, useCallback cho callback props để React.memo hoạt động hiệu quả.", q_en: "What is the difference between useMemo and React.memo?", a_en: "useMemo is a hook that memoizes a computed value or calculation result inside a component. React.memo is a Higher-Order Component that memoizes an entire component, skipping re-renders when props have not changed (shallow comparison). Use both together: wrap the component with React.memo and wrap callback props with useCallback so React.memo's comparison works correctly." },
 
   // === React - Custom Hooks (496-505) ===
-  { id: 496, category: "React", subcategory: "Custom Hooks", level: "intermediate", q: "Custom hook là gì và cách tạo?", a: "Custom hook là JavaScript function bắt đầu bằng 'use' có thể gọi các hooks khác. Dùng để tái sử dụng stateful logic giữa components. Mỗi component sử dụng custom hook có state instance riêng biệt, không chia sẻ. Ví dụ: `function useLocalStorage(key, initial) { const [value, setValue] = useState(...); return [value, setValue]; }`.", q_en: "What is a custom hook and how do you create one?", a_en: "A custom hook is a JavaScript function whose name starts with 'use' and which can call other hooks. It is used to share stateful logic between components. Each component that uses the hook gets its own isolated state instance — state is not shared. Example: `function useLocalStorage(key, initial) { const [value, setValue] = useState(...); return [value, setValue]; }`." },
+  { id: 496, category: "React", subcategory: "Custom Hooks", level: "intermediate", q: "Custom hook là gì và cách tạo?", a: "Custom hook là JavaScript function bắt đầu bằng 'use' có thể gọi các hooks khác. Dùng để tái sử dụng stateful logic giữa components. Mỗi component sử dụng custom hook có state instance riêng biệt, không chia sẻ. \n\n**Ví dụ:** `function useLocalStorage(key, initial) { const [value, setValue] = useState(...); return [value, setValue]; }`.", q_en: "What is a custom hook and how do you create one?", a_en: "A custom hook is a JavaScript function whose name starts with 'use' and which can call other hooks. It is used to share stateful logic between components. Each component that uses the hook gets its own isolated state instance — state is not shared. \n\n**Example:** `function useLocalStorage(key, initial) { const [value, setValue] = useState(...); return [value, setValue]; }`." },
   { id: 497, category: "React", subcategory: "Custom Hooks", level: "intermediate", q: "Tại sao custom hook phải bắt đầu bằng 'use'?", a: "Quy ước 'use' prefix là contract với React và linter: nó nói với React rằng function này có thể gọi hooks bên trong. ESLint plugin react-hooks/rules-of-hooks chỉ kiểm tra functions có prefix 'use'. Không bắt đầu bằng 'use' có nghĩa là function không tuân theo rules of hooks và linter sẽ không cảnh báo nếu vi phạm.", q_en: "Why must a custom hook start with 'use'?", a_en: "The 'use' prefix is a contract with React and the linter: it signals that this function may call hooks inside. The ESLint plugin react-hooks/rules-of-hooks only enforces the Rules of Hooks on functions prefixed with 'use'. Without the prefix, the function is not treated as a hook and the linter will not warn about violations inside it." },
   { id: 498, category: "React", subcategory: "Custom Hooks", level: "intermediate", q: "Khi nào nên tách logic vào custom hook so với utility function?", a: "Dùng custom hook khi logic cần: React hooks (useState, useEffect, v.v.), React lifecycle, hay stateful behavior. Dùng utility function (pure function) khi: chỉ xử lý data transformation, validation, formatting - không cần React context. Custom hook gọi được từ components, utility function gọi từ bất cứ đâu.", q_en: "When should you extract logic into a custom hook vs a utility function?", a_en: "Use a custom hook when the logic requires React hooks (useState, useEffect, etc.), React lifecycle behavior, or stateful behavior. Use a plain utility function (pure function) when the logic only handles data transformation, validation, or formatting — no React context needed. Custom hooks can only be called from components; utility functions can be called from anywhere." },
   { id: 499, category: "React", subcategory: "Custom Hooks", level: "intermediate", q: "Viết custom hook useDebounce như thế nào?", a: "useDebounce delay việc cập nhật value cho đến khi user ngừng thay đổi trong khoảng thời gian nhất định: `function useDebounce(value, delay) { const [debounced, setDebounced] = useState(value); useEffect(() => { const timer = setTimeout(() => setDebounced(value), delay); return () => clearTimeout(timer); }, [value, delay]); return debounced; }`.", q_en: "How do you implement a useDebounce custom hook?", a_en: "useDebounce delays updating the value until the user stops changing it for a specified duration: `function useDebounce(value, delay) { const [debounced, setDebounced] = useState(value); useEffect(() => { const timer = setTimeout(() => setDebounced(value), delay); return () => clearTimeout(timer); }, [value, delay]); return debounced; }`." },
   { id: 500, category: "React", subcategory: "Custom Hooks", level: "advanced", q: "Làm thế nào để test custom hooks?", a: "Dùng @testing-library/react với `renderHook` utility: `const { result } = renderHook(() => useMyHook()); expect(result.current.value).toBe(expected)`. Để test interactions: `act(() => { result.current.setValue('new') })`. Với async hooks dùng `waitFor`. `renderHook` tạo component test wrapper để hooks có React context đầy đủ.", q_en: "How do you test custom hooks?", a_en: "Use @testing-library/react with the `renderHook` utility: `const { result } = renderHook(() => useMyHook()); expect(result.current.value).toBe(expected)`. To test interactions: `act(() => { result.current.setValue('new') })`. For async hooks use `waitFor`. `renderHook` creates a test component wrapper so hooks have full React context." },
-  { id: 501, category: "React", subcategory: "Custom Hooks", level: "intermediate", q: "usePrevious hook làm gì và cách implement?", a: "usePrevious lưu giá trị trước đó của một value sử dụng useRef. Sau mỗi render, ref được cập nhật với value hiện tại nhưng function trả về ref.current (value từ render trước): `function usePrevious(value) { const ref = useRef(undefined); useEffect(() => { ref.current = value; }); return ref.current; }`. React 19 yêu cầu truyền giá trị khởi tạo cho useRef, dùng undefined nếu không có giá trị ban đầu phù hợp.", q_en: "What does the usePrevious hook do and how do you implement it?", a_en: "usePrevious stores the previous value of a variable using useRef. After each render the ref is updated with the current value, but the function returns ref.current — the value from the previous render: `function usePrevious(value) { const ref = useRef(undefined); useEffect(() => { ref.current = value; }); return ref.current; }`. React 19 requires passing an initial value to useRef; use undefined if no suitable initial value exists." },
+  { id: 501, category: "React", subcategory: "Custom Hooks", level: "intermediate", q: "usePrevious hook làm gì và cách implement?", a: `usePrevious lưu giá trị trước đó của một value sử dụng useRef. Sau mỗi render, ref được cập nhật với value hiện tại nhưng function trả về ref.current (value từ render trước).
+\`\`\`tsx
+function usePrevious<T>(value: T): T | undefined {
+  const ref = useRef<T | undefined>(undefined)
+
+  // useEffect không có deps chạy sau MỖI render
+  // → ghi ref SAU khi render hiện tại đã xong
+  // → lần render tiếp theo, ref.current là giá trị CŨ
+  useEffect(() => {
+    ref.current = value
+  })
+
+  return ref.current
+}
+
+// Ví dụ sử dụng
+const Counter = () => {
+  const [count, setCount] = useState(0)
+  const prevCount = usePrevious(count)
+
+  return (
+    <p>
+      Current: {count}, Previous: {prevCount ?? 'none'}
+    </p>
+  )
+}
+\`\`\``, q_en: "What does the usePrevious hook do and how do you implement it?", a_en: `usePrevious stores the previous value of a variable using useRef. After each render the ref is updated with the current value, but the function returns ref.current — the value from the previous render.
+\`\`\`tsx
+function usePrevious<T>(value: T): T | undefined {
+  const ref = useRef<T | undefined>(undefined)
+
+  // useEffect with no deps runs after EVERY render
+  // → writes to ref AFTER the current render completes
+  // → on the next render, ref.current holds the OLD value
+  useEffect(() => {
+    ref.current = value
+  })
+
+  return ref.current
+}
+
+// Usage example
+const Counter = () => {
+  const [count, setCount] = useState(0)
+  const prevCount = usePrevious(count)
+
+  return (
+    <p>
+      Current: {count}, Previous: {prevCount ?? 'none'}
+    </p>
+  )
+}
+\`\`\`` },
   { id: 502, category: "React", subcategory: "Custom Hooks", level: "intermediate", q: "useFetch custom hook nên xử lý những trường hợp nào?", a: "useFetch nên handle: loading state, error state, data state, abort on unmount (AbortController), refetch capability, caching tùy chọn. Nên tránh: không xử lý race conditions, không handle 4xx/5xx HTTP errors riêng biệt. Thực tế, dùng React Query hoặc SWR tốt hơn tự viết vì chúng xử lý tất cả edge cases.", q_en: "What cases should a useFetch custom hook handle?", a_en: "useFetch should handle: loading state, error state, data state, aborting on unmount (AbortController), a refetch capability, and optional caching. Common pitfalls to avoid: not handling race conditions and not distinguishing 4xx/5xx HTTP errors. In practice, React Query or SWR are better choices than writing your own because they handle all edge cases out of the box." },
-  { id: 503, category: "React", subcategory: "Custom Hooks", level: "advanced", q: "Composition của custom hooks là gì?", a: "Custom hooks có thể gọi custom hooks khác, tạo composable layers. Ví dụ: useUser gọi useFetch, useCache, useAuth. Pattern này giống function composition, cho phép xây dựng complex behaviors từ simple hooks. Giữ mỗi hook single-responsibility, tránh hooks quá fat có nhiều trách nhiệm không liên quan.", q_en: "What is custom hook composition?", a_en: "Custom hooks can call other custom hooks, creating composable layers. For example, useUser can call useFetch, useCache, and useAuth internally. This mirrors function composition and allows building complex behaviors from simple, focused hooks. Keep each hook single-responsibility — avoid bloated hooks with multiple unrelated concerns." },
+  { id: 503, category: "React", subcategory: "Custom Hooks", level: "advanced", q: "Composition của custom hooks là gì?", a: "Custom hooks có thể gọi custom hooks khác, tạo composable layers. \n\n**Ví dụ:** useUser gọi useFetch, useCache, useAuth. Pattern này giống function composition, cho phép xây dựng complex behaviors từ simple hooks. Giữ mỗi hook single-responsibility, tránh hooks quá fat có nhiều trách nhiệm không liên quan.", q_en: "What is custom hook composition?", a_en: "Custom hooks can call other custom hooks, creating composable layers. For example, useUser can call useFetch, useCache, and useAuth internally. This mirrors function composition and allows building complex behaviors from simple, focused hooks. Keep each hook single-responsibility — avoid bloated hooks with multiple unrelated concerns." },
   { id: 504, category: "React", subcategory: "Custom Hooks", level: "intermediate", q: "Custom hook có thể return gì?", a: "Custom hook có thể return bất cứ thứ gì: object `{ value, setValue }`, array `[value, handler]` (như useState), single value, function, hay void. Convention: return array khi có 2 giá trị đơn giản (như useState), return object khi có nhiều named values. Tên phải mô tả ý nghĩa rõ ràng.", q_en: "What can a custom hook return?", a_en: "A custom hook can return anything: an object `{ value, setValue }`, an array `[value, handler]` (like useState), a single value, a function, or void. Convention: return an array for two simple values (mirroring useState), return a named object when there are multiple values to expose. Names should clearly describe their meaning." },
   { id: 505, category: "React", subcategory: "Custom Hooks", level: "advanced", q: "Patterns hay được dùng trong custom hooks là gì?", a: "Các patterns phổ biến: (1) State + Actions pattern (return state và handlers), (2) Observer pattern (subscribe/unsubscribe), (3) Factory pattern (nhận config tạo ra hook instance khác nhau), (4) Composition (gọi nhiều hooks nhỏ), (5) Bridge pattern (kết nối external library với React world). usehooks.com là nguồn tham khảo tốt.", q_en: "What patterns are commonly used when building custom hooks?", a_en: "Common patterns: (1) State + Actions — return state and handlers together; (2) Observer — subscribe/unsubscribe to external sources; (3) Factory — accept config to produce different hook instances; (4) Composition — call multiple smaller hooks internally; (5) Bridge — connect an external library to the React world. usehooks.com is a great reference for well-tested implementations." },
 
   // === React - Context & Router (506-520) ===
-  { id: 506, category: "React", subcategory: "Context & Router", level: "intermediate", q: "Context API trong React là gì và giải quyết vấn đề gì?", a: "Context API cho phép chia sẻ dữ liệu (theme, language, auth, user) qua component tree mà không cần pass props qua từng cấp trung gian (props drilling). Gồm ba phần: React.createContext(), Context.Provider (bọc tree cung cấp value), useContext (consume value trong bất kỳ component con nào).", q_en: "What is the Context API in React and what problem does it solve?", a_en: "The Context API lets you share data (theme, language, auth, user info) across the component tree without passing props through every intermediate level (prop drilling). It has three parts: React.createContext() to create a context, Context.Provider to wrap the tree and supply a value, and useContext to consume that value in any descendant component." },
+  { id: 506, category: "React", subcategory: "Context & Router", level: "intermediate", q: "Context API trong React là gì và giải quyết vấn đề gì?", a: `Context API cho phép chia sẻ dữ liệu (theme, language, auth, user) qua component tree mà không cần pass props qua từng cấp trung gian (props drilling). Gồm ba phần: createContext, Provider, useContext.
+\`\`\`tsx
+// auth-context.tsx
+interface AuthCtx { user: User | null; logout: () => void }
+const AuthContext = createContext<AuthCtx | null>(null)
+
+export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
+  const [user, setUser] = useState<User | null>(null)
+  const logout = () => setUser(null)
+  return (
+    <AuthContext.Provider value={{ user, logout }}>
+      {children}
+    </AuthContext.Provider>
+  )
+}
+
+// Hook để dùng an toàn
+export const useAuth = () => {
+  const ctx = useContext(AuthContext)
+  if (!ctx) throw new Error('useAuth must be inside AuthProvider')
+  return ctx
+}
+
+// Dùng trong component
+const Header = () => {
+  const { user, logout } = useAuth()
+  return <button onClick={logout}>Logout {user?.name}</button>
+}
+\`\`\``, q_en: "What is the Context API in React and what problem does it solve?", a_en: `The Context API lets you share data (theme, language, auth, user info) across the component tree without passing props through every intermediate level (prop drilling). It has three parts: createContext, Provider, and useContext.
+\`\`\`tsx
+// auth-context.tsx
+interface AuthCtx { user: User | null; logout: () => void }
+const AuthContext = createContext<AuthCtx | null>(null)
+
+export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
+  const [user, setUser] = useState<User | null>(null)
+  const logout = () => setUser(null)
+  return (
+    <AuthContext.Provider value={{ user, logout }}>
+      {children}
+    </AuthContext.Provider>
+  )
+}
+
+// Safe hook with guard
+export const useAuth = () => {
+  const ctx = useContext(AuthContext)
+  if (!ctx) throw new Error('useAuth must be inside AuthProvider')
+  return ctx
+}
+
+// Usage in any descendant
+const Header = () => {
+  const { user, logout } = useAuth()
+  return <button onClick={logout}>Logout {user?.name}</button>
+}
+\`\`\`` },
   { id: 507, category: "React", subcategory: "Context & Router", level: "intermediate", q: "Provider và Consumer trong Context API hoạt động như thế nào?", a: "Provider bọc phần tree cần access context, cung cấp value: `<ThemeContext.Provider value={theme}>`. Consumer là cách cũ để đọc context dùng render props pattern. useContext hook là cách hiện đại thay Consumer, ngắn gọn hơn nhiều. Khi Provider value thay đổi, tất cả consumers re-render.", q_en: "How do Provider and Consumer work in the Context API?", a_en: "Provider wraps the part of the tree that needs access to the context and supplies the value: `<ThemeContext.Provider value={theme}>`. Consumer is the legacy way to read context using the render props pattern. The useContext hook is the modern replacement for Consumer and is much more concise. When the Provider value changes, all consumers re-render." },
   { id: 508, category: "React", subcategory: "Context & Router", level: "intermediate", q: "Khi nào nên dùng Context thay vì props drilling?", a: "Dùng Context khi: dữ liệu cần ở nhiều levels sâu (theme, locale, auth), data được nhiều components dùng, props chỉ passed qua để forward (không dùng ở cấp trung gian). Không nên dùng cho state thay đổi thường xuyên vì gây nhiều re-renders. Props drilling 2-3 cấp thì không cần Context.", q_en: "When should you use Context instead of prop drilling?", a_en: "Use Context when: data is needed many levels deep (theme, locale, auth), many components need the same data, or props are only being passed through intermediate levels without being used there. Avoid Context for frequently changing state because it causes many re-renders. Prop drilling across 2-3 levels does not warrant Context." },
   { id: 509, category: "React", subcategory: "Context & Router", level: "intermediate", q: "React Router là gì và cách hoạt động?", a: "React Router là thư viện routing phổ biến nhất cho React SPA. Dựa trên history API của browser, sync URL với component tree. Components chính: BrowserRouter (provider), Routes/Route (mapping URL đến component), Link (navigation không reload). Phiên bản v6 thay đổi nhiều so với v5 với nested routes và outlet.", q_en: "What is React Router and how does it work?", a_en: "React Router is the most popular routing library for React SPAs. It uses the browser's history API to keep the URL in sync with the component tree. Core components: BrowserRouter (the provider), Routes/Route (map URLs to components), and Link (navigate without a full page reload). Version 6 introduced significant changes from v5, including improved nested routes and the Outlet component." },
@@ -143,7 +621,7 @@ export const REACT_NEXTJS_DATA: QAItem[] = [
   { id: 523, category: "React", subcategory: "Forms & Error", level: "intermediate", q: "Formik là gì và tại sao sử dụng nó?", a: "Formik là thư viện quản lý form state, validation, và submission trong React. Xử lý: touched/dirty states, error messages, submission handling, field-level và form-level validation. Giảm boilerplate code đáng kể so với quản lý state thủ công. Tích hợp tốt với Yup cho schema validation.", q_en: "What is Formik and why would you use it?", a_en: "Formik is a library for managing form state, validation, and submission in React. It handles: touched/dirty states, error messages, submission flow, and both field-level and form-level validation. It significantly reduces boilerplate compared to manual state management and integrates well with Yup for schema-based validation." },
   { id: 524, category: "React", subcategory: "Forms & Error", level: "intermediate", q: "React Hook Form khác Formik như thế nào?", a: "React Hook Form dùng uncontrolled components và refs thay vì state, nên ít re-renders hơn (performance tốt hơn). API đơn giản hơn với register, handleSubmit, formState. Bundle size nhỏ hơn Formik. Formik dễ học hơn với explicit controlled pattern. RHF được cộng đồng ưa chuộng hơn cho performance-critical forms.", q_en: "How does React Hook Form differ from Formik?", a_en: "React Hook Form uses uncontrolled components and refs instead of state, resulting in fewer re-renders and better performance. Its API is simpler: register, handleSubmit, formState. Bundle size is smaller than Formik. Formik is easier to learn with its explicit controlled pattern. The community generally prefers RHF for performance-critical forms." },
   { id: 525, category: "React", subcategory: "Forms & Error", level: "intermediate", q: "Form validation trong React được thực hiện như thế nào?", a: "Các cách: (1) Manual: check trong onChange/onSubmit, lưu errors vào state. (2) HTML5 built-in: required, minLength, pattern attributes. (3) Formik + Yup: declarative schema validation. (4) React Hook Form với resolver (Yup, Zod). Dùng Zod cho type-safe validation kết hợp TypeScript là best practice hiện đại.", q_en: "How is form validation done in React?", a_en: "Several approaches: (1) Manual — check values in onChange/onSubmit and store errors in state. (2) HTML5 built-in — required, minLength, pattern attributes. (3) Formik + Yup — declarative schema validation. (4) React Hook Form with a resolver (Yup or Zod). Using Zod for type-safe validation combined with TypeScript is the modern best practice." },
-  { id: 526, category: "React", subcategory: "Forms & Error", level: "beginner", q: "onSubmit handler trong React form ngăn reload page như thế nào?", a: "Gọi `event.preventDefault()` ở đầu onSubmit handler để chặn browser reload trang — đây là hành vi mặc định của HTML form khi submit. Ví dụ: `function handleSubmit(e) { e.preventDefault(); callApi(formData); }`. Sau đó xử lý validate, gọi API và cập nhật state tự do trong JS. Nếu dùng React Hook Form, `handleSubmit(onSubmit)` wrapper tự động gọi preventDefault nên không cần làm thủ công.", q_en: "How does an onSubmit handler prevent a page reload in a React form?", a_en: "Call `event.preventDefault()` at the top of the onSubmit handler to block the browser's default form submission behavior, which causes a full page reload. Example: `function handleSubmit(e) { e.preventDefault(); callApi(formData); }`. You can then freely validate, call APIs, and update state. When using React Hook Form, the `handleSubmit(onSubmit)` wrapper calls preventDefault automatically." },
+  { id: 526, category: "React", subcategory: "Forms & Error", level: "beginner", q: "onSubmit handler trong React form ngăn reload page như thế nào?", a: "Gọi `event.preventDefault()` ở đầu onSubmit handler để chặn browser reload trang — đây là hành vi mặc định của HTML form khi submit. \n\n**Ví dụ:** `function handleSubmit(e) { e.preventDefault(); callApi(formData); }`. Sau đó xử lý validate, gọi API và cập nhật state tự do trong JS. Nếu dùng React Hook Form, `handleSubmit(onSubmit)` wrapper tự động gọi preventDefault nên không cần làm thủ công.", q_en: "How does an onSubmit handler prevent a page reload in a React form?", a_en: "Call `event.preventDefault()` at the top of the onSubmit handler to block the browser's default form submission behavior, which causes a full page reload. \n\n**Example:** `function handleSubmit(e) { e.preventDefault(); callApi(formData); }`. You can then freely validate, call APIs, and update state. When using React Hook Form, the `handleSubmit(onSubmit)` wrapper calls preventDefault automatically." },
   { id: 527, category: "React", subcategory: "Forms & Error", level: "intermediate", q: "Error Boundary là gì và cách tạo?", a: "Error Boundary là React component bắt JavaScript errors trong component tree con và hiển thị fallback UI thay vì crash toàn app. Chỉ có thể tạo với Class Component implement `getDerivedStateFromError` (set error state) và `componentDidCatch` (log error). Thư viện react-error-boundary cung cấp `ErrorBoundary` component tiện dụng hơn.", q_en: "What is an Error Boundary and how do you create one?", a_en: "An Error Boundary is a React component that catches JavaScript errors anywhere in its child component tree and displays a fallback UI instead of crashing the whole app. It can only be created with a Class Component that implements `getDerivedStateFromError` (to set the error state) and `componentDidCatch` (to log the error). The react-error-boundary library provides a convenient `ErrorBoundary` component for function-component-based projects." },
   { id: 528, category: "React", subcategory: "Forms & Error", level: "intermediate", q: "Error Boundary không bắt được lỗi nào?", a: "Error Boundary không bắt: errors trong event handlers (phải try/catch thủ công), async code (setTimeout, Promises), server-side rendering, errors trong chính Error Boundary component. Chỉ bắt errors trong render phase, lifecycle methods, constructors của component tree bên dưới.", q_en: "What errors does an Error Boundary NOT catch?", a_en: "Error Boundaries do not catch: errors inside event handlers (use try/catch manually), errors in async code (setTimeout, Promises), server-side rendering errors, or errors thrown by the Error Boundary component itself. They only catch errors that occur during the render phase, lifecycle methods, and constructors of the component tree below them." },
   { id: 529, category: "React", subcategory: "Forms & Error", level: "advanced", q: "Làm thế nào để handle form với file upload trong React?", a: "Input type file phải là uncontrolled (không dùng value, dùng onChange để đọc files). Đọc files qua `e.target.files` (FileList object). Tạo FormData để gửi: `const fd = new FormData(); fd.append('file', file)`. Hiển thị preview với `URL.createObjectURL(file)`. Nhớ revoke URL sau khi dùng để tránh memory leak.", q_en: "How do you handle file uploads in a React form?", a_en: "File inputs must be uncontrolled — do not use the value attribute; use onChange to read the files instead. Access files via `e.target.files` (a FileList object). Build a FormData payload to send: `const fd = new FormData(); fd.append('file', file)`. Show a preview with `URL.createObjectURL(file)`. Always revoke the object URL afterward to prevent memory leaks." },
@@ -155,8 +633,100 @@ export const REACT_NEXTJS_DATA: QAItem[] = [
   { id: 535, category: "React", subcategory: "Forms & Error", level: "advanced", q: "Server-side form validation vs client-side validation khi nào dùng cái nào?", a: "Client-side validation: UX tốt hơn, instant feedback, giảm unnecessary server requests. KHÔNG thể thay thế server-side vì user có thể bypass. Server-side validation: bắt buộc cho security, validate business rules phức tạp, kiểm tra database constraints. Best practice: cả hai - client để UX, server để security và correctness.", q_en: "When should you use server-side vs client-side form validation?", a_en: "Client-side validation: better UX, instant feedback, fewer unnecessary server requests. It CANNOT replace server-side validation because users can bypass it. Server-side validation: mandatory for security, enforcing complex business rules, and checking database constraints. Best practice: use both — client-side for UX, server-side for security and correctness." },
 
   // === React - Performance & Patterns (536-550) ===
-  { id: 536, category: "React", subcategory: "Performance & Patterns", level: "intermediate", q: "React.memo là gì và cách hoạt động?", a: "React.memo là HOC memoize function component, skip re-render nếu props không thay đổi (shallow comparison). `const MemoButton = React.memo(Button)`. Nên dùng khi: component render expensive, props ít thay đổi, component được render thường xuyên bởi parent. Cần kết hợp với useCallback cho function props để có hiệu quả.", q_en: "What is React.memo and how does it work?", a_en: "React.memo is a Higher-Order Component that memoizes a function component, skipping re-renders when props have not changed (shallow comparison). `const MemoButton = React.memo(Button)`. Use it when: the component is expensive to render, props change infrequently, or the component is re-rendered often by a parent. Combine with useCallback for function props to make the comparison effective." },
-  { id: 537, category: "React", subcategory: "Performance & Patterns", level: "intermediate", q: "React.lazy và Suspense dùng để làm gì?", a: "React.lazy cho phép lazy load component, chỉ download JavaScript khi component cần render: `const LazyComp = React.lazy(() => import('./HeavyComponent'))`. Suspense là wrapper hiển thị fallback UI trong khi component đang load: `<Suspense fallback={<Spinner />}><LazyComp /></Suspense>`. Giúp code splitting, giảm initial bundle size.", q_en: "What are React.lazy and Suspense used for?", a_en: "React.lazy enables lazy loading of a component — its JavaScript is only downloaded when the component needs to render: `const LazyComp = React.lazy(() => import('./HeavyComponent'))`. Suspense is the wrapper that shows a fallback UI while the component loads: `<Suspense fallback={<Spinner />}><LazyComp /></Suspense>`. Together they enable code splitting and reduce initial bundle size." },
+  { id: 536, category: "React", subcategory: "Performance & Patterns", level: "intermediate", q: "React.memo là gì và cách hoạt động?", a: `React.memo là HOC memoize function component, skip re-render nếu props không thay đổi (shallow comparison). Nên dùng khi component render expensive và props ít thay đổi. Cần kết hợp với useCallback cho function props để có hiệu quả.
+\`\`\`tsx
+// Row chỉ re-render khi data hoặc onDelete thực sự thay đổi
+const Row = React.memo(({ data, onDelete }: RowProps) => {
+  console.log('Row render:', data.id)
+  return (
+    <tr>
+      <td>{data.name}</td>
+      <td><button onClick={() => onDelete(data.id)}>Delete</button></td>
+    </tr>
+  )
+})
+
+const Table = ({ items }: { items: Item[] }) => {
+  // useCallback để giữ stable reference, tránh Row re-render mỗi khi Table render
+  const handleDelete = useCallback((id: number) => {
+    setItems(prev => prev.filter(i => i.id !== id))
+  }, [])
+
+  return (
+    <table>
+      {items.map(item => <Row key={item.id} data={item} onDelete={handleDelete} />)}
+    </table>
+  )
+}
+\`\`\``, q_en: "What is React.memo and how does it work?", a_en: `React.memo is a Higher-Order Component that memoizes a function component, skipping re-renders when props have not changed (shallow comparison). Use it when the component is expensive to render and props change infrequently. Combine with useCallback for function props to make the comparison effective.
+\`\`\`tsx
+// Row only re-renders when data or onDelete actually changes
+const Row = React.memo(({ data, onDelete }: RowProps) => {
+  console.log('Row render:', data.id)
+  return (
+    <tr>
+      <td>{data.name}</td>
+      <td><button onClick={() => onDelete(data.id)}>Delete</button></td>
+    </tr>
+  )
+})
+
+const Table = ({ items }: { items: Item[] }) => {
+  // useCallback keeps a stable reference, preventing Row re-renders on every Table render
+  const handleDelete = useCallback((id: number) => {
+    setItems(prev => prev.filter(i => i.id !== id))
+  }, [])
+
+  return (
+    <table>
+      {items.map(item => <Row key={item.id} data={item} onDelete={handleDelete} />)}
+    </table>
+  )
+}
+\`\`\`` },
+  { id: 537, category: "React", subcategory: "Performance & Patterns", level: "intermediate", q: "React.lazy và Suspense dùng để làm gì?", a: `React.lazy cho phép lazy load component, chỉ download JavaScript khi component cần render. Suspense hiển thị fallback UI trong khi component đang load. Giúp code splitting, giảm initial bundle size.
+\`\`\`tsx
+import { lazy, Suspense } from 'react'
+
+// Bundle của HeavyChart chỉ download khi cần
+const HeavyChart = lazy(() => import('./HeavyChart'))
+
+const Dashboard = () => {
+  const [showChart, setShowChart] = useState(false)
+
+  return (
+    <div>
+      <button onClick={() => setShowChart(true)}>Load Chart</button>
+      {showChart && (
+        <Suspense fallback={<div>Loading chart...</div>}>
+          <HeavyChart />
+        </Suspense>
+      )}
+    </div>
+  )
+}
+\`\`\``, q_en: "What are React.lazy and Suspense used for?", a_en: `React.lazy enables lazy loading of a component — its JavaScript is only downloaded when the component needs to render. Suspense shows a fallback UI while the component loads. Together they enable code splitting and reduce initial bundle size.
+\`\`\`tsx
+import { lazy, Suspense } from 'react'
+
+// HeavyChart bundle is only downloaded when needed
+const HeavyChart = lazy(() => import('./HeavyChart'))
+
+const Dashboard = () => {
+  const [showChart, setShowChart] = useState(false)
+
+  return (
+    <div>
+      <button onClick={() => setShowChart(true)}>Load Chart</button>
+      {showChart && (
+        <Suspense fallback={<div>Loading chart...</div>}>
+          <HeavyChart />
+        </Suspense>
+      )}
+    </div>
+  )
+}
+\`\`\`` },
   { id: 538, category: "React", subcategory: "Performance & Patterns", level: "intermediate", q: "Virtual DOM trong React là gì?", a: "Virtual DOM là representation trong memory của DOM thực. Khi state thay đổi, React tạo Virtual DOM mới, so sánh (diff) với Virtual DOM cũ, tính ra minimal set of changes, rồi áp dụng vào DOM thực (reconciliation). Giúp tối ưu DOM operations tốn kém, nhưng không phải lúc nào cũng nhanh hơn direct DOM manipulation.", q_en: "What is the Virtual DOM in React?", a_en: "The Virtual DOM is an in-memory representation of the real DOM. When state changes, React creates a new Virtual DOM tree, diffs it against the previous one, computes the minimal set of changes, and applies them to the real DOM (reconciliation). This optimizes expensive DOM operations, though it is not always faster than direct DOM manipulation for simple cases." },
   { id: 539, category: "React", subcategory: "Performance & Patterns", level: "advanced", q: "React Fiber là gì?", a: "React Fiber là reimplementation của React's reconciliation algorithm (React 16+). Cho phép chia nhỏ rendering work thành units, có thể pause, resume, hay abort. Enables: incremental rendering, priority-based updates, concurrent features (Suspense, useTransition). Giải quyết vấn đề previous stack reconciler không thể interrupt render.", q_en: "What is React Fiber?", a_en: "React Fiber is a complete reimplementation of React's reconciliation algorithm introduced in React 16. It breaks rendering work into small units that can be paused, resumed, or aborted. This enables incremental rendering, priority-based updates, and all concurrent features like Suspense and useTransition. It solved the core problem with the previous stack reconciler, which could not interrupt a render once started." },
   { id: 540, category: "React", subcategory: "Performance & Patterns", level: "intermediate", q: "HOC (Higher Order Component) là gì?", a: "HOC là function nhận component và return component mới được enhanced: `function withAuth(Component) { return function AuthWrapper(props) { ... } }`. Pattern phổ biến cho: authentication, logging, data fetching, với-conditional rendering. Hiện nay Hooks thường thay thế nhiều use cases của HOC vì đơn giản và composable hơn.", q_en: "What is a Higher Order Component (HOC)?", a_en: "A HOC is a function that takes a component and returns a new enhanced component: `function withAuth(Component) { return function AuthWrapper(props) { ... } }`. Common use cases: authentication guards, logging, data fetching, and conditional rendering. Hooks have replaced many HOC use cases today because they are simpler and more composable." },
@@ -177,27 +747,183 @@ export const REACT_NEXTJS_DATA: QAItem[] = [
   { id: 553, category: "Next.js", subcategory: "App Router", level: "intermediate", q: "Layouts trong Next.js App Router là gì?", a: "Layout là UI chia sẻ giữa nhiều pages, preserve state khi navigate (không remount). `layout.tsx` nhận `children` prop. Nested layouts: layout lồng trong layout tạo hierarchy. Root layout (`app/layout.tsx`) bắt buộc phải có, wrap toàn app. Khác với template.tsx: template remount mỗi navigate.", q_en: "What are layouts in the Next.js App Router?", a_en: "A layout is shared UI that wraps multiple pages and preserves its state across navigations (it does not remount). `layout.tsx` receives a `children` prop. Layouts can be nested to create a hierarchy. The root layout (`app/layout.tsx`) is required and wraps the entire app. Unlike layout.tsx, template.tsx remounts on every navigation." },
   { id: 554, category: "Next.js", subcategory: "App Router", level: "intermediate", q: "loading.tsx và Suspense trong Next.js App Router?", a: "`loading.tsx` tự động tạo Suspense boundary bọc page hoặc layout, hiển thị loading UI ngay lập tức khi navigate. Streaming: Next.js stream HTML từng phần, user thấy nội dung nhanh hơn thay vì đợi toàn trang. Instant loading states không cần manually thêm Suspense và fallback UI.", q_en: "How do loading.tsx and Suspense work in the Next.js App Router?", a_en: "`loading.tsx` automatically creates a Suspense boundary around a page or layout, showing a loading UI instantly on navigation. Next.js streams HTML in chunks so users see content progressively rather than waiting for the full page. This gives instant loading states without manually adding Suspense and fallback UI." },
   { id: 555, category: "Next.js", subcategory: "App Router", level: "intermediate", q: "error.tsx và not-found.tsx trong Next.js hoạt động như thế nào?", a: "`error.tsx` phải là Client Component, nhận `error` và `reset` props, hiển thị khi có lỗi trong segment. `not-found.tsx` hiển thị khi gọi `notFound()` từ server component hoặc khi URL không match route nào. Global error.tsx ở root app/ bắt lỗi kể cả trong root layout.", q_en: "How do error.tsx and not-found.tsx work in Next.js?", a_en: "`error.tsx` must be a Client Component; it receives `error` and `reset` props and is shown when an error occurs within its route segment. `not-found.tsx` renders when `notFound()` is called from a server component or when no route matches the URL. A global error.tsx at the root of `app/` catches errors even inside the root layout." },
-  { id: 556, category: "Next.js", subcategory: "App Router", level: "intermediate", q: "Route Groups trong Next.js là gì?", a: "Route Groups dùng ngoặc đơn `(groupName)` để tổ chức routes mà không ảnh hưởng URL. Ví dụ: `(auth)/login` và `(auth)/register` share cùng layout auth nhưng URL vẫn là `/login` và `/register`. Useful để: apply layout cho subset of routes, organize large codebases theo features.", q_en: "What are Route Groups in Next.js?", a_en: "Route Groups use parentheses `(groupName)` to organize routes without affecting the URL. For example, `(auth)/login` and `(auth)/register` share the same auth layout but the URLs remain `/login` and `/register`. Useful for: applying a layout to a subset of routes, and organizing large codebases by feature." },
+  { id: 556, category: "Next.js", subcategory: "App Router", level: "intermediate", q: "Route Groups trong Next.js là gì?", a: "Route Groups dùng ngoặc đơn `(groupName)` để tổ chức routes mà không ảnh hưởng URL. \n\n**Ví dụ:** `(auth)/login` và `(auth)/register` share cùng layout auth nhưng URL vẫn là `/login` và `/register`. Useful để: apply layout cho subset of routes, organize large codebases theo features.", q_en: "What are Route Groups in Next.js?", a_en: "Route Groups use parentheses `(groupName)` to organize routes without affecting the URL. For example, `(auth)/login` and `(auth)/register` share the same auth layout but the URLs remain `/login` and `/register`. Useful for: applying a layout to a subset of routes, and organizing large codebases by feature." },
   { id: 557, category: "Next.js", subcategory: "App Router", level: "intermediate", q: "Dynamic routes và catch-all routes trong Next.js App Router?", a: "Dynamic routes trong App Router sử dụng cú pháp folder name trong ngoặc vuông, ví dụ app/blog/[slug]/page.tsx sẽ match URL /blog/anything và truy cập giá trị qua params.slug trong component. Catch-all routes dùng cú pháp ba chấm app/[...slug]/page.tsx để match nhiều segments cùng lúc như /a/b/c, lúc này params.slug là một mảng ['a', 'b', 'c']. Optional catch-all routes app/[[...slug]]/page.tsx hoạt động tương tự nhưng còn match cả root route khi không có segment nào. Khi dùng TypeScript, ta nên định nghĩa kiểu cho params trong PageProps để đảm bảo type safety, ví dụ { params: { slug: string } } cho dynamic route hoặc { params: { slug: string[] } } cho catch-all.", q_en: "How do dynamic routes and catch-all routes work in the Next.js App Router?", a_en: "Dynamic routes use bracket folder names: `app/blog/[slug]/page.tsx` matches `/blog/anything` and exposes the value as `params.slug`. Catch-all routes use spread syntax `app/[...slug]/page.tsx` to match multiple segments like `/a/b/c`, where `params.slug` is the array `['a', 'b', 'c']`. Optional catch-all routes `app/[[...slug]]/page.tsx` also match the root route when no segments are present. With TypeScript, type the params in PageProps for type safety: `{ params: { slug: string } }` for dynamic routes or `{ params: { slug: string[] } }` for catch-all." },
   { id: 558, category: "Next.js", subcategory: "App Router", level: "advanced", q: "Parallel Routes và Intercepting Routes trong Next.js là gì?", a: "Parallel Routes dùng `@slot` convention để render nhiều pages cùng lúc trong cùng layout (ví dụ modal + page). Intercepting Routes (`(.)path`, `(..)path`) cho phép intercept route và hiển thị trong context hiện tại (như Instagram photo modal). Phù hợp cho modal workflows phức tạp không mất URL sharability.", q_en: "What are Parallel Routes and Intercepting Routes in Next.js?", a_en: "Parallel Routes use the `@slot` folder convention to render multiple pages simultaneously within the same layout (e.g., a modal alongside a page). Intercepting Routes (`(.)path`, `(..)path`) let you intercept a navigation and display the target route in the current context — like Instagram's photo modal. Both patterns are ideal for complex modal workflows that need shareable URLs." },
   { id: 559, category: "Next.js", subcategory: "App Router", level: "beginner", q: "Metadata trong Next.js App Router được định nghĩa như thế nào?", a: "Export `metadata` object hoặc `generateMetadata` function từ page.tsx hoặc layout.tsx. Tự động merge metadata từ parent layouts. `export const metadata = { title: 'Page Title', description: '...' }`. `generateMetadata` là async function nhận params để tạo dynamic metadata cho dynamic routes. Thay thế cho next/head.", q_en: "How is metadata defined in the Next.js App Router?", a_en: "Export a `metadata` object or a `generateMetadata` function from page.tsx or layout.tsx. Metadata is automatically merged from parent layouts. `export const metadata = { title: 'Page Title', description: '...' }`. `generateMetadata` is an async function that receives params, enabling dynamic metadata for dynamic routes. This replaces the old next/head approach." },
   { id: 560, category: "Next.js", subcategory: "App Router", level: "intermediate", q: "generateStaticParams trong Next.js App Router dùng để làm gì?", a: "generateStaticParams export từ dynamic route page để pre-generate static paths tại build time, tương đương getStaticPaths trong Pages Router. `export async function generateStaticParams() { return posts.map(p => ({ slug: p.slug })) }`. Kết hợp với Static Generation để tạo static pages cho mọi possible value.", q_en: "What is generateStaticParams used for in the Next.js App Router?", a_en: "generateStaticParams is exported from a dynamic route page to pre-generate static paths at build time, equivalent to getStaticPaths in the Pages Router. `export async function generateStaticParams() { return posts.map(p => ({ slug: p.slug })) }`. Combined with Static Generation, it creates static pages for every possible parameter value." },
 
   // === Next.js - Server/Client Components (561-570) ===
-  { id: 561, category: "Next.js", subcategory: "Server/Client Components", level: "intermediate", q: "React Server Components là gì?", a: "Server Components render hoàn toàn trên server, HTML được gửi xuống client. Không có JavaScript bundle gửi xuống cho server components. Có thể trực tiếp access database, file system, server-only APIs. Không hỗ trợ: state, effects, event handlers, browser APIs. Mặc định trong App Router, giúp giảm bundle size và cải thiện performance.", q_en: "What are React Server Components?", a_en: "Server Components render entirely on the server and send HTML to the client. No JavaScript bundle is shipped to the client for server components. They can directly access databases, the file system, and server-only APIs. They do not support: state, effects, event handlers, or browser APIs. They are the default in the App Router and help reduce bundle size and improve performance." },
-  { id: 562, category: "Next.js", subcategory: "Server/Client Components", level: "beginner", q: "'use client' directive trong Next.js dùng khi nào?", a: "`'use client'` đặt ở đầu file để đánh dấu component là Client Component. Cần thiết khi component dùng: useState, useEffect, event handlers (onClick), browser APIs (window, localStorage), third-party client libraries. Mặc định không cần directive - component là Server Component. Đặt boundary tại component cần interactivity, không cần wrap toàn app.", q_en: "When should you use the 'use client' directive in Next.js?", a_en: "Place `'use client'` at the top of a file to mark it as a Client Component. It is required when the component uses: useState, useEffect, event handlers (onClick), browser APIs (window, localStorage), or third-party client-side libraries. By default no directive is needed — components are Server Components. Place the boundary at the component that needs interactivity; there is no need to wrap the entire app." },
+  { id: 561, category: "Next.js", subcategory: "Server/Client Components", level: "intermediate", q: "React Server Components là gì?", a: `Server Components render hoàn toàn trên server, HTML được gửi xuống client. Không có JavaScript bundle gửi xuống client. Có thể trực tiếp access database, file system, server-only APIs. Không hỗ trợ: state, effects, event handlers, browser APIs. Mặc định trong App Router.
+\`\`\`tsx
+// app/products/page.tsx — Server Component (mặc định)
+// Có thể dùng async/await trực tiếp, access DB, không cần useEffect
+async function ProductsPage() {
+  // Chạy trên server, không ship JS xuống client
+  const products = await db.products.findMany()
+
+  return (
+    <ul>
+      {products.map(p => (
+        <li key={p.id}>{p.name} — {p.price} VND</li>
+      ))}
+    </ul>
+  )
+}
+
+export default ProductsPage
+\`\`\``, q_en: "What are React Server Components?", a_en: `Server Components render entirely on the server and send HTML to the client. No JavaScript bundle is shipped to the client. They can directly access databases, the file system, and server-only APIs. They do not support: state, effects, event handlers, or browser APIs. They are the default in the App Router.
+\`\`\`tsx
+// app/products/page.tsx — Server Component (default)
+// Can use async/await directly, access DB, no need for useEffect
+async function ProductsPage() {
+  // Runs on server only, no JS shipped to client
+  const products = await db.products.findMany()
+
+  return (
+    <ul>
+      {products.map(p => (
+        <li key={p.id}>{p.name} — {p.price} USD</li>
+      ))}
+    </ul>
+  )
+}
+
+export default ProductsPage
+\`\`\`` },
+  { id: 562, category: "Next.js", subcategory: "Server/Client Components", level: "beginner", q: "'use client' directive trong Next.js dùng khi nào?", a: `\`'use client'\` đặt ở đầu file để đánh dấu component là Client Component. Cần thiết khi component dùng: useState, useEffect, event handlers, browser APIs. Đặt boundary tại component cần interactivity, không cần wrap toàn app.
+\`\`\`tsx
+// components/like-button.tsx
+'use client'  // ← bắt buộc vì dùng useState và onClick
+
+import { useState } from 'react'
+
+export function LikeButton({ initialCount }: { initialCount: number }) {
+  const [count, setCount] = useState(initialCount)
+  return (
+    <button onClick={() => setCount(c => c + 1)}>
+      ❤️ {count}
+    </button>
+  )
+}
+
+// app/post/page.tsx — Server Component, không cần 'use client'
+import { LikeButton } from '@/components/like-button'
+
+export default async function PostPage() {
+  const post = await fetchPost()
+  return (
+    <article>
+      <h1>{post.title}</h1>
+      {/* Server Component chứa Client Component — OK */}
+      <LikeButton initialCount={post.likes} />
+    </article>
+  )
+}
+\`\`\``, q_en: "When should you use the 'use client' directive in Next.js?", a_en: `Place \`'use client'\` at the top of a file to mark it as a Client Component. It is required when the component uses: useState, useEffect, event handlers, or browser APIs. Place the boundary at the component that needs interactivity; there is no need to wrap the entire app.
+\`\`\`tsx
+// components/like-button.tsx
+'use client'  // ← required because we use useState and onClick
+
+import { useState } from 'react'
+
+export function LikeButton({ initialCount }: { initialCount: number }) {
+  const [count, setCount] = useState(initialCount)
+  return (
+    <button onClick={() => setCount(c => c + 1)}>
+      ❤️ {count}
+    </button>
+  )
+}
+
+// app/post/page.tsx — Server Component, no 'use client' needed
+import { LikeButton } from '@/components/like-button'
+
+export default async function PostPage() {
+  const post = await fetchPost()
+  return (
+    <article>
+      <h1>{post.title}</h1>
+      {/* Server Component can include Client Components — OK */}
+      <LikeButton initialCount={post.likes} />
+    </article>
+  )
+}
+\`\`\`` },
   { id: 563, category: "Next.js", subcategory: "Server/Client Components", level: "intermediate", q: "Server Component có thể import Client Component không và ngược lại?", a: "Server Component có thể import và render Client Component - đây là hướng dependency bình thường. Ngược lại: Client Component KHÔNG thể import Server Component vì server component sẽ bị client-ize. Nhưng Server Component có thể truyền Server Component làm children/props cho Client Component (pattern được phép).", q_en: "Can a Server Component import a Client Component and vice versa?", a_en: "A Server Component can import and render a Client Component — this is the normal dependency direction. The reverse is not allowed: a Client Component CANNOT import a Server Component because the server component would be pulled into the client bundle. However, a Server Component can pass another Server Component as children or props to a Client Component — this pattern is permitted." },
   { id: 564, category: "Next.js", subcategory: "Server/Client Components", level: "intermediate", q: "Khi nào nên dùng Server Component, khi nào dùng Client Component?", a: "Server Component khi cần: data fetching, access backend resources, keep sensitive info (API keys), reduce client bundle. Client Component khi cần: onClick, onChange event handlers, useState/useEffect, browser APIs, real-time updates, custom hooks. Default là Server, chỉ dùng 'use client' khi thực sự cần interactivity.", q_en: "When should you use a Server Component vs a Client Component?", a_en: "Use a Server Component when you need: data fetching, access to backend resources, keeping sensitive data (API keys) off the client, or reducing the client bundle. Use a Client Component when you need: onClick/onChange event handlers, useState/useEffect, browser APIs, real-time updates, or custom hooks. Default to Server; only add 'use client' when interactivity is truly required." },
   { id: 565, category: "Next.js", subcategory: "Server/Client Components", level: "advanced", q: "Server Component props phải tuân theo quy tắc gì?", a: "Props từ Server sang Client Component phải serializable (có thể convert to JSON): strings, numbers, booleans, arrays, plain objects. Không thể truyền: functions, class instances, Symbols, Date objects (trực tiếp), React elements cũng có hạn chế. JSX làm children có thể pass. Cần serialize Date thành string trước khi pass.", q_en: "What rules must Server Component props follow?", a_en: "Props passed from a Server Component to a Client Component must be serializable (convertible to JSON): strings, numbers, booleans, arrays, and plain objects. You cannot pass: functions, class instances, Symbols, or Date objects directly. JSX as children can be passed. Serialize Dates to strings before passing them as props." },
-  { id: 566, category: "Next.js", subcategory: "Server/Client Components", level: "intermediate", q: "Context API có hoạt động với Server Components không?", a: "Context API không hoạt động trong Server Components vì context phụ thuộc React runtime trên client. Chỉ Client Components trong component tree mới có thể dùng Context. Để share data trong Server Components, truyền qua props hoặc dùng Next.js built-ins như hàm await cookies() và await headers() (async kể từ Next.js 15+). Tạo Context Provider là Client Component và wrap children.", q_en: "Does the Context API work with Server Components?", a_en: "The Context API does not work in Server Components because context depends on the React runtime running on the client. Only Client Components in the tree can use Context. To share data in Server Components, pass it via props or use Next.js built-ins like `await cookies()` and `await headers()` (both async since Next.js 15+). Create the Context Provider as a Client Component and wrap the children inside it." },
-  { id: 567, category: "Next.js", subcategory: "Server/Client Components", level: "advanced", q: "Taint API trong React và Next.js là gì?", a: "React Taint API (experimental) cho phép đánh dấu objects và values là sensitive để ngăn vô tình pass xuống Client Components. `taintObjectReference(message, object)` và `taintUniqueValue(message, object, value)`. Ví dụ: taint user password, API keys. Giúp prevent server-side secrets leak xuống client bundle.", q_en: "What is the Taint API in React and Next.js?", a_en: "The React Taint API (experimental) lets you mark objects and values as sensitive to prevent accidentally passing them to Client Components. `taintObjectReference(message, object)` and `taintUniqueValue(message, object, value)`. For example: taint a user's password or an API key. This helps prevent server-side secrets from leaking into the client bundle." },
-  { id: 568, category: "Next.js", subcategory: "Server/Client Components", level: "intermediate", q: "Third-party libraries và Server Components có vấn đề gì?", a: "Nhiều npm packages cũ dùng browser APIs hay React client features mà không có 'use client'. Giải pháp: tạo wrapper Client Component import library đó, thêm 'use client' ở wrapper. Next.js có boundary tự động cho packages với 'use client' trong package.json exports. Kiểm tra compatibility trước khi dùng library mới.", q_en: "What issues can arise with third-party libraries and Server Components?", a_en: "Many older npm packages use browser APIs or React client features without including a 'use client' directive. Solution: create a wrapper Client Component that imports the library and add 'use client' to the wrapper. Next.js automatically handles packages that declare 'use client' in their package.json exports. Always check library compatibility before adding a new dependency." },
+  { id: 566, category: "Next.js", subcategory: "Server/Client Components", level: "intermediate", q: "Context API có hoạt động với Server Components không?", a: `Context API không hoạt động trong Server Components vì context phụ thuộc React runtime trên client. Chỉ Client Components mới có thể dùng Context. Để share data trong Server Components, truyền qua props hoặc dùng Next.js built-ins. Tạo Context Provider là Client Component và wrap children.
+\`\`\`tsx
+// providers/theme-provider.tsx — phải là Client Component
+'use client'
+import { createContext, useContext, useState } from 'react'
+
+const ThemeContext = createContext<'light' | 'dark'>('light')
+
+export function ThemeProvider({ children }: { children: React.ReactNode }) {
+  const [theme, setTheme] = useState<'light' | 'dark'>('light')
+  return (
+    <ThemeContext.Provider value={theme}>
+      {children}
+    </ThemeContext.Provider>
+  )
+}
+
+export const useTheme = () => useContext(ThemeContext)
+
+// app/layout.tsx — Server Component bọc Provider
+import { ThemeProvider } from '@/providers/theme-provider'
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html>
+      <body>
+        <ThemeProvider>{children}</ThemeProvider>
+      </body>
+    </html>
+  )
+}
+\`\`\``, q_en: "Does the Context API work with Server Components?", a_en: `The Context API does not work in Server Components because context depends on the React runtime on the client. Only Client Components can use Context. To share data in Server Components, pass it via props or use Next.js built-ins. Create the Context Provider as a Client Component and wrap the children inside it.
+\`\`\`tsx
+// providers/theme-provider.tsx — must be a Client Component
+'use client'
+import { createContext, useContext, useState } from 'react'
+
+const ThemeContext = createContext<'light' | 'dark'>('light')
+
+export function ThemeProvider({ children }: { children: React.ReactNode }) {
+  const [theme, setTheme] = useState<'light' | 'dark'>('light')
+  return (
+    <ThemeContext.Provider value={theme}>
+      {children}
+    </ThemeContext.Provider>
+  )
+}
+
+export const useTheme = () => useContext(ThemeContext)
+
+// app/layout.tsx — Server Component wrapping the Provider
+import { ThemeProvider } from '@/providers/theme-provider'
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html>
+      <body>
+        <ThemeProvider>{children}</ThemeProvider>
+      </body>
+    </html>
+  )
+}
+\`\`\`` },
+  { id: 567, category: "Next.js", subcategory: "Server/Client Components", level: "advanced", q: "Taint API trong React và Next.js là gì?", a: "React Taint API (experimental) cho phép đánh dấu objects và values là sensitive để ngăn vô tình pass xuống Client Components. `taintObjectReference(message, object)` và `taintUniqueValue(message, object, value)`. \n\n**Ví dụ:** taint user password, API keys. Giúp prevent server-side secrets leak xuống client bundle.", q_en: "What is the Taint API in React and Next.js?", a_en: "The React Taint API (experimental) lets you mark objects and values as sensitive to prevent accidentally passing them to Client Components. `taintObjectReference(message, object)` and `taintUniqueValue(message, object, value)`. For example: taint a user's password or an API key. This helps prevent server-side secrets from leaking into the client bundle." },
+  { id: 568, category: "Next.js", subcategory: "Server/Client Components", level: "intermediate", q: "Third-party libraries và Server Components có vấn đề gì?", a: "Nhiều npm packages cũ dùng browser APIs hay React client features mà không có 'use client'. Giải pháp: tạo wrapper Client Component import library đó, thêm 'use client' ở wrapper. Next.js có boundary tự động cho packages với 'use client' trong package.json exports. Kiểm tra compatibility trước khi dùng library mới.", q_en: "What issues can arise with third-party libraries and Server Components?", a_en: "Many older npm packages use browser APIs or React client features without including a 'use client' directive. \n\n**Solution:** create a wrapper Client Component that imports the library and add 'use client' to the wrapper. Next.js automatically handles packages that declare 'use client' in their package.json exports. Always check library compatibility before adding a new dependency." },
   { id: 569, category: "Next.js", subcategory: "Server/Client Components", level: "beginner", q: "Server-only và client-only packages trong Next.js là gì?", a: "`server-only` package throw error tại build time nếu vô tình import server code vào client bundle. `client-only` throw nếu import client code trên server. Dùng: `import 'server-only'` đầu file chứa database connections, API keys. Giúp catch mistakes sớm thay vì runtime errors hay security issues.", q_en: "What are the server-only and client-only packages in Next.js?", a_en: "The `server-only` package throws a build-time error if server code is accidentally imported into the client bundle. `client-only` throws if client code is imported on the server. Usage: add `import 'server-only'` at the top of files containing database connections or API keys. This catches mistakes early rather than discovering them as runtime errors or security vulnerabilities." },
   { id: 570, category: "Next.js", subcategory: "Server/Client Components", level: "advanced", q: "React Server Components streaming và progressive rendering là gì?", a: "Next.js stream HTML theo từng phần thay vì đợi toàn page ready. Server components có thể wrap trong Suspense, phần xung quanh stream trước, khi data ready phần trong Suspense stream tiếp. User thấy content nhanh hơn. TTFB tốt hơn. Cần design components để render độc lập và không block lẫn nhau.", q_en: "What is streaming and progressive rendering with React Server Components?", a_en: "Next.js streams HTML in chunks rather than waiting for the full page to be ready. Server components wrapped in Suspense allow the surrounding content to stream first; when data is ready, the Suspense content streams next. Users see content faster and TTFB improves. Design components to render independently so they do not block each other." },
 
   // === Next.js - Rendering (571-580) ===
-  { id: 571, category: "Next.js", subcategory: "Rendering", level: "beginner", q: "SSR (Server-Side Rendering) trong Next.js là gì?", a: "SSR render HTML trên server cho mỗi request, trả về fully-rendered HTML cho browser. Tốt cho: SEO, trang có data thay đổi thường xuyên theo user, first paint nhanh. Trong App Router: mặc định Server Components là SSR. Pages Router: dùng `getServerSideProps`. Nhược điểm: server phải xử lý nhiều, TTFB cao hơn SSG.", q_en: "What is SSR (Server-Side Rendering) in Next.js?", a_en: "SSR renders HTML on the server for every request and delivers fully-rendered HTML to the browser. It is great for: SEO, pages with frequently changing per-user data, and fast first paint. In the App Router, Server Components are SSR by default. In the Pages Router, use `getServerSideProps`. Downsides: higher server load and higher TTFB compared to SSG." },
-  { id: 572, category: "Next.js", subcategory: "Rendering", level: "beginner", q: "SSG (Static Site Generation) trong Next.js là gì?", a: "SSG tạo HTML tại build time, serve static files từ CDN. Cực kỳ nhanh, không cần server processing mỗi request. Phù hợp cho: blog, documentation, marketing pages, data ít thay đổi. Pages Router: không có getServerSideProps. App Router: dùng `export const dynamic = 'force-static'`. Nhược điểm: phải rebuild để cập nhật content.", q_en: "What is SSG (Static Site Generation) in Next.js?", a_en: "SSG generates HTML at build time and serves static files from a CDN. It is extremely fast with no per-request server processing. Best for: blogs, documentation, marketing pages, and data that changes infrequently. In the App Router use `export const dynamic = 'force-static'`. Downside: you must rebuild to update content." },
+  { id: 571, category: "Next.js", subcategory: "Rendering", level: "beginner", q: "SSR (Server-Side Rendering) trong Next.js là gì?", a: "SSR render HTML trên server cho mỗi request, trả về fully-rendered HTML cho browser. Tốt cho: SEO, trang có data thay đổi thường xuyên theo user, first paint nhanh. Trong App Router: mặc định Server Components là SSR. Pages Router: dùng `getServerSideProps`. \n\n**Nhược điểm:** server phải xử lý nhiều, TTFB cao hơn SSG.", q_en: "What is SSR (Server-Side Rendering) in Next.js?", a_en: "SSR renders HTML on the server for every request and delivers fully-rendered HTML to the browser. It is great for: SEO, pages with frequently changing per-user data, and fast first paint. In the App Router, Server Components are SSR by default. In the Pages Router, use `getServerSideProps`. Downsides: higher server load and higher TTFB compared to SSG." },
+  { id: 572, category: "Next.js", subcategory: "Rendering", level: "beginner", q: "SSG (Static Site Generation) trong Next.js là gì?", a: "SSG tạo HTML tại build time, serve static files từ CDN. Cực kỳ nhanh, không cần server processing mỗi request. Phù hợp cho: blog, documentation, marketing pages, data ít thay đổi. Pages Router: không có getServerSideProps. App Router: dùng `export const dynamic = 'force-static'`. \n\n**Nhược điểm:** phải rebuild để cập nhật content.", q_en: "What is SSG (Static Site Generation) in Next.js?", a_en: "SSG generates HTML at build time and serves static files from a CDN. It is extremely fast with no per-request server processing. Best for: blogs, documentation, marketing pages, and data that changes infrequently. In the App Router use `export const dynamic = 'force-static'`. Downside: you must rebuild to update content." },
   { id: 573, category: "Next.js", subcategory: "Rendering", level: "intermediate", q: "ISR (Incremental Static Regeneration) là gì?", a: "ISR kết hợp SSG và SSR: trang được generate tĩnh, nhưng sau `revalidate` seconds có thể regenerate lại. User đầu tiên sau revalidate nhận stale content, trigger background regeneration. User sau nhận fresh content. Pages Router: `return { revalidate: 60 }` trong getStaticProps. App Router: `export const revalidate = 60` hoặc `fetch(url, { next: { revalidate: 60 } })`.", q_en: "What is ISR (Incremental Static Regeneration)?", a_en: "ISR blends SSG and SSR: pages are statically generated but can be regenerated in the background after a `revalidate` interval. The first user after the interval receives stale content and triggers a background regeneration; subsequent users get the fresh version. Pages Router: `return { revalidate: 60 }` in getStaticProps. App Router: `export const revalidate = 60` or `fetch(url, { next: { revalidate: 60 } })`." },
   { id: 574, category: "Next.js", subcategory: "Rendering", level: "intermediate", q: "On-demand revalidation trong Next.js là gì?", a: "On-demand revalidation cho phép invalidate cache và regenerate pages ngay lập tức thay vì đợi timeout. Pages Router: `res.revalidate('/path')` trong API route. App Router: `revalidatePath('/path')` hoặc `revalidateTag('posts')` trong Server Action hoặc Route Handler. Phù hợp khi CMS webhook trigger cần update content ngay.", q_en: "What is on-demand revalidation in Next.js?", a_en: "On-demand revalidation lets you invalidate the cache and regenerate pages immediately rather than waiting for a timer. Pages Router: call `res.revalidate('/path')` inside an API route. App Router: call `revalidatePath('/path')` or `revalidateTag('posts')` inside a Server Action or Route Handler. Ideal when a CMS webhook fires and content needs to update right away." },
   { id: 575, category: "Next.js", subcategory: "Rendering", level: "intermediate", q: "fetch cache trong Next.js App Router hoạt động như thế nào?", a: "Next.js extend native fetch với caching: `fetch(url)` mặc định `no-store` từ Next.js 15+ (trước đó cache), `{ cache: 'force-cache' }` để opt-in cache, `{ next: { revalidate: 60 } }` revalidate sau 60 giây. `{ next: { tags: ['posts'] } }` tag để invalidate theo tag. Data cache tách biệt với Full Route Cache.", q_en: "How does fetch caching work in the Next.js App Router?", a_en: "Next.js extends the native fetch API with caching options: `fetch(url)` defaults to `no-store` from Next.js 15+ (it was cached in earlier versions), `{ cache: 'force-cache' }` opts into caching, and `{ next: { revalidate: 60 } }` revalidates after 60 seconds. `{ next: { tags: ['posts'] } }` assigns a tag for targeted invalidation. The Data Cache is separate from the Full Route Cache." },
@@ -208,8 +934,92 @@ export const REACT_NEXTJS_DATA: QAItem[] = [
   { id: 580, category: "Next.js", subcategory: "Rendering", level: "advanced", q: "Partial Prerendering (PPR) trong Next.js là gì?", a: "Partial Prerendering (experimental, Next.js 14) cho phép combine static shell và dynamic holes trong cùng một page. Static parts được prerender và cached, dynamic parts (trong Suspense) được stream khi request. User nhận static shell ngay lập tức, dynamic content load sau. Tốt nhất của SSG và SSR trong một trang.", q_en: "What is Partial Prerendering (PPR) in Next.js?", a_en: "Partial Prerendering (experimental, introduced in Next.js 14) combines a static shell with dynamic holes on a single page. Static parts are prerendered and cached; dynamic parts (inside Suspense boundaries) are streamed on each request. Users receive the static shell instantly and dynamic content loads in afterward — the best of SSG and SSR on a single page." },
 
   // === Next.js - API & Server Actions (581-590) ===
-  { id: 581, category: "Next.js", subcategory: "API & Server Actions", level: "beginner", q: "Route Handlers (API Routes) trong Next.js App Router là gì?", a: "Route Handlers là cách tạo API endpoints trong Next.js App Router bằng cách đặt file route.ts trong bất kỳ thư mục nào thuộc app/, ví dụ app/api/users/route.ts sẽ tạo endpoint tại /api/users. Mỗi HTTP method được export dưới dạng named function riêng biệt như export async function GET(request: NextRequest) {} và export async function POST(request: NextRequest) {}, cho phép xử lý nhiều methods trong cùng một file. Route Handlers sử dụng Web APIs chuẩn (Request và Response) thay vì req/res của Node.js, giúp code portable và nhất quán với các web standards hiện đại. Đây là giải pháp thay thế cho pages/api/ trong Pages Router, với ưu điểm hỗ trợ streaming responses, edge runtime, và tích hợp tốt hơn với các tính năng caching của App Router.", q_en: "What are Route Handlers (API Routes) in the Next.js App Router?", a_en: "Route Handlers are how you create API endpoints in the Next.js App Router by placing a route.ts file inside any directory under app/. For example, app/api/users/route.ts creates an endpoint at /api/users. Each HTTP method is exported as a named function: `export async function GET(request: NextRequest) {}` and `export async function POST(request: NextRequest) {}`, allowing multiple methods in one file. Route Handlers use standard Web APIs (Request and Response) instead of Node.js req/res, making the code portable and consistent with modern web standards. They replace pages/api/ from the Pages Router with added support for streaming responses, edge runtime, and better integration with the App Router's caching features." },
-  { id: 582, category: "Next.js", subcategory: "API & Server Actions", level: "intermediate", q: "Server Actions trong Next.js là gì?", a: "Server Actions là async functions chạy trên server, được gọi từ Client Components hoặc forms. Khai báo với `'use server'` directive. Cho phép mutate data trực tiếp từ component mà không cần tạo API endpoint. Tự động xử lý serialization, error handling. Tốt cho: form submission, button actions, mutations.", q_en: "What are Server Actions in Next.js?", a_en: "Server Actions are async functions that run on the server and can be called from Client Components or HTML forms. Declare them with the `'use server'` directive. They allow mutating data directly from a component without building a separate API endpoint. Next.js automatically handles serialization and error handling. Best suited for: form submissions, button-triggered mutations, and any server-side data changes." },
+  { id: 581, category: "Next.js", subcategory: "API & Server Actions", level: "beginner", q: "Route Handlers (API Routes) trong Next.js App Router là gì?", a: `Route Handlers là cách tạo API endpoints trong App Router bằng cách đặt file route.ts trong thư mục app/. Mỗi HTTP method được export dưới dạng named function riêng biệt. Sử dụng Web APIs chuẩn (Request/Response) thay vì req/res của Node.js.
+\`\`\`typescript
+// app/api/users/route.ts → endpoint: /api/users
+
+import { NextRequest, NextResponse } from 'next/server'
+
+export async function GET(request: NextRequest) {
+  const { searchParams } = new URL(request.url)
+  const page = Number(searchParams.get('page') ?? 1)
+  const users = await db.users.findMany({ skip: (page - 1) * 10, take: 10 })
+  return NextResponse.json(users)
+}
+
+export async function POST(request: NextRequest) {
+  const body = await request.json()
+  const user = await db.users.create({ data: body })
+  return NextResponse.json(user, { status: 201 })
+}
+\`\`\``, q_en: "What are Route Handlers (API Routes) in the Next.js App Router?", a_en: `Route Handlers are how you create API endpoints in the App Router by placing a route.ts file inside any directory under app/. Each HTTP method is exported as a named function. They use standard Web APIs (Request/Response) instead of Node.js req/res.
+\`\`\`typescript
+// app/api/users/route.ts → endpoint: /api/users
+
+import { NextRequest, NextResponse } from 'next/server'
+
+export async function GET(request: NextRequest) {
+  const { searchParams } = new URL(request.url)
+  const page = Number(searchParams.get('page') ?? 1)
+  const users = await db.users.findMany({ skip: (page - 1) * 10, take: 10 })
+  return NextResponse.json(users)
+}
+
+export async function POST(request: NextRequest) {
+  const body = await request.json()
+  const user = await db.users.create({ data: body })
+  return NextResponse.json(user, { status: 201 })
+}
+\`\`\`` },
+  { id: 582, category: "Next.js", subcategory: "API & Server Actions", level: "intermediate", q: "Server Actions trong Next.js là gì?", a: `Server Actions là async functions chạy trên server, được gọi từ Client Components hoặc forms. Khai báo với \`'use server'\` directive. Cho phép mutate data trực tiếp mà không cần tạo API endpoint riêng.
+\`\`\`tsx
+// actions/post-actions.ts
+'use server'
+import { revalidatePath } from 'next/cache'
+
+export async function createPost(formData: FormData) {
+  const title = formData.get('title') as string
+  await db.posts.create({ title })
+  revalidatePath('/posts') // làm mới cache trang sau khi mutate
+}
+
+// components/new-post-form.tsx
+'use client'
+import { createPost } from '@/actions/post-actions'
+
+export function NewPostForm() {
+  return (
+    <form action={createPost}>
+      <input name="title" placeholder="Post title" />
+      <button type="submit">Create</button>
+    </form>
+  )
+}
+\`\`\``, q_en: "What are Server Actions in Next.js?", a_en: `Server Actions are async functions that run on the server and can be called from Client Components or HTML forms. Declare them with the \`'use server'\` directive. They allow mutating data directly without building a separate API endpoint.
+\`\`\`tsx
+// actions/post-actions.ts
+'use server'
+import { revalidatePath } from 'next/cache'
+
+export async function createPost(formData: FormData) {
+  const title = formData.get('title') as string
+  await db.posts.create({ title })
+  revalidatePath('/posts') // bust the cache after mutating
+}
+
+// components/new-post-form.tsx
+'use client'
+import { createPost } from '@/actions/post-actions'
+
+export function NewPostForm() {
+  return (
+    <form action={createPost}>
+      <input name="title" placeholder="Post title" />
+      <button type="submit">Create</button>
+    </form>
+  )
+}
+\`\`\`` },
   { id: 583, category: "Next.js", subcategory: "API & Server Actions", level: "intermediate", q: "Cách sử dụng Server Actions với HTML forms?", a: "Gán Server Action vào form action attribute: `<form action={createPost}>`. Form submit tự động gọi Server Action với FormData. Không cần JavaScript client-side (progressive enhancement). Trong action: `const title = formData.get('title')`. Kết hợp với useFormState (React 18) hoặc useActionState (React 19) để track state.", q_en: "How do you use Server Actions with HTML forms?", a_en: "Assign a Server Action to the form's action attribute: `<form action={createPost}>`. On submit, the Server Action is automatically called with the FormData — no client-side JavaScript required (progressive enhancement). Inside the action: `const title = formData.get('title')`. Combine with useFormState (React 18) or useActionState (React 19) to track submission state." },
   { id: 584, category: "Next.js", subcategory: "API & Server Actions", level: "intermediate", q: "Revalidation sau mutation trong Server Actions?", a: "Sau khi mutate data trong Server Action, cần revalidate cache để UI cập nhật: `revalidatePath('/posts')` invalidate cached route, `revalidateTag('posts')` invalidate theo tag. `redirect('/path')` để điều hướng sau action thành công.", q_en: "How do you revalidate after a mutation in a Server Action?", a_en: "After mutating data in a Server Action, revalidate the cache so the UI reflects the change: `revalidatePath('/posts')` invalidates a specific cached route, and `revalidateTag('posts')` invalidates all cache entries with that tag. Use `redirect('/path')` to navigate after a successful action." },
   { id: 585, category: "Next.js", subcategory: "API & Server Actions", level: "intermediate", q: "Error handling trong Server Actions như thế nào?", a: "Server Actions có thể throw errors sẽ được catch bởi nearest error.tsx. Với useFormState/useActionState, return error object thay vì throw: `return { error: 'Invalid input' }`. Dùng try/catch trong action để handle expected errors (validation, not found) và return user-friendly error states.", q_en: "How do you handle errors in Server Actions?", a_en: "Server Actions can throw errors, which will be caught by the nearest error.tsx boundary. When using useFormState/useActionState, return an error object instead of throwing: `return { error: 'Invalid input' }`. Use try/catch inside the action to handle expected errors (validation failures, not-found cases) and return user-friendly error state objects." },

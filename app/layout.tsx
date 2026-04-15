@@ -32,23 +32,26 @@ const SITE_URL = 'https://luyenphongvan.online'
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: '1700+ Câu Hỏi Phỏng Vấn IT 2026 Có Đáp Án — Luyện Phỏng Vấn Online',
+    default: '1800+ Câu Hỏi Phỏng Vấn IT 2026 Có Đáp Án — Luyện Phỏng Vấn Online',
     template: '%s | Luyện Phỏng Vấn IT',
   },
   description:
-    'Tổng hợp 1700+ câu hỏi phỏng vấn IT có đáp án chi tiết. Frontend, Backend, Fullstack — React, JavaScript, TypeScript, Node.js, Next.js, Java, PHP, Laravel, C#, Flutter, System Design, Database, DevOps. Từ Junior đến Senior. Luyện tập miễn phí online.',
+    'Tổng hợp 1800+ câu hỏi phỏng vấn IT có đáp án chi tiết. Frontend, Backend, Fullstack — React, JavaScript, TypeScript, Node.js, NestJS, Next.js, Python, Vue.js, Java, PHP, Laravel, C#, Flutter, Android, System Design, Database, DevOps. Từ Junior đến Senior. Luyện tập miễn phí online.',
   keywords: [
     'câu hỏi phỏng vấn IT', 'phỏng vấn lập trình viên', 'ôn tập phỏng vấn',
     'câu hỏi phỏng vấn frontend', 'câu hỏi phỏng vấn backend', 'phỏng vấn fullstack',
     'phỏng vấn React', 'phỏng vấn JavaScript', 'phỏng vấn TypeScript',
-    'phỏng vấn Node.js', 'phỏng vấn Next.js', 'phỏng vấn Golang',
+    'phỏng vấn Node.js', 'phỏng vấn NestJS', 'phỏng vấn Next.js', 'phỏng vấn Golang',
+    'phỏng vấn Python', 'phỏng vấn Vue.js', 'phỏng vấn FastAPI',
     'phỏng vấn Java', 'phỏng vấn Spring Boot', 'phỏng vấn PHP', 'phỏng vấn Laravel',
     'phỏng vấn C#', 'phỏng vấn .NET', 'phỏng vấn Flutter', 'phỏng vấn Dart',
+    'phỏng vấn Android', 'phỏng vấn Kotlin', 'phỏng vấn RabbitMQ',
     'phỏng vấn system design', 'phỏng vấn database', 'phỏng vấn DevOps',
     'câu hỏi phỏng vấn AWS', 'luyện phỏng vấn IT 2026', 'tuyển dụng lập trình viên',
     'chuẩn bị phỏng vấn IT', 'ôn thi phỏng vấn',
     'phỏng vấn junior developer', 'phỏng vấn senior developer',
     'developer interview questions', 'coding interview Vietnamese',
+    'NestJS interview questions', 'Python interview questions', 'Vue.js interview questions',
   ],
   alternates: {
     canonical: SITE_URL,
@@ -60,16 +63,16 @@ export const metadata: Metadata = {
     alternateLocale: ['en_US'],
     url: SITE_URL,
     siteName: 'Luyện Phỏng Vấn IT',
-    title: '1700+ Câu Hỏi Phỏng Vấn IT 2026 Có Đáp Án — Luyện Phỏng Vấn Online',
+    title: '1800+ Câu Hỏi Phỏng Vấn IT 2026 Có Đáp Án — Luyện Phỏng Vấn Online',
     description:
-      'Luyện phỏng vấn IT miễn phí. 1700+ câu hỏi Frontend, Backend, Fullstack — React, JavaScript, TypeScript, Node.js, Java, PHP, Laravel, C#, Flutter, System Design, DevOps. Từ Junior đến Senior.',
-    images: [{ url: '/opengraph-image', width: 1200, height: 630, alt: '1700+ Câu Hỏi Phỏng Vấn IT 2026 Có Đáp Án' }],
+      'Luyện phỏng vấn IT miễn phí. 1800+ câu hỏi Frontend, Backend, Fullstack — React, JavaScript, TypeScript, Node.js, NestJS, Python, Vue.js, Java, PHP, Laravel, C#, Flutter, System Design, DevOps. Từ Junior đến Senior.',
+    images: [{ url: '/opengraph-image', width: 1200, height: 630, alt: '1800+ Câu Hỏi Phỏng Vấn IT 2026 Có Đáp Án' }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: '1700+ Câu Hỏi Phỏng Vấn IT 2026 Có Đáp Án',
+    title: '1800+ Câu Hỏi Phỏng Vấn IT 2026 Có Đáp Án',
     description:
-      'Luyện phỏng vấn IT miễn phí — Frontend, Backend, Fullstack. React, JavaScript, Node.js, Java, PHP, C#, Flutter, System Design, DevOps. Junior đến Senior.',
+      'Luyện phỏng vấn IT miễn phí — Frontend, Backend, Fullstack. React, JavaScript, Node.js, NestJS, Python, Vue.js, Java, PHP, C#, Flutter, System Design, DevOps. Junior đến Senior.',
     images: ['/opengraph-image'],
   },
   verification: {
@@ -126,7 +129,7 @@ export default function RootLayout({
               name: 'Luyện Phỏng Vấn IT',
               alternateName: ['Câu Hỏi Phỏng Vấn IT', 'Ôn Tập Phỏng Vấn IT', 'IT Interview Questions'],
               url: SITE_URL,
-              description: '1700+ câu hỏi phỏng vấn IT có đáp án chi tiết. Frontend, Backend, Fullstack — React, Java, PHP, C#, Flutter, System Design. Từ Junior đến Senior.',
+              description: '1800+ câu hỏi phỏng vấn IT có đáp án chi tiết. Frontend, Backend, Fullstack — React, Node.js, NestJS, Python, Vue.js, Java, PHP, C#, Flutter, System Design. Từ Junior đến Senior.',
               inLanguage: ['vi', 'en'],
               potentialAction: {
                 '@type': 'SearchAction',

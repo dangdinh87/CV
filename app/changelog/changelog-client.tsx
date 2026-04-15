@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useLanguage } from '../context/language-context'
 import { CHANGELOG, CURRENT_VERSION, TYPE_LABEL } from './changelog-data'
 import './changelog.css'
@@ -28,9 +28,9 @@ export function ChangelogClient() {
   })
 
   /* Mark current version as seen when user visits this page */
-  if (typeof window !== 'undefined') {
+  useEffect(() => {
     localStorage.setItem(SEEN_KEY, CURRENT_VERSION)
-  }
+  }, [])
 
   const toggle = (version: string) => {
     setExpanded(prev => {
@@ -75,6 +75,13 @@ export function ChangelogClient() {
                     {entry.changes.map((change, j) => (
                       <li key={j} className="cl-change">
                         <span className={`cl-badge cl-badge--${change.type}`}>{TYPE_LABEL[change.type][lang]}</span>
+                        {change.icons && (
+                          <span className="cl-change-icons">
+                            {change.icons.map(icon => (
+                              <img key={icon} src={icon} alt="" width={18} height={18} className="cl-change-icon" />
+                            ))}
+                          </span>
+                        )}
                         <span>{change.text[lang]}</span>
                       </li>
                     ))}

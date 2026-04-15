@@ -61,10 +61,14 @@ export function InterviewClient() {
   // Reset visible count on filter change
   useEffect(() => { setVisibleCount(ITEMS_PER_PAGE) }, [store.activeCategory, store.activeLevel, store.search, store.showFilter])
 
-  // Keyboard shortcut: / to focus search
+  // Keyboard shortcut: / or Ctrl+K/Cmd+K to focus search
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
-      if (e.key === '/' && !e.ctrlKey && !e.metaKey && document.activeElement?.tagName !== 'INPUT') {
+      // Allow Ctrl+K or Cmd+K or /
+      const isCmdK = (e.ctrlKey || e.metaKey) && e.key === 'k';
+      const isSlash = e.key === '/' && !e.ctrlKey && !e.metaKey;
+
+      if ((isCmdK || isSlash) && document.activeElement?.tagName !== 'INPUT' && document.activeElement?.tagName !== 'TEXTAREA') {
         e.preventDefault()
         document.getElementById('searchInput')?.focus()
       }
@@ -110,7 +114,7 @@ export function InterviewClient() {
             </span>
           </button>
           <div className="iv-menu-wrap">
-            <button className="iv-hero-action-btn" onClick={() => setMenuOpen(!menuOpen)} title="Menu">
+            <button className="iv-hero-action-btn" onClick={() => setMenuOpen(!menuOpen)} title="Menu" aria-label={locale === 'en' ? 'Menu' : 'Danh mục'} aria-expanded={menuOpen}>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
               {hasNewUpdate && <span className="iv-menu-dot" />}
             </button>
@@ -130,6 +134,10 @@ export function InterviewClient() {
                     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 8v4l3 3"/><circle cx="12" cy="12" r="10"/></svg>
                     {locale === 'en' ? 'Changelog' : 'Nhật ký cập nhật'}
                     {hasNewUpdate && <span className="iv-menu-new">NEW</span>}
+                  </a>
+                  <a href="https://t.me/+cvU8QIEmuY5iMDQ1" target="_blank" rel="noopener noreferrer" className="iv-menu-item" onClick={() => setMenuOpen(false)}>
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="#26A5E4"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+                    {locale === 'en' ? 'Telegram Group' : 'Nhóm Telegram'}
                   </a>
                 </div>
               </>
@@ -205,7 +213,9 @@ export function InterviewClient() {
           <input
             id="searchInput"
             type="text"
-            placeholder={locale === 'en' ? 'Search questions... (press / to focus)' : 'Tìm kiếm câu hỏi... (nhấn / để focus)'}
+            placeholder={locale === 'en' ? 'Search questions... (press / or Ctrl+K)' : 'Tìm kiếm câu hỏi... (nhấn / hoặc Ctrl+K)'}
+            aria-label={locale === 'en' ? 'Search questions' : 'Tìm kiếm câu hỏi'}
+            autoComplete="off"
             value={searchInput}
             onChange={(e) => setSearchInput(e.target.value)}
           />
@@ -286,8 +296,15 @@ export function InterviewClient() {
 
               {/* Show all answers */}
               <div className="iv-settings-row">
-                <span>{locale === 'en' ? 'Show all answers' : 'Hiện tất cả đáp án'}</span>
-                <button className="iv-settings-toggle" data-active={store.showAll} onClick={() => store.toggleAllAnswers(!store.showAll)}>
+                <span id="show-all-answers-label">{locale === 'en' ? 'Show all answers' : 'Hiện tất cả đáp án'}</span>
+                <button
+                  className="iv-settings-toggle"
+                  data-active={store.showAll}
+                  onClick={() => store.toggleAllAnswers(!store.showAll)}
+                  role="switch"
+                  aria-checked={store.showAll}
+                  aria-labelledby="show-all-answers-label"
+                >
                   <span className="iv-settings-toggle-thumb" />
                 </button>
               </div>
@@ -384,6 +401,11 @@ export function InterviewClient() {
 
               return (
                 <div key={group.label}>
+                  {group.sectionLabel && (
+                    <div className="iv-sidebar-section">
+                      <span className="iv-sidebar-section-label">{locale === 'en' ? group.sectionLabel.en : group.sectionLabel.vi}</span>
+                    </div>
+                  )}
                   <div
                     className={`iv-sidebar-item iv-sidebar-group ${group.comingSoon ? 'coming-soon' : ''} ${isGroupActive || isSubActive ? 'active' : ''}`}
                     onClick={() => { if (!group.comingSoon) { store.setActiveCategory(group.label); setSidebarOpen(false) } }}
@@ -504,8 +526,12 @@ export function InterviewClient() {
             </a>
             <button className="iv-footer-donate" onClick={() => setDonateOpen(true)}>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-              {locale === 'en' ? 'Support' : 'Ủng hộ'}
+              Donate
             </button>
+            <a href="https://t.me/+cvU8QIEmuY5iMDQ1" target="_blank" rel="noopener noreferrer" className="iv-footer-link">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+              Telegram
+            </a>
           </div>
         </div>
         <div className="iv-footer-right">
