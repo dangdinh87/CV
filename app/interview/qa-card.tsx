@@ -368,13 +368,22 @@ function formatTextOnly(text: string): string {
   }
 
   // Detect if first sentence is a peer item (not a real summary).
-  // Short first sentence (< 40 chars) much shorter than the rest → likely a peer.
   const first = sentences[0]
   const rest = sentences.slice(1)
   const firstIsShort = first.length < 40
   const restAvgLen = rest.reduce((sum, s) => sum + s.length, 0) / rest.length
-  // Only treat as peer when there are few items (3-4); with 5+ items, keep first as summary
-  const firstIsPeer = firstIsShort && restAvgLen > first.length * 1.2 && sentences.length <= 4
+
+  // Check if sentences follow a consistent "Label: content" pattern (e.g. "Mount: ...", "Update: ...", "Unmount: ...")
+  const labelPattern = /^[A-Za-z\u00C0-\u1EF9][A-Za-z\u00C0-\u1EF9\s\d/\-&().#*+]{0,40}:/
+  const labelledCount = sentences.filter(s => labelPattern.test(s.trim())).length
+  const allLabelled = labelledCount === sentences.length && sentences.length >= 3
+  // Most sentences are labelled and first one too → all are peers
+  const firstIsLabelledPeer = allLabelled && labelPattern.test(first.trim())
+
+  // Short first sentence much shorter than the rest → likely a peer (original heuristic)
+  const firstIsShortPeer = firstIsShort && restAvgLen > first.length * 1.2 && sentences.length <= 4
+
+  const firstIsPeer = firstIsLabelledPeer || firstIsShortPeer
 
   let summary: string | null = null
   let bulletSentences: string[]

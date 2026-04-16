@@ -191,8 +191,18 @@ export const AWS_CLOUD_DATA: QAItem[] = [
     level: "intermediate",
     q: "AWS Step Functions là gì? Giải thích Standard vs Express workflows và các use case phù hợp.",
     q_en: "What is AWS Step Functions? Explain Standard vs Express workflows and their appropriate use cases.",
-    a: "AWS Step Functions là serverless workflow orchestration service, cho phép coordinate nhiều Lambda functions và AWS services thành workflows có trạng thái (state machines), với visual diagram, error handling, retry logic, và audit trail tự động. Định nghĩa workflow bằng Amazon States Language (JSON/YAML); các state types: Task (invoke Lambda/service), Choice (conditional branching), Parallel (chạy branches song song), Map (iterate over array), Wait (delay), Pass, Succeed, Fail. Standard Workflows: tối đa 1 năm execution duration, exactly-once execution semantics, execution history stored 90 ngày để audit/debug, tính tiền per state transition ($0.025/1000 transitions); phù hợp cho long-running business processes, order fulfillment, human approval flows. Express Workflows: tối đa 5 phút, at-least-once semantics, không lưu execution history dài hạn (log vào CloudWatch), giá rẻ hơn ($1/triệu workflow executions + duration); phù hợp cho high-volume, short-duration workflows như IoT data processing, streaming data transformation. Tích hợp trực tiếp với 200+ AWS services qua SDK integrations (không cần Lambda wrapper cho nhiều tác vụ). So với Lambda orchestration thủ công: Step Functions giải quyết error handling, retry, timeout, saga pattern cho distributed transactions dễ dàng hơn.",
-    a_en: "AWS Step Functions is a serverless workflow orchestration service that coordinates multiple Lambda functions and AWS services into stateful workflows (state machines), with visual diagrams, error handling, retry logic, and automatic audit trails. Workflows are defined using Amazon States Language (JSON/YAML); state types include: Task (invoke Lambda/service), Choice (conditional branching), Parallel (run branches concurrently), Map (iterate over an array), Wait (delay), Pass, Succeed, and Fail. Standard Workflows: up to 1 year execution duration, exactly-once semantics, execution history stored for 90 days for auditing/debugging, billed per state transition ($0.025/1000 transitions) — suitable for long-running business processes, order fulfillment, and human approval flows. Express Workflows: up to 5 minutes, at-least-once semantics, no long-term execution history (logs to CloudWatch), cheaper ($1/million workflow executions + duration) — suitable for high-volume, short-duration workflows like IoT data processing and streaming data transformation. Integrates directly with 200+ AWS services via SDK integrations (no Lambda wrapper needed for many tasks). Compared to manual Lambda orchestration: Step Functions handles error handling, retries, timeouts, and the saga pattern for distributed transactions much more easily.",
+    a: `AWS Step Functions là serverless workflow orchestration service, cho phép coordinate nhiều Lambda functions và AWS services thành workflows có trạng thái (state machines), với visual diagram, error handling, retry logic, và audit trail tự động. Định nghĩa workflow bằng Amazon States Language (JSON/YAML); các state types: Task (invoke Lambda/service), Choice (conditional branching), Parallel (chạy branches song song), Map (iterate over array), Wait (delay), Pass, Succeed, Fail.
+
+- Standard Workflows: tối đa 1 năm execution duration, exactly-once execution semantics, execution history stored 90 ngày để audit/debug, tính tiền per state transition ($0.025/1000 transitions); phù hợp cho long-running business processes, order fulfillment, human approval flows.
+- Express Workflows: tối đa 5 phút, at-least-once semantics, không lưu execution history dài hạn (log vào CloudWatch), giá rẻ hơn ($1/triệu workflow executions + duration); phù hợp cho high-volume, short-duration workflows như IoT data processing, streaming data transformation.
+
+Tích hợp trực tiếp với 200+ AWS services qua SDK integrations (không cần Lambda wrapper cho nhiều tác vụ). So với Lambda orchestration thủ công: Step Functions giải quyết error handling, retry, timeout, saga pattern cho distributed transactions dễ dàng hơn.`,
+    a_en: `AWS Step Functions is a serverless workflow orchestration service that coordinates multiple Lambda functions and AWS services into stateful workflows (state machines), with visual diagrams, error handling, retry logic, and automatic audit trails. Workflows are defined using Amazon States Language (JSON/YAML); state types include: Task (invoke Lambda/service), Choice (conditional branching), Parallel (run branches concurrently), Map (iterate over an array), Wait (delay), Pass, Succeed, and Fail.
+
+- Standard Workflows: up to 1 year execution duration, exactly-once semantics, execution history stored for 90 days for auditing/debugging, billed per state transition ($0.025/1000 transitions) — suitable for long-running business processes, order fulfillment, and human approval flows.
+- Express Workflows: up to 5 minutes, at-least-once semantics, no long-term execution history (logs to CloudWatch), cheaper ($1/million workflow executions + duration) — suitable for high-volume, short-duration workflows like IoT data processing and streaming data transformation.
+
+Integrates directly with 200+ AWS services via SDK integrations (no Lambda wrapper needed for many tasks). Compared to manual Lambda orchestration: Step Functions handles error handling, retries, timeouts, and the saga pattern for distributed transactions much more easily.`,
   },
   {
     id: 2420,
@@ -233,8 +243,36 @@ export const AWS_CLOUD_DATA: QAItem[] = [
     level: "advanced",
     q: "AWS KMS và Secrets Manager là gì? Giải thích envelope encryption và khi nào dùng từng service.",
     q_en: "What are AWS KMS and Secrets Manager? Explain envelope encryption and when to use each service.",
-    a: "AWS KMS (Key Management Service) là managed service tạo và quản lý cryptographic keys (CMK — Customer Master Key, nay gọi là KMS Key); keys không bao giờ rời khỏi KMS hardware (FIPS 140-2 validated HSM); tích hợp hầu hết AWS services (S3, EBS, RDS, DynamoDB encryption at rest). Envelope Encryption: dùng KMS để generate Data Encryption Key (DEK) — DEK encrypt plaintext data, sau đó chính DEK được encrypt bởi KMS Key (encrypted DEK lưu cùng data); khi decrypt, gửi encrypted DEK tới KMS để decrypt → dùng DEK để decrypt data; KMS chỉ decrypt DEK, không handle bulk data — giúp giảm latency và cost. Key types: AWS managed keys (free, managed by AWS), Customer managed keys ($1/month/key + $0.03/10,000 API calls), Customer managed keys in CloudHSM (dedicated HSM). AWS Secrets Manager lưu trữ và quản lý secrets (database passwords, API keys, OAuth tokens) có encrypt bằng KMS; tính năng nổi bật: automatic rotation (Lambda function tự đổi password DB theo schedule), versioning, cross-account access, audit via CloudTrail. Dùng Secrets Manager khi: cần rotate secrets tự động, cần audit trail, cần chia sẻ secret cross-account. Dùng Parameter Store (SSM) khi: lưu config đơn giản (không cần rotation), free tier (Standard parameters miễn phí, Advanced tốn phí). Không bao giờ hardcode secrets trong code hay environment variables plaintext.",
-    a_en: "AWS KMS (Key Management Service) is a managed service for creating and managing cryptographic keys (CMK — Customer Master Key, now called KMS Key); keys never leave the KMS hardware (FIPS 140-2 validated HSM); it integrates with most AWS services (S3, EBS, RDS, DynamoDB encryption at rest). Envelope Encryption: use KMS to generate a Data Encryption Key (DEK) — the DEK encrypts plaintext data, and then the DEK itself is encrypted by a KMS Key (the encrypted DEK is stored alongside the data); to decrypt, send the encrypted DEK to KMS to decrypt, then use the DEK to decrypt the data; KMS only decrypts the DEK, not bulk data — reducing latency and cost. Key types: AWS managed keys (free, managed by AWS), Customer managed keys ($1/month/key + $0.03/10,000 API calls), Customer managed keys in CloudHSM (dedicated HSM). AWS Secrets Manager stores and manages secrets (database passwords, API keys, OAuth tokens) encrypted with KMS; key features: automatic rotation (a Lambda function rotates DB passwords on a schedule), versioning, cross-account access, and audit via CloudTrail. Use Secrets Manager when: automatic secret rotation is needed, an audit trail is required, or sharing secrets cross-account. Use Parameter Store (SSM) when: storing simple configuration without rotation (Standard parameters are free; Advanced costs extra). Never hardcode secrets in code or plaintext environment variables.",
+    a: `AWS KMS (Key Management Service) là managed service tạo và quản lý cryptographic keys (CMK — Customer Master Key, nay gọi là KMS Key); keys không bao giờ rời khỏi KMS hardware (FIPS 140-2 validated HSM); tích hợp hầu hết AWS services (S3, EBS, RDS, DynamoDB encryption at rest).
+
+Envelope Encryption: dùng KMS để generate Data Encryption Key (DEK) — DEK encrypt plaintext data, sau đó chính DEK được encrypt bởi KMS Key (encrypted DEK lưu cùng data); khi decrypt, gửi encrypted DEK tới KMS để decrypt → dùng DEK để decrypt data; KMS chỉ decrypt DEK, không handle bulk data — giúp giảm latency và cost.
+
+Key types:
+- AWS managed keys: free, managed by AWS.
+- Customer managed keys: $1/month/key + $0.03/10,000 API calls.
+- Customer managed keys in CloudHSM: dedicated HSM.
+
+AWS Secrets Manager lưu trữ và quản lý secrets (database passwords, API keys, OAuth tokens) có encrypt bằng KMS; tính năng nổi bật: automatic rotation (Lambda function tự đổi password DB theo schedule), versioning, cross-account access, audit via CloudTrail.
+
+- Dùng Secrets Manager khi: cần rotate secrets tự động, cần audit trail, cần chia sẻ secret cross-account.
+- Dùng Parameter Store (SSM) khi: lưu config đơn giản (không cần rotation), free tier (Standard parameters miễn phí, Advanced tốn phí).
+
+Không bao giờ hardcode secrets trong code hay environment variables plaintext.`,
+    a_en: `AWS KMS (Key Management Service) is a managed service for creating and managing cryptographic keys (CMK — Customer Master Key, now called KMS Key); keys never leave the KMS hardware (FIPS 140-2 validated HSM); it integrates with most AWS services (S3, EBS, RDS, DynamoDB encryption at rest).
+
+Envelope Encryption: use KMS to generate a Data Encryption Key (DEK) — the DEK encrypts plaintext data, and then the DEK itself is encrypted by a KMS Key (the encrypted DEK is stored alongside the data); to decrypt, send the encrypted DEK to KMS to decrypt, then use the DEK to decrypt the data; KMS only decrypts the DEK, not bulk data — reducing latency and cost.
+
+Key types:
+- AWS managed keys: free, managed by AWS.
+- Customer managed keys: $1/month/key + $0.03/10,000 API calls.
+- Customer managed keys in CloudHSM: dedicated HSM.
+
+AWS Secrets Manager stores and manages secrets (database passwords, API keys, OAuth tokens) encrypted with KMS; key features: automatic rotation (a Lambda function rotates DB passwords on a schedule), versioning, cross-account access, and audit via CloudTrail.
+
+- Use Secrets Manager when: automatic secret rotation is needed, an audit trail is required, or sharing secrets cross-account.
+- Use Parameter Store (SSM) when: storing simple configuration without rotation (Standard parameters are free; Advanced costs extra).
+
+Never hardcode secrets in code or plaintext environment variables.`,
   },
   {
     id: 2424,
@@ -253,8 +291,22 @@ export const AWS_CLOUD_DATA: QAItem[] = [
     level: "intermediate",
     q: "Amazon CloudWatch là gì? Giải thích Metrics, Logs, Alarms, Dashboards và các best practices monitoring.",
     q_en: "What is Amazon CloudWatch? Explain Metrics, Logs, Alarms, Dashboards, and monitoring best practices.",
-    a: "Amazon CloudWatch là observability service tập trung cho monitoring AWS resources và applications. CloudWatch Metrics: time-series data points (CPU, memory, request count, latency); AWS services tự động gửi metrics (vd: EC2 CPUUtilization mỗi 5 phút, hoặc 1 phút với detailed monitoring); custom metrics từ ứng dụng qua PutMetricData API hoặc CloudWatch agent ($0.30/metric/month). CloudWatch Logs: collect, store và search log data; Log Groups (container) → Log Streams (từng instance/function); Metric Filters extract metrics từ log patterns; Log Insights cho ad-hoc query logs bằng query language; export sang S3 cho long-term retention; Subscription Filters stream logs real-time tới Lambda/Kinesis/OpenSearch. CloudWatch Alarms: trigger khi metric vượt threshold; actions: SNS notification, EC2 Auto Scaling, EC2 action (stop/reboot/terminate); Composite Alarms kết hợp nhiều alarms; Anomaly Detection dùng ML để tự động detect anomaly. CloudWatch Dashboards: visualize metrics và logs trên single pane; cross-account/cross-region dashboards. Best practices: enable detailed monitoring cho production EC2, set up alarms cho critical metrics (error rate > 1%, P99 latency > 2s, CPU > 80%), dùng EMF (Embedded Metric Format) để gửi structured metrics từ Lambda logs, tạo custom dashboard cho each service, set log retention policy để kiểm soát cost.",
-    a_en: "Amazon CloudWatch is the centralized observability service for monitoring AWS resources and applications. CloudWatch Metrics: time-series data points (CPU, memory, request count, latency); AWS services automatically emit metrics (e.g., EC2 CPUUtilization every 5 minutes, or 1 minute with detailed monitoring); custom metrics from applications via the PutMetricData API or CloudWatch agent ($0.30/metric/month). CloudWatch Logs: collects, stores, and searches log data; Log Groups (containers) → Log Streams (per instance/function); Metric Filters extract metrics from log patterns; Log Insights enables ad-hoc log queries; logs can be exported to S3 for long-term retention; Subscription Filters stream logs in real time to Lambda/Kinesis/OpenSearch. CloudWatch Alarms: trigger when a metric breaches a threshold; actions include SNS notifications, EC2 Auto Scaling, and EC2 actions (stop/reboot/terminate); Composite Alarms combine multiple alarms; Anomaly Detection uses ML to automatically identify anomalies. CloudWatch Dashboards: visualize metrics and logs on a single pane; supports cross-account/cross-region dashboards. Best practices: enable detailed monitoring for production EC2, set up alarms for critical metrics (error rate > 1%, P99 latency > 2s, CPU > 80%), use EMF (Embedded Metric Format) to emit structured metrics from Lambda logs, create custom dashboards per service, and set log retention policies to control cost.",
+    a: `Amazon CloudWatch là observability service tập trung cho monitoring AWS resources và applications.
+
+- CloudWatch Metrics: time-series data points (CPU, memory, request count, latency); AWS services tự động gửi metrics (vd: EC2 CPUUtilization mỗi 5 phút, hoặc 1 phút với detailed monitoring); custom metrics từ ứng dụng qua PutMetricData API hoặc CloudWatch agent ($0.30/metric/month).
+- CloudWatch Logs: collect, store và search log data; Log Groups (container) → Log Streams (từng instance/function); Metric Filters extract metrics từ log patterns; Log Insights cho ad-hoc query logs bằng query language; export sang S3 cho long-term retention; Subscription Filters stream logs real-time tới Lambda/Kinesis/OpenSearch.
+- CloudWatch Alarms: trigger khi metric vượt threshold; actions: SNS notification, EC2 Auto Scaling, EC2 action (stop/reboot/terminate); Composite Alarms kết hợp nhiều alarms; Anomaly Detection dùng ML để tự động detect anomaly.
+- CloudWatch Dashboards: visualize metrics và logs trên single pane; cross-account/cross-region dashboards.
+
+Best practices: enable detailed monitoring cho production EC2, set up alarms cho critical metrics (error rate > 1%, P99 latency > 2s, CPU > 80%), dùng EMF (Embedded Metric Format) để gửi structured metrics từ Lambda logs, tạo custom dashboard cho each service, set log retention policy để kiểm soát cost.`,
+    a_en: `Amazon CloudWatch is the centralized observability service for monitoring AWS resources and applications.
+
+- CloudWatch Metrics: time-series data points (CPU, memory, request count, latency); AWS services automatically emit metrics (e.g., EC2 CPUUtilization every 5 minutes, or 1 minute with detailed monitoring); custom metrics from applications via the PutMetricData API or CloudWatch agent ($0.30/metric/month).
+- CloudWatch Logs: collects, stores, and searches log data; Log Groups (containers) → Log Streams (per instance/function); Metric Filters extract metrics from log patterns; Log Insights enables ad-hoc log queries; logs can be exported to S3 for long-term retention; Subscription Filters stream logs in real time to Lambda/Kinesis/OpenSearch.
+- CloudWatch Alarms: trigger when a metric breaches a threshold; actions include SNS notifications, EC2 Auto Scaling, and EC2 actions (stop/reboot/terminate); Composite Alarms combine multiple alarms; Anomaly Detection uses ML to automatically identify anomalies.
+- CloudWatch Dashboards: visualize metrics and logs on a single pane; supports cross-account/cross-region dashboards.
+
+Best practices: enable detailed monitoring for production EC2, set up alarms for critical metrics (error rate > 1%, P99 latency > 2s, CPU > 80%), use EMF (Embedded Metric Format) to emit structured metrics from Lambda logs, create custom dashboards per service, and set log retention policies to control cost.`,
   },
   {
     id: 2426,
@@ -325,8 +377,56 @@ export const AWS_CLOUD_DATA: QAItem[] = [
     level: "advanced",
     q: "Các chiến lược tối ưu chi phí AWS là gì? Làm thế nào để giảm AWS bill 30-50% mà không ảnh hưởng performance?",
     q_en: "What are AWS cost optimization strategies? How do you reduce your AWS bill by 30-50% without impacting performance?",
-    a: "Cost optimization là một trong 6 pillars Well-Architected Framework. Compute optimization: chuyển On-Demand sang Reserved Instances/Savings Plans (tiết kiệm 30-60% cho baseline workload), dùng Spot Instances cho batch/fault-tolerant workload (tiết kiệm đến 90%), right-size instances (dùng Compute Optimizer để suggest instance type phù hợp), tắt non-production environment ngoài giờ làm việc (Lambda + EventBridge scheduler). Storage optimization: S3 Intelligent-Tiering cho data không rõ access pattern, lifecycle policy chuyển sang IA/Glacier/Deep Archive, enable S3 compression, xóa unattached EBS volumes (thường quên tạo snapshot rồi delete instance), xóa old EBS snapshots, dùng gp3 thay gp2 (rẻ hơn 20% và IOPS cao hơn). Data transfer optimization: data transfer within region miễn phí, cross-AZ $0.01/GB mỗi chiều (đặt DB và app cùng AZ cho non-HA workload), CloudFront giảm origin data transfer, VPC Endpoint loại bỏ NAT Gateway cost cho S3/DynamoDB access. Database optimization: Aurora Serverless cho dev/test, DynamoDB on-demand cho sporadic traffic, ElastiCache giảm DB load và RDS cost. Monitoring cost: AWS Cost Explorer phân tích spending trend, Budget Alerts khi vượt threshold, Cost Allocation Tags track by team/project, Trusted Advisor recommendations. Kiến trúc: serverless loại bỏ idle compute cost, managed services giảm operational labor cost.",
-    a_en: "Cost optimization is one of the 6 pillars of the Well-Architected Framework. Compute optimization: move from On-Demand to Reserved Instances/Savings Plans (30-60% savings for baseline workloads), use Spot Instances for batch/fault-tolerant workloads (up to 90% savings), right-size instances (use Compute Optimizer to suggest appropriate instance types), and shut down non-production environments outside business hours (Lambda + EventBridge scheduler). Storage optimization: use S3 Intelligent-Tiering for data with unknown access patterns, lifecycle policies to transition to IA/Glacier/Deep Archive, enable S3 compression, delete unattached EBS volumes (often forgotten after taking a snapshot and deleting an instance), delete old EBS snapshots, and switch from gp2 to gp3 (20% cheaper with higher IOPS). Data transfer optimization: data transfer within a region is free; cross-AZ is $0.01/GB per direction (place DB and app in the same AZ for non-HA workloads); CloudFront reduces origin data transfer; VPC Endpoints eliminate NAT Gateway costs for S3/DynamoDB access. Database optimization: use Aurora Serverless for dev/test, DynamoDB on-demand for sporadic traffic, and ElastiCache to reduce DB load and RDS costs. Cost monitoring: use AWS Cost Explorer to analyze spending trends, Budget Alerts for threshold notifications, Cost Allocation Tags to track by team/project, and Trusted Advisor recommendations. Architecture: serverless eliminates idle compute costs, and managed services reduce operational labor costs.",
+    a: `Cost optimization là một trong 6 pillars Well-Architected Framework.
+
+Compute optimization:
+- Chuyển On-Demand sang Reserved Instances/Savings Plans (tiết kiệm 30-60% cho baseline workload).
+- Dùng Spot Instances cho batch/fault-tolerant workload (tiết kiệm đến 90%).
+- Right-size instances (dùng Compute Optimizer để suggest instance type phù hợp).
+- Tắt non-production environment ngoài giờ làm việc (Lambda + EventBridge scheduler).
+
+Storage optimization:
+- S3 Intelligent-Tiering cho data không rõ access pattern.
+- Lifecycle policy chuyển sang IA/Glacier/Deep Archive.
+- Enable S3 compression.
+- Xóa unattached EBS volumes (thường quên tạo snapshot rồi delete instance).
+- Xóa old EBS snapshots.
+- Dùng gp3 thay gp2 (rẻ hơn 20% và IOPS cao hơn).
+
+Data transfer optimization:
+- Data transfer within region miễn phí.
+- Cross-AZ $0.01/GB mỗi chiều (đặt DB và app cùng AZ cho non-HA workload).
+- CloudFront giảm origin data transfer.
+- VPC Endpoint loại bỏ NAT Gateway cost cho S3/DynamoDB access.
+
+Database optimization: Aurora Serverless cho dev/test, DynamoDB on-demand cho sporadic traffic, ElastiCache giảm DB load và RDS cost.
+
+Monitoring cost: AWS Cost Explorer phân tích spending trend, Budget Alerts khi vượt threshold, Cost Allocation Tags track by team/project, Trusted Advisor recommendations. Kiến trúc: serverless loại bỏ idle compute cost, managed services giảm operational labor cost.`,
+    a_en: `Cost optimization is one of the 6 pillars of the Well-Architected Framework.
+
+Compute optimization:
+- Move from On-Demand to Reserved Instances/Savings Plans (30-60% savings for baseline workloads).
+- Use Spot Instances for batch/fault-tolerant workloads (up to 90% savings).
+- Right-size instances (use Compute Optimizer to suggest appropriate instance types).
+- Shut down non-production environments outside business hours (Lambda + EventBridge scheduler).
+
+Storage optimization:
+- Use S3 Intelligent-Tiering for data with unknown access patterns.
+- Lifecycle policies to transition to IA/Glacier/Deep Archive.
+- Enable S3 compression.
+- Delete unattached EBS volumes (often forgotten after taking a snapshot and deleting an instance).
+- Delete old EBS snapshots.
+- Switch from gp2 to gp3 (20% cheaper with higher IOPS).
+
+Data transfer optimization:
+- Data transfer within a region is free.
+- Cross-AZ is $0.01/GB per direction (place DB and app in the same AZ for non-HA workloads).
+- CloudFront reduces origin data transfer.
+- VPC Endpoints eliminate NAT Gateway costs for S3/DynamoDB access.
+
+Database optimization: use Aurora Serverless for dev/test, DynamoDB on-demand for sporadic traffic, and ElastiCache to reduce DB load and RDS costs.
+
+Cost monitoring: use AWS Cost Explorer to analyze spending trends, Budget Alerts for threshold notifications, Cost Allocation Tags to track by team/project, and Trusted Advisor recommendations. Architecture: serverless eliminates idle compute costs, and managed services reduce operational labor costs.`,
   },
   {
     id: 2433,

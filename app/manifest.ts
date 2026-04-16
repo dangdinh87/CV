@@ -2,10 +2,10 @@ import type { MetadataRoute } from 'next'
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'Luyện Phỏng Vấn IT — 1700+ Câu Hỏi Có Đáp Án',
+    name: 'Luyện Phỏng Vấn IT — 1800+ Câu Hỏi Có Đáp Án',
     short_name: 'Luyện Phỏng Vấn IT',
     description:
-      '1700+ câu hỏi phỏng vấn IT có đáp án chi tiết. Frontend, Backend, Fullstack — React, Java, PHP, C#, Flutter, System Design, DevOps.',
+      '1800+ câu hỏi phỏng vấn IT có đáp án chi tiết. Frontend, Backend, Fullstack — React, Java, PHP, C#, Flutter, System Design, DevOps.',
     start_url: '/',
     display: 'standalone',
     background_color: '#0a0a0a',

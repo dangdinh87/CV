@@ -116,7 +116,7 @@ body,
 .project-header .project-period,
 .h-title .yoe,
 section {
-  transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+  transition: var(--theme-transition, background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease);
 }
 
 /* ═══ LAYOUT ═══ */
@@ -127,7 +127,7 @@ section {
   border-radius: var(--radius-lg);
   box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 8px 32px rgba(0,0,0,0.06);
   overflow: hidden;
-  transition: background-color 0.4s ease, box-shadow 0.4s ease;
+  transition: var(--theme-transition, background-color 0.4s ease, box-shadow 0.4s ease);
 }
 
 /* ═══════════════════════════════════════

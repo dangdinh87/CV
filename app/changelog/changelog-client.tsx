@@ -102,8 +102,8 @@ export function ChangelogClient() {
               <span className="iv-footer-logo">{lang === 'en' ? 'IT Knowledge Hub' : 'Luyện Phỏng Vấn IT'}</span>
             </div>
             <p className="iv-footer-slogan">{lang === 'en'
-              ? '1700+ IT interview questions with detailed answers — Frontend, Backend, Java, PHP, C#, Flutter, System Design, DevOps.'
-              : '1700+ câu hỏi phỏng vấn IT kèm đáp án chi tiết — Frontend, Backend, Java, PHP, C#, Flutter, System Design, DevOps.'}</p>
+              ? '1800+ IT interview questions with detailed answers — Frontend, Backend, Java, PHP, C#, Flutter, System Design, DevOps.'
+              : '1800+ câu hỏi phỏng vấn IT kèm đáp án chi tiết — Frontend, Backend, Java, PHP, C#, Flutter, System Design, DevOps.'}</p>
             <div className="iv-footer-links">
               <a href="mailto:nguyendangdinh47@gmail.com" className="iv-footer-link">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>

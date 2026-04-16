@@ -101,7 +101,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="vi" className={`${spaceGrotesk.variable} ${dmSans.variable} ${jetbrainsMono.variable}`} suppressHydrationWarning>
-      <head>
+      <head suppressHydrationWarning>
         {process.env.NEXT_PUBLIC_GA_ID?.trim() && (
           <>
             <Script src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID.trim()}`} strategy="afterInteractive" />
@@ -114,8 +114,9 @@ export default function RootLayout({
           </>
         )}
         <script
+          suppressHydrationWarning
           dangerouslySetInnerHTML={{
-            __html: `(function(){try{var t=localStorage.getItem('theme')||'dark';document.documentElement.setAttribute('data-theme',t)}catch(e){}})()`,
+            __html: `(function(){try{var t=localStorage.getItem('theme')||'dark';document.documentElement.setAttribute('data-theme',t);document.documentElement.style.setProperty('--theme-transition','none');requestAnimationFrame(function(){requestAnimationFrame(function(){document.documentElement.style.removeProperty('--theme-transition')})})}catch(e){}})()`,
           }}
         />
       </head>
@@ -163,7 +164,7 @@ export default function RootLayout({
               '@type': 'EducationalOrganization',
               name: 'Luyện Phỏng Vấn IT',
               url: SITE_URL,
-              description: '1700+ câu hỏi phỏng vấn IT có đáp án, dành cho developer Việt Nam',
+              description: '1800+ câu hỏi phỏng vấn IT có đáp án, dành cho developer Việt Nam',
               availableLanguage: ['Vietnamese', 'English'],
               teaches: ['Frontend Development', 'Backend Development', 'Java', 'PHP', 'Laravel', 'C#', '.NET', 'Flutter', 'System Design', 'Design Patterns', 'DevOps', 'Cloud Computing', 'Database', 'Networking'],
             }),

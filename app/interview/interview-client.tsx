@@ -95,7 +95,7 @@ export function InterviewClient() {
     <div style={{ '--iv-fs': `${fontSize}px` } as React.CSSProperties} role="main">
       {/* Hero */}
       <header className="iv-hero">
-        <h1 className="sr-only">Luyện Phỏng Vấn IT — 1700+ Câu Hỏi Phỏng Vấn IT Có Đáp Án 2026</h1>
+        <h1 className="sr-only">Luyện Phỏng Vấn IT — 1800+ Câu Hỏi Phỏng Vấn IT Có Đáp Án 2026</h1>
         <div className="iv-hero-actions">
           <button className="iv-hover-btn iv-hover-btn--donate" onClick={() => setDonateOpen(true)} title={locale === 'en' ? 'Support the project' : 'Ủng hộ dự án'}>
             <span className="iv-hover-btn-dot" />
@@ -241,7 +241,8 @@ export function InterviewClient() {
             className={`iv-filter-btn ${store.activeLevel === 'bookmarked' ? 'active' : ''}`}
             onClick={() => store.setActiveLevel(store.activeLevel === 'bookmarked' ? 'all' : 'bookmarked')}
           >
-            {locale === 'en' ? '★ Saved' : '★ Đã lưu'}
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginRight: 2 }}><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+            {locale === 'en' ? 'Saved' : 'Đã lưu'}
           </button>
           <button
             className={`iv-filter-btn ${store.showFilter === 'learned-only' ? 'active' : ''}`}
@@ -513,8 +514,8 @@ export function InterviewClient() {
             <span className="iv-footer-logo">{locale === 'en' ? 'IT Knowledge Hub' : 'Luyện Phỏng Vấn IT'}</span>
           </div>
           <p className="iv-footer-slogan">{locale === 'en'
-                ? '1700+ IT interview questions with detailed answers — Frontend, Backend, Java, PHP, C#, Flutter, System Design, DevOps. Built by the community, for the community.'
-                : '1700+ câu hỏi phỏng vấn IT kèm đáp án chi tiết — Frontend, Backend, Java, PHP, C#, Flutter, System Design, DevOps. Được xây dựng bởi cộng đồng, dành cho cộng đồng.'}</p>
+                ? '1800+ IT interview questions with detailed answers — Frontend, Backend, Java, PHP, C#, Flutter, System Design, DevOps. Built by the community, for the community.'
+                : '1800+ câu hỏi phỏng vấn IT kèm đáp án chi tiết — Frontend, Backend, Java, PHP, C#, Flutter, System Design, DevOps. Được xây dựng bởi cộng đồng, dành cho cộng đồng.'}</p>
           <div className="iv-footer-links">
             <a href="mailto:nguyendangdinh47@gmail.com" className="iv-footer-link">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>

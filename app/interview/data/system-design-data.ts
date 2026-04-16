@@ -79,8 +79,24 @@ export const SYSTEM_DESIGN_DATA: QAItem[] = [
     level: "beginner",
     q: "Các mô hình Consistency trong hệ thống phân tán là gì? (What are the consistency models in distributed systems?)",
     q_en: "What are the consistency models in distributed systems?",
-    a: "Strong Consistency (hay Linearizability): sau khi write thành công, mọi read sau đó đều thấy giá trị mới nhất – dễ lập trình nhất nhưng latency cao nhất vì cần coordination giữa các node. Eventual Consistency: dữ liệu sẽ nhất quán sau một khoảng thời gian, nhưng tạm thời có thể đọc dữ liệu cũ – được dùng trong Cassandra, DynamoDB, DNS. Read-your-writes Consistency: sau khi user write, chính user đó luôn đọc được dữ liệu mới nhất (dù user khác chưa thấy) – quan trọng cho UX tốt trong social media. Causal Consistency: các operation có quan hệ nhân quả được nhìn thấy theo đúng thứ tự (A post → B comment → mọi người thấy comment sau post). Monotonic Read: user không bao giờ thấy dữ liệu quay ngược thời gian (không đọc v2 rồi đọc v1). Lựa chọn consistency model ảnh hưởng trực tiếp đến latency, availability và trải nghiệm người dùng.",
-    a_en: "Strong Consistency (Linearizability): after a successful write, every subsequent read returns the latest value — easiest to reason about but highest latency since it requires coordination across nodes. Eventual Consistency: data will become consistent over time, but reads may temporarily return stale values — used in Cassandra, DynamoDB, and DNS. Read-your-writes Consistency: after a user writes data, that same user always reads the latest value (even if other users haven't seen it yet) — important for good UX in social media. Causal Consistency: causally related operations are observed in the correct order (A posts → B comments → everyone sees the comment after the post). Monotonic Read: a user never observes data going backwards in time (won't read v2 and then read v1). The choice of consistency model directly impacts latency, availability, and user experience.",
+    a: `Các mô hình consistency phổ biến:
+
+- Strong Consistency (Linearizability): sau khi write thành công, mọi read sau đó đều thấy giá trị mới nhất – dễ lập trình nhất nhưng latency cao nhất vì cần coordination giữa các node.
+- Eventual Consistency: dữ liệu sẽ nhất quán sau một khoảng thời gian, nhưng tạm thời có thể đọc dữ liệu cũ – được dùng trong Cassandra, DynamoDB, DNS.
+- Read-your-writes Consistency: sau khi user write, chính user đó luôn đọc được dữ liệu mới nhất (dù user khác chưa thấy) – quan trọng cho UX tốt trong social media.
+- Causal Consistency: các operation có quan hệ nhân quả được nhìn thấy theo đúng thứ tự (A post → B comment → mọi người thấy comment sau post).
+- Monotonic Read: user không bao giờ thấy dữ liệu quay ngược thời gian (không đọc v2 rồi đọc v1).
+
+Lựa chọn consistency model ảnh hưởng trực tiếp đến latency, availability và trải nghiệm người dùng.`,
+    a_en: `Common consistency models:
+
+- Strong Consistency (Linearizability): after a successful write, every subsequent read returns the latest value — easiest to reason about but highest latency since it requires coordination across nodes.
+- Eventual Consistency: data will become consistent over time, but reads may temporarily return stale values — used in Cassandra, DynamoDB, and DNS.
+- Read-your-writes Consistency: after a user writes data, that same user always reads the latest value (even if other users haven't seen it yet) — important for good UX in social media.
+- Causal Consistency: causally related operations are observed in the correct order (A posts → B comments → everyone sees the comment after the post).
+- Monotonic Read: a user never observes data going backwards in time (won't read v2 and then read v1).
+
+The choice of consistency model directly impacts latency, availability, and user experience.`,
   },
 
   // ─── Scaling (2009–2016) ────────────────────────────────────────────────────
@@ -213,8 +229,18 @@ export const SYSTEM_DESIGN_DATA: QAItem[] = [
     level: "intermediate",
     q: "Saga Pattern giải quyết vấn đề gì trong microservices? Choreography vs Orchestration? (What problem does the Saga Pattern solve in microservices? Choreography vs Orchestration?)",
     q_en: "What problem does the Saga Pattern solve in microservices? What is the difference between Choreography and Orchestration?",
-    a: "Trong microservices, mỗi service có database riêng, nên không thể dùng distributed transactions (2PC) – quá phức tạp và tạo tight coupling. Saga Pattern giải quyết bằng cách chia distributed transaction thành chuỗi local transactions, mỗi bước publish event; nếu một bước fail, thực hiện compensating transactions để rollback các bước trước. Ví dụ Order Saga: CreateOrder → ReserveInventory → ProcessPayment → ShipOrder; nếu ProcessPayment fail → UnreserveInventory → CancelOrder. Choreography: mỗi service lắng nghe events và tự quyết định hành động tiếp theo – không có coordinator trung tâm, loosely coupled hơn nhưng khó theo dõi flow tổng thể, dễ tạo circular dependencies. Orchestration: có một Saga Orchestrator trung tâm điều phối các bước, gửi commands đến từng service – dễ hiểu và debug flow, nhưng orchestrator có thể trở thành bottleneck và chứa nhiều business logic. Temporal.io, AWS Step Functions là công cụ hỗ trợ orchestration saga.",
-    a_en: "In microservices, each service owns its own database, making distributed transactions (2PC) impractical — too complex and too tightly coupled. The Saga Pattern solves this by breaking a distributed transaction into a sequence of local transactions, each publishing an event; if any step fails, compensating transactions roll back the previous steps. Example Order Saga: CreateOrder → ReserveInventory → ProcessPayment → ShipOrder; if ProcessPayment fails → UnreserveInventory → CancelOrder. Choreography: each service listens for events and decides its own next action — no central coordinator, more loosely coupled, but the overall flow is hard to track and prone to circular dependencies. Orchestration: a central Saga Orchestrator coordinates all steps, sending commands to each service — easier to understand and debug, but the orchestrator can become a bottleneck and accumulate too much business logic. Temporal.io and AWS Step Functions are tools that support orchestration-based sagas.",
+    a: `Trong microservices, mỗi service có database riêng, nên không thể dùng distributed transactions (2PC) – quá phức tạp và tạo tight coupling. Saga Pattern giải quyết bằng cách chia distributed transaction thành chuỗi local transactions, mỗi bước publish event; nếu một bước fail, thực hiện compensating transactions để rollback các bước trước. Ví dụ Order Saga: CreateOrder → ReserveInventory → ProcessPayment → ShipOrder; nếu ProcessPayment fail → UnreserveInventory → CancelOrder.
+
+- Choreography: mỗi service lắng nghe events và tự quyết định hành động tiếp theo – không có coordinator trung tâm, loosely coupled hơn nhưng khó theo dõi flow tổng thể, dễ tạo circular dependencies.
+- Orchestration: có một Saga Orchestrator trung tâm điều phối các bước, gửi commands đến từng service – dễ hiểu và debug flow, nhưng orchestrator có thể trở thành bottleneck và chứa nhiều business logic.
+
+Temporal.io, AWS Step Functions là công cụ hỗ trợ orchestration saga.`,
+    a_en: `In microservices, each service owns its own database, making distributed transactions (2PC) impractical — too complex and too tightly coupled. The Saga Pattern solves this by breaking a distributed transaction into a sequence of local transactions, each publishing an event; if any step fails, compensating transactions roll back the previous steps. Example Order Saga: CreateOrder → ReserveInventory → ProcessPayment → ShipOrder; if ProcessPayment fails → UnreserveInventory → CancelOrder.
+
+- Choreography: each service listens for events and decides its own next action — no central coordinator, more loosely coupled, but the overall flow is hard to track and prone to circular dependencies.
+- Orchestration: a central Saga Orchestrator coordinates all steps, sending commands to each service — easier to understand and debug, but the orchestrator can become a bottleneck and accumulate too much business logic.
+
+Temporal.io and AWS Step Functions are tools that support orchestration-based sagas.`,
   },
   {
     id: 2022,
@@ -265,8 +291,28 @@ export const SYSTEM_DESIGN_DATA: QAItem[] = [
     level: "intermediate",
     q: "Database Indexing hoạt động như thế nào? Các loại index và khi nào nên dùng? (How does Database Indexing work? Types of indexes and when to use them?)",
     q_en: "How does Database Indexing work? What are the types of indexes and when should you use them?",
-    a: "Index là data structure (thường là B-Tree) cho phép database tìm kiếm records nhanh mà không cần full table scan – giảm query time từ O(n) xuống O(log n). B-Tree Index: phổ biến nhất, hỗ trợ equality và range queries (=, <, >, BETWEEN, LIKE 'prefix%'), tốt cho high-cardinality columns. Hash Index: cực nhanh cho equality lookups (=) nhưng không hỗ trợ range queries, dùng trong memory-optimized tables. Composite Index: index trên nhiều columns – thứ tự columns quan trọng (leftmost prefix rule); index (a,b,c) hỗ trợ queries trên (a), (a,b), (a,b,c) nhưng không hỗ trợ chỉ (b) hoặc (c). Partial Index: chỉ index một subset của rows (ví dụ `WHERE status='active'`) – nhỏ hơn và hiệu quả hơn. Full-Text Index: cho text search. GIN/GiST Index (PostgreSQL): cho array, JSONB, geometric data. Covering Index: index chứa tất cả columns cần cho query – không cần đọc thêm table rows. Trade-off: mỗi index tốn storage và làm chậm write (phải cập nhật index); không phải nhiều index là tốt hơn. Dùng EXPLAIN ANALYZE để hiểu query plan trước khi thêm index.",
-    a_en: "An index is a data structure (typically a B-Tree) that allows the database to find records quickly without a full table scan — reducing query time from O(n) to O(log n). B-Tree Index: the most common type; supports equality and range queries (=, <, >, BETWEEN, LIKE 'prefix%'); good for high-cardinality columns. Hash Index: extremely fast for equality lookups (=) but does not support range queries; used in memory-optimized tables. Composite Index: an index on multiple columns — column order matters (leftmost prefix rule); an index on (a, b, c) supports queries on (a), (a, b), and (a, b, c) but not queries on only (b) or (c). Partial Index: indexes only a subset of rows (e.g., WHERE status='active') — smaller and more efficient. Full-Text Index: for text search queries. GIN/GiST Index (PostgreSQL): for arrays, JSONB, and geometric data. Covering Index: includes all columns needed for a query, eliminating the need to read the actual table rows. Trade-offs: each index consumes storage and slows writes (the index must be updated); more indexes is not always better. Use EXPLAIN ANALYZE to understand the query plan before adding an index.",
+    a: `Index là data structure (thường là B-Tree) cho phép database tìm kiếm records nhanh mà không cần full table scan – giảm query time từ O(n) xuống O(log n).
+
+- B-Tree Index: phổ biến nhất, hỗ trợ equality và range queries (=, <, >, BETWEEN, LIKE 'prefix%'), tốt cho high-cardinality columns.
+- Hash Index: cực nhanh cho equality lookups (=) nhưng không hỗ trợ range queries, dùng trong memory-optimized tables.
+- Composite Index: index trên nhiều columns – thứ tự columns quan trọng (leftmost prefix rule); index (a,b,c) hỗ trợ queries trên (a), (a,b), (a,b,c) nhưng không hỗ trợ chỉ (b) hoặc (c).
+- Partial Index: chỉ index một subset của rows (ví dụ \`WHERE status='active'\`) – nhỏ hơn và hiệu quả hơn.
+- Full-Text Index: cho text search.
+- GIN/GiST Index (PostgreSQL): cho array, JSONB, geometric data.
+- Covering Index: index chứa tất cả columns cần cho query – không cần đọc thêm table rows.
+
+Trade-off: mỗi index tốn storage và làm chậm write (phải cập nhật index); không phải nhiều index là tốt hơn. Dùng EXPLAIN ANALYZE để hiểu query plan trước khi thêm index.`,
+    a_en: `An index is a data structure (typically a B-Tree) that allows the database to find records quickly without a full table scan — reducing query time from O(n) to O(log n).
+
+- B-Tree Index: the most common type; supports equality and range queries (=, <, >, BETWEEN, LIKE 'prefix%'); good for high-cardinality columns.
+- Hash Index: extremely fast for equality lookups (=) but does not support range queries; used in memory-optimized tables.
+- Composite Index: an index on multiple columns — column order matters (leftmost prefix rule); an index on (a, b, c) supports queries on (a), (a, b), and (a, b, c) but not queries on only (b) or (c).
+- Partial Index: indexes only a subset of rows (e.g., WHERE status='active') — smaller and more efficient.
+- Full-Text Index: for text search queries.
+- GIN/GiST Index (PostgreSQL): for arrays, JSONB, and geometric data.
+- Covering Index: includes all columns needed for a query, eliminating the need to read the actual table rows.
+
+Trade-offs: each index consumes storage and slows writes (the index must be updated); more indexes is not always better. Use EXPLAIN ANALYZE to understand the query plan before adding an index.`,
   },
   {
     id: 2027,
@@ -337,8 +383,22 @@ export const SYSTEM_DESIGN_DATA: QAItem[] = [
     level: "advanced",
     q: "Thiết kế hệ thống URL Shortener (như bit.ly). Các thành phần chính và quyết định kỹ thuật? (Design a URL Shortener system like bit.ly. Key components and technical decisions?)",
     q_en: "Design a URL Shortener system like bit.ly. What are the key components and technical decisions?",
-    a: "Requirements: tạo short URL từ long URL, redirect từ short → long, ~100M URLs/day (write), ~1B redirects/day (read, read-heavy 10:1). Core components: (1) Hash Generation – dùng Base62 encoding (a-zA-Z0-9) trên 7 ký tự = 62^7 ≈ 3.5 tỷ unique URLs; tránh MD5/SHA vì collision; thay vào đó dùng auto-increment ID convert sang Base62. (2) Database: lưu `short_code → long_url` mapping; read-heavy nên cần caching aggressive; có thể dùng Cassandra (scale tốt) hoặc MySQL/PostgreSQL với Redis cache. (3) Cache: 80% traffic chỉ đến 20% URLs (hot URLs) → cache top URLs trong Redis với LRU eviction, cache hit rate rất cao. (4) Redirect: 301 (permanent, browser cache – ít load server nhưng không track analytics) vs 302 (temporary, browser không cache – track được mỗi click). Architecture: API Server stateless → Redis cache → Database; Rate limiting để tránh abuse; Custom domain support cần DNS wildcard; Analytics pipeline: click → Kafka → Spark → analytics DB. Scale: phân tách read service (redirect) và write service (create) vì load pattern khác nhau.",
-    a_en: "Requirements: generate a short URL from a long URL, redirect from short to long, ~100M URLs/day (write), ~1B redirects/day (read — heavily read-biased at 10:1 ratio). Core components: (1) Hash Generation — use Base62 encoding (a-zA-Z0-9) on 7 characters = 62^7 ≈ 3.5 billion unique URLs; avoid MD5/SHA due to collision risk; instead, use an auto-incrementing ID converted to Base62. (2) Database: stores the `short_code → long_url` mapping; since reads dominate, aggressive caching is needed; Cassandra (scales well) or MySQL/PostgreSQL with a Redis cache are good options. (3) Cache: 80% of traffic hits 20% of URLs (hot URLs) → cache top URLs in Redis with LRU eviction for very high cache hit rates. (4) Redirect: 301 (permanent — browser caches it, reduces server load but cannot track analytics) vs 302 (temporary — browser does not cache, each click is trackable). Architecture: stateless API Server → Redis cache → Database; rate limiting to prevent abuse; custom domain support requires a DNS wildcard; analytics pipeline: click → Kafka → Spark → analytics DB. Scaling: separate the read service (redirect) from the write service (create) since their load patterns differ significantly.",
+    a: `Requirements: tạo short URL từ long URL, redirect từ short → long, ~100M URLs/day (write), ~1B redirects/day (read, read-heavy 10:1).
+
+- Hash Generation: dùng Base62 encoding (a-zA-Z0-9) trên 7 ký tự = 62^7 ≈ 3.5 tỷ unique URLs; tránh MD5/SHA vì collision; thay vào đó dùng auto-increment ID convert sang Base62.
+- Database: lưu \`short_code → long_url\` mapping; read-heavy nên cần caching aggressive; có thể dùng Cassandra (scale tốt) hoặc MySQL/PostgreSQL với Redis cache.
+- Cache: 80% traffic chỉ đến 20% URLs (hot URLs) → cache top URLs trong Redis với LRU eviction, cache hit rate rất cao.
+- Redirect: 301 (permanent, browser cache – ít load server nhưng không track analytics) vs 302 (temporary, browser không cache – track được mỗi click).
+
+Architecture: API Server stateless → Redis cache → Database; Rate limiting để tránh abuse; Custom domain support cần DNS wildcard; Analytics pipeline: click → Kafka → Spark → analytics DB. Scale: phân tách read service (redirect) và write service (create) vì load pattern khác nhau.`,
+    a_en: `Requirements: generate a short URL from a long URL, redirect from short to long, ~100M URLs/day (write), ~1B redirects/day (read — heavily read-biased at 10:1 ratio).
+
+- Hash Generation: use Base62 encoding (a-zA-Z0-9) on 7 characters = 62^7 ≈ 3.5 billion unique URLs; avoid MD5/SHA due to collision risk; instead, use an auto-incrementing ID converted to Base62.
+- Database: stores the \`short_code → long_url\` mapping; since reads dominate, aggressive caching is needed; Cassandra (scales well) or MySQL/PostgreSQL with a Redis cache are good options.
+- Cache: 80% of traffic hits 20% of URLs (hot URLs) → cache top URLs in Redis with LRU eviction for very high cache hit rates.
+- Redirect: 301 (permanent — browser caches it, reduces server load but cannot track analytics) vs 302 (temporary — browser does not cache, each click is trackable).
+
+Architecture: stateless API Server → Redis cache → Database; rate limiting to prevent abuse; custom domain support requires a DNS wildcard; analytics pipeline: click → Kafka → Spark → analytics DB. Scaling: separate the read service (redirect) from the write service (create) since their load patterns differ significantly.`,
   },
   {
     id: 2034,
@@ -347,8 +407,22 @@ export const SYSTEM_DESIGN_DATA: QAItem[] = [
     level: "advanced",
     q: "Thiết kế hệ thống Chat real-time (như WhatsApp/Slack). Làm thế nào để handle kết nối và tin nhắn? (Design a real-time chat system like WhatsApp/Slack. How to handle connections and messages?)",
     q_en: "Design a real-time chat system like WhatsApp or Slack. How do you handle connections and messages?",
-    a: "Requirements: real-time messaging, online/offline status, message history, 1-1 và group chat. Connection layer: WebSocket là lựa chọn tốt hơn long polling vì bi-directional, persistent connection, low latency – mỗi client maintain một WebSocket connection đến chat server. Challenge: users kết nối đến different servers – cần pub/sub layer (Redis Pub/Sub hoặc Kafka) để route messages giữa servers: Server A nhận message cho User B đang connect đến Server B → publish lên Redis → Server B subscribe và push đến User B. Message storage: chat messages cần được lưu persistent → Cassandra là lựa chọn phổ biến (HBase ở Facebook Messenger, Cassandra ở Discord) vì write-heavy, time-based access pattern, scale tốt. Schema: partition key là `(conversation_id)`, clustering key là `(timestamp, message_id)` để query messages của một conversation theo thứ tự thời gian. Offline messages: nếu user offline khi nhận message, lưu vào DB; khi reconnect, fetch unread messages. Status service: heart-beat mỗi 5s để track online status, lưu trong Redis với TTL. Fanout cho group chat: mỗi group member cần nhận message; fanout-on-write (push đến tất cả members) vs fanout-on-read (members pull khi cần); với group lớn, fanout-on-write tốn kém → cần giới hạn group size hoặc hybrid approach.",
-    a_en: "Requirements: real-time messaging, online/offline presence, message history, 1-on-1 and group chat. Connection layer: WebSockets are preferred over long polling because they are bidirectional, maintain a persistent connection, and offer low latency — each client maintains one WebSocket connection to a chat server. Challenge: users connect to different servers — a pub/sub layer (Redis Pub/Sub or Kafka) is needed to route messages between servers: Server A receives a message for User B (who is connected to Server B) → publishes to Redis → Server B subscribes and pushes the message to User B. Message storage: chat messages must be persisted → Cassandra is a popular choice (Facebook Messenger uses HBase, Discord uses Cassandra) because of its write-heavy, time-based access patterns and horizontal scalability. Schema: partition key is `(conversation_id)`, clustering key is `(timestamp, message_id)` to query messages in a conversation in chronological order. Offline messages: if the user is offline when a message arrives, store it in the DB; when they reconnect, fetch unread messages. Presence service: heartbeat every 5s to track online status, stored in Redis with TTL. Group chat fanout: every group member must receive the message; fanout-on-write (push to all members immediately) vs fanout-on-read (members pull when needed); for large groups, fanout-on-write is expensive → enforce a group size limit or use a hybrid approach.",
+    a: `Requirements: real-time messaging, online/offline status, message history, 1-1 và group chat.
+
+- Connection layer: WebSocket là lựa chọn tốt hơn long polling vì bi-directional, persistent connection, low latency – mỗi client maintain một WebSocket connection đến chat server.
+- Cross-server routing: users kết nối đến different servers – cần pub/sub layer (Redis Pub/Sub hoặc Kafka): Server A nhận message cho User B đang connect đến Server B → publish lên Redis → Server B subscribe và push đến User B.
+- Message storage: Cassandra (HBase ở Facebook Messenger, Cassandra ở Discord) vì write-heavy, time-based access pattern. Schema: partition key là \`(conversation_id)\`, clustering key là \`(timestamp, message_id)\`.
+- Offline messages: nếu user offline khi nhận message, lưu vào DB; khi reconnect, fetch unread messages.
+- Status service: heart-beat mỗi 5s để track online status, lưu trong Redis với TTL.
+- Fanout cho group chat: fanout-on-write (push đến tất cả members) vs fanout-on-read (members pull khi cần); với group lớn, fanout-on-write tốn kém → giới hạn group size hoặc hybrid approach.`,
+    a_en: `Requirements: real-time messaging, online/offline presence, message history, 1-on-1 and group chat.
+
+- Connection layer: WebSockets are preferred over long polling — bidirectional, persistent connection, low latency; each client maintains one WebSocket connection to a chat server.
+- Cross-server routing: users connect to different servers — a pub/sub layer (Redis Pub/Sub or Kafka) is needed: Server A receives a message for User B (connected to Server B) → publishes to Redis → Server B subscribes and pushes the message to User B.
+- Message storage: Cassandra (Facebook Messenger uses HBase, Discord uses Cassandra) — write-heavy, time-based access patterns. Schema: partition key is \`(conversation_id)\`, clustering key is \`(timestamp, message_id)\`.
+- Offline messages: if the user is offline, store the message in the DB; fetch unread messages on reconnect.
+- Presence service: heartbeat every 5s to track online status, stored in Redis with TTL.
+- Group chat fanout: fanout-on-write (push to all members immediately) vs fanout-on-read (members pull when needed); for large groups, fanout-on-write is expensive → enforce a group size limit or use a hybrid approach.`,
   },
   {
     id: 2035,
@@ -357,8 +431,32 @@ export const SYSTEM_DESIGN_DATA: QAItem[] = [
     level: "advanced",
     q: "Thiết kế hệ thống Notification (push/email/SMS notifications). Các thành phần và đảm bảo delivery? (Design a Notification System (push/email/SMS). Components and ensuring delivery?)",
     q_en: "Design a Notification System supporting push, email, and SMS. What are the key components and how do you ensure reliable delivery?",
-    a: "Requirements: multi-channel (push, email, SMS), high volume (hàng trăm triệu notifications/day), reliable delivery, user preferences. Architecture tổng thể: Producer Services → Notification Service → Channel Handlers → Third-party providers. Notification Service nhận events (order shipped, friend request), lookup user preferences (channel, quiet hours, opt-out), enqueue vào Kafka với separate topics per channel. Channel Workers: Push Notification Worker gọi FCM (Android)/APNs (iOS); Email Worker gọi SendGrid/SES; SMS Worker gọi Twilio/SNS. Reliability: at-least-once delivery via Kafka; lưu notification vào DB với status (pending/sent/failed); retry with exponential backoff cho failures; dead letter queue cho permanent failures. Rate limiting per user: không spam user với 100 notifications cùng lúc – aggregate/throttle. Notification template service: versioned templates với i18n support. User preference service: per-channel opt-in/out, quiet hours, digest mode. Monitoring: delivery rate per channel, bounce/unsubscribe tracking, latency P99. Scale bottleneck thường ở third-party API calls – cần circuit breakers và fallback providers. Idempotency key để tránh duplicate notifications khi retry.",
-    a_en: "Requirements: multi-channel (push, email, SMS), high volume (hundreds of millions of notifications per day), reliable delivery, user preference support. Overall architecture: Producer Services → Notification Service → Channel Handlers → Third-party providers. The Notification Service receives events (order shipped, friend request), looks up user preferences (channel, quiet hours, opt-out), and enqueues them into Kafka with separate topics per channel. Channel Workers: Push Notification Worker calls FCM (Android) / APNs (iOS); Email Worker calls SendGrid/SES; SMS Worker calls Twilio/SNS. Reliability: at-least-once delivery via Kafka; store notifications in the DB with status (pending/sent/failed); retry with exponential backoff on failures; dead letter queue for permanent failures. Per-user rate limiting: avoid spamming users with 100 notifications at once — aggregate or throttle. Notification template service: versioned templates with i18n support. User preference service: per-channel opt-in/out, quiet hours, and digest mode. Monitoring: delivery rate per channel, bounce/unsubscribe tracking, P99 latency. The typical scale bottleneck is third-party API calls — circuit breakers and fallback providers are essential. Use idempotency keys to avoid duplicate notifications during retries.",
+    a: `Requirements: multi-channel (push, email, SMS), high volume (hàng trăm triệu notifications/day), reliable delivery, user preferences.
+
+Architecture: Producer Services → Notification Service → Channel Handlers → Third-party providers.
+
+- Notification Service: nhận events (order shipped, friend request), lookup user preferences (channel, quiet hours, opt-out), enqueue vào Kafka với separate topics per channel.
+- Channel Workers: Push Notification Worker gọi FCM (Android)/APNs (iOS); Email Worker gọi SendGrid/SES; SMS Worker gọi Twilio/SNS.
+- Reliability: at-least-once delivery via Kafka; lưu notification vào DB với status (pending/sent/failed); retry with exponential backoff; dead letter queue cho permanent failures.
+- Rate limiting per user: không spam user với 100 notifications cùng lúc – aggregate/throttle.
+- Notification template service: versioned templates với i18n support.
+- User preference service: per-channel opt-in/out, quiet hours, digest mode.
+- Monitoring: delivery rate per channel, bounce/unsubscribe tracking, latency P99.
+
+Scale bottleneck thường ở third-party API calls – cần circuit breakers và fallback providers. Idempotency key để tránh duplicate notifications khi retry.`,
+    a_en: `Requirements: multi-channel (push, email, SMS), high volume (hundreds of millions of notifications per day), reliable delivery, user preference support.
+
+Architecture: Producer Services → Notification Service → Channel Handlers → Third-party providers.
+
+- Notification Service: receives events (order shipped, friend request), looks up user preferences (channel, quiet hours, opt-out), and enqueues into Kafka with separate topics per channel.
+- Channel Workers: Push Notification Worker calls FCM (Android) / APNs (iOS); Email Worker calls SendGrid/SES; SMS Worker calls Twilio/SNS.
+- Reliability: at-least-once delivery via Kafka; store notifications in the DB with status (pending/sent/failed); retry with exponential backoff; dead letter queue for permanent failures.
+- Rate limiting per user: avoid spamming users with 100 notifications at once — aggregate or throttle.
+- Notification template service: versioned templates with i18n support.
+- User preference service: per-channel opt-in/out, quiet hours, and digest mode.
+- Monitoring: delivery rate per channel, bounce/unsubscribe tracking, P99 latency.
+
+The typical scale bottleneck is third-party API calls — circuit breakers and fallback providers are essential. Use idempotency keys to avoid duplicate notifications during retries.`,
   },
   {
     id: 2036,
@@ -377,8 +475,32 @@ export const SYSTEM_DESIGN_DATA: QAItem[] = [
     level: "advanced",
     q: "Thiết kế News Feed (như Facebook/Twitter). Fanout strategies và caching? (Design a News Feed like Facebook/Twitter. Fanout strategies and caching?)",
     q_en: "Design a News Feed like Facebook or Twitter. What are the fanout strategies and caching approaches?",
-    a: "Requirements: user thấy posts từ người họ follow, realtime updates, pagination, ~500M users. Core challenge: News Feed generation – khi user A post, tất cả followers của A cần thấy post đó trong feed. Fanout-on-write (Push model): khi post mới được tạo, immediately push vào feed cache của tất cả followers → feed read rất nhanh (chỉ đọc pre-computed feed từ cache), nhưng write amplification lớn: user có 1M followers → 1M cache writes. Fanout-on-read (Pull model): khi user load feed, query tất cả người họ follow, merge và sort → không có write overhead, nhưng read rất chậm và expensive. Hybrid approach (Facebook/Twitter): fanout-on-write cho users thường (< N followers), fanout-on-read cho celebrities (> N followers); khi load feed, merge pre-computed feed + real-time pull từ celebrities. Feed Storage: Redis sorted set với timestamp là score, post_id là member – ZREVRANGE để paginate; TTL để evict old feeds. Post storage: separate service, fetch post content từ DB/cache khi render feed. Ranking: chronological là đơn giản nhất; ML-based ranking (engagement prediction) phức tạp hơn nhưng giữ user lâu hơn. Cursor-based pagination thay vì offset pagination để tránh missing/duplicate items khi feed thay đổi.",
-    a_en: "Requirements: users see posts from people they follow, real-time updates, pagination support, ~500M users. Core challenge: News Feed generation — when user A posts, all of A's followers need to see that post in their feed. Fanout-on-write (Push model): when a new post is created, immediately push it into the feed cache of all followers → feed reads are very fast (just read the pre-computed feed from cache), but write amplification is high: a user with 1M followers triggers 1M cache writes. Fanout-on-read (Pull model): when a user loads their feed, query all accounts they follow, then merge and sort → no write overhead, but reads are very slow and expensive. Hybrid approach (Facebook/Twitter): fanout-on-write for regular users (fewer than N followers); fanout-on-read for celebrities (more than N followers); when loading the feed, merge the pre-computed feed with a real-time pull from celebrities. Feed storage: Redis sorted set with timestamp as the score and post_id as the member — ZREVRANGE for pagination; TTL to evict stale feeds. Post storage: a separate service fetches post content from the DB/cache when rendering the feed. Ranking: chronological order is simplest; ML-based ranking (engagement prediction) is more complex but increases user retention. Use cursor-based pagination instead of offset pagination to avoid missing or duplicate items as the feed changes.",
+    a: `Requirements: user thấy posts từ người họ follow, realtime updates, pagination, ~500M users.
+
+Core challenge: khi user A post, tất cả followers của A cần thấy post đó trong feed.
+
+- Fanout-on-write (Push model): immediately push vào feed cache của tất cả followers → feed read rất nhanh, nhưng write amplification lớn: user có 1M followers → 1M cache writes.
+- Fanout-on-read (Pull model): khi user load feed, query tất cả người họ follow, merge và sort → không có write overhead, nhưng read rất chậm và expensive.
+- Hybrid approach (Facebook/Twitter): fanout-on-write cho users thường (< N followers), fanout-on-read cho celebrities (> N followers); merge pre-computed feed + real-time pull từ celebrities.
+
+- Feed Storage: Redis sorted set với timestamp là score, post_id là member – ZREVRANGE để paginate; TTL để evict old feeds.
+- Post storage: separate service, fetch post content từ DB/cache khi render feed.
+- Ranking: chronological là đơn giản nhất; ML-based ranking (engagement prediction) phức tạp hơn nhưng giữ user lâu hơn.
+
+Cursor-based pagination thay vì offset pagination để tránh missing/duplicate items khi feed thay đổi.`,
+    a_en: `Requirements: users see posts from people they follow, real-time updates, pagination support, ~500M users.
+
+Core challenge: when user A posts, all of A's followers need to see that post in their feed.
+
+- Fanout-on-write (Push model): immediately push into the feed cache of all followers → very fast reads, but high write amplification: a user with 1M followers triggers 1M cache writes.
+- Fanout-on-read (Pull model): when a user loads their feed, query all followed accounts, merge and sort → no write overhead, but reads are very slow and expensive.
+- Hybrid approach (Facebook/Twitter): fanout-on-write for regular users (fewer than N followers); fanout-on-read for celebrities (more than N followers); merge the pre-computed feed with a real-time pull from celebrities.
+
+- Feed storage: Redis sorted set with timestamp as the score and post_id as the member — ZREVRANGE for pagination; TTL to evict stale feeds.
+- Post storage: a separate service fetches post content from the DB/cache when rendering the feed.
+- Ranking: chronological order is simplest; ML-based ranking (engagement prediction) is more complex but increases user retention.
+
+Use cursor-based pagination instead of offset pagination to avoid missing or duplicate items as the feed changes.`,
   },
   {
     id: 2038,
@@ -387,8 +509,28 @@ export const SYSTEM_DESIGN_DATA: QAItem[] = [
     level: "advanced",
     q: "Thiết kế hệ thống File Storage như Google Drive hoặc Dropbox. Các thành phần chính? (Design a file storage system like Google Drive or Dropbox. Key components?)",
     q_en: "Design a file storage system like Google Drive or Dropbox. What are the key components?",
-    a: "Requirements: upload/download/sync files, share với others, version history, ~1B users, ~10 exabytes storage. Chunking: chia file thành chunks (4-8MB), mỗi chunk được hash (SHA-256) để detect duplicates (deduplication) và support delta sync (chỉ upload chunks thay đổi). Upload flow: Client chunker → tính hash của mỗi chunk → gửi chunk hashes lên server → server trả lại chunks nào cần upload → client upload missing chunks lên Blob Storage (S3) → server ghi metadata vào DB. Metadata DB: lưu file tree structure, ownership, permissions, version history – dùng RDBMS (MySQL) cho ACID và complex queries. Blob Storage: S3-compatible object storage cho raw file chunks. Deduplication: nếu hai users upload cùng file, chỉ lưu một bản vật lý, tham chiếu từ nhiều users – tiết kiệm storage đáng kể. Sync service: khi file thay đổi trên device A → upload delta chunks → notify other devices qua WebSocket/long polling → devices download changed chunks. Conflict resolution: last-write-wins hoặc tạo conflict copy như Dropbox. Bandwidth optimization: client-side deduplication và delta sync giảm upload data tới 90%. Permission model: owner, editor, viewer; sharing links với expiry. CDN cho download popular files. File metadata search dùng Elasticsearch.",
-    a_en: "Requirements: upload/download/sync files, sharing with others, version history, ~1B users, ~10 exabytes of storage. Chunking: split files into chunks (4–8MB each); each chunk is hashed (SHA-256) to detect duplicates (deduplication) and support delta sync (only upload changed chunks). Upload flow: Client chunker → compute hash of each chunk → send chunk hashes to the server → server responds with which chunks are missing → client uploads missing chunks to Blob Storage (S3) → server writes metadata to the database. Metadata DB: stores file tree structure, ownership, permissions, and version history — use an RDBMS (MySQL) for ACID guarantees and complex queries. Blob Storage: S3-compatible object storage for raw file chunks. Deduplication: if two users upload the same file, store only one physical copy and reference it from multiple users — significant storage savings. Sync service: when a file changes on device A → upload delta chunks → notify other devices via WebSocket/long polling → devices download the changed chunks. Conflict resolution: last-write-wins or create a conflict copy (like Dropbox). Bandwidth optimization: client-side deduplication and delta sync can reduce uploaded data by up to 90%. Permission model: owner, editor, viewer; sharing links with expiry. CDN for downloading popular files. File metadata search powered by Elasticsearch.",
+    a: `Requirements: upload/download/sync files, share với others, version history, ~1B users, ~10 exabytes storage.
+
+- Chunking: chia file thành chunks (4-8MB), mỗi chunk được hash (SHA-256) để detect duplicates (deduplication) và support delta sync (chỉ upload chunks thay đổi).
+- Upload flow: Client chunker → tính hash của mỗi chunk → gửi chunk hashes lên server → server trả lại chunks nào cần upload → client upload missing chunks lên Blob Storage (S3) → server ghi metadata vào DB.
+- Metadata DB: lưu file tree structure, ownership, permissions, version history – dùng RDBMS (MySQL) cho ACID và complex queries.
+- Blob Storage: S3-compatible object storage cho raw file chunks.
+- Deduplication: nếu hai users upload cùng file, chỉ lưu một bản vật lý, tham chiếu từ nhiều users – tiết kiệm storage đáng kể.
+- Sync service: khi file thay đổi trên device A → upload delta chunks → notify other devices qua WebSocket/long polling → devices download changed chunks.
+- Conflict resolution: last-write-wins hoặc tạo conflict copy như Dropbox.
+
+Bandwidth optimization: client-side deduplication và delta sync giảm upload data tới 90%. Permission model: owner, editor, viewer; sharing links với expiry. CDN cho download popular files. File metadata search dùng Elasticsearch.`,
+    a_en: `Requirements: upload/download/sync files, sharing with others, version history, ~1B users, ~10 exabytes of storage.
+
+- Chunking: split files into chunks (4–8MB each); each chunk is hashed (SHA-256) to detect duplicates (deduplication) and support delta sync (only upload changed chunks).
+- Upload flow: Client chunker → compute hash of each chunk → send chunk hashes to the server → server responds with which chunks are missing → client uploads missing chunks to Blob Storage (S3) → server writes metadata to the database.
+- Metadata DB: stores file tree structure, ownership, permissions, and version history — use an RDBMS (MySQL) for ACID guarantees and complex queries.
+- Blob Storage: S3-compatible object storage for raw file chunks.
+- Deduplication: if two users upload the same file, store only one physical copy and reference it from multiple users — significant storage savings.
+- Sync service: when a file changes on device A → upload delta chunks → notify other devices via WebSocket/long polling → devices download the changed chunks.
+- Conflict resolution: last-write-wins or create a conflict copy (like Dropbox).
+
+Bandwidth optimization: client-side deduplication and delta sync can reduce uploaded data by up to 90%. Permission model: owner, editor, viewer; sharing links with expiry. CDN for downloading popular files. File metadata search powered by Elasticsearch.`,
   },
   {
     id: 2039,
@@ -397,8 +539,28 @@ export const SYSTEM_DESIGN_DATA: QAItem[] = [
     level: "advanced",
     q: "Thiết kế Search Autocomplete (Typeahead Suggestions). Tối ưu latency và ranking? (Design a Search Autocomplete / Typeahead system. How to optimize latency and ranking?)",
     q_en: "Design a Search Autocomplete / Typeahead system. How do you optimize for latency and ranking?",
-    a: "Requirements: suggest top-K queries khi user gõ, latency < 100ms, millions of users. Data collection: log tất cả search queries; aggregation job (Hadoop/Spark) chạy weekly/daily để tính frequency của mỗi query (hay trending score). Trie (Prefix Tree): data structure lý tưởng cho prefix matching – mỗi node đại diện một ký tự, lưu top-K queries tại mỗi node (không phải chỉ ở leaf). Query time: traverse trie theo prefix → O(prefix_length) để tìm top suggestions. Trie storage: serialized trie lưu trong distributed cache (Redis). Caching là critical: top-20% prefixes chiếm ~80% traffic → cache aggressively; prefix cache với TTL 24h. Browser cache: suggest kết quả cho prefix 'a' không thay đổi trong vài giờ → cache ở client để giảm requests. Ranking factors: frequency, freshness (trending queries), personalization (user's search history). Trie update: không update trie real-time (expensive); thay vào đó rebuild offline và swap atomically. Scale: shard trie theo first character (26 shards); consistent hashing để route request đến đúng shard. Filter: cần filter offensive/spam queries trước khi hiển thị. API: GET /autocomplete?q={prefix}&limit=10 → cần < 50ms để UX tốt.",
-    a_en: "Requirements: suggest top-K queries as the user types, latency < 100ms, millions of users. Data collection: log all search queries; run an aggregation job (Hadoop/Spark) weekly or daily to compute the frequency (or trending score) of each query. Trie (Prefix Tree): the ideal data structure for prefix matching — each node represents a character and stores the top-K queries at that node (not just at leaf nodes). Query time: traverse the trie following the prefix → O(prefix_length) to find the top suggestions. Trie storage: serialize the trie and store it in a distributed cache (Redis). Caching is critical: the top 20% of prefixes account for ~80% of traffic → cache aggressively; prefix cache with a 24h TTL. Browser caching: suggestions for the prefix 'a' do not change for hours → cache at the client to reduce requests. Ranking factors: query frequency, freshness (trending queries), and personalization (user's own search history). Trie updates: do not update the trie in real-time (too expensive); instead, rebuild offline and swap atomically. Scaling: shard the trie by the first character (26 shards); use consistent hashing to route requests to the correct shard. Filtering: screen for offensive or spam queries before displaying suggestions. API: GET /autocomplete?q={prefix}&limit=10 — must respond in < 50ms for good UX.",
+    a: `Requirements: suggest top-K queries khi user gõ, latency < 100ms, millions of users.
+
+- Data collection: log tất cả search queries; aggregation job (Hadoop/Spark) chạy weekly/daily để tính frequency của mỗi query (hay trending score).
+- Trie (Prefix Tree): data structure lý tưởng cho prefix matching – mỗi node đại diện một ký tự, lưu top-K queries tại mỗi node. Query time: traverse trie theo prefix → O(prefix_length).
+- Trie storage: serialized trie lưu trong distributed cache (Redis).
+- Caching: top-20% prefixes chiếm ~80% traffic → cache aggressively; prefix cache với TTL 24h; browser cache ở client để giảm requests.
+- Ranking factors: frequency, freshness (trending queries), personalization (user's search history).
+- Trie update: không update real-time (expensive); rebuild offline và swap atomically.
+- Scale: shard trie theo first character (26 shards); consistent hashing để route request đến đúng shard.
+
+Filter: cần filter offensive/spam queries trước khi hiển thị. API: GET /autocomplete?q={prefix}&limit=10 → cần < 50ms để UX tốt.`,
+    a_en: `Requirements: suggest top-K queries as the user types, latency < 100ms, millions of users.
+
+- Data collection: log all search queries; run an aggregation job (Hadoop/Spark) weekly or daily to compute the frequency (or trending score) of each query.
+- Trie (Prefix Tree): the ideal data structure for prefix matching — each node represents a character and stores the top-K queries at that node. Query time: traverse the trie following the prefix → O(prefix_length).
+- Trie storage: serialize the trie and store it in a distributed cache (Redis).
+- Caching: the top 20% of prefixes account for ~80% of traffic → cache aggressively; prefix cache with a 24h TTL; browser-cache client-side to reduce requests.
+- Ranking factors: query frequency, freshness (trending queries), and personalization (user's own search history).
+- Trie updates: do not update in real-time (too expensive); rebuild offline and swap atomically.
+- Scaling: shard the trie by the first character (26 shards); use consistent hashing to route requests to the correct shard.
+
+Filtering: screen for offensive or spam queries before displaying. API: GET /autocomplete?q={prefix}&limit=10 — must respond in < 50ms for good UX.`,
   },
   {
     id: 2040,
@@ -407,7 +569,27 @@ export const SYSTEM_DESIGN_DATA: QAItem[] = [
     level: "advanced",
     q: "Thiết kế hệ thống Payment như Stripe. Đảm bảo tính chính xác và idempotency? (Design a payment system like Stripe. Ensuring correctness and idempotency?)",
     q_en: "Design a payment system like Stripe. How do you ensure correctness and idempotency?",
-    a: "Requirements: process payments, prevent double charges, handle failures gracefully, PCI compliance, audit trail đầy đủ. Idempotency là quan trọng nhất: client gửi `Idempotency-Key` (UUID) theo mỗi request; server lưu {idempotency_key → response} trong DB; nếu cùng key gửi lại (do retry), trả về cached response mà không xử lý lại – ngăn double charge tuyệt đối. Payment flow: Create PaymentIntent (trạng thái: created) → Client collect card info (Stripe.js không gửi card data đến server của bạn – PCI scope reduction) → Confirm payment → Server gọi payment processor → Update trạng thái. State machine cho payment: created → processing → succeeded/failed/refunded – mọi transition được log với Event Sourcing. Distributed transaction giữa internal DB và external payment processor: dùng Outbox Pattern – ghi payment record và outbox event trong cùng DB transaction; worker đọc outbox và gọi external API, update status khi xong. Reconciliation: hàng đêm so sánh internal records với statement từ bank/processor để phát hiện discrepancy. Security: TLS everywhere, no log card data, tokenization (lưu token thay vì raw card number), fraud detection ML model. Retry strategy: exponential backoff với jitter cho transient failures; không retry idempotent operations mà không có idempotency key. Compliance: PCI-DSS, SOC2, GDPR data retention policies.",
-    a_en: "Requirements: process payments, prevent double charges, handle failures gracefully, PCI compliance, full audit trail. Idempotency is the most critical concern: the client sends an `Idempotency-Key` (UUID) with every request; the server stores {idempotency_key → response} in the DB; if the same key is sent again (due to a retry), return the cached response without reprocessing — absolutely preventing double charges. Payment flow: Create PaymentIntent (status: created) → Client collects card info (Stripe.js does not send card data to your server — reducing PCI scope) → Confirm payment → Server calls the payment processor → Update status. State machine for payments: created → processing → succeeded/failed/refunded — every transition is logged using Event Sourcing. Distributed transaction between the internal DB and an external payment processor: use the Outbox Pattern — write the payment record and an outbox event in the same DB transaction; a worker reads the outbox and calls the external API, updating status when complete. Reconciliation: nightly comparison of internal records against bank/processor statements to detect discrepancies. Security: TLS everywhere, never log card data, tokenization (store tokens instead of raw card numbers), fraud detection ML model. Retry strategy: exponential backoff with jitter for transient failures; never retry operations without an idempotency key. Compliance: PCI-DSS, SOC2, GDPR data retention policies.",
+    a: `Requirements: process payments, prevent double charges, handle failures gracefully, PCI compliance, audit trail đầy đủ.
+
+- Idempotency (quan trọng nhất): client gửi \`Idempotency-Key\` (UUID) theo mỗi request; server lưu {idempotency_key → response} trong DB; nếu cùng key gửi lại (do retry), trả về cached response mà không xử lý lại – ngăn double charge tuyệt đối.
+- Payment flow: Create PaymentIntent (created) → Client collect card info (Stripe.js không gửi card data đến server – PCI scope reduction) → Confirm payment → Server gọi payment processor → Update trạng thái.
+- State machine: created → processing → succeeded/failed/refunded – mọi transition được log với Event Sourcing.
+- Outbox Pattern: ghi payment record và outbox event trong cùng DB transaction; worker đọc outbox và gọi external API, update status khi xong.
+- Reconciliation: hàng đêm so sánh internal records với statement từ bank/processor để phát hiện discrepancy.
+- Security: TLS everywhere, no log card data, tokenization (lưu token thay vì raw card number), fraud detection ML model.
+- Retry strategy: exponential backoff với jitter cho transient failures; không retry idempotent operations mà không có idempotency key.
+
+Compliance: PCI-DSS, SOC2, GDPR data retention policies.`,
+    a_en: `Requirements: process payments, prevent double charges, handle failures gracefully, PCI compliance, full audit trail.
+
+- Idempotency (most critical): the client sends an \`Idempotency-Key\` (UUID) with every request; the server stores {idempotency_key → response} in the DB; if the same key is sent again (due to a retry), return the cached response without reprocessing — absolutely preventing double charges.
+- Payment flow: Create PaymentIntent (created) → Client collects card info (Stripe.js does not send card data to your server — reducing PCI scope) → Confirm payment → Server calls the payment processor → Update status.
+- State machine: created → processing → succeeded/failed/refunded — every transition is logged using Event Sourcing.
+- Outbox Pattern: write the payment record and an outbox event in the same DB transaction; a worker reads the outbox and calls the external API, updating status when complete.
+- Reconciliation: nightly comparison of internal records against bank/processor statements to detect discrepancies.
+- Security: TLS everywhere, never log card data, tokenization (store tokens instead of raw card numbers), fraud detection ML model.
+- Retry strategy: exponential backoff with jitter for transient failures; never retry operations without an idempotency key.
+
+Compliance: PCI-DSS, SOC2, GDPR data retention policies.`,
   },
 ]

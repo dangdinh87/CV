@@ -101,8 +101,26 @@ export const NETWORKING_OS_DATA: QAItem[] = [
     level: "intermediate",
     q: "Các thuật toán load balancing phổ biến là gì? Ưu nhược điểm của từng loại?",
     q_en: "What are the common load balancing algorithms? What are the pros and cons of each?",
-    a: "Round Robin: phân phối request lần lượt qua các server — đơn giản nhưng không tính đến load thực tế. Weighted Round Robin: server mạnh hơn nhận nhiều request hơn theo tỷ lệ cấu hình. Least Connections: gửi đến server có ít active connections nhất — tốt khi request duration không đều nhau. Least Response Time: chọn server có response time thấp nhất — cần monitoring liên tục. IP Hash: hash IP client để luôn route đến cùng một server (sticky session) — quan trọng khi app có state (session). Random: chọn ngẫu nhiên — đơn giản, hoạt động tốt với số lượng server lớn. Trong thực tế: Nginx/HAProxy/AWS ALB hỗ trợ hầu hết các thuật toán này; Kubernetes dùng iptables/ipvs với round-robin mặc định. Health check là thành phần bắt buộc — LB phải tự động loại server unhealthy khỏi pool.",
-    a_en: "Round Robin: distributes requests sequentially across servers — simple but ignores actual server load. Weighted Round Robin: higher-capacity servers receive a proportionally larger share of requests based on configured weights. Least Connections: routes to the server with the fewest active connections — effective when request durations vary. Least Response Time: selects the server with the lowest response time — requires continuous monitoring. IP Hash: hashes the client IP to always route to the same server (sticky session) — important for stateful applications using sessions. Random: selects a server at random — simple and works well at scale. In practice, Nginx/HAProxy/AWS ALB support most of these algorithms; Kubernetes uses iptables/ipvs with round-robin by default. Health checks are mandatory — the load balancer must automatically remove unhealthy servers from the pool.",
+    a: `Các thuật toán load balancing phổ biến:
+
+- Round Robin: phân phối request lần lượt qua các server — đơn giản nhưng không tính đến load thực tế.
+- Weighted Round Robin: server mạnh hơn nhận nhiều request hơn theo tỷ lệ cấu hình.
+- Least Connections: gửi đến server có ít active connections nhất — tốt khi request duration không đều nhau.
+- Least Response Time: chọn server có response time thấp nhất — cần monitoring liên tục.
+- IP Hash: hash IP client để luôn route đến cùng một server (sticky session) — quan trọng khi app có state (session).
+- Random: chọn ngẫu nhiên — đơn giản, hoạt động tốt với số lượng server lớn.
+
+Trong thực tế: Nginx/HAProxy/AWS ALB hỗ trợ hầu hết các thuật toán này; Kubernetes dùng iptables/ipvs với round-robin mặc định. Health check là thành phần bắt buộc — LB phải tự động loại server unhealthy khỏi pool.`,
+    a_en: `Common load balancing algorithms:
+
+- Round Robin: distributes requests sequentially across servers — simple but ignores actual server load.
+- Weighted Round Robin: higher-capacity servers receive a proportionally larger share of requests based on configured weights.
+- Least Connections: routes to the server with the fewest active connections — effective when request durations vary.
+- Least Response Time: selects the server with the lowest response time — requires continuous monitoring.
+- IP Hash: hashes the client IP to always route to the same server (sticky session) — important for stateful applications using sessions.
+- Random: selects a server at random — simple and works well at scale.
+
+In practice, Nginx/HAProxy/AWS ALB support most of these algorithms; Kubernetes uses iptables/ipvs with round-robin by default. Health checks are mandatory — the load balancer must automatically remove unhealthy servers from the pool.`,
   },
   {
     id: 2311,
@@ -151,8 +169,20 @@ export const NETWORKING_OS_DATA: QAItem[] = [
     level: "intermediate",
     q: "So sánh các phương thức API authentication: OAuth2, JWT và API Key. Khi nào dùng cái nào?",
     q_en: "Compare API authentication methods: OAuth2, JWT, and API Key. When should you use each?",
-    a: "API Key: chuỗi secret gửi trong header (`X-API-Key`) hoặc query param — đơn giản, phù hợp server-to-server, machine-to-machine; không có expiry tự động; nếu lộ phải revoke thủ công. JWT (JSON Web Token): self-contained token chứa claims (user ID, roles) được ký bằng secret/private key — stateless, không cần query DB mỗi request; có expiry; Access token (15 phút) + Refresh token (7-30 ngày) là pattern chuẩn; nhược điểm: không thể revoke trước expiry trừ khi dùng blocklist. OAuth2: authorization framework (không phải authentication) — cho phép third-party app access resource thay mặt user mà không cần share password; các flows: Authorization Code (web app), PKCE (mobile/SPA), Client Credentials (server-to-server), Device Flow (TV/CLI). Thực tế: Internal API dùng JWT; Public API cho developers dùng API Key; Login với Google/GitHub dùng OAuth2 + OpenID Connect (OIDC) để lấy user identity.",
-    a_en: "API Key: a secret string sent in a header (`X-API-Key`) or query parameter — simple, suitable for server-to-server or machine-to-machine communication; no automatic expiry; must be manually revoked if compromised. JWT (JSON Web Token): a self-contained token carrying claims (user ID, roles) signed with a secret or private key — stateless, no DB lookup needed per request; has an expiry; the standard pattern is a short-lived access token (15 minutes) plus a refresh token (7–30 days); downside: cannot be revoked before expiry without a blocklist. OAuth2: an authorization framework (not an authentication protocol) — allows third-party apps to access resources on behalf of a user without sharing passwords; flows include Authorization Code (web apps), PKCE (mobile/SPA), Client Credentials (server-to-server), and Device Flow (TV/CLI). In practice: internal APIs use JWT; public developer APIs use API Keys; login with Google/GitHub uses OAuth2 + OpenID Connect (OIDC) to obtain user identity.",
+    a: `So sánh các phương thức API authentication:
+
+- API Key: chuỗi secret gửi trong header (\`X-API-Key\`) hoặc query param — đơn giản, phù hợp server-to-server, machine-to-machine; không có expiry tự động; nếu lộ phải revoke thủ công.
+- JWT (JSON Web Token): self-contained token chứa claims (user ID, roles) được ký bằng secret/private key — stateless, không cần query DB mỗi request; có expiry; Access token (15 phút) + Refresh token (7-30 ngày) là pattern chuẩn; nhược điểm: không thể revoke trước expiry trừ khi dùng blocklist.
+- OAuth2: authorization framework (không phải authentication) — cho phép third-party app access resource thay mặt user mà không cần share password; các flows: Authorization Code (web app), PKCE (mobile/SPA), Client Credentials (server-to-server), Device Flow (TV/CLI).
+
+Thực tế: Internal API dùng JWT; Public API cho developers dùng API Key; Login với Google/GitHub dùng OAuth2 + OpenID Connect (OIDC) để lấy user identity.`,
+    a_en: `Comparing API authentication methods:
+
+- API Key: a secret string sent in a header (\`X-API-Key\`) or query parameter — simple, suitable for server-to-server or machine-to-machine communication; no automatic expiry; must be manually revoked if compromised.
+- JWT (JSON Web Token): a self-contained token carrying claims (user ID, roles) signed with a secret or private key — stateless, no DB lookup needed per request; has an expiry; the standard pattern is a short-lived access token (15 minutes) plus a refresh token (7–30 days); downside: cannot be revoked before expiry without a blocklist.
+- OAuth2: an authorization framework (not an authentication protocol) — allows third-party apps to access resources on behalf of a user without sharing passwords; flows include Authorization Code (web apps), PKCE (mobile/SPA), Client Credentials (server-to-server), and Device Flow (TV/CLI).
+
+In practice: internal APIs use JWT; public developer APIs use API Keys; login with Google/GitHub uses OAuth2 + OpenID Connect (OIDC) to obtain user identity.`,
   },
   {
     id: 2316,
@@ -203,8 +233,28 @@ export const NETWORKING_OS_DATA: QAItem[] = [
     level: "intermediate",
     q: "Inter-Process Communication (IPC) là gì? Các cơ chế IPC phổ biến?",
     q_en: "What is Inter-Process Communication (IPC)? What are the common IPC mechanisms?",
-    a: "IPC là các cơ chế để các process độc lập trao đổi dữ liệu, vì chúng không chia sẻ bộ nhớ trực tiếp. Pipe (anonymous pipe): luồng dữ liệu một chiều giữa parent-child process; Named pipe (FIFO): pipe có tên trong filesystem, không cần parent-child relationship. Shared Memory: vùng nhớ được map vào address space của nhiều process — nhanh nhất vì không copy data, nhưng cần đồng bộ (mutex/semaphore). Message Queue: process gửi/nhận messages qua kernel queue (POSIX mqueue, System V) — asynchronous, có thể buffer. Socket: Unix domain socket (local) hoặc TCP/UDP socket (network) — linh hoạt nhất, dùng cả local và remote; microservices giao tiếp qua HTTP/gRPC là IPC qua socket. Signal: notification đơn giản (SIGTERM, SIGKILL, SIGUSR1) — limited data. Memory-mapped file (mmap): file được map vào memory, nhiều process cùng đọc/ghi — Node.js dùng cho large file processing. Thực tế: Nginx worker processes giao tiếp với master qua pipe và shared memory.",
-    a_en: "IPC refers to the mechanisms that allow independent processes to exchange data, since they do not share memory directly. Pipe (anonymous pipe): a one-way data stream between a parent and child process. Named pipe (FIFO): a pipe with a filesystem name that does not require a parent-child relationship. Shared Memory: a memory region mapped into the address space of multiple processes — the fastest mechanism since no data is copied, but requires synchronization (mutex/semaphore). Message Queue: processes send and receive messages through a kernel-managed queue (POSIX mqueue, System V) — asynchronous and buffered. Socket: Unix domain socket (local IPC) or TCP/UDP socket (network) — the most flexible, supporting both local and remote communication; microservices communicating via HTTP/gRPC are using socket-based IPC. Signal: a simple notification mechanism (SIGTERM, SIGKILL, SIGUSR1) — carries no data payload. Memory-mapped file (mmap): a file mapped into memory, allowing multiple processes to read and write it concurrently — used in Node.js for large file processing. In practice, Nginx worker processes communicate with the master process via pipes and shared memory.",
+    a: `IPC là các cơ chế để các process độc lập trao đổi dữ liệu, vì chúng không chia sẻ bộ nhớ trực tiếp.
+
+- Pipe (anonymous pipe): luồng dữ liệu một chiều giữa parent-child process.
+- Named pipe (FIFO): pipe có tên trong filesystem, không cần parent-child relationship.
+- Shared Memory: vùng nhớ được map vào address space của nhiều process — nhanh nhất vì không copy data, nhưng cần đồng bộ (mutex/semaphore).
+- Message Queue: process gửi/nhận messages qua kernel queue (POSIX mqueue, System V) — asynchronous, có thể buffer.
+- Socket: Unix domain socket (local) hoặc TCP/UDP socket (network) — linh hoạt nhất, dùng cả local và remote; microservices giao tiếp qua HTTP/gRPC là IPC qua socket.
+- Signal: notification đơn giản (SIGTERM, SIGKILL, SIGUSR1) — limited data.
+- Memory-mapped file (mmap): file được map vào memory, nhiều process cùng đọc/ghi — Node.js dùng cho large file processing.
+
+Thực tế: Nginx worker processes giao tiếp với master qua pipe và shared memory.`,
+    a_en: `IPC refers to the mechanisms that allow independent processes to exchange data, since they do not share memory directly.
+
+- Pipe (anonymous pipe): a one-way data stream between a parent and child process.
+- Named pipe (FIFO): a pipe with a filesystem name that does not require a parent-child relationship.
+- Shared Memory: a memory region mapped into the address space of multiple processes — the fastest mechanism since no data is copied, but requires synchronization (mutex/semaphore).
+- Message Queue: processes send and receive messages through a kernel-managed queue (POSIX mqueue, System V) — asynchronous and buffered.
+- Socket: Unix domain socket (local IPC) or TCP/UDP socket (network) — the most flexible, supporting both local and remote communication; microservices communicating via HTTP/gRPC are using socket-based IPC.
+- Signal: a simple notification mechanism (SIGTERM, SIGKILL, SIGUSR1) — carries no data payload.
+- Memory-mapped file (mmap): a file mapped into memory, allowing multiple processes to read and write it concurrently — used in Node.js for large file processing.
+
+In practice, Nginx worker processes communicate with the master process via pipes and shared memory.`,
   },
   {
     id: 2321,
@@ -285,8 +335,36 @@ export const NETWORKING_OS_DATA: QAItem[] = [
     level: "intermediate",
     q: "Memory leak là gì? Cách phát hiện và phòng tránh trong Node.js/Go?",
     q_en: "What is a memory leak? How do you detect and prevent it in Node.js/Go?",
-    a: "Memory leak xảy ra khi program allocate memory nhưng không release, dần dần RSS tăng cho đến khi OOM. Nguyên nhân phổ biến: global/module-level variables tích lũy data; event listeners không được removeListener; closures capture large objects; circular references (trong ngôn ngữ reference-counted); unbounded cache/map; timer setInterval không clearInterval. Trong Node.js: dùng `node --inspect` + Chrome DevTools Memory tab để heap snapshot và so sánh; `clinic.js heapprofiler` cho production; `process.memoryUsage().heapUsed` monitor; `WeakMap`/`WeakRef` cho cache để GC tự thu dọn khi key không còn reference. Trong Go: goroutine leak (goroutine blocked trên channel mãi mãi, không bao giờ exit) là phổ biến hơn memory leak; dùng `pprof` heap/goroutine profiler; `runtime.ReadMemStats` để monitor. Best practice: giới hạn size của in-memory cache; dùng context cancellation để goroutines tự cleanup; integration test monitor memory growth theo thời gian.",
-    a_en: "A memory leak occurs when a program allocates memory but never releases it, causing RSS to grow steadily until an OOM kill. Common causes: global or module-level variables accumulating data; event listeners that are never removed; closures capturing large objects; circular references in reference-counted languages; unbounded caches or maps; `setInterval` timers that are never cleared. In Node.js: use `node --inspect` + the Chrome DevTools Memory tab to take and compare heap snapshots; `clinic.js heapprofiler` for production profiling; monitor `process.memoryUsage().heapUsed`; use `WeakMap`/`WeakRef` for caches so the GC can collect entries when keys are no longer referenced. In Go: goroutine leaks (a goroutine blocked on a channel forever, never exiting) are more common than memory leaks; use `pprof` for heap and goroutine profiling; use `runtime.ReadMemStats` for monitoring. Best practices: cap the size of in-memory caches; use context cancellation so goroutines clean up on shutdown; write integration tests that monitor memory growth over time.",
+    a: `Memory leak xảy ra khi program allocate memory nhưng không release, dần dần RSS tăng cho đến khi OOM.
+
+Nguyên nhân phổ biến:
+- global/module-level variables tích lũy data.
+- event listeners không được removeListener.
+- closures capture large objects.
+- circular references (trong ngôn ngữ reference-counted).
+- unbounded cache/map.
+- timer setInterval không clearInterval.
+
+Trong Node.js: dùng \`node --inspect\` + Chrome DevTools Memory tab để heap snapshot và so sánh; \`clinic.js heapprofiler\` cho production; \`process.memoryUsage().heapUsed\` monitor; \`WeakMap\`/\`WeakRef\` cho cache để GC tự thu dọn khi key không còn reference.
+
+Trong Go: goroutine leak (goroutine blocked trên channel mãi mãi, không bao giờ exit) là phổ biến hơn memory leak; dùng \`pprof\` heap/goroutine profiler; \`runtime.ReadMemStats\` để monitor.
+
+Best practice: giới hạn size của in-memory cache; dùng context cancellation để goroutines tự cleanup; integration test monitor memory growth theo thời gian.`,
+    a_en: `A memory leak occurs when a program allocates memory but never releases it, causing RSS to grow steadily until an OOM kill.
+
+Common causes:
+- Global or module-level variables accumulating data.
+- Event listeners that are never removed.
+- Closures capturing large objects.
+- Circular references in reference-counted languages.
+- Unbounded caches or maps.
+- \`setInterval\` timers that are never cleared.
+
+In Node.js: use \`node --inspect\` + the Chrome DevTools Memory tab to take and compare heap snapshots; \`clinic.js heapprofiler\` for production profiling; monitor \`process.memoryUsage().heapUsed\`; use \`WeakMap\`/\`WeakRef\` for caches so the GC can collect entries when keys are no longer referenced.
+
+In Go: goroutine leaks (a goroutine blocked on a channel forever, never exiting) are more common than memory leaks; use \`pprof\` for heap and goroutine profiling; use \`runtime.ReadMemStats\` for monitoring.
+
+Best practices: cap the size of in-memory caches; use context cancellation so goroutines clean up on shutdown; write integration tests that monitor memory growth over time.`,
   },
   {
     id: 2329,

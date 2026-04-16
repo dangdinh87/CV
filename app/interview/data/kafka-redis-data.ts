@@ -99,8 +99,22 @@ export const KAFKA_REDIS_DATA: QAItem[] = [
     level: "beginner",
     q: "Các use case phổ biến nhất của Kafka trong thực tế là gì?",
     q_en: "What are the most common real-world use cases for Kafka?",
-    a: "Log aggregation: tập hợp log từ nhiều service vào một nơi, sau đó forward sang Elasticsearch hoặc S3 để phân tích. Event sourcing: lưu tất cả sự kiện (thay vì chỉ state hiện tại) để rebuild state bất kỳ lúc nào. Real-time analytics: stream data từ user activity vào Kafka, xử lý với Kafka Streams hoặc Flink để cập nhật dashboard real-time. Microservices communication: thay vì gọi API trực tiếp (tight coupling), các service publish event và service khác subscribe — giảm coupling và tăng resilience. Change Data Capture (CDC): dùng Debezium để capture mọi thay đổi từ database, sync sang data warehouse hoặc invalidate cache. Fraud detection: stream giao dịch tài chính qua Kafka, dùng ML model để detect bất thường trong real-time.",
-    a_en: "Log aggregation: collecting logs from many services into one place, then forwarding to Elasticsearch or S3 for analysis. Event sourcing: storing every event (rather than just current state) so state can be rebuilt at any point in time. Real-time analytics: streaming user activity data into Kafka, processing with Kafka Streams or Flink to update dashboards in real time. Microservices communication: instead of direct API calls (tight coupling), services publish events and others subscribe — reducing coupling and improving resilience. Change Data Capture (CDC): using Debezium to capture all database changes, syncing to a data warehouse or invalidating caches. Fraud detection: streaming financial transactions through Kafka and applying ML models to detect anomalies in real time.",
+    a: `Các use case phổ biến của Kafka trong production:
+
+- Log aggregation: tập hợp log từ nhiều service vào một nơi, sau đó forward sang Elasticsearch hoặc S3 để phân tích.
+- Event sourcing: lưu tất cả sự kiện (thay vì chỉ state hiện tại) để rebuild state bất kỳ lúc nào.
+- Real-time analytics: stream data từ user activity vào Kafka, xử lý với Kafka Streams hoặc Flink để cập nhật dashboard real-time.
+- Microservices communication: thay vì gọi API trực tiếp (tight coupling), các service publish event và service khác subscribe — giảm coupling và tăng resilience.
+- Change Data Capture (CDC): dùng Debezium để capture mọi thay đổi từ database, sync sang data warehouse hoặc invalidate cache.
+- Fraud detection: stream giao dịch tài chính qua Kafka, dùng ML model để detect bất thường trong real-time.`,
+    a_en: `Most common real-world use cases for Kafka:
+
+- Log aggregation: collecting logs from many services into one place, then forwarding to Elasticsearch or S3 for analysis.
+- Event sourcing: storing every event (rather than just current state) so state can be rebuilt at any point in time.
+- Real-time analytics: streaming user activity data into Kafka, processing with Kafka Streams or Flink to update dashboards in real time.
+- Microservices communication: instead of direct API calls (tight coupling), services publish events and others subscribe — reducing coupling and improving resilience.
+- Change Data Capture (CDC): using Debezium to capture all database changes, syncing to a data warehouse or invalidating caches.
+- Fraud detection: streaming financial transactions through Kafka and applying ML models to detect anomalies in real time.`,
   },
 
   // ─── Kafka Advanced (2211–2218) ──────────────────────────────────────────────
@@ -203,8 +217,20 @@ export const KAFKA_REDIS_DATA: QAItem[] = [
     level: "beginner",
     q: "Các kiểu dữ liệu trong Redis: String, Hash, List, Set, Sorted Set dùng khi nào?",
     q_en: "Redis data types: when should you use String, Hash, List, Set, and Sorted Set?",
-    a: "String: kiểu cơ bản nhất, dùng cho cache HTML/JSON, counter (`INCR pageview`), session token. Lệnh: `SET key value EX 3600`, `GET key`, `INCR counter`. Hash: lưu object có nhiều field (như row trong database), hiệu quả hơn lưu từng field dưới dạng String riêng. Dùng cho: user profile, product info. Lệnh: `HSET user:1 name 'Alice' age 30`, `HGETALL user:1`. List: linked list có thể push/pop từ cả hai đầu — dùng cho message queue, activity feed, recent items. Lệnh: `LPUSH queue task1`, `RPOP queue`. Set: tập hợp unique member — dùng cho tags, unique visitors, friend list. Lệnh: `SADD tags:post:1 redis database`, `SISMEMBER`, `SUNION`. Sorted Set: như Set nhưng mỗi member có score — dùng cho leaderboard, rate limiting, priority queue. Lệnh: `ZADD leaderboard 1000 'Alice'`, `ZRANGE leaderboard 0 9 REV WITHSCORES`.",
-    a_en: "String: the most basic type, used for caching HTML/JSON, counters (`INCR pageview`), and session tokens. Commands: `SET key value EX 3600`, `GET key`, `INCR counter`. Hash: stores objects with multiple fields (like a database row), more efficient than individual String keys per field. Use for user profiles, product info. Commands: `HSET user:1 name Alice age 30`, `HGETALL user:1`. List: a doubly-linked list supporting push/pop from both ends — used for message queues, activity feeds, and recent-items lists. Commands: `LPUSH queue task1`, `RPOP queue`. Set: a collection of unique members — used for tags, unique visitor tracking, and friend lists. Commands: `SADD tags:post:1 redis database`, `SISMEMBER`, `SUNION`. Sorted Set: like a Set but each member has a score — used for leaderboards, rate limiting, and priority queues. Commands: `ZADD leaderboard 1000 Alice`, `ZRANGE leaderboard 0 9 REV WITHSCORES`.",
+    a: `Các kiểu dữ liệu Redis và khi nào dùng:
+
+- String: kiểu cơ bản nhất, dùng cho cache HTML/JSON, counter (\`INCR pageview\`), session token. Lệnh: \`SET key value EX 3600\`, \`GET key\`, \`INCR counter\`.
+- Hash: lưu object có nhiều field (như row trong database), hiệu quả hơn lưu từng field dưới dạng String riêng. Dùng cho: user profile, product info. Lệnh: \`HSET user:1 name 'Alice' age 30\`, \`HGETALL user:1\`.
+- List: linked list có thể push/pop từ cả hai đầu — dùng cho message queue, activity feed, recent items. Lệnh: \`LPUSH queue task1\`, \`RPOP queue\`.
+- Set: tập hợp unique member — dùng cho tags, unique visitors, friend list. Lệnh: \`SADD tags:post:1 redis database\`, \`SISMEMBER\`, \`SUNION\`.
+- Sorted Set: như Set nhưng mỗi member có score — dùng cho leaderboard, rate limiting, priority queue. Lệnh: \`ZADD leaderboard 1000 'Alice'\`, \`ZRANGE leaderboard 0 9 REV WITHSCORES\`.`,
+    a_en: `Redis data types and when to use them:
+
+- String: the most basic type, used for caching HTML/JSON, counters (\`INCR pageview\`), and session tokens. Commands: \`SET key value EX 3600\`, \`GET key\`, \`INCR counter\`.
+- Hash: stores objects with multiple fields (like a database row), more efficient than individual String keys per field. Use for user profiles, product info. Commands: \`HSET user:1 name Alice age 30\`, \`HGETALL user:1\`.
+- List: a doubly-linked list supporting push/pop from both ends — used for message queues, activity feeds, and recent-items lists. Commands: \`LPUSH queue task1\`, \`RPOP queue\`.
+- Set: a collection of unique members — used for tags, unique visitor tracking, and friend lists. Commands: \`SADD tags:post:1 redis database\`, \`SISMEMBER\`, \`SUNION\`.
+- Sorted Set: like a Set but each member has a score — used for leaderboards, rate limiting, and priority queues. Commands: \`ZADD leaderboard 1000 Alice\`, \`ZRANGE leaderboard 0 9 REV WITHSCORES\`.`,
   },
   {
     id: 2221,
@@ -273,8 +299,28 @@ export const KAFKA_REDIS_DATA: QAItem[] = [
     level: "beginner",
     q: "Các use case phổ biến nhất của Redis trong production là gì?",
     q_en: "What are the most common production use cases for Redis?",
-    a: "Caching: lưu kết quả database query, API response, rendered HTML để giảm latency và tải cho database — đây là use case phổ biến nhất. Session store: lưu session người dùng với TTL, dễ share giữa nhiều server instance. Rate limiting: dùng INCR + EXPIRE hoặc Sorted Set để giới hạn API request theo IP/user. Leaderboard: dùng Sorted Set để rank user theo điểm, cực kỳ efficient với `ZADD`, `ZRANGE`, `ZRANK`. Queue: dùng List với `LPUSH`/`BRPOP` để implement simple task queue (hoặc Redis Streams cho production). Pub/Sub: real-time notification, live dashboard, chat. Distributed lock: implement lock bằng `SET key value NX EX timeout` để tránh race condition trong distributed system. Geospatial: dùng Geo commands (`GEOADD`, `GEODIST`, `GEORADIUS`) cho tính năng tìm store gần nhất. Full-text search: RedisSearch module (Redis Stack) cho phép search index trực tiếp trên Redis data.",
-    a_en: "Caching: storing database query results, API responses, and rendered HTML to reduce latency and database load — the most common use case. Session store: storing user sessions with a TTL, easily shared across multiple server instances. Rate limiting: using INCR + EXPIRE or a Sorted Set to limit API requests per IP or user. Leaderboard: using a Sorted Set to rank users by score — extremely efficient with `ZADD`, `ZRANGE`, and `ZRANK`. Queue: using a List with `LPUSH`/`BRPOP` for a simple task queue (or Redis Streams for production-grade queuing). Pub/Sub: real-time notifications, live dashboards, and chat. Distributed lock: using `SET key value NX EX timeout` to prevent race conditions in distributed systems. Geospatial: using Geo commands (`GEOADD`, `GEODIST`, `GEORADIUS`) for nearest-store lookups. Full-text search: the RedisSearch module (Redis Stack) enables search indexing directly on Redis data.",
+    a: `Các use case phổ biến của Redis trong production:
+
+- Caching: lưu kết quả database query, API response, rendered HTML để giảm latency và tải cho database — đây là use case phổ biến nhất.
+- Session store: lưu session người dùng với TTL, dễ share giữa nhiều server instance.
+- Rate limiting: dùng INCR + EXPIRE hoặc Sorted Set để giới hạn API request theo IP/user.
+- Leaderboard: dùng Sorted Set để rank user theo điểm, cực kỳ efficient với \`ZADD\`, \`ZRANGE\`, \`ZRANK\`.
+- Queue: dùng List với \`LPUSH\`/\`BRPOP\` để implement simple task queue (hoặc Redis Streams cho production).
+- Pub/Sub: real-time notification, live dashboard, chat.
+- Distributed lock: implement lock bằng \`SET key value NX EX timeout\` để tránh race condition trong distributed system.
+- Geospatial: dùng Geo commands (\`GEOADD\`, \`GEODIST\`, \`GEORADIUS\`) cho tính năng tìm store gần nhất.
+- Full-text search: RedisSearch module (Redis Stack) cho phép search index trực tiếp trên Redis data.`,
+    a_en: `Most common production use cases for Redis:
+
+- Caching: storing database query results, API responses, and rendered HTML to reduce latency and database load — the most common use case.
+- Session store: storing user sessions with a TTL, easily shared across multiple server instances.
+- Rate limiting: using INCR + EXPIRE or a Sorted Set to limit API requests per IP or user.
+- Leaderboard: using a Sorted Set to rank users by score — extremely efficient with \`ZADD\`, \`ZRANGE\`, and \`ZRANK\`.
+- Queue: using a List with \`LPUSH\`/\`BRPOP\` for a simple task queue (or Redis Streams for production-grade queuing).
+- Pub/Sub: real-time notifications, live dashboards, and chat.
+- Distributed lock: using \`SET key value NX EX timeout\` to prevent race conditions in distributed systems.
+- Geospatial: using Geo commands (\`GEOADD\`, \`GEODIST\`, \`GEORADIUS\`) for nearest-store lookups.
+- Full-text search: the RedisSearch module (Redis Stack) enables search indexing directly on Redis data.`,
   },
   {
     id: 2228,
@@ -315,8 +361,24 @@ export const KAFKA_REDIS_DATA: QAItem[] = [
     level: "advanced",
     q: "Distributed lock với Redis: SET NX và Redlock algorithm, những pitfall cần biết?",
     q_en: "Distributed locks with Redis: SET NX and the Redlock algorithm — what pitfalls should you know?",
-    a: "Basic distributed lock: `SET lock:resource_name unique_value NX PX 30000` — atomic set-if-not-exists với TTL. Release lock: chỉ xóa nếu value match (dùng Lua script để atomic check-and-delete: `if redis.call('GET', KEYS[1]) == ARGV[1] then return redis.call('DEL', KEYS[1]) else return 0 end`). Dùng unique value (UUID) per lock acquisition để tránh xóa nhầm lock của client khác. Vấn đề với single Redis: nếu Redis master fail trước khi replicate sang replica, lock bị mất dẫn đến nhiều client cùng hold lock. Redlock algorithm (Martin Kleppmann vs Antirez debate): acquire lock trên N/2+1 node Redis độc lập, chỉ coi là success khi acquire được majority trong thời gian nhỏ hơn TTL. Redlock vẫn có edge case với GC pause và clock skew. Trong production critical system, nên dùng ZooKeeper hoặc etcd cho distributed lock; Redis lock phù hợp cho use case không quá critical (rate limiting, idempotency key).",
-    a_en: "Basic distributed lock: `SET lock:resource_name unique_value NX PX 30000` — atomic set-if-not-exists with a TTL. Release: only delete if the value matches (use a Lua script for atomic check-and-delete: `if redis.call('GET', KEYS[1]) == ARGV[1] then return redis.call('DEL', KEYS[1]) else return 0 end`). Use a unique value (UUID) per lock acquisition to avoid accidentally releasing another client's lock. Problem with a single Redis node: if the master fails before replicating to a replica, the lock is lost and multiple clients can simultaneously hold it. The Redlock algorithm (Martin Kleppmann vs. Antirez debate): acquire the lock on N/2+1 independent Redis nodes, considering success only when a majority is acquired within a time shorter than the TTL. Redlock still has edge cases involving GC pauses and clock skew. For truly critical production systems, use ZooKeeper or etcd for distributed locking; Redis locks are well-suited for less-critical scenarios such as rate limiting and idempotency keys.",
+    a: `Distributed lock với Redis:
+
+- Basic lock: \`SET lock:resource_name unique_value NX PX 30000\` — atomic set-if-not-exists với TTL.
+- Release lock: chỉ xóa nếu value match (dùng Lua script: \`if redis.call('GET', KEYS[1]) == ARGV[1] then return redis.call('DEL', KEYS[1]) else return 0 end\`).
+- Dùng unique value (UUID) per lock acquisition để tránh xóa nhầm lock của client khác.
+- Vấn đề với single Redis: nếu master fail trước khi replicate sang replica, lock bị mất → nhiều client cùng hold lock.
+- Redlock algorithm (Martin Kleppmann vs Antirez debate): acquire lock trên N/2+1 node Redis độc lập, chỉ coi là success khi acquire được majority trong thời gian nhỏ hơn TTL. Vẫn có edge case với GC pause và clock skew.
+
+Trong production critical system, nên dùng ZooKeeper hoặc etcd; Redis lock phù hợp cho use case không quá critical (rate limiting, idempotency key).`,
+    a_en: `Distributed locks with Redis:
+
+- Basic lock: \`SET lock:resource_name unique_value NX PX 30000\` — atomic set-if-not-exists with a TTL.
+- Release: only delete if the value matches (Lua script: \`if redis.call('GET', KEYS[1]) == ARGV[1] then return redis.call('DEL', KEYS[1]) else return 0 end\`).
+- Use a unique value (UUID) per lock acquisition to avoid accidentally releasing another client's lock.
+- Problem with a single Redis node: if the master fails before replicating to a replica, the lock is lost and multiple clients can simultaneously hold it.
+- Redlock algorithm (Martin Kleppmann vs. Antirez debate): acquire the lock on N/2+1 independent Redis nodes, considering success only when a majority is acquired within a time shorter than the TTL. Still has edge cases involving GC pauses and clock skew.
+
+For truly critical production systems, use ZooKeeper or etcd; Redis locks are well-suited for less-critical scenarios such as rate limiting and idempotency keys.`,
   },
   {
     id: 2232,
@@ -355,7 +417,23 @@ export const KAFKA_REDIS_DATA: QAItem[] = [
     level: "advanced",
     q: "Redis trong production: các best practices quan trọng nhất cần tuân thủ?",
     q_en: "Redis in production: what are the most important best practices to follow?",
-    a: "Security: bật authentication (`requirepass`), disable unused commands (`rename-command FLUSHALL ''`), bind Redis chỉ trên internal interface (không expose ra internet), dùng TLS cho Redis 6+. Availability: dùng Sentinel hoặc Cluster, đặt `replica-priority` hợp lý, test failover định kỳ. Performance: đặt `maxmemory` phù hợp với RAM (để lại 20-30% cho OS và fragmentation), chọn `maxmemory-policy` đúng, monitor `slowlog` (`slowlog-log-slower-than 10000` microseconds). Tránh blocking operation: không dùng `KEYS *` trên production (dùng `SCAN`), không dùng `SMEMBERS` trên Set lớn (dùng `SSCAN`), cẩn thận với `SORT`, `LRANGE` trên List dài. Connection management: dùng connection pool (`max pool size = 10-50`), set `tcp-keepalive 300`. Backup: cấu hình RDB snapshot, monitor `rdb_last_save_time` và `rdb_changes_since_last_save`. Upgrade: Redis minor version backward compatible, major version cần test kỹ; dùng Redis managed service (ElastiCache, Redis Cloud) để giảm operational burden.",
-    a_en: "Security: enable authentication (`requirepass`), disable unused commands (`rename-command FLUSHALL ''`), bind Redis only to internal interfaces (never expose to the internet), and use TLS for Redis 6+. Availability: use Sentinel or Cluster, set `replica-priority` appropriately, and test failover regularly. Performance: set `maxmemory` to leave 20-30% of RAM free for the OS and fragmentation, choose the correct `maxmemory-policy`, and monitor the slow log (`slowlog-log-slower-than 10000` microseconds). Avoid blocking operations: never use `KEYS *` in production (use `SCAN`), never use `SMEMBERS` on large Sets (use `SSCAN`), and be cautious with `SORT` and `LRANGE` on long Lists. Connection management: use a connection pool (max pool size 10-50) and set `tcp-keepalive 300`. Backups: configure RDB snapshots and monitor `rdb_last_save_time` and `rdb_changes_since_last_save`. Upgrades: Redis minor versions are backward compatible; major versions require thorough testing. Consider using a managed Redis service (ElastiCache, Redis Cloud) to reduce operational overhead.",
+    a: `Best practices khi vận hành Redis trong production:
+
+- Security: bật authentication (\`requirepass\`), disable unused commands (\`rename-command FLUSHALL ''\`), bind Redis chỉ trên internal interface (không expose ra internet), dùng TLS cho Redis 6+.
+- Availability: dùng Sentinel hoặc Cluster, đặt \`replica-priority\` hợp lý, test failover định kỳ.
+- Performance: đặt \`maxmemory\` phù hợp với RAM (để lại 20-30% cho OS và fragmentation), chọn \`maxmemory-policy\` đúng, monitor \`slowlog\` (\`slowlog-log-slower-than 10000\` microseconds).
+- Tránh blocking operation: không dùng \`KEYS *\` trên production (dùng \`SCAN\`), không dùng \`SMEMBERS\` trên Set lớn (dùng \`SSCAN\`), cẩn thận với \`SORT\`, \`LRANGE\` trên List dài.
+- Connection management: dùng connection pool (\`max pool size = 10-50\`), set \`tcp-keepalive 300\`.
+- Backup: cấu hình RDB snapshot, monitor \`rdb_last_save_time\` và \`rdb_changes_since_last_save\`.
+- Upgrade: Redis minor version backward compatible, major version cần test kỹ; dùng Redis managed service (ElastiCache, Redis Cloud) để giảm operational burden.`,
+    a_en: `Most important best practices for Redis in production:
+
+- Security: enable authentication (\`requirepass\`), disable unused commands (\`rename-command FLUSHALL ''\`), bind Redis only to internal interfaces (never expose to the internet), and use TLS for Redis 6+.
+- Availability: use Sentinel or Cluster, set \`replica-priority\` appropriately, and test failover regularly.
+- Performance: set \`maxmemory\` to leave 20-30% of RAM free for the OS and fragmentation, choose the correct \`maxmemory-policy\`, and monitor the slow log (\`slowlog-log-slower-than 10000\` microseconds).
+- Avoid blocking operations: never use \`KEYS *\` in production (use \`SCAN\`), never use \`SMEMBERS\` on large Sets (use \`SSCAN\`), and be cautious with \`SORT\` and \`LRANGE\` on long Lists.
+- Connection management: use a connection pool (max pool size 10-50) and set \`tcp-keepalive 300\`.
+- Backups: configure RDB snapshots and monitor \`rdb_last_save_time\` and \`rdb_changes_since_last_save\`.
+- Upgrades: Redis minor versions are backward compatible; major versions require thorough testing. Consider using a managed Redis service (ElastiCache, Redis Cloud) to reduce operational overhead.`,
   },
 ]
