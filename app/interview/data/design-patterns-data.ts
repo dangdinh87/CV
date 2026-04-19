@@ -1,4 +1,4 @@
-import type { QAItem } from '../interview-data'
+import type { QAItem } from "../interview-data";
 
 export const DESIGN_PATTERNS_DATA: QAItem[] = [
   // ── SOLID ──────────────────────────────────────────────────────────────────
@@ -910,4 +910,4 @@ Generator functions (\`function*\`) are syntactic sugar for creating iterators/i
     q_en: "What are the most important anti-patterns to avoid in software development? Real-world examples?",
     a_en: "Anti-patterns are solutions that seem reasonable at first but cause long-term harm. The most common ones: (1) **God Object/Class**: a class that knows and does too much — violates SRP, hard to test, becomes a bottleneck at scale; (2) **Spaghetti Code**: scattered logic, tangled dependencies, no clear structure — usually caused by lack of planning; (3) **Golden Hammer**: defaulting to a familiar tool or pattern for every problem even when it doesn't fit (e.g., using Redis for all caching even when in-memory would do); (4) **Premature Optimization**: optimizing before there is evidence of a bottleneck — wastes time and adds complexity; (5) **Copy-Paste Programming**: violates DRY — a bug fixed in one place goes unfixed in all the copies; (6) **Magic Numbers/Strings**: hardcoding `if (status === 3)` instead of `if (status === OrderStatus.SHIPPED)`; (7) **Shotgun Surgery**: one change requires edits across many small classes — the opposite of God Object; (8) **Callback Hell** in JavaScript: resolved by Promise chaining and async/await. Recognition tip: code smells are early warning signs of an anti-pattern taking hold.",
   },
-]
+];

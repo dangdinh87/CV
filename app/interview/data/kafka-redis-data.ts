@@ -1,4 +1,4 @@
-import type { QAItem } from '../interview-data'
+import type { QAItem } from "../interview-data";
 
 export const KAFKA_REDIS_DATA: QAItem[] = [
   // ─── Kafka Fundamentals (2201–2210) ──────────────────────────────────────────
@@ -436,4 +436,4 @@ For truly critical production systems, use ZooKeeper or etcd; Redis locks are we
 - Backups: configure RDB snapshots and monitor \`rdb_last_save_time\` and \`rdb_changes_since_last_save\`.
 - Upgrades: Redis minor versions are backward compatible; major versions require thorough testing. Consider using a managed Redis service (ElastiCache, Redis Cloud) to reduce operational overhead.`,
   },
-]
+];
