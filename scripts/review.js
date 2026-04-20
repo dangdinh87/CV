@@ -38,7 +38,7 @@ async function promptMultiLine(questionText) {
 function parseItemsFromContent(content) {
   const items = [];
   // More robust regex to capture the object up to the closing brace.
-  const regex = /{\s*id:\s*(\d+),\s*category:\s*"([^"]+)",\s*subcategory:\s*"([^"]+)",\s*level:\s*"([^"]+)",\s*q:\s*"((?:[^"\\]|\\.)*)",\s*a:\s*"((?:[^"\\]|\\.)*)",(.*?)}/gs;
+  const regex = /{\s*id:\s*(\d+),\s*category:\s*"([^"]+)",\s*subcategory:\s*"([^"]+)",\s*level:\s*"([^"]+)",\s*q:\s*"((?:[^"\\]|\\.)*)",\s*a:\s*"((?:[^"\\]|\\.)*)"(.*?)}/gs;
 
   let match;
   while ((match = regex.exec(content)) !== null) {
