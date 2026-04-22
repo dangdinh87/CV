@@ -232,6 +232,7 @@ export function InterviewClient() {
               className={`iv-filter-btn ${store.activeLevel === level ? 'active' : ''}`}
               data-level={level}
               onClick={() => store.setActiveLevel(level)}
+              aria-pressed={store.activeLevel === level}
             >
               {level === 'all' ? (locale === 'en' ? 'All' : 'Tất cả') : level === 'beginner' ? (locale === 'en' ? 'Basic' : 'Cơ bản') : level === 'intermediate' ? (locale === 'en' ? 'Medium' : 'Trung bình') : (locale === 'en' ? 'Advanced' : 'Nâng cao')}
             </button>
@@ -240,6 +241,7 @@ export function InterviewClient() {
           <button
             className={`iv-filter-btn ${store.activeLevel === 'bookmarked' ? 'active' : ''}`}
             onClick={() => store.setActiveLevel(store.activeLevel === 'bookmarked' ? 'all' : 'bookmarked')}
+            aria-pressed={store.activeLevel === 'bookmarked'}
           >
             <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginRight: 2 }}><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
             {locale === 'en' ? 'Saved' : 'Đã lưu'}
@@ -247,6 +249,7 @@ export function InterviewClient() {
           <button
             className={`iv-filter-btn ${store.showFilter === 'learned-only' ? 'active' : ''}`}
             onClick={() => store.setShowFilter(store.showFilter === 'learned-only' ? 'all' : 'learned-only')}
+            aria-pressed={store.showFilter === 'learned-only'}
           >
             {locale === 'en' ? '✓ Learned' : '✓ Đã học'}
           </button>
@@ -275,7 +278,7 @@ export function InterviewClient() {
                     { mode: 'dark' as const, label: locale === 'en' ? 'Dark' : 'Tối', icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg> },
                     { mode: 'system' as const, label: locale === 'en' ? 'System' : 'Hệ thống', icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg> },
                   ]).map(({ mode, label, icon }) => (
-                    <button key={mode} className={`iv-settings-chip ${theme === mode ? 'active' : ''}`} onClick={() => setTheme(mode)}>
+                    <button key={mode} className={`iv-settings-chip ${theme === mode ? 'active' : ''}`} onClick={() => setTheme(mode)} aria-pressed={theme === mode}>
                       {icon}{label}
                     </button>
                   ))}
@@ -286,10 +289,10 @@ export function InterviewClient() {
               <div className="iv-settings-section">
                 <span className="iv-settings-label">{locale === 'en' ? 'Language' : 'Ngôn ngữ'}</span>
                 <div className="iv-settings-chips">
-                  <button className={`iv-settings-chip ${locale === 'vi' ? 'active' : ''}`} onClick={() => { if (locale !== 'vi') toggleLocale() }}>
+                  <button className={`iv-settings-chip ${locale === 'vi' ? 'active' : ''}`} onClick={() => { if (locale !== 'vi') toggleLocale() }} aria-pressed={locale === 'vi'}>
                     <span>🇻🇳</span> Tiếng Việt
                   </button>
-                  <button className={`iv-settings-chip ${locale === 'en' ? 'active' : ''}`} onClick={() => { if (locale !== 'en') toggleLocale() }}>
+                  <button className={`iv-settings-chip ${locale === 'en' ? 'active' : ''}`} onClick={() => { if (locale !== 'en') toggleLocale() }} aria-pressed={locale === 'en'}>
                     <span>🇬🇧</span> English
                   </button>
                 </div>
@@ -314,10 +317,10 @@ export function InterviewClient() {
               <div className="iv-settings-section">
                 <span className="iv-settings-label">{locale === 'en' ? 'Order' : 'Thứ tự'}</span>
                 <div className="iv-settings-chips">
-                  <button className={`iv-settings-chip ${!store.shuffled ? 'active' : ''}`} onClick={() => { if (store.shuffled) store.toggleShuffle() }}>
+                  <button className={`iv-settings-chip ${!store.shuffled ? 'active' : ''}`} onClick={() => { if (store.shuffled) store.toggleShuffle() }} aria-pressed={!store.shuffled}>
                     {locale === 'en' ? 'Sequential' : 'Theo thứ tự'}
                   </button>
-                  <button className={`iv-settings-chip ${store.shuffled ? 'active' : ''}`} onClick={() => { if (!store.shuffled) store.toggleShuffle() }}>
+                  <button className={`iv-settings-chip ${store.shuffled ? 'active' : ''}`} onClick={() => { if (!store.shuffled) store.toggleShuffle() }} aria-pressed={store.shuffled}>
                     {locale === 'en' ? 'Shuffle' : 'Xáo trộn'}
                   </button>
                 </div>
@@ -332,6 +335,7 @@ export function InterviewClient() {
                       key={size}
                       className={`iv-settings-chip iv-font-chip ${fontSize === size ? 'active' : ''}`}
                       onClick={() => setFontSize(size)}
+                      aria-pressed={fontSize === size}
                     >
                       <span style={{ fontSize: `${Math.round(size * 0.75)}px` }}>A</span>
                       {size === FONT_DEFAULT && <span className="iv-font-chip-dot" />}
