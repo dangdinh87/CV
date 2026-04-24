@@ -1,4 +1,4 @@
-import type { QAItem } from '../interview-data'
+import type { QAItem } from "../interview-data";
 
 export const SYSTEM_DESIGN_DATA: QAItem[] = [
   // ─── Fundamentals (2001–2008) ───────────────────────────────────────────────
@@ -157,7 +157,7 @@ The choice of consistency model directly impacts latency, availability, and user
     level: "intermediate",
     q: "CQRS Pattern là gì? Khi nào nên áp dụng và những thách thức gì khi implement? (What is the CQRS Pattern? When should it be applied and what are the challenges?)",
     q_en: "What is the CQRS Pattern? When should it be applied and what are the implementation challenges?",
-    a: "CQRS (Command Query Responsibility Segregation) là pattern tách biệt hoàn toàn model đọc (Query) và model ghi (Command) – thay vì một model dùng cho cả CRUD. Command side xử lý mutations và thường dùng domain model phức tạp; Query side tối ưu cho read và có thể dùng denormalized view riêng. \n\n**Lợi ích:** Read model có thể scale độc lập với Write model; Query side có thể dùng database khác (Elasticsearch cho search, Redis cho cache); mỗi side được tối ưu riêng. Thường kết hợp với Event Sourcing: mỗi Command tạo ra Events, Events cập nhật Read Model (eventual consistency). Phù hợp khi: read/write ratio không cân bằng, domain logic phức tạp, cần nhiều dạng read views khác nhau. Thách thức: eventual consistency giữa write và read side; operational complexity tăng; debugging khó hơn; không phù hợp cho CRUD đơn giản. Ví dụ thực tế: e-commerce – order placement (Command) và order listing dashboard (Query) dùng store riêng biệt.",
+    a: "CQRS (Command Query Responsibility Segregation) là pattern tách biệt hoàn toàn model đọc (Query) và model ghi (Command) – thay vì một model dùng cho cả CRUD. Command side xử lý mutations và thường dùng domain model phức tạp; Query side tối ưu cho read và có thể dùng denormalized view riêng. \n\n**Lợi ích:** Read model có thể scale độc lập với Write model; Query side có thể dùng database khác (Elasticsearch cho search, Redis cho cache); mỗi side được tối ưu riêng. Thường kết hợp với Event Sourcing: mỗi Command tạo ra Events, Events cập nhật Read Model (eventual consistency). Phù hợp khi: read/write ratio không cân bằng, domain logic phức tạp, cần nhiều dạng read views khác nhau. Thách thức: eventual consistency giữa write và read side; operational complexity tăng; debugging khó hơn; không phù hợp cho CRUD đơn giản. **Ví dụ thực tế:** e-commerce – order placement (Command) và order listing dashboard (Query) dùng store riêng biệt.",
     a_en: "CQRS (Command Query Responsibility Segregation) is a pattern that fully separates the read model (Query) from the write model (Command), rather than using one model for all CRUD operations. The Command side handles mutations and typically uses a rich domain model; the Query side is optimized for reads and can use a denormalized view. \n\n**Benefits:** the read model can scale independently from the write model; the query side can use a different database (Elasticsearch for search, Redis for caching); each side is independently optimized. CQRS is often combined with Event Sourcing: each Command produces Events, which update the Read Model (eventual consistency). Best applied when: the read/write ratio is imbalanced, domain logic is complex, or multiple different read views are needed. Challenges: eventual consistency between the write and read sides; increased operational complexity; harder debugging; not appropriate for simple CRUD applications. Real-world example: in e-commerce, order placement (Command) and the order listing dashboard (Query) use separate stores.",
   },
   {
@@ -592,4 +592,4 @@ Compliance: PCI-DSS, SOC2, GDPR data retention policies.`,
 
 Compliance: PCI-DSS, SOC2, GDPR data retention policies.`,
   },
-]
+];

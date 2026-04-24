@@ -1,4 +1,4 @@
-import type { QAItem } from '../interview-data'
+import type { QAItem } from "../interview-data";
 
 export const DESIGN_PATTERNS_DATA: QAItem[] = [
   // ── SOLID ──────────────────────────────────────────────────────────────────
@@ -78,7 +78,7 @@ export const DESIGN_PATTERNS_DATA: QAItem[] = [
     subcategory: "SOLID",
     level: "intermediate",
     q: "Làm thế nào để áp dụng SOLID trong dự án Next.js/React thực tế?",
-    a: "Trong React/Next.js, SRP áp dụng cho component (mỗi component một trách nhiệm), custom hook (tách logic ra khỏi UI), và service layer (tách API call ra file riêng). OCP áp dụng qua component composition và render props/children thay vì if/else trong component. DIP áp dụng qua dependency injection pattern trong custom hook: `useUserService(api: ApiClient)` nhận API client từ ngoài thay vì hard-code. ISP áp dụng khi thiết kế props interface — không truyền prop không cần thiết. Ví dụ thực tế: tách `UserProfile` thành `UserAvatar`, `UserInfo`, `UserActions` components (SRP); dùng `AuthContext` inject `authService` vào app (DIP); tạo `useFormValidation(validators: Validator[])` nhận validators từ ngoài (OCP + DIP). SOLID trong frontend thường ít formal hơn backend nhưng nguyên tắc vẫn có giá trị tương đương.",
+    a: "Trong React/Next.js, SRP áp dụng cho component (mỗi component một trách nhiệm), custom hook (tách logic ra khỏi UI), và service layer (tách API call ra file riêng). OCP áp dụng qua component composition và render props/children thay vì if/else trong component. DIP áp dụng qua dependency injection pattern trong custom hook: `useUserService(api: ApiClient)` nhận API client từ ngoài thay vì hard-code. ISP áp dụng khi thiết kế props interface — không truyền prop không cần thiết. **Ví dụ thực tế:** tách `UserProfile` thành `UserAvatar`, `UserInfo`, `UserActions` components (SRP); dùng `AuthContext` inject `authService` vào app (DIP); tạo `useFormValidation(validators: Validator[])` nhận validators từ ngoài (OCP + DIP). SOLID trong frontend thường ít formal hơn backend nhưng nguyên tắc vẫn có giá trị tương đương.",
     q_en: "How do you apply SOLID principles in a real Next.js/React project?",
     a_en: "In React/Next.js, SRP applies to components (each component owns one concern), custom hooks (extracting logic out of the UI), and the service layer (keeping API calls in dedicated files). OCP applies through component composition and render props/children instead of if/else inside components. DIP applies via dependency injection in custom hooks: `useUserService(api: ApiClient)` receives an API client from outside rather than hard-coding it. ISP applies when designing props interfaces — don't pass props a component doesn't need. Concrete examples: splitting `UserProfile` into `UserAvatar`, `UserInfo`, and `UserActions` (SRP); using `AuthContext` to inject `authService` into the app (DIP); creating `useFormValidation(validators: Validator[])` that receives validators from outside (OCP + DIP). SOLID in frontend is typically less formal than in backend, but the principles carry equal value.",
   },
@@ -274,7 +274,7 @@ DI frameworks: NestJS uses an IoC container with \`@Injectable()\` and \`@Inject
     subcategory: "Structural",
     level: "intermediate",
     q: "Adapter pattern là gì? Ví dụ thực tế trong TypeScript?",
-    a: `Adapter cho phép các interface incompatible làm việc cùng nhau bằng cách bọc một object trong wrapper cung cấp interface mà client kỳ vọng. Ví dụ thực tế: tích hợp third-party payment SDK:
+    a: `Adapter cho phép các interface incompatible làm việc cùng nhau bằng cách bọc một object trong wrapper cung cấp interface mà client kỳ vọng. **Ví dụ thực tế:** tích hợp third-party payment SDK:
 \`\`\`typescript
 interface PaymentProvider {
   charge(cents: number): Promise<Receipt>
@@ -910,4 +910,4 @@ Generator functions (\`function*\`) are syntactic sugar for creating iterators/i
     q_en: "What are the most important anti-patterns to avoid in software development? Real-world examples?",
     a_en: "Anti-patterns are solutions that seem reasonable at first but cause long-term harm. The most common ones: (1) **God Object/Class**: a class that knows and does too much — violates SRP, hard to test, becomes a bottleneck at scale; (2) **Spaghetti Code**: scattered logic, tangled dependencies, no clear structure — usually caused by lack of planning; (3) **Golden Hammer**: defaulting to a familiar tool or pattern for every problem even when it doesn't fit (e.g., using Redis for all caching even when in-memory would do); (4) **Premature Optimization**: optimizing before there is evidence of a bottleneck — wastes time and adds complexity; (5) **Copy-Paste Programming**: violates DRY — a bug fixed in one place goes unfixed in all the copies; (6) **Magic Numbers/Strings**: hardcoding `if (status === 3)` instead of `if (status === OrderStatus.SHIPPED)`; (7) **Shotgun Surgery**: one change requires edits across many small classes — the opposite of God Object; (8) **Callback Hell** in JavaScript: resolved by Promise chaining and async/await. Recognition tip: code smells are early warning signs of an anti-pattern taking hold.",
   },
-]
+];
