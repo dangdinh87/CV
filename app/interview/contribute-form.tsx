@@ -78,22 +78,28 @@ export function ContributeForm({ onClose }: { onClose: () => void }) {
           </button>
         </div>
 
-        <div className="iv-contribute-tabs">
+        <div className="iv-contribute-tabs" role="tablist">
           <button
             className={`iv-contribute-tab ${tab === 'question' ? 'active' : ''}`}
             onClick={() => { setTab('question'); setStatus('idle'); setErrorMsg('') }}
+            role="tab"
+            aria-selected={tab === 'question'}
           >
             {locale === 'en' ? 'Question' : 'Câu hỏi'}
           </button>
           <button
             className={`iv-contribute-tab ${tab === 'feature' ? 'active' : ''}`}
             onClick={() => { setTab('feature'); setStatus('idle'); setErrorMsg('') }}
+            role="tab"
+            aria-selected={tab === 'feature'}
           >
             {locale === 'en' ? 'Feature' : 'Tính năng'}
           </button>
           <button
             className={`iv-contribute-tab ${tab === 'contribute' ? 'active' : ''}`}
             onClick={() => { setTab('contribute'); setStatus('idle'); setErrorMsg('') }}
+            role="tab"
+            aria-selected={tab === 'contribute'}
           >
             {locale === 'en' ? 'Contribute' : 'Đóng góp PR'}
           </button>
