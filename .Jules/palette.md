@@ -1,3 +1,10 @@
 ## 2024-05-20 - Missing ARIA labels on Icon-Only Buttons
 **Learning:** Found an accessibility pattern where icon-only buttons (like the hamburger menu button in the hero section) rely purely on `title` attributes instead of proper `aria-label`s. In addition, interactive toggle elements missed `aria-expanded` attributes which are crucial for screen reader users to understand the component's state.
 **Action:** When adding or auditing icon-only buttons in the application, ensure `aria-label` is always set (using appropriate localization) and any stateful toggles implement the relevant ARIA attributes (e.g. `aria-expanded`).
+## 2025-04-29 - Accessible Tablist Implementation in Custom Modals
+**Learning:** In Next.js/React applications, custom-built tab interfaces (like those used in modals for switching between "Question", "Feature", and "Contribute" forms) are often constructed with standard `<div>` and `<button>` elements that lack semantic meaning for screen readers. Simply updating component state (`setActiveTab`) does not inform assistive technologies of the structural relationship between the tabs and the content panels they control.
+**Action:** Always implement the ARIA tab pattern for custom tab components: 1) Add `role="tablist"` and `aria-label` to the container. 2) Add `role="tab"`, `aria-selected={isActive}`, `id`, and `aria-controls="panel-id"` to the buttons. 3) Add `role="tabpanel"`, `id="panel-id"`, and `aria-labelledby="tab-id"` to the corresponding content containers.
+
+## 2025-04-29 - Screen Reader Alerts for Dynamic Form Status
+**Learning:** When form submission statuses (like success banners or error messages) are conditionally rendered based on React state, they may be entirely missed by screen reader users if they don't receive focus.
+**Action:** Consistently apply `role="alert"` (or `aria-live="polite"`/`"assertive"`) to containers that display dynamic error messages or success confirmations (e.g., `<div className="iv-contribute-success" role="alert">`).
