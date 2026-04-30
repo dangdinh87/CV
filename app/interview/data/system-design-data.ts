@@ -1,4 +1,4 @@
-import type { QAItem } from '../interview-data'
+import type { QAItem } from "../interview-data";
 
 export const SYSTEM_DESIGN_DATA: QAItem[] = [
   // ─── Fundamentals (2001–2008) ───────────────────────────────────────────────
@@ -592,4 +592,4 @@ Compliance: PCI-DSS, SOC2, GDPR data retention policies.`,
 
 Compliance: PCI-DSS, SOC2, GDPR data retention policies.`,
   },
-]
+];
